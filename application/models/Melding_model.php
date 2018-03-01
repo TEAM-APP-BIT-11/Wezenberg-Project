@@ -33,7 +33,7 @@ class Melding_model extends CI_Model {
 	function insert($melding)
 	{
 		$this->db->insert('melding_model', $melding);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

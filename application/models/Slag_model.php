@@ -33,7 +33,7 @@ class Slag_model extends CI_Model {
 	function insert($slag)
 	{
 		$this->db->insert('slag_model', $slag);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

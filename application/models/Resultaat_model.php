@@ -33,7 +33,7 @@ class Resultaat_model extends CI_Model {
 	function insert($resultaat)
 	{
 		$this->db->insert('resultaat_model', $resultaat);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

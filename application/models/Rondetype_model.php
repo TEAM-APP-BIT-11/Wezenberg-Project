@@ -33,7 +33,7 @@ class Rondetype_model extends CI_Model {
 	function insert($rondetype)
 	{
 		$this->db->insert('rondetype_model', $rondetype);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

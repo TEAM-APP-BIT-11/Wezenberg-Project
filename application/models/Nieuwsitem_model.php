@@ -33,7 +33,7 @@ class Nieuwsitem_model extends CI_Model {
 	function insert($nieuwsitem)
 	{
 		$this->db->insert('nieuwsitem_model', $nieuwsitem);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

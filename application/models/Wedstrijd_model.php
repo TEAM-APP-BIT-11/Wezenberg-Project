@@ -33,7 +33,7 @@ class Wedstrijd_model extends CI_Model {
 	function insert($wedstrijd)
 	{
 		$this->db->insert('wedstrijd_model', $wedstrijd);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

@@ -33,7 +33,7 @@ class Voedingssupplement_model extends CI_Model {
 	function insert($voedingssupplement)
 	{
 		$this->db->insert('voedingssupplement_model', $voedingssupplement);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

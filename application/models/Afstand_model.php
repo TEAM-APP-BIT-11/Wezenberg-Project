@@ -33,7 +33,7 @@ class Afstand_model extends CI_Model {
 	function insert($afstand)
 	{
 		$this->db->insert('afstand_model', $afstand);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

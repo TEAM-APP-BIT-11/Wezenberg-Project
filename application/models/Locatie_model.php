@@ -33,7 +33,7 @@ class Locatie_model extends CI_Model {
 	function insert($locatie)
 	{
 		$this->db->insert('locatie_model', $locatie);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

@@ -33,7 +33,7 @@ class Persoon_model extends CI_Model {
 	function insert($persoon)
 	{
 		$this->db->insert('persoon_model', $persoon);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

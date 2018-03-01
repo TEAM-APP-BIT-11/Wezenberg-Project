@@ -33,7 +33,7 @@ class Supplementdoelstelling_model extends CI_Model {
 	function insert($supplementdoelstelling)
 	{
 		$this->db->insert('supplementdoelstelling_model', $supplementdoelstelling);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

@@ -33,7 +33,7 @@ class Inname_model extends CI_Model {
 	function insert($inname)
 	{
 		$this->db->insert('inname_model', $inname);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

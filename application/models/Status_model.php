@@ -33,7 +33,7 @@ class Status_model extends CI_Model {
 	function insert($status)
 	{
 		$this->db->insert('status_model', $status);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

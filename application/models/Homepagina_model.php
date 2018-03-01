@@ -33,7 +33,7 @@ class Homepagina_model extends CI_Model {
 	function insert($homepagina)
 	{
 		$this->db->insert('homepagina_model', $homepagina);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }

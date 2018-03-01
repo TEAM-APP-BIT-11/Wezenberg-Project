@@ -33,7 +33,7 @@ class Evenement_model extends CI_Model {
 	function insert($evenement)
 	{
 		$this->db->insert('evenement_model', $evenement);
-		return ->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 }
