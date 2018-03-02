@@ -61,7 +61,6 @@
 				<td><a href="">Details</a></td>
 			</tr>
 		</table>
-
 		<button type="button" class="btn btn-primary">Wedstrijd toevoegen</button>
 	</div>
 
