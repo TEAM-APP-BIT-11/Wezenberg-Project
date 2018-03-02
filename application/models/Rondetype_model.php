@@ -27,7 +27,7 @@ class Rondetype_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('rondetype_model', $rondetype);
+		$this->db->delete('rondetype_model');
 	}
 
 	function insert($rondetype)

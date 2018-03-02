@@ -27,7 +27,7 @@ class Afstand_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('afstand_model', $afstand);
+		$this->db->delete('afstand_model');
 	}
 
 	function insert($afstand)

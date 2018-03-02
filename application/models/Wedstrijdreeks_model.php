@@ -27,7 +27,7 @@ class Wedstrijdreeks_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('wedstrijdreeks_model', $wedstrijdreeks);
+		$this->db->delete('wedstrijdreeks_model');
 	}
 
 	function insert($wedstrijdreeks)

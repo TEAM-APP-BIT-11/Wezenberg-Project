@@ -27,7 +27,7 @@ class Inname_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('inname_model', $inname);
+		$this->db->delete('inname_model');
 	}
 
 	function insert($inname)

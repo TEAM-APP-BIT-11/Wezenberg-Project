@@ -27,7 +27,7 @@ class Nieuwsitem_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('nieuwsitem_model', $nieuwsitem);
+		$this->db->delete('nieuwsitem_model');
 	}
 
 	function insert($nieuwsitem)

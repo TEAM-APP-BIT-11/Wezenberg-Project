@@ -27,7 +27,7 @@ class Evenementdeelname_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('evenementdeelname_model', $evenementdeelname);
+		$this->db->delete('evenementdeelname_model');
 	}
 
 	function insert($evenementdeelname)
