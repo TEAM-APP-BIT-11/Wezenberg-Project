@@ -99,7 +99,6 @@
 			</div>
 
 		</form>
-
 		<button type="button" class="btn btn-primary">Annuleren</button>
 		<button type="button" class="btn btn-primary">Toevoegen</button>
 	</div>
