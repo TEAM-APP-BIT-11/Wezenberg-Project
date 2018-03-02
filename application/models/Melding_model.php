@@ -27,7 +27,7 @@ class Melding_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('melding_model', $melding);
+		$this->db->delete('melding_model');
 	}
 
 	function insert($melding)

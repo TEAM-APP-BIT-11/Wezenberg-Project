@@ -27,7 +27,7 @@ class Slag_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('slag_model', $slag);
+		$this->db->delete('slag_model');
 	}
 
 	function insert($slag)

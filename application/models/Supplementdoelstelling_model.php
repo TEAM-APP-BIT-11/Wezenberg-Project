@@ -27,7 +27,7 @@ class Supplementdoelstelling_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('supplementdoelstelling_model', $supplementdoelstelling);
+		$this->db->delete('supplementdoelstelling_model');
 	}
 
 	function insert($supplementdoelstelling)

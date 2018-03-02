@@ -27,7 +27,7 @@ class Status_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('status_model', $status);
+		$this->db->delete('status_model');
 	}
 
 	function insert($status)

@@ -27,7 +27,7 @@ class Typepersoon_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('typepersoon_model', $typepersoon);
+		$this->db->delete('typepersoon_model');
 	}
 
 	function insert($typepersoon)
