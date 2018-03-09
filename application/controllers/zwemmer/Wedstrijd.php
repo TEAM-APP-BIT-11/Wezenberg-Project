@@ -18,6 +18,12 @@ class Wedstrijd extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->helper('form');
+    }
+
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -26,10 +32,12 @@ class Wedstrijd extends CI_Controller {
         $data['titel'] = 'Inschrijven voor een Wedstrijd';
         $data['naam'] = 'Neil';
 
+        $this->load->model('wedstrijdreeks_model');
         $this->load->model('wedstrijd_model');
 
-
         $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+
+        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstand();
 
         $partials = array(
             'menuGebruiker' => 'zwemmer_menu',
