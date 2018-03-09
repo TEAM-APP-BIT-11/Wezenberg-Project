@@ -22,4 +22,10 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+    public function toon() {
+        $data['titel'] = 'Formulier met dialoogvenster';
+
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren');
+        $this->template->load('main_master', $partials, $data);
+    }
 }
