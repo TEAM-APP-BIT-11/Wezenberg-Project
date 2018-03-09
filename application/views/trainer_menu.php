@@ -1,4 +1,5 @@
     <li class="active"><a href="#">Home</a></li>
+    <?php anchor('/trainer/Wedstrijd/beheren', 'Wedstrijd beheren', ''); ?>
     <li><a href="#">Wedstrijd beheren</a></li>
     <li><a href="#">Wedstrijd aanvragen</a></li>
     <li><a href="#">Locatie beheren</a></li>
