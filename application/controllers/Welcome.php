@@ -28,7 +28,7 @@ class Welcome extends CI_Controller {
 
         $partials = array(
             'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijdresultaten_beheren');
+            'inhoud' => 'trainer/home');
         $this->template->load('main_master', $partials, $data);
     }
 }
