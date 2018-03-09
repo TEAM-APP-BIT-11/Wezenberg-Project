@@ -23,12 +23,17 @@ class Wedstrijd extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
     public function inschrijven() {
-        $data['titel'] = 'Formulier met dialoogvenster';
+        $data['titel'] = 'Inschrijven voor een Wedstrijd';
         $data['naam'] = 'Neil';
+
+        $this->load->model('wedstrijd_model');
+
+
+        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
 
         $partials = array(
             'menuGebruiker' => 'zwemmer_menu',
-            'inhoud' => 'trainer/wedstrijdresultaten_beheren');
+            'inhoud' => 'zwemmer/wedstrijd_aanvragen');
         $this->template->load('main_master', $partials, $data);
     }
 }
