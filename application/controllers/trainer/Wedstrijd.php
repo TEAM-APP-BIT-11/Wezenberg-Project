@@ -23,7 +23,7 @@ class Wedstrijd extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
     public function beheren() {
-        $data['titel'] = 'Formulier met dialoogvenster';
+        $data['titel'] = 'Wedstrijden beheren';
         $data['naam'] = 'Neil';
 
         $partials = array(
