@@ -24,8 +24,11 @@ class Welcome extends CI_Controller {
 	}
     public function toon() {
         $data['titel'] = 'Formulier met dialoogvenster';
+        $data['naam'] = 'Neil';
 
-        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren');
+        $partials = array(
+            'menuGebruiker' => 'trainer_menu',
+            'inhoud' => 'trainer/wedstrijdresultaten_beheren');
         $this->template->load('main_master', $partials, $data);
     }
 }

@@ -12,7 +12,6 @@
     <title> <?php echo $titel; ?> </title>
 </head>
 <body>
-
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -31,7 +30,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Trainer
+                            <?php echo $naam ?>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Logout</a></li>
@@ -41,19 +40,11 @@
         </div>
     </div>
 </nav>
+
 <div class="container-fluid main-container">
     <div class="col-md-2 sidebar">
         <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Wedstrijd beheren</a></li>
-            <li><a href="#">Wedstrijd aanvragen</a></li>
-            <li><a href="#">Locatie beheren</a></li>
-            <li><a href="#">Resultaten bekijken</a></li>
-            <li><a href="#">Resultaten beheren</a></li>
-            <li><a href="#">Gebruikers</a></li>
-            <li><a href="#">Schema supplementen</a></li>
-            <li><a href="#">Supplementen beheren</a></li>
-            <li><a href="#">Homepagina beheren</a></li>
+            <?php echo $menuGebruiker; ?>
         </ul>
     </div>
     <div class="col-md-10 content">
