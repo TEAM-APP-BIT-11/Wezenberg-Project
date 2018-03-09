@@ -14,7 +14,8 @@ echo '<table class="table">'
         . '<tbody>';
 foreach ($locaties as $locatie) {
 
-    echo "<tr><td>" . $locatie->naam . "</td><td>" . anchor('home', 'Aanpassen/Verwijderen') . "</td></tr>\n";
+    //anchor moet nog veranderd worden naar aanpassen ipv beheren
+    echo "<tr><td>" . $locatie->naam . "</td><td>" . anchor('trainer/locatie/index', 'Aanpassen/Verwijderen') . "</td></tr>\n";
 }
 echo '</tbody></table>';
 
