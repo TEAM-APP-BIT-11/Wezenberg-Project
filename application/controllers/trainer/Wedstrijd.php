@@ -22,13 +22,13 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
-    public function toon() {
+    public function beheren() {
         $data['titel'] = 'Formulier met dialoogvenster';
         $data['naam'] = 'Neil';
 
         $partials = array(
             'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
+            'inhoud' => 'trainer/wedstrijdresultaten_beheren');
         $this->template->load('main_master', $partials, $data);
     }
 }
