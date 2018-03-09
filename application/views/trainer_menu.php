@@ -1,11 +1,9 @@
-    <li class="active"><a href="#">Home</a></li>
-    <?php anchor('/trainer/Wedstrijd/beheren', 'Wedstrijd beheren', ''); ?>
-    <li><a href="#">Wedstrijd beheren</a></li>
-    <li><a href="#">Wedstrijd aanvragen</a></li>
-    <li><a href="#">Locatie beheren</a></li>
-    <li><a href="#">Resultaten bekijken</a></li>
-    <li><a href="#">Resultaten beheren</a></li>
-    <li><a href="#">Gebruikers</a></li>
-    <li><a href="#">Schema supplementen</a></li>
-    <li><a href="#">Supplementen beheren</a></li>
-    <li><a href="#">Homepagina beheren</a></li>
+    <li class="active"><?php echo anchor('/trainer/Wedstrijd/beheren', 'Home', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Locatie beheren', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten bekijken', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten beheren', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Gebruikers', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Schema supplementen', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Supplementen beheren', '')?></li>
+    <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '')?></li>
