@@ -22,6 +22,7 @@ class Wedstrijd extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('form');
+        $this->load->helper('notation');
     }
 
 	public function index()
@@ -44,4 +45,10 @@ class Wedstrijd extends CI_Controller {
             'inhoud' => 'zwemmer/wedstrijd_aanvragen');
         $this->template->load('main_master', $partials, $data);
     }
+
+    public function haalJsonOP_WedstrijdReeksen(){
+        //todo: MOET NOG UITGESCHREVEN WORDEN
+        //Hierboven enkel wedstrijd meegeven en dan met json de rest ophalen.
+    }
+
 }
