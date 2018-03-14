@@ -24,34 +24,44 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
-                Wezenberg
-            </a>
+            <a class="navbar-brand" href="#">Wezenberg</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown ">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <?php echo $naam ?>
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Resultaten</a></li>
+                <?php
+                    if(isset($naam)){
+                        echo '<li class="dropdown ">';
+                        echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' . $naam . '<span class="caret"></span></a>';
+                        echo '<ul class="dropdown-menu" role="menu">';
+                        echo '<li><a href="#">Logout</a></li>';
+                        echo '</ul>';
+                        echo '</li>';
+                    } else{
+                        echo '<li>';
+                        echo anchor('welcome/toon', 'Login');
+                        echo '</li>';
+                    }
+                ?>
             </ul>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid main-container">
-    <div class="col-md-2 sidebar">
-        <ul class="nav nav-pills nav-stacked">
-            <?php echo $menuGebruiker; ?>
-        </ul>
-    </div>
+    <?php
+        if(isset($menuGebruiker)){
+            echo '<div class="col-md-2 sidebar">';
+            echo '<ul class="nav nav-pills nav-stacked">';
+            echo $menuGebruiker;
+            echo '</ul>';
+            echo '</div>';
+        }
+    ?>
+    
     <div class="col-md-10 content">
-
         <?php echo $inhoud; ?>
     </div>
 
