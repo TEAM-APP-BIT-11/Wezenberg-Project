@@ -18,17 +18,39 @@ class Wedstrijd extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	 public function __construct()
+	 {
+			 parent::__construct();
+
+			 $this->load->helper('form');
+			 $this->load->helper('notation');
+	 }
+
 	public function index()
 	{
 		$this->load->view('welcome_message');
 	}
     public function beheren() {
         $data['titel'] = 'Wedstrijden beheren';
-        $data['naam'] = 'Neil';
+        $data['naam'] = 'Trainer x';
+
+				$this->load->model('wedstrijd_model');
+				$data['wedstrijden'] = $this->wedstrijd_model->getAll();
 
         $partials = array(
             'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijdresultaten_beheren');
+            'inhoud' => 'trainer/wedstrijden_beheren');
         $this->template->load('main_master', $partials, $data);
     }
+
+		public function resultatenBeheren() {
+				$data['titel'] = 'Wedstrijd resultaten beheren';
+				$data['naam'] = 'Trainer x';
+
+				$partials = array(
+						'menuGebruiker' => 'trainer_menu',
+						'inhoud' => 'trainer/wedstrijdresultaten_beheren');
+				$this->template->load('main_master', $partials, $data);
+		}
 }

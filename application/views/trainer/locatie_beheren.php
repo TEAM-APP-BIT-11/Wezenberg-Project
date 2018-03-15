@@ -1,25 +1,22 @@
-<h1>Locaties Beheren</h1>
-<h3>Lijst van alle locaties</h3>
+<div class="col-md-10 content">
 
-<?php
+		<h1 class="">Locaties beheren</h1>
+		<hr>
+		<h3>Locaties</h3>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+		<table class="table">
+			<tr>
+				<th>Locatie</th>
+				<th>Actie</th>
+			</tr>
 
-echo '<table class="table">'
-        . '<thead><tr><th>Locatie</th><th>Acties</th></thead>'
-        . '<tbody>';
-foreach ($locaties as $locatie) {
+		<?php
+		foreach ($locaties as $locatie) {
+			echo "<tr><td>".$locatie->naam."</td><td>".anchor('trainer/locatie/index', 'Aanpassen/Verwijderen')."</td><td></tr>";
+		}
+		?>
 
-    //anchor moet nog veranderd worden naar aanpassen ipv beheren
-    echo "<tr><td>" . $locatie->naam . "</td><td>" . anchor('trainer/locatie/index', 'Aanpassen/Verwijderen') . "</td></tr>\n";
-}
-echo '</tbody></table>';
-
-?>
-
-
-<button>Voeg een nieuwe locatie toe</button>
+		</table>
+    
+		<button type="button" class="btn btn-primary">Voeg een nieuwe locatie toe</button>
+</div>

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Locatie extends CI_Controller {
+class wedstrijdresultaten extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -36,16 +36,16 @@ class Locatie extends CI_Controller {
 	     $this->load->view('welcome_message');
     }
 
-    public function beheren() {
-        $data['titel']  = 'Locaties beheren';
-        $data['naam'] = 'Trainer x';
+    public function bekijken() {
+        $data['titel']  = 'Persoonlijke wedstrijdresultaten bekijken';
+        $data['naam'] = 'Zwemmer x';
 
-        $this->load->model('locatie_model');
-        $data['locaties'] = $this->locatie_model->getAll();
+        $this->load->model('resultaat_model');
+        $data['resultaten'] = $this->resultaat_model->getAll();
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/locatie_beheren');
+            'menuGebruiker' => 'zwemmer_menu',
+            'inhoud' => 'zwemmer/persoonlijke_resultaten');
 
         $this->template->load('main_master', $partials, $data);
     }
