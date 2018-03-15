@@ -1,5 +1,4 @@
-<script type="text/javascript">
-
+    <script type="text/javascript">
     function haalReeksenop(wedstrijdId){
         $.ajax({type: "GET",
             url : site_url + "/zwemmer/Wedstrijd/haalJsonOp_WedstrijdReeksen",
@@ -23,7 +22,7 @@
                         // wel deelname dus status tonen
                         else {
                             lijst += '<td><a class="button" href="' + site_url + '/zwemmer/Wedstrijd/schrijfUit/' + wedstrijdreeksen[i].deelname.id + '">Schrijf uit</a></td>';
-                            lijst += '<td>'+wedstrijdreeksen[i].deelname.status.status+ '</td></tr>';
+                            lijst += '<td class="' + wedstrijdreeksen[i].deelname.status.status.replace(/ /g, '')+'"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> '+wedstrijdreeksen[i].deelname.status.status+ '</td></tr>';
                         }
 
                     $('#resultaat').append(lijst);
@@ -50,6 +49,21 @@
 
 </script>
 
+    <style type="text/css">
+
+        .goedgekeurd {
+            color: forestgreen;
+        }
+
+        .afgewezen {
+            color: red;
+        }
+
+        .inafwachting{
+            color: orange;
+        }
+
+    </style>
 
 <h1>Wedstrijd Aanvragen</h1>
 <h3>Lijst van alle wedstrijden</h3>

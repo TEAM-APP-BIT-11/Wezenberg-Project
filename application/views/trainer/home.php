@@ -1,7 +1,7 @@
 <script type="text/javascript">
     function verwijderMelding(id){
         console.log(id);
-        //AJAX voor melding te verwijderen nog coderen 
+        //AJAX voor melding te verwijderen nog coderen
     };
 
 

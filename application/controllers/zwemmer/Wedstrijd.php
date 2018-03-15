@@ -76,6 +76,10 @@ public function schrijfUit($wedstrijdDeelnameId){
         $this->load->model('wedstrijdreeks_model');
         $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon(2, $id);
 
+        foreach($wedstrijdreeksen as $wedstrijdreeks){
+            $wedstrijdreeks->datum = zetOmNaarDDMMYYYY($wedstrijdreeks->datum);
+        }
+
         echo json_encode($wedstrijdreeksen);
 
         //todo: MOET NOG UITGESCHREVEN WORDEN
