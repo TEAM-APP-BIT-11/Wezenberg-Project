@@ -20,16 +20,20 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
 		$this->load->helper('url');
+                
+                $partials = array(
+                    'inhoud' => 'main_menu');
+                $this->template->load('main_master', $partials);
 	}
-    public function toon() {
-        $data['titel'] = 'Formulier met dialoogvenster';
-        $data['naam'] = 'Neil';
+        
+        public function toon() {
+            $data['titel'] = 'Formulier met dialoogvenster';
+            $data['naam'] = 'Neil';
 
-        $partials = array(
-            'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/home');
-        $this->template->load('main_master', $partials, $data);
-    }
+            $partials = array(
+                'menuGebruiker' => 'trainer_menu',
+                'inhoud' => 'trainer/home');
+            $this->template->load('main_master', $partials, $data);
+        }
 }
