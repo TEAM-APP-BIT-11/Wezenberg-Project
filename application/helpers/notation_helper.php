@@ -33,6 +33,20 @@ function zetOmNaarYYYYMMDD($input) {
     }
 }
 
+function zetOmNaarHHMMDDMMYYYY($input){
+    if($input = ""){
+        return "";
+    }
+    else {
+        $datum = strtotime($input);
+        return date('j/m/Y H:j');
+    }
+
+
+}
+
+
+
 // database decimaal getal tonen met komma (van 999.99 naar 999,99)
 
 function zetOmNaarKomma($input) {

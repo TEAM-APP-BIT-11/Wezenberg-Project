@@ -18,6 +18,12 @@ class Melding_model extends CI_Model {
 		return $query->result();
 	}
 
+	function getAllFromPersoon($persoonId){
+        $this->db->where('persoonId', $persoonId);
+        $query = $this->db->get('melding');
+        return $query->result();
+	}
+
 	function update($melding)
 	{
 		$this->db->where('id', $melding->id);

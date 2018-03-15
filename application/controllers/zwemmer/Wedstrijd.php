@@ -30,24 +30,22 @@ class Wedstrijd extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-public function schrijfIn($wedstrijdReeksId){
+    public function schrijfIn($wedstrijdReeksId){
 
         //voeg een nieuwe record toe in de database met standaardwaardes.
         //Status op 1 = in afwachting --> standaard voor een ingeschrijving.
-    $wedstrijdDeelname = new stdClass();
+        $wedstrijdDeelname = new stdClass();
 
-    $wedstrijdDeelname->persoonId = "2";
-    $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdReeksId;
-    $wedstrijdDeelname->resultaatId = null;
-    $wedstrijdDeelname->statusId = '1';
-    $wedstrijdDeelname->ranking = null;
+        $wedstrijdDeelname->persoonId = "2";
+        $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdReeksId;
+        $wedstrijdDeelname->resultaatId = null;
+        $wedstrijdDeelname->statusId = '1';
+        $wedstrijdDeelname->ranking = null;
 
+        $this->load->model("wedstrijddeelname_model");
+        $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
 
-    $this->load->model("wedstrijddeelname_model");
-    $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
-
-    redirect('/zwemmer/Wedstrijd/inschrijven');
-
+        redirect('/zwemmer/Wedstrijd/inschrijven');
 }
 
 public function schrijfUit($wedstrijdDeelnameId){
