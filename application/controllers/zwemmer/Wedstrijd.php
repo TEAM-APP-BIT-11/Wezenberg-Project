@@ -29,16 +29,41 @@ class Wedstrijd extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+public function schrijfIn($wedstrijdReeksId){
+
+        //voeg een nieuwe record toe in de database met standaardwaardes.
+        //Status op 1 = in afwachting --> standaard voor een ingeschrijving.
+    $wedstrijdDeelname = new stdClass();
+
+    $wedstrijdDeelname->persoonId = "2";
+    $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdReeksId;
+    $wedstrijdDeelname->resultaatId = null;
+    $wedstrijdDeelname->statusId = '1';
+    $wedstrijdDeelname->ranking = null;
+
+
+    $this->load->model("wedstrijddeelname_model");
+    $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
+
+    redirect('/zwemmer/Wedstrijd/inschrijven');
+
+}
+
+public function schrijfUit($wedstrijdDeelnameId){
+        // verwijderd de record uit de database met de het ID dat doorgegeven wordt
+        $this->load->model('wedstrijddeelname_model');
+        $this->wedstrijddeelname_model->delete($wedstrijdDeelnameId);
+
+        redirect('/zwemmer/Wedstrijd/inschrijven');
+}
     public function inschrijven() {
         $data['titel'] = 'Inschrijven voor een Wedstrijd';
         $data['naam'] = 'Neil';
 
-        $this->load->model('wedstrijdreeks_model');
         $this->load->model('wedstrijd_model');
 
         $data['wedstrijden'] = $this->wedstrijd_model->getAll();
-
-        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstand();
 
         $partials = array(
             'menuGebruiker' => 'zwemmer_menu',
@@ -46,7 +71,15 @@ class Wedstrijd extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function haalJsonOP_WedstrijdReeksen(){
+    public function haalJsonOp_WedstrijdReeksen(){
+
+        $id = $this->input->get('wedstrijdId');
+
+        $this->load->model('wedstrijdreeks_model');
+        $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon(2, $id);
+
+        echo json_encode($wedstrijdreeksen);
+
         //todo: MOET NOG UITGESCHREVEN WORDEN
         //Hierboven enkel wedstrijd meegeven en dan met json de rest ophalen.
     }
