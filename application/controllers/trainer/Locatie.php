@@ -6,8 +6,7 @@
  * and open the template in the editor.
  */
 
-class Locatie extends CI_Controller
-{
+class Locatie extends CI_Controller {
 
     /**
      * Index Page for this controller.
@@ -24,8 +23,7 @@ class Locatie extends CI_Controller
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
@@ -41,16 +39,11 @@ class Locatie extends CI_Controller
         $this->load->helper('notation');
     }
 
-
-    public
-    function index()
-    {
+    public function index() {
         $this->load->view('welcome_message');
     }
 
-    public
-    function beheren()
-    {
+    public function beheren() {
         $data['titel'] = 'Locaties beheren';
         $data['naam'] = 'Trainer x';
 
@@ -65,27 +58,28 @@ class Locatie extends CI_Controller
     }
 
     public function aanpassen($id) {
-      $data['titel'] = 'Locatie beheren';
+        $data['titel'] = 'Locatie beheren';
 
-      $this->load->model('locatie_model');
-      $data['locatie'] = $this->locatie_model->get($id);
+        $this->load->model('locatie_model');
+        $data['locatie'] = $this->locatie_model->get($id);
 
-      $partials = array(
-          'menuGebruiker' => 'trainer_menu',
-          'inhoud' => 'trainer/locatie_aanpassen');
+        $partials = array(
+            'menuGebruiker' => 'trainer_menu',
+            'inhoud' => 'trainer/locatie_aanpassen');
 
-      $this->template->load('main_master', $partials, $data);
-  }
+        $this->template->load('main_master', $partials, $data);
+    }
 
-  public function toevoegen() {
-    $data['titel'] = 'Locatie beheren';
+    public function toevoegen() {
+        $data['titel'] = 'Locatie beheren';
 
-    $this->load->model('locatie_model');
+        $this->load->model('locatie_model');
 
-    $partials = array(
-        'menuGebruiker' => 'trainer_menu',
-        'inhoud' => 'trainer/locatie_toevoegen');
+        $partials = array(
+            'menuGebruiker' => 'trainer_menu',
+            'inhoud' => 'trainer/locatie_toevoegen');
 
-    $this->template->load('main_master', $partials, $data);
-}
+        $this->template->load('main_master', $partials, $data);
+    }
+
 }

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Wedstrijd extends CI_Controller {
+class Evenement extends CI_Controller {
 
     /**
      * Index Page for this controller.
@@ -35,28 +35,12 @@ class Wedstrijd extends CI_Controller {
     }
 
     public function beheren() {
-        $data['titel'] = 'Wedstrijden beheren';
         $data['naam'] = 'Trainer x';
 
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        $this->load->model('evenement_model');
+        $data['evenementen'] = $this->evenement_model->getAll();
 
-        $partials = array(
-            'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijden_beheren');
-        $this->template->load('main_master', $partials, $data);
-    }
-
-    public function aanpassen($id) {
-        $data['titel'] = 'Wedstrijd beheren';
-
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-
-        $partials = array(
-            'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijd_aanpassen');
-
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenementen_beheren');
         $this->template->load('main_master', $partials, $data);
     }
 }

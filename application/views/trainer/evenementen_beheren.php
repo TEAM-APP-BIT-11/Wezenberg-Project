@@ -1,8 +1,24 @@
-<?php
+<div class="col-md-10 content">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+        <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    </ul>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Hier komt inhoud van Home.</p>
+        </div>
 
+        <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Hier komt inhoud van menu 1.</p>
+        </div>
+
+        <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Hier komt inhoud van menu 2.</p>
+        </div>
+    </div>
+</div>
