@@ -45,6 +45,7 @@
                 <li><a href="#">Team</a></li>
                 <li><a href="#">Resultaten</a></li>
                 <?php
+                $persoon = $this->session->gebruiker;
                 if ($persoon !== null) {
                     echo '<li class="dropdown ">';
                     echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' . ucfirst($persoon->voornaam) . '<span class="caret"></span></a>';

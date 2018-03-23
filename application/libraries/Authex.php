@@ -70,6 +70,7 @@ class Authex
             return false;
         } else {
             $CI->session->set_userdata('gebruiker_id', $gebruiker->id);
+            $CI->session->set_userdata('gebruiker', $gebruiker);
             return true;
         }
     }
@@ -80,6 +81,7 @@ class Authex
         $CI = &get_instance();
 
         $CI->session->unset_userdata('gebruiker_id');
+        $CI->session->unset_userdata('gebruiker');
     }
 
     function registreer($naam, $email, $wachtwoord)
