@@ -31,23 +31,31 @@ class Welcome extends CI_Controller
     public function index()
     {
         $this->load->helper('url');
+        $data['persoon'] = $this->authex->getPersoonInfo();
 
         $partials = array(
             'inhoud' => 'algemeen/inloggen');
-        $this->template->load('main_master', $partials);
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function logIn()
+    {
+        $this->load->helper('url');
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $partials = array(
+            'inhoud' => 'algemeen/inloggen');
+        $this->template->load('main_master', $partials, $data);
     }
 
     public function controleerAanmelden()
     {
-        $data['titel'] = 'Formulier met dialoogvenster';
-        $data['naam'] = 'Neil';
-
         $gebruikersnaam = $this->input->post('gebruikersnaam');
         $wachtwoord = $this->input->post('wachtwoord');
 
         if ($this->authex->meldAan($gebruikersnaam, $wachtwoord)) {
-            $gebruiker = $this->autex->getGebruikerInfo();
-            if ($gebruiker->typePersoonId == 1) {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->typePersoonId == 2) {
                 redirect('zwemmer/Home');
             } else {
                 redirect('trainer/Home');
@@ -63,11 +71,16 @@ class Welcome extends CI_Controller
     public function toon()
     {
         $data['titel'] = 'Formulier met dialoogvenster';
-        $data['naam'] = 'Neil';
 
         $partials = array(
             'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/home');
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function meldAf()
+    {
+        $this->authex->meldAf();
+        redirect('Welcome/index');
     }
 }

@@ -34,7 +34,7 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $data['titel'] = 'Home van de Trainer';
+        $data['titel'] = 'Home van de Zwemmer';
         $persoon = $this->authex->getPersoonInfo();
         $data['persoon'] = $persoon;
 

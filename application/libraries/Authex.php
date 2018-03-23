@@ -34,7 +34,7 @@ class Authex
         $CI->gebruiker_model->activeer($id);
     }
 
-    function getGebruikerInfo()
+    function getPersoonInfo()
     {
         // geef gebruiker-object als gebruiker aangemeld is
         $CI = &get_instance();
@@ -63,9 +63,9 @@ class Authex
     {
         // gebruiker aanmelden met opgegeven email en wachtwoord
         $CI = &get_instance();
-        
+
         $gebruiker = $CI->persoon_model->getPersoon($gebruikersnaam, $wachtwoord);
-        
+
         if ($gebruiker == null) {
             return false;
         } else {
