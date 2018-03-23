@@ -51,6 +51,9 @@
                     echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' . ucfirst($persoon->voornaam) . '<span class="caret"></span></a>';
                     echo '<ul class="dropdown-menu" role="menu">';
                     echo '<li> ';
+                    echo anchor('Welcome/wijzig/' . $persoon->id, 'Wijzig profiel');
+                    echo '</li > ';
+                    echo '<li> ';
                     echo anchor('Welcome/meldAf', 'Afmelden');
                     echo '</li > ';
                     echo '</ul > ';
