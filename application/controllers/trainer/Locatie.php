@@ -49,4 +49,29 @@ class Locatie extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    public function aanpassen($id) {
+      $data['titel'] = 'Locatie beheren';
+
+      $this->load->model('locatie_model');
+      $data['locatie'] = $this->locatie_model->get($id);
+
+      $partials = array(
+          'menuGebruiker' => 'trainer_menu',
+          'inhoud' => 'trainer/locatie_aanpassen');
+
+      $this->template->load('main_master', $partials, $data);
+  }
+
+  public function toevoegen() {
+    $data['titel'] = 'Locatie beheren';
+
+    $this->load->model('locatie_model');
+
+    $partials = array(
+        'menuGebruiker' => 'trainer_menu',
+        'inhoud' => 'trainer/locatie_toevoegen');
+
+    $this->template->load('main_master', $partials, $data);
+}
 }

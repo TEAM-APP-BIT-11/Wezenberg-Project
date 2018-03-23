@@ -13,12 +13,9 @@
 				<th>Actie</th>
 			</tr>
 
-<!-- nog een anchor aan de details
-en nog een link maken tussen de locatieId -->
-
 		<?php
 		foreach ($wedstrijden as $wedstrijd) {
-			echo '<tr><td>'.$wedstrijd->naam.'</td><td>Geel</td><td>'.$wedstrijd->begindatum.'</td><td>'.$wedstrijd->einddatum.'</td><td><a href="">Details</a></td></tr>';
+			echo "<tr><td>".$wedstrijd->naam."</td><td>Geel</td><td>".$wedstrijd->begindatum."</td><td>".$wedstrijd->einddatum."</td><td>".anchor('trainer/wedstrijd/aanpassen/'.$wedstrijd->id, 'Details')."</td></tr>";
 		}
 		?>
 
