@@ -28,6 +28,15 @@ class Home extends CI_Controller
     {
         parent::__construct();
 
+        if (!$this->authex->isAangemeld()) {
+            redirect('Welcome/logIn');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->typePersoonId != 1) {
+                redirect('Welcome/logIn');
+            }
+        }
+
         $this->load->helper('form');
         $this->load->helper('notation');
     }
