@@ -41,9 +41,7 @@ class Wedstrijd extends CI_Controller {
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAll();
 
-        $partials = array(
-            'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijden_beheren');
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijden_beheren');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -53,9 +51,7 @@ class Wedstrijd extends CI_Controller {
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
-        $partials = array(
-            'menuGebruiker' => 'trainer_menu',
-            'inhoud' => 'trainer/wedstrijd_aanpassen');
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_aanpassen');
 
         $this->template->load('main_master', $partials, $data);
     }

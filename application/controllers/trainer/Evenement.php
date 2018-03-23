@@ -1,27 +1,14 @@
 <?php
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @class Evenement
+ * @brief Controller-klasse voor evenementen
+ * 
+ * Controller-klasse met alle methodes die gebruikt worden in vervand met evenementen
  */
-
 class Evenement extends CI_Controller {
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
+    /*
+     * Constructor
      */
     public function __construct() {
         parent::__construct();
@@ -30,10 +17,12 @@ class Evenement extends CI_Controller {
         $this->load->helper('notation');
     }
 
-    public function index() {
-        $this->load->view('welcome_message');
-    }
-
+    /*
+     * Haalt alle evenement-records op via Evenement_model en toont de lijst in de view evenementen_beheren.php
+     * 
+     * @see Evenement_mode::getAll()
+     * @see evenementen_beheren.php
+     */
     public function beheren() {
         $data['naam'] = 'Trainer x';
 

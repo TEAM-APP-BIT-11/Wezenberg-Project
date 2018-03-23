@@ -1,41 +1,67 @@
 <?php
+/**
+ * @class Afstand_model
+ * @brief Model-klasse voor afstanden
+ * 
+ * Model-klasse die alle methodes bevat om te
+ * interageren met de database-tabel afstand
+ */
 class Afstand_model extends CI_Model {
-	function __construct()
-	{
-		parent::__construct();
-	}
 
-	function get($id)
-	{
-		$this->db->where('id', $id);
-		$query = $this->db->get('afstand');
-		return $query->row();
-	}
+    /*
+     * Constructor
+     */
+    function __construct() {
+        parent::__construct();
+    }
 
-	function getAll()
-	{
-		$query = $this->db->get('afstand');
-		return $query->result();
-	}
+    /*
+     * Retourneert het record met id=$id uit de tabel afstand
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
+    function get($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('afstand');
+        return $query->row();
+    }
 
-	function update($afstand)
-	{
-		$this->db->where('id', $afstand->id);
-		$this->db->update('afstand_model', $afstand);
-	}
+    /*
+     * Retourneert alle records uit de tabel afstand
+     * @return Alle records
+     */
+    function getAll() {
+        $query = $this->db->get('afstand');
+        return $query->result();
+    }
 
-	function delete($id)
-	{
-		$this->db->where('id', $id);
-		$this->db->delete('afstand_model');
-	}
+    /*
+     * Update het record in de tabel afstand met de id die uit $afstand gehaald wordt
+     * @param $afstand Het record waarmee we een bestaand record willen vervangen
+     */
+    function update($afstand) {
+        $this->db->where('id', $afstand->id);
+        $this->db->update('afstand_model', $afstand);
+    }
 
-	function insert($afstand)
-	{
-		$this->db->insert('afstand_model', $afstand);
-		return $this->db->insert_id();
-	}
+    /*
+     * Verwijdert het record in de tabel afstand met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
+    function delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete('afstand_model');
+    }
 
+    /*
+     * Voegt een nieuw record afstand=$afstand toe in de tabel afstand
+     * @param $afstand Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
+    function insert($afstand) {
+        $this->db->insert('afstand_model', $afstand);
+        return $this->db->insert_id();
+    }
 }
 
 ?>
