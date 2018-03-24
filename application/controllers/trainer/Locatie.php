@@ -53,6 +53,7 @@ class Locatie extends CI_Controller
 
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
+        $data['msg'] = "";
 
         $partials = array(
             'menuGebruiker' => 'trainer_menu',
@@ -93,7 +94,18 @@ class Locatie extends CI_Controller
     public function verwijder($id)
     {
         $this->load->model('locatie_model');
-        $this->locatie_model->delete($id);
-        redirect('trainer/locatie/beheer');
+        $data['msg'] = $this->locatie_model->delete($id);
+
+        $data['titel'] = 'Locaties beheren';
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $data['locaties'] = $this->locatie_model->getAll();
+
+        $partials = array(
+            'menuGebruiker' => 'trainer_menu',
+            'inhoud' => 'trainer/locatie_beheren');
+
+        $this->template->load('main_master', $partials, $data);
+        // redirect('trainer/locatie/beheer');
     }
 }

@@ -1,5 +1,5 @@
 <div class="col-md-10 content">
-
+	<?php echo $msg;?>
 		<h1 class="">Locaties beheren</h1>
 		<hr>
 		<h3>Locaties</h3>
