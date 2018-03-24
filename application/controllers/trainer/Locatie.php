@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 
-class Locatie extends CI_Controller {
+class Locatie extends CI_Controller
+{
 
     /**
      * Index Page for this controller.
@@ -23,7 +24,8 @@ class Locatie extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
@@ -31,7 +33,7 @@ class Locatie extends CI_Controller {
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoonId != 1) {
-                redirect('Welcome/logIn');
+                redirect('trainer/locatie');
             }
         }
 
@@ -39,13 +41,15 @@ class Locatie extends CI_Controller {
         $this->load->helper('notation');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->load->view('welcome_message');
     }
 
-    public function beheren() {
+    public function beheren()
+    {
         $data['titel'] = 'Locaties beheren';
-        $data['naam'] = 'Trainer x';
+        $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
@@ -57,8 +61,10 @@ class Locatie extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function aanpassen($id) {
+    public function aanpassen($id)
+    {
         $data['titel'] = 'Locatie beheren';
+        $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
         $data['locatie'] = $this->locatie_model->get($id);
@@ -70,8 +76,10 @@ class Locatie extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function toevoegen() {
+    public function toevoegen()
+    {
         $data['titel'] = 'Locatie beheren';
+        $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
 
@@ -82,4 +90,17 @@ class Locatie extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
+    public function verwijder($id)
+    {
+        // $data['titel'] = 'Locatie beheren';
+        // $data['persoon'] = $this->authex->getPersoonInfo();
+        //
+        // $this->load->model('locatie_model');
+        //
+        // $partials = array(
+        //     'menuGebruiker' => 'trainer_menu',
+        //     'inhoud' => 'trainer/locatie_toevoegen');
+        //
+        // $this->template->load('main_master', $partials, $data);
+    }
 }

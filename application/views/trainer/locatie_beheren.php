@@ -12,7 +12,7 @@
 
 		<?php
 		foreach ($locaties as $locatie) {
-			echo "<tr><td>".$locatie->naam."</td><td>".anchor('trainer/locatie/aanpassen/'.$locatie->id, 'Aanpassen/Verwijderen')."</td><td></tr>";
+			echo "<tr><td>".$locatie->naam."</td><td>".anchor('trainer/locatie/aanpassen/'.$locatie->id, 'Aanpassen/Verwijderen')."</td></tr>";
 		}
 		?>
 		</table>
