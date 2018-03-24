@@ -2,7 +2,7 @@
 /**
 * @class Locatie_model
 * @brief Model-klasse voor locatieen
-* 
+*
 * Model-klasse die alle methodes bevat om te
 * interageren met de database-tabel locatie
 */
@@ -57,10 +57,17 @@ class Locatie_model extends CI_Model {
 	*/
 
 
-	function delete($id)
+	public function delete($id)
 	{
-		$this->db->where('id', $id);
-		$this->db-delete('locatie', $locatie);
+			$this->db->where('id', $id);
+			if (!$this->db->delete('locatie')) {
+					$error = $this->db->error();
+					$msg = "Locatie heeft evenement!";
+					return $msg;
+			} else {
+					$msg = "Locatie verwijderd!";
+					return $msg;
+			}
 	}
 
 	/*
