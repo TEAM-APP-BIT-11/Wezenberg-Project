@@ -2,8 +2,7 @@
 
 		<h1 class="">Locaties beheren</h1>
 		<hr>
-		<h3>Locatie <?php echo $locatie->naam; ?> beheren</h3>
-    <h4 class="text-center">Aanpassen</h4>
+		<h3>Locatie <?php echo $locatie->naam; ?> aanpassen</h3>
 
 		<?php
     $attributes = array('name' => 'locatie');
