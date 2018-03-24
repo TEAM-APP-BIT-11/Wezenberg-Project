@@ -18,7 +18,7 @@ class Wedstrijddeelname_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel wedstrijddeelname
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -62,7 +62,7 @@ class Wedstrijddeelname_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $wedstrijddeelname gehaald wordt
+	* Update het record in de tabel wedstrijddeelname met de id die uit $wedstrijddeelname gehaald wordt
 	* @param $wedstrijddeelname Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -85,7 +85,7 @@ class Wedstrijddeelname_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$wedstrijddeelname', $wedstrijddeelname toe in de tabel wedstrijddeelname', $wedstrijddeelname
+	* Voegt een nieuw record wedstrijddeelname=$wedstrijddeelname', $wedstrijddeelname toe in de tabel wedstrijddeelname', $wedstrijddeelname
 	* @param $wedstrijddeelname', $wedstrijddeelname Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

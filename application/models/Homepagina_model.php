@@ -18,7 +18,7 @@ class Homepagina_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel homepagina
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Homepagina_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $homepagina gehaald wordt
+	* Update het record in de tabel homepagina met de id die uit $homepagina gehaald wordt
 	* @param $homepagina Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Homepagina_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$homepagina', $homepagina toe in de tabel homepagina', $homepagina
+	* Voegt een nieuw record homepagina=$homepagina', $homepagina toe in de tabel homepagina', $homepagina
 	* @param $homepagina', $homepagina Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

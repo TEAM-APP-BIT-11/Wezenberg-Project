@@ -18,7 +18,7 @@ class Melding_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel melding
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -54,7 +54,7 @@ class Melding_model extends CI_Model {
 	}
 
         /*
-	* Update het record in de tabel afstand met de id die uit $melding gehaald wordt
+	* Update het record in de tabel melding met de id die uit $melding gehaald wordt
 	* @param $melding Het record waarmee we een bestaand record willen vervangen
 	*/
         
@@ -77,7 +77,7 @@ class Melding_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$melding', $melding toe in de tabel melding', $melding
+	* Voegt een nieuw record melding=$melding', $melding toe in de tabel melding', $melding
 	* @param $melding', $melding Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

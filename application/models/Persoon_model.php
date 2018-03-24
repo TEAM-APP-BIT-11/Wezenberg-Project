@@ -18,7 +18,7 @@ class Persoon_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel persoon
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -73,7 +73,7 @@ class Persoon_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $persoon gehaald wordt
+	* Update het record in de tabel persoon met de id die uit $persoon gehaald wordt
 	* @param $persoon Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -96,7 +96,7 @@ class Persoon_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$persoon', $persoon toe in de tabel persoon', $persoon
+	* Voegt een nieuw record persoon=$persoon', $persoon toe in de tabel persoon', $persoon
 	* @param $persoon', $persoon Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

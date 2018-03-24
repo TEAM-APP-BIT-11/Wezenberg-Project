@@ -18,7 +18,7 @@ class Innamereeks_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel innamereeks
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Innamereeks_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $innamereeks gehaald wordt
+	* Update het record in de tabel innamereeks met de id die uit $innamereeks gehaald wordt
 	* @param $innamereeks Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Innamereeks_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$innamereeks', $innamereeks toe in de tabel innamereeks', $innamereeks
+	* Voegt een nieuw record innemareeks=$innamereeks', $innamereeks toe in de tabel innamereeks', $innamereeks
 	* @param $innamereeks', $innamereeks Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

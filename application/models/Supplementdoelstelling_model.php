@@ -18,7 +18,7 @@ class Supplementdoelstelling_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel supplementdoelstelling
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Supplementdoelstelling_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $supplementdoelstelling gehaald wordt
+	* Update het record in de tabel supplementdoelstelling met de id die uit $supplementdoelstelling gehaald wordt
 	* @param $supplementdoelstelling Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Supplementdoelstelling_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$supplementdoelstelling', $supplementdoelstelling toe in de tabel supplementdoelstelling', $supplementdoelstelling
+	* Voegt een nieuw record supplementdoelstelling=$supplementdoelstelling', $supplementdoelstelling toe in de tabel supplementdoelstelling', $supplementdoelstelling
 	* @param $supplementdoelstelling', $supplementdoelstelling Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

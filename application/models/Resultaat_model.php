@@ -18,7 +18,7 @@ class Resultaat_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel resultaat
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Resultaat_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $resultaat gehaald wordt
+	* Update het record in de tabel resultaat met de id die uit $resultaat gehaald wordt
 	* @param $resultaat Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Resultaat_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$resultaat', $resultaat toe in de tabel resultaat', $resultaat
+	* Voegt een nieuw record resultaat=$resultaat', $resultaat toe in de tabel resultaat', $resultaat
 	* @param $resultaat', $resultaat Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

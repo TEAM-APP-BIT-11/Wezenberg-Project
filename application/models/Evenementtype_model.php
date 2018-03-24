@@ -18,7 +18,7 @@ class Evenementtype_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel evenementtype
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Evenementtype_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $evenementtype gehaald wordt
+	* Update het record in de tabel evenementtype met de id die uit $evenementtype gehaald wordt
 	* @param $evenementtype Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Evenementtype_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$evenementtype', $evenementtype toe in de tabel evenementtype', $evenementtype
+	* Voegt een nieuw record evenementtype=$evenementtype', $evenementtype toe in de tabel evenementtype', $evenementtype
 	* @param $evenementtype', $evenementtype Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

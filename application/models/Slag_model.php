@@ -18,7 +18,7 @@ class Slag_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel slag
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Slag_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $slag gehaald wordt
+	* Update het record in de tabel slag met de id die uit $slag gehaald wordt
 	* @param $slag Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Slag_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$slag', $slag toe in de tabel slag', $slag
+	* Voegt een nieuw record slag=$slag', $slag toe in de tabel slag', $slag
 	* @param $slag', $slag Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

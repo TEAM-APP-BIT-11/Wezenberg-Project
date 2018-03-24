@@ -18,7 +18,7 @@ class Afstand_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel afstand
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 

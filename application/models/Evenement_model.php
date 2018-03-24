@@ -18,7 +18,7 @@ class Evenement_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel evenement
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Evenement_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $evenement gehaald wordt
+	* Update het record in de tabel evenement met de id die uit $evenement gehaald wordt
 	* @param $evenement Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Evenement_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$evenement', $evenement toe in de tabel evenement', $evenement
+	* Voegt een nieuw record evenement=$evenement', $evenement toe in de tabel evenement', $evenement
 	* @param $evenement', $evenement Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

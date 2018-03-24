@@ -18,7 +18,7 @@ class Nieuwsitem_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel nieuwsitem
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Nieuwsitem_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $nieuwsitem gehaald wordt
+	* Update het record in de tabel nieuwsitem met de id die uit $nieuwsitem gehaald wordt
 	* @param $nieuwsitem Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Nieuwsitem_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$nieuwsitem', $nieuwsitem toe in de tabel nieuwsitem', $nieuwsitem
+	* Voegt een nieuw record nieuwsitem=$nieuwsitem', $nieuwsitem toe in de tabel nieuwsitem', $nieuwsitem
 	* @param $nieuwsitem', $nieuwsitem Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

@@ -18,7 +18,7 @@ class Voedingssupplement_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel voedingssupplement
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Voedingssupplement_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $voedingssupplement gehaald wordt
+	* Update het record in de tabel voedingssupplement met de id die uit $voedingssupplement gehaald wordt
 	* @param $voedingssupplement Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Voedingssupplement_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$voedingssupplement', $voedingssupplement toe in de tabel voedingssupplement', $voedingssupplement
+	* Voegt een nieuw record voedingssupplement=$voedingssupplement', $voedingssupplement toe in de tabel voedingssupplement', $voedingssupplement
 	* @param $voedingssupplement', $voedingssupplement Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

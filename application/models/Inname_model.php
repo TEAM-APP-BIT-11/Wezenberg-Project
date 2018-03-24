@@ -18,7 +18,7 @@ class Inname_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel inname
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Inname_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $inname gehaald wordt
+	* Update het record in de tabel inname met de id die uit $inname gehaald wordt
 	* @param $inname Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Inname_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$inname', $inname toe in de tabel inname', $inname
+	* Voegt een nieuw record inname=$inname', $inname toe in de tabel inname', $inname
 	* @param $inname', $inname Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

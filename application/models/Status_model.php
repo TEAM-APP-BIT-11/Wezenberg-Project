@@ -18,7 +18,7 @@ class Status_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel status
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Status_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $status gehaald wordt
+	* Update het record in de tabel status met de id die uit $status gehaald wordt
 	* @param $status Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Status_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$status', $status toe in de tabel status', $status
+	* Voegt een nieuw record status=$status', $status toe in de tabel status', $status
 	* @param $status', $status Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

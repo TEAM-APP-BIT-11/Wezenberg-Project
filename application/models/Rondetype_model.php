@@ -18,7 +18,7 @@ class Rondetype_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel rondetype
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Rondetype_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $rondetype gehaald wordt
+	* Update het record in de tabel rondetype met de id die uit $rondetype gehaald wordt
 	* @param $rondetype Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -64,7 +64,7 @@ class Rondetype_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$rondetype', $rondetype toe in de tabel rondetype', $rondetype
+	* Voegt een nieuw record rondetype=$rondetype', $rondetype toe in de tabel rondetype', $rondetype
 	* @param $rondetype', $rondetype Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/

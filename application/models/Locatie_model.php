@@ -18,7 +18,7 @@ class Locatie_model extends CI_Model {
 
 	/*
 	* Retourneert het record met id=$id uit de tabel locatie
-	* @param  De id van het record dat opgevraagd wordt
+	* @param $id De id van het record dat opgevraagd wordt
 	* @return Het opgevraagde record
 	*/
 
@@ -41,7 +41,7 @@ class Locatie_model extends CI_Model {
 	}
 
 	/*
-	* Update het record in de tabel afstand met de id die uit $locatie gehaald wordt
+	* Update het record in de tabel locatie met de id die uit $locatie gehaald wordt
 	* @param $locatie Het record waarmee we een bestaand record willen vervangen
 	*/
 
@@ -71,7 +71,7 @@ class Locatie_model extends CI_Model {
 	}
 
 	/*
-	* Voegt een nieuw record afstand=$locatie', $locatie toe in de tabel locatie', $locatie
+	* Voegt een nieuw record locatie=$locatie', $locatie toe in de tabel locatie', $locatie
 	* @param $locatie', $locatie Het nieuwe record dat toegevoegd zal worden
 	* @return De id van het nieuw toegevoegde record
 	*/
