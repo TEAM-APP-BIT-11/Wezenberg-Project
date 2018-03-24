@@ -4,69 +4,83 @@
 		<hr>
 		<h3>Locatie <?php echo $locatie->naam; ?> beheren</h3>
     <h4 class="text-center">Aanpassen</h4>
-    <form class="form-horizontal">
-<fieldset>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieNaam">Naam</label>
-  <div class="col-md-4">
-  <input id="locatieNaam" name="locatieNaam" value="<?php echo $locatie->naam;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
+		<?php
+    $attributes = array('name' => 'locatie');
+    echo form_open('locatie/pasAan', $attributes);
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieStraat">Straat</label>
-  <div class="col-md-4">
-  <input id="locatieStraat" name="locatieStraat" value="<?php echo $locatie->straat;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
+    echo form_labelpro('Naam', 'naam');
+    echo form_input(array('name' => 'naam',
+        'id' => 'naam',
+        'value' => $locatie->naam,
+        'class' => 'form-control',
+        'required' => 'required'));
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieNr">Nummer</label>
-  <div class="col-md-4">
-  <input id="locatieNr" name="locatieNr" value="<?php echo $locatie->nr;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
+    echo '</br>';
+    echo form_labelpro('Straat', 'straat');
+    echo form_input(array('name' => 'straat',
+        'id' => 'straat',
+        'value' => $locatie->straat,
+        'class' => 'form-control',
+        'required' => 'required'));
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatiePostcode">Postcode</label>
-  <div class="col-md-4">
-  <input id="locatiePostcode" name="locatiePostcode" value="<?php echo $locatie->postcode;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieGemeente">Gemeente</label>
-  <div class="col-md-4">
-  <input id="locatieGemeente" name="locatieGemeente" value="<?php echo $locatie->gemeente;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
+    echo '</br>';
+    echo form_labelpro('Nummer', 'nummer');
+    echo form_input(array('name' => 'nummer',
+        'id' => 'nummer',
+        'value' => $locatie->nr,
+        'class' => 'form-control',
+        'required' => 'required',
+        'type' => 'number',));
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieZaal">Zaal</label>
-  <div class="col-md-4">
-  <input id="locatieZaal" name="locatieZaal" value="<?php echo $locatie->zaal;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
+    echo '</br>';
+    echo form_labelpro('Postcode', 'postcode');
+    echo form_input(array('name' => 'postcode',
+        'id' => 'postcode',
+        'value' => $locatie->postcode,
+        'class' => 'form-control',
+        'required' => 'required',
+        'type' => 'number',));
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieLand">Land</label>
-  <div class="col-md-4">
-  <input id="locatieLand" name="locatieLand" value="<?php echo $locatie->land;?>" placeholder="placeholder" class="form-control input-md" type="text">
-  </div>
-</div>
+    echo '</br>';
+    echo form_labelpro('Gemeente', 'gemeente');
+    echo form_input(array('name' => 'gemeente',
+        'id' => 'gemeente',
+        'value' => $locatie->gemeente,
+        'class' => 'form-control',
+        'required' => 'required',));
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="locatieExtraInfo">Extra informatie</label>
-  <div class="col-md-4">
-    <textarea class="form-control" id="locatieExtraInfo" name="textarea"><?php echo $locatie->extraInfo;?></textarea>
-  </div>
-</div>
+		echo '</br>';
+		echo form_labelpro('Zaal', 'zaal');
+		echo form_input(array('name' => 'zaal',
+				'id' => 'zaal',
+				'value' => $locatie->zaal,
+				'class' => 'form-control',
+        'required' => 'required',));
 
-</fieldset>
+		echo '</br>';
+		echo form_labelpro('Land', 'land');
+		echo form_input(array('name' => 'land',
+				'id' => 'land',
+				'value' => $locatie->land,
+				'class' => 'form-control',
+        'required' => 'required',));
+
+		echo '</br>';
+		echo form_labelpro('Extra informatie', 'extra informatie');
+		echo form_input(array('name' => 'extraInfo',
+				'id' => 'extraInfo',
+				'value' => $locatie->extraInfo,
+				'class' => 'form-control',
+        'required' => 'required',));
+
+    echo form_hidden('id', $locatie->id);
+    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
+    echo form_close();
+    ?>
 
 <a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
-<button type="button" class="btn btn-primary">Opslaan</button>
 <?php echo anchor('trainer/locatie/verwijder/'.$locatie->id, 'Verwijder', 'class="btn btn-danger"');?>
 
 </form>
