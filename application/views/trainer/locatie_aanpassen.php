@@ -67,7 +67,7 @@
 
 <a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
 <button type="button" class="btn btn-primary">Opslaan</button>
-<button type="button" class="btn btn-danger">Verwijderen</button>
+<?php echo anchor('trainer/locatie/verwijder/'.$locatie->id, 'Verwijder', 'class="btn btn-danger"');?>
 
 </form>
 </div>

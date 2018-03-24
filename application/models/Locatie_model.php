@@ -27,7 +27,7 @@ class Locatie_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db->delete('locatie_model');
+		$this->db->delete('locatie');
 	}
 
 	function insert($locatie)

@@ -92,15 +92,8 @@ class Locatie extends CI_Controller
 
     public function verwijder($id)
     {
-        // $data['titel'] = 'Locatie beheren';
-        // $data['persoon'] = $this->authex->getPersoonInfo();
-        //
-        // $this->load->model('locatie_model');
-        //
-        // $partials = array(
-        //     'menuGebruiker' => 'trainer_menu',
-        //     'inhoud' => 'trainer/locatie_toevoegen');
-        //
-        // $this->template->load('main_master', $partials, $data);
+        $this->load->model('locatie_model');
+        $this->locatie_model->delete($id);
+        redirect('trainer/locatie/beheer');
     }
 }
