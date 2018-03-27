@@ -4,8 +4,6 @@
         //AJAX voor melding te verwijderen nog coderen
     };
 
-
-
     $(document).ready(function(){
         $('.alert-dismissible button').click(function(){
             verwijderMelding($(this).data('id'));

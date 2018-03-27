@@ -6,7 +6,8 @@
  * and open the template in the editor.
  */
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
 
     /**
      * Index Page for this controller.
@@ -23,24 +24,17 @@ class Home extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-
-        if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
-        } else {
-            $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoonId != 1) {
-                redirect('Welcome/logIn');
-            }
-        }
 
         $this->load->helper('form');
         $this->load->helper('notation');
     }
 
-    public function index() {
-        $data['titel'] = 'Home van de Trainer';
+    public function index()
+    {
+        $data['titel'] = 'Home van de Zwemmer';
         $persoon = $this->authex->getPersoonInfo();
         $data['persoon'] = $persoon;
 
