@@ -53,11 +53,7 @@ class Agenda extends CI_Controller
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
 
-<<<<<<< HEAD
-            $partials = array('inhoud' => 'zwemmer/agenda');
-=======
         $partials = array('inhoud' => 'trainer/locatie_beheren');
->>>>>>> 96d63cb3593144aa9676df1c3a95702a78e6ccab
 
         $this->template->load('main_master', $partials, $data);
     }
