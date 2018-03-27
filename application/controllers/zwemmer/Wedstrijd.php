@@ -85,5 +85,6 @@ public function schrijfUit($wedstrijdDeelnameId){
         //todo: MOET NOG UITGESCHREVEN WORDEN
         //Hierboven enkel wedstrijd meegeven en dan met json de rest ophalen.
     }
+    
 
 }

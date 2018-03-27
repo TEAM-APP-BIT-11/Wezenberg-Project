@@ -21,18 +21,18 @@ class Persoon_model extends CI_Model {
 	function update($persoon)
 	{
 		$this->db->where('id', $persoon->id);
-		$this->db->update('persoon_model', $persoon);
+		$this->db->update('persoon', $persoon);
 	}
 
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db->delete('persoon_model');
+		$this->db->delete('persoon');
 	}
 
 	function insert($persoon)
 	{
-		$this->db->insert('persoon_model', $persoon);
+		$this->db->insert('persoon', $persoon);
 		return $this->db->insert_id();
 	}
 

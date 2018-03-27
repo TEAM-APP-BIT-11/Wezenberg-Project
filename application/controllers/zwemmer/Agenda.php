@@ -42,7 +42,7 @@ class Agenda extends CI_Controller {
             $this->load->model('locatie_model');
             $data['locaties'] = $this->locatie_model->getAll();
 
-            $partials = array('inhoud' => 'trainer/locatie_beheren');
+            $partials = array('inhoud' => 'zwemmer/agenda');
 
             $this->template->load('main_master', $partials, $data);
     }

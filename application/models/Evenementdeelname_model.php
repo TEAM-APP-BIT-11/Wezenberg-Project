@@ -36,6 +36,17 @@ class Evenementdeelname_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+        function getAllJoinLeverancier()
+        {
+            $this->db->select('*, shop_product.id as productId');
+            $this->db->from('shop_product');
+            $this->db->join('shop_leverancier', 
+                    'shop_leverancier.id = shop_product.leverancierId');
+            $this->db->order_by('nederlandseNaam', 'asc');
+            $query = $this->db->get();
+            return $query->result();
+        }
+    
 }
 
 ?>
