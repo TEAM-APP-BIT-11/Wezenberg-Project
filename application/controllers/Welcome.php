@@ -26,42 +26,55 @@ class Welcome extends CI_Controller
 
         $this->load->helper('form');
         $this->load->helper('notation');
+        $this->load->helper('url');
     }
 
     public function index()
     {
         $data['titel'] = "Indexpagina";
-        $this->load->helper('url');
 
         $partials = array(
-            'inhoud' => 'algemeen/inloggen');
+            'inhoud' => 'algemeen/home');
         $this->template->load('main_master', $partials, $data);
     }
 
     public function logIn()
     {
-        $this->load->helper('url');
-        $data['persoon'] = $this->authex->getPersoonInfo();
+        $data['titel'] = "Login";
 
         $partials = array(
             'inhoud' => 'algemeen/inloggen');
         $this->template->load('main_master', $partials, $data);
     }
-    
-    function wijzig($id) {
+
+    public function wijzig($id)
+    {
         $data['titel'] = "Profiel wijzigen";
+
+        $this->load->model('persoon_model');
+        $data['persoon'] = $this->persoon_model->get($id);
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'algemeen/profiel_beheren',
+            'voetnoot' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    function wachtwoord($id) {
+        $data['titel'] = "Wachtwoord wijzigen";
         
         $this->load->model('persoon_model');
         $data['persoon'] = $this->persoon_model->get($id);
         
         $partials = array('hoofding' => 'main_header', 
-			    'inhoud' => 'algemeen/profiel_beheren', 
+			    'inhoud' => 'algemeen/reset_wachtwoord', 
 				'voetnoot' => 'main_footer');
         
         $this->template->load('main_master', $partials, $data);
         }
         
-        function registreer() {
+    function registreer() {
         $persoon = new stdClass();
 
         $persoon->id = $this->input->post('id');
@@ -72,8 +85,25 @@ class Welcome extends CI_Controller
         $persoon->mailadres = $this->input->post('mailadres');
         $persoon->gsmnummer = $this->input->post('gsmnummer');
         $persoon->woonplaats = $this->input->post('gemeente');
-        $persoon->postcode = $this->input->post('postocde');
+        $persoon->postcode = $this->input->post('postcode');
         $persoon->biografie = $this->input->post('biografie');
+
+        $this->load->model('persoon_model');
+
+        if ($persoon->id == 0) {
+            $this->persoon_model->insert($persoon);
+        } else {
+            $this->persoon_model->update($persoon);
+        }
+        
+        redirect('/welcome/controleerAanmelden');
+    }
+    
+    function wijzigWachtwoord() {
+        $persoon = new stdClass();
+
+        $persoon->id = $this->input->post('id');
+        $persoon->wachtwoord = $this->input->post('nieuw');
         
         $this->load->model('persoon_model');
         
@@ -84,7 +114,8 @@ class Welcome extends CI_Controller
             $this->persoon_model->update($persoon);
         }
         
-        redirect('/welcome/index');
+        redirect('/welcome/controleerAanmelden');
+
     }
 
     public function controleerAanmelden()
@@ -94,7 +125,7 @@ class Welcome extends CI_Controller
 
         if ($this->authex->meldAan($gebruikersnaam, $wachtwoord)) {
             $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoonId == 2) {
+            if ($persoon->typePersoon->typePersoon == "zwemmer") {
                 redirect('zwemmer/Home');
             } else {
                 redirect('trainer/Home');

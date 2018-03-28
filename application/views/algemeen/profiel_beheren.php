@@ -7,7 +7,7 @@ echo form_hidden('id', $persoon->id);
 <?php echo "<h3>" . $persoon->voornaam . " " . $persoon->familienaam . "</h3>" ?>
 <table>
     <tr>
-        <td><?php echo form_label('Voornaam:', 'bedrijf'); ?></td>
+        <td><?php echo form_label('Voornaam:', 'voornaam'); ?></td>
         <td><?php echo form_input('voornaam', $persoon->voornaam, 'size=50'); ?></td>
     </tr>
     <tr>
@@ -46,7 +46,13 @@ echo form_hidden('id', $persoon->id);
 
 <?php echo form_close(); ?>
 
-<p><?php echo anchor('welcome/index', "Back"); ?></p>
+<p><?php 
+
+echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>"; 
+
+echo "<p>" . anchor('welcome/controleerAanmelden', "Terug") . "</p>"; 
+
+?></p>
 
 
 
