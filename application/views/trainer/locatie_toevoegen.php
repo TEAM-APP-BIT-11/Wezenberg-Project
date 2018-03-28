@@ -7,7 +7,7 @@
 		<div class="col-md-10 content">
 
 				<?php
-		    $attributes = array('name' => 'locatie');
+		    $attributes = array('name' => 'locatieToevoegenFormulier');
 		    echo form_open('locatie/pasAan', $attributes);
 
 		    echo form_labelpro('Naam', 'naam');
@@ -71,7 +71,6 @@
 		    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
 		    echo form_close();
 		    ?>
-		</form>
 		<a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
 		</div>
 

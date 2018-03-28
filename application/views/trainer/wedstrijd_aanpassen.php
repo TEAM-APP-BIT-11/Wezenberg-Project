@@ -1,65 +1,107 @@
 <div class="col-md-10 content">
 
-		<h1 class="">Wedstrijd x</h1>
+		<h1 class="">Wedstrijden aanpassen</h1>
 		<hr>
-		<h3>Vul de onderstaande velden in om een nieuwe wedstrijd aan te maken.</h3>
+		<h3>Wedstrijd <?php echo $wedstrijd->naam; ?> aanpassen</h3>
 
-		<form>
-			<div class="form-group">
-				<label for="name">Naam:</label>
-				<input type="text" class="form-control" id="name" placeholder="Naam" value="<?php echo $wedstrijd->naam;?>">
-			</div>
+		<?php
+    $attributes = array('name' => 'wedstrijdAanpassenFormulier');
+    echo form_open('wedstrijd/aanpassen', $attributes);
 
-			<div class="form-group">
-				<label for="begindatum">Begindatum:</label>
-				<input type="text" class="form-control" id="begindatum" placeholder="Begindatum" value="<?php echo $wedstrijd->begindatum;?>">
-			</div>
+    echo form_labelpro('Naam', 'naam');
+    echo form_input(array('name' => 'naam',
+        'id' => 'naam',
+        'value' => $wedstrijd->naam,
+        'class' => 'form-control',
+        'required' => 'required'));
 
-			<div class="form-group">
-				<label for="einddatum">Einddatum:</label>
-				<input type="text" class="form-control" id="einddatum" placeholder="Einddatum" value="<?php echo $wedstrijd->einddatum;?>">
-			</div>
-
-			<div class="form-group">
-				<label for="locatie">Locatie:</label>
-				<input type="text" class="form-control" id="locatie" placeholder="Locatie" value="<?php echo $wedstrijd->locatieId;?>">
-			</div>
-
-			<div class="form-group">
-				<label for="extrainfo">Extra informatie:</label>
-				<textarea id="extrainfo" class="form-control" rows="3" placeholder="Extra informatie"><?php echo $wedstrijd->extraInfo;?></textarea>
-			</div>
-		</form>
+    echo '</br>';
+    echo form_labelpro('Begindatum', 'begindatum');
+    echo form_input(array('name' => 'begindatum',
+        'id' => 'begindatum',
+        'value' => $wedstrijd->begindatum,
+        'class' => 'form-control',
+        'required' => 'required',
+				'type' => 'date',));
 
 
-		<h4>Reeksen:</h4>
-		<h4>Reeks 1:</h4>
-		<form class="form-inline">
-			<div class="form-group">
-				<label for="datum">Datum</label>
-				<input type="text" class="form-control" id="datum" placeholder="Datum">
-			</div>
+    echo '</br>';
+    echo form_labelpro('Einddatumm', 'einddatumm');
+    echo form_input(array('name' => 'einddatumm',
+        'id' => 'einddatumm',
+        'value' => $wedstrijd->einddatum,
+        'class' => 'form-control',
+        'required' => 'required',
+        'type' => 'date',));
 
-			<div class="form-group">
-				<label for="beginuur">Beginuur</label>
-				<input type="text" class="form-control" id="beginuur" placeholder="Beginuur">
-			</div>
+    echo '</br>';
+    echo form_labelpro('Locatie', 'locatie');
+    echo form_input(array('name' => 'locatie',
+        'id' => 'locatie',
+        'value' => $wedstrijd->locatieId,
+        'class' => 'form-control',
+        'required' => 'required',
+        'type' => 'number',));
 
-			<div class="form-group">
-				<label for="afstand">Afstand</label>
-				<input type="text" class="form-control" id="afstand" placeholder="Afstand">
-			</div>
+    echo '</br>';
+    echo form_labelpro('Extra informatie', 'extra informatie');
+    echo form_input(array('name' => 'extraInfo',
+        'id' => 'extraInfo',
+        'value' => $wedstrijd->extraInfo,
+        'class' => 'form-control',
+        'required' => 'required',));
 
-			<div class="form-group">
-				<label for="slag">Slag</label>
-				<input type="text" class="form-control" id="slag" placeholder="Slag">
-			</div>
+	 echo '<hr>';
+	 echo '<h4>Reeksen:</h4>';
 
-		</form>
+foreach($wedstrijdreeksen as $wedstrijdreeks){
+	echo '</br>';
+	echo form_labelpro('Datum', 'datum');
+	echo form_input(array('name' => 'reeksDatum',
+			'id' => 'reeksDatum',
+			'value' => $wedstrijdreeks->datum,
+			'class' => 'form-control',
+			'required' => 'required',));
+
+	echo '</br>';
+	echo form_labelpro('Beginuur', 'beginuur');
+	echo form_input(array('name' => 'reeksBeginuur',
+			'id' => 'reeksBeginuur',
+			'value' => $wedstrijdreeks->beginuur,
+			'class' => 'form-control',
+			'required' => 'required',));
+
+	echo '</br>';
+	echo form_labelpro('Einduur', 'einduur');
+	echo form_input(array('name' => 'reeksEinduur',
+			'id' => 'reeksEinduur',
+			'value' => $wedstrijdreeks->einduur,
+			'class' => 'form-control',
+			'required' => 'required',));
+
+	echo '</br>';
+	echo form_labelpro('Afstand', 'afstand');
+	echo form_input(array('name' => 'reeksAfstand',
+			'id' => 'reeksAfstand',
+			'value' => $wedstrijdreeks->afstandId,
+			'class' => 'form-control',
+			'required' => 'required',));
+
+	echo '</br>';
+	echo form_labelpro('Slag', 'slag');
+	echo form_input(array('name' => 'reeksslag',
+				'id' => 'reeksslag',
+				'value' => $wedstrijdreeks->slagId,
+				'class' => 'form-control',
+				'required' => 'required',));
+}
+
+
+    echo form_hidden('id', $wedstrijd->id);
+    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
+    echo form_close();
+    ?>
 		<a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
-		<button type="button" class="btn btn-primary">Toevoegen</button>
-	</div>
-
 	<footer>
 	</footer>
 
