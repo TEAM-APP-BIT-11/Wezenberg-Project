@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-       
+
     <!-- Bootstrap 3.7 compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- jQuery minified JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!-- Bootstrap 3.7 compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <title> <?php echo $titel; ?> </title>
 
     <script type="text/javascript">
@@ -64,10 +69,30 @@
 
 <div class="container-fluid main-container">
     <?php
-    if (isset($menuGebruiker)) {
+    if ($persoon !== null) {
         echo '<div class="col-md-2 sidebar" > ';
         echo '<ul class="nav nav-pills nav-stacked" > ';
-        echo $menuGebruiker;
+        if ($persoon->typePersoon->typePersoon == "trainer") {
+            ?>
+            <li class="active"><?php echo anchor('/trainer/Wedstrijd/beheren', 'Home', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '') ?></li>
+            <li><?php echo anchor('/trainer/Locatie/beheren', 'Locatie beheren', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten beheren', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Gebruikers', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Schema supplementen', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Supplementen beheren', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
+            <?php
+        } else {
+            ?>
+            <li class="active"><?php echo anchor('/trainer/Wedstrijd/beheren', 'Home', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Wedstrijd/inschrijven', 'inschrijven Wedstrijd', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
+            <?php
+        }
         echo '</ul > ';
         echo '</div > ';
     }

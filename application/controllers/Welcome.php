@@ -30,8 +30,8 @@ class Welcome extends CI_Controller
 
     public function index()
     {
+        $data['titel'] = "Indexpagina";
         $this->load->helper('url');
-        $data['persoon'] = $this->authex->getPersoonInfo();
 
         $partials = array(
             'inhoud' => 'algemeen/inloggen');
@@ -99,7 +99,6 @@ class Welcome extends CI_Controller
             } else {
                 redirect('trainer/Home');
             }
-
         } else {
             //fout 
             redirect('Welcome/index');
@@ -112,7 +111,6 @@ class Welcome extends CI_Controller
         $data['titel'] = 'Formulier met dialoogvenster';
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/home');
         $this->template->load('main_master', $partials, $data);
     }
