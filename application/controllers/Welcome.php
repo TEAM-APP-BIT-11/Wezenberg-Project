@@ -61,8 +61,20 @@ class Welcome extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    function registreer()
-    {
+    function wachtwoord($id) {
+        $data['titel'] = "Wachtwoord wijzigen";
+        
+        $this->load->model('persoon_model');
+        $data['persoon'] = $this->persoon_model->get($id);
+        
+        $partials = array('hoofding' => 'main_header', 
+			    'inhoud' => 'algemeen/reset_wachtwoord', 
+				'voetnoot' => 'main_footer');
+        
+        $this->template->load('main_master', $partials, $data);
+        }
+        
+    function registreer() {
         $persoon = new stdClass();
 
         $persoon->id = $this->input->post('id');
@@ -73,7 +85,7 @@ class Welcome extends CI_Controller
         $persoon->mailadres = $this->input->post('mailadres');
         $persoon->gsmnummer = $this->input->post('gsmnummer');
         $persoon->woonplaats = $this->input->post('gemeente');
-        $persoon->postcode = $this->input->post('postocde');
+        $persoon->postcode = $this->input->post('postcode');
         $persoon->biografie = $this->input->post('biografie');
 
         $this->load->model('persoon_model');
@@ -83,8 +95,27 @@ class Welcome extends CI_Controller
         } else {
             $this->persoon_model->update($persoon);
         }
+        
+        redirect('/welcome/controleerAanmelden');
+    }
+    
+    function wijzigWachtwoord() {
+        $persoon = new stdClass();
 
-        redirect('/welcome/index');
+        $persoon->id = $this->input->post('id');
+        $persoon->wachtwoord = $this->input->post('nieuw');
+        
+        $this->load->model('persoon_model');
+        
+        if ($persoon->id == 0) {
+            $this->persoon_model->insert($persoon);
+        }
+        else {
+            $this->persoon_model->update($persoon);
+        }
+        
+        redirect('/welcome/controleerAanmelden');
+
     }
 
     public function controleerAanmelden()
