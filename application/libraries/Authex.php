@@ -42,8 +42,8 @@ class Authex
         if (!$this->isAangemeld()) {
             return null;
         } else {
-            $id = $CI->session->userdata('gebruiker_id');
-            return $CI->persoon_model->get($id);
+            $persoon = $CI->session->userdata('gebruiker');
+            return $persoon;
         }
     }
 
