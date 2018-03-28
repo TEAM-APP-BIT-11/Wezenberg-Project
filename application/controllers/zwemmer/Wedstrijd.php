@@ -2,16 +2,17 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Wedstrijd extends CI_Controller {
+class Wedstrijd extends CI_Controller
+{
 
     /**
      * Index Page for this controller.
      *
      * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
+     *        http://example.com/index.php/welcome
+     *    - or -
+     *        http://example.com/index.php/welcome/index
+     *    - or -
      * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
      *
@@ -20,7 +21,8 @@ class Wedstrijd extends CI_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->load->helper('form');
         $this->load->helper('notation');
@@ -28,7 +30,7 @@ class Wedstrijd extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('welcome_message');
+        redirect('zwemmer/Wedstrijd/inschrijven');
     }
 
     public function schrijfIn($wedstrijdReeksId)
@@ -47,42 +49,43 @@ class Wedstrijd extends CI_Controller {
 
         $this->load->model("wedstrijddeelname_model");
         $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
-
-        redirect('/zwemmer/Wedstrijd/inschrijven');
+        redirect('/zwemmer/Wedstrijd/inschrijven/' . $wedstrijdReeksId);
     }
 
 
-    public function schrijfUit($wedstrijdDeelnameId) {
-
+    public function schrijfUit($wedstrijdDeelnameId)
+    {
         // verwijderd de record uit de database met de het ID dat doorgegeven wordt
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->delete($wedstrijdDeelnameId);
 
-        redirect('/zwemmer/Wedstrijd/inschrijven');
+        redirect('/zwemmer/Wedstrijd/inschrijven' . $wedstrijdReeksId);
     }
 
-    public function inschrijven() {
+    public function inschrijven($wedstrijd = 0)
+    {
         $data['titel'] = 'Inschrijven voor een Wedstrijd';
-        $data['naam'] = 'Neil';
 
         $this->load->model('wedstrijd_model');
 
         $data['wedstrijden'] = $this->wedstrijd_model->getAll();
 
+        $data['tonen'] = $wedstrijd;
+
         $partials = array(
-            'menuGebruiker' => 'zwemmer_menu',
             'inhoud' => 'zwemmer/wedstrijd_aanvragen');
         $this->template->load('main_master', $partials, $data);
     }
 
 
-    public function haalJsonOp_WedstrijdReeksen() {
+    public function haalJsonOp_WedstrijdReeksen()
+    {
 
         $id = $this->input->get('wedstrijdId');
 
         $this->load->model('wedstrijdreeks_model');
         $persoon = $this->authex->getPersoonInfo();
-        $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon(2, $id);
+        $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $id);
 
         foreach ($wedstrijdreeksen as $wedstrijdreeks) {
             $wedstrijdreeks->datum = zetOmNaarDDMMYYYY($wedstrijdreeks->datum);

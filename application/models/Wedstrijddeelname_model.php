@@ -83,7 +83,7 @@ class Wedstrijddeelname_model extends CI_Model
     function delete($id)
     {
         $this->db->where('id', $id);
-        $this->db - delete('wedstrijddeelname', $wedstrijddeelname);
+        $this->db->delete('wedstrijddeelname');
     }
 
     /*
@@ -92,10 +92,13 @@ class Wedstrijddeelname_model extends CI_Model
     * @return De id van het nieuw toegevoegde record
     */
 
-    function insert($wedstrijddeelname)
+    function insert($wedstrijdDeelname)
     {
-        $this->db->insert('wedstrijddeelname', $wedstrijddeelname);
+        $this->db->insert('wedstrijddeelname', $wedstrijdDeelname);
+        var_dump($wedstrijdDeelname);
+        //echo($this->db->insert_id());
         return $this->db->insert_id();
+
     }
 
 }

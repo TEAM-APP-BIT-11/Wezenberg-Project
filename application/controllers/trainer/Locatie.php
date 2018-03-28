@@ -56,7 +56,6 @@ class Locatie extends CI_Controller
         $data['msg'] = "";
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/locatie_beheren');
 
         $this->template->load('main_master', $partials, $data);
@@ -71,7 +70,6 @@ class Locatie extends CI_Controller
         $data['locatie'] = $this->locatie_model->get($id);
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/locatie_aanpassen');
 
         $this->template->load('main_master', $partials, $data);
@@ -85,7 +83,6 @@ class Locatie extends CI_Controller
         $this->load->model('locatie_model');
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/locatie_toevoegen');
 
         $this->template->load('main_master', $partials, $data);
@@ -102,7 +99,6 @@ class Locatie extends CI_Controller
         $data['locaties'] = $this->locatie_model->getAll();
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/locatie_beheren');
 
         $this->template->load('main_master', $partials, $data);
