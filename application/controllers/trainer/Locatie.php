@@ -32,8 +32,8 @@ class Locatie extends CI_Controller
             redirect('Welcome/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoonId != 1) {
-                redirect('trainer/locatie');
+            if ($persoon->typePersoon->typePersoon !== "trainer") {
+                redirect('Welcome/logIn');
             }
         }
 
@@ -43,7 +43,8 @@ class Locatie extends CI_Controller
 
     public function index()
     {
-        $this->load->view('welcome_message');
+
+        $this->template->load('main_master', $partials, $data);
     }
 
     public function beheren()
