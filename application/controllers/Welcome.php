@@ -103,7 +103,9 @@ class Welcome extends CI_Controller
         $persoon = new stdClass();
 
         $persoon->id = $this->input->post('id');
-        $persoon->wachtwoord = $this->input->post('nieuw');
+        
+        
+        $persoon->wachtwoord = password_hash($this->input->post('nieuw'), PASSWORD_DEFAULT);
         
         $this->load->model('persoon_model');
         

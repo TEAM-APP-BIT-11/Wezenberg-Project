@@ -26,6 +26,11 @@
 
 </script>
 
+<?php
+$attributen = array('name' => 'mijnFormulier');
+echo form_open('welcome/wijzigWachtwoord', $attributen);
+echo form_hidden('id', $persoon->id);
+?>
 
 <div class="wachtwoord">
     <h1>Wachtwoord wijzigen</h1>
@@ -52,8 +57,9 @@
     
     <div class="alert alert-success" id="success">
         <strong>OK! </strong><p>Het wachtwoord is veranderd.</p>
-        <?php echo anchor('welcome/wijzigWachtwoord', "Ga terug")?>        
+        <?php echo form_submit('knop', 'Ga terug'); ?>        
     </div>
 
-    
+
+<?php echo form_close(); ?>
 
