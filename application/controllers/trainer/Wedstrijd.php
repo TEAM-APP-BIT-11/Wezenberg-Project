@@ -82,6 +82,9 @@ class Wedstrijd extends CI_Controller
         $this->load->model('afstand_model');
         $data['afstanden'] = $this->afstand_model->getAll();
 
+        $this->load->model('slag_model');
+        $data['slagen'] = $this->slag_model->getAll();
+
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_toevoegen');
 
         $this->template->load('main_master', $partials, $data);

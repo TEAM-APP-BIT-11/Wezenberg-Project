@@ -5,12 +5,15 @@
 		<h3>Wedstrijd toevoegen</h3>
 
 		<?php
-    $lijstAfstanden = '';
-    $lijstAfstanden[0] = '-- Select --';
-		    $lijstAfstanden[1] = '-- test --';
-    // foreach ($afstanden as $afstand) {
-    //     $lijstAfstanden[$afstand->id] = $afstand->$afstand;
-    // }
+
+    foreach ($afstanden as $afstand ) {
+        $afstandOpties[$afstand->id] = $afstand->afstand;
+    }
+
+		foreach ($slagen as $slag ) {
+				$slagOpties[$slag->id] = $slag->naam;
+		}
+
     $attributes = array('name' => 'wedstrijdToevoegenFormulier');
     echo form_open('wedstrijd/toevoegen', $attributes);
 
@@ -82,18 +85,18 @@
 	// 		'id' => 'reeksAfstand',
 	// 		'class' => 'form-control',
 	// 		'required' => 'required',));
-	echo form_dropdown('afstand', $lijstAfstanden, 'id="afstand"');
+	echo form_labelpro('Afstand', 'afstand');
+	echo form_dropdown('afstand', $afstandOpties);
 
 	echo '</br>';
 	echo form_labelpro('Slag', 'slag');
-	echo form_input(array('name' => 'reeksslag',
-				'id' => 'reeksslag',
-				'class' => 'form-control',
-				'required' => 'required',));
+	echo form_dropdown('slag', $slagOpties);
 
-    echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
-    echo form_close();
-    ?>
+	echo '</br>';
+
+  echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
+  echo form_close();
+  ?>
 		<a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
 	<footer>
 	</footer>
