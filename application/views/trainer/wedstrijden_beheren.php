@@ -15,7 +15,7 @@
 
 		<?php
 		foreach ($wedstrijden as $wedstrijd) {
-			echo "<tr><td>".$wedstrijd->naam."</td><td>Geel</td><td>".$wedstrijd->begindatum."</td><td>".$wedstrijd->einddatum."</td><td>".anchor('trainer/wedstrijd/aanpassen/'.$wedstrijd->id, 'Details')."</td></tr>";
+			echo "<tr><td>".$wedstrijd->naam."</td><td>Geel</td><td>".$wedstrijd->begindatum."</td><td>".$wedstrijd->einddatum."</td><td>".anchor('trainer/wedstrijd/aanpassen/'.$wedstrijd->id, 'Aanpassen')."</td></tr>";
 		}
 		?>
 

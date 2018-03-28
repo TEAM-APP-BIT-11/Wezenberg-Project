@@ -1,6 +1,6 @@
 <div class="col-md-10 content">
 
-		<h1 class="">Locaties beheren</h1>
+		<h1 class="">Locaties aanpassen</h1>
 		<hr>
 		<h3>Locatie <?php echo $locatie->naam; ?> aanpassen</h3>
 

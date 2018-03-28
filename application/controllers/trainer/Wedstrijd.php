@@ -66,6 +66,9 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
+        $this->load->model('wedstrijdreeks_model');
+        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandTest($id);
+
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_aanpassen');
 
         $this->template->load('main_master', $partials, $data);

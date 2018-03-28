@@ -37,7 +37,9 @@ class Wedstrijd extends CI_Controller
         //Status op 1 = in afwachting --> standaard voor een ingeschrijving.
         $wedstrijdDeelname = new stdClass();
 
-        $wedstrijdDeelname->persoonId = "2";
+        $persoon = $this->authex->getPersoonInfo();
+
+        $wedstrijdDeelname->persoonId = $persoon->id;
         $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdReeksId;
         $wedstrijdDeelname->resultaatId = null;
         $wedstrijdDeelname->statusId = '1';
@@ -80,6 +82,7 @@ class Wedstrijd extends CI_Controller
         $id = $this->input->get('wedstrijdId');
 
         $this->load->model('wedstrijdreeks_model');
+        $persoon = $this->authex->getPersoonInfo();
         $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon(2, $id);
 
         foreach ($wedstrijdreeksen as $wedstrijdreeks) {
@@ -91,6 +94,6 @@ class Wedstrijd extends CI_Controller
         //todo: MOET NOG UITGESCHREVEN WORDEN
         //Hierboven enkel wedstrijd meegeven en dan met json de rest ophalen.
     }
-    
+
 
 }

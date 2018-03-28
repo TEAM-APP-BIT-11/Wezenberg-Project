@@ -43,7 +43,6 @@ class Locatie extends CI_Controller
 
     public function index()
     {
-
         $this->template->load('main_master', $partials, $data);
     }
 
