@@ -45,6 +45,17 @@ function zetOmNaarHHMMDDMMYYYY($input){
 
 }
 
+function zetOmNaarHHMM($input){
+    $inputString = (string)$input;
+    if($inputString = ""){
+        return "";
+    }
+    else {
+        $datum = strtotime($inputString);
+        return date('H:j', $datum);
+    }
+}
+
 
 
 // database decimaal getal tonen met komma (van 999.99 naar 999,99)

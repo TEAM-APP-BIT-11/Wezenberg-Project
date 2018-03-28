@@ -1,17 +1,17 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Wedstrijd extends CI_Controller
-{
+class Wedstrijd extends CI_Controller {
 
     /**
      * Index Page for this controller.
      *
      * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
+     * 		http://example.com/index.php/welcome
+     * 	- or -
+     * 		http://example.com/index.php/welcome/index
+     * 	- or -
      * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
      *
@@ -19,8 +19,8 @@ class Wedstrijd extends CI_Controller
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    function __construct()
-    {
+
+    function __construct() {
         parent::__construct();
         $this->load->helper('form');
         $this->load->helper('notation');
@@ -52,8 +52,8 @@ class Wedstrijd extends CI_Controller
     }
 
 
-    public function schrijfUit($wedstrijdDeelnameId)
-    {
+    public function schrijfUit($wedstrijdDeelnameId) {
+
         // verwijderd de record uit de database met de het ID dat doorgegeven wordt
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->delete($wedstrijdDeelnameId);
@@ -61,8 +61,7 @@ class Wedstrijd extends CI_Controller
         redirect('/zwemmer/Wedstrijd/inschrijven');
     }
 
-    public function inschrijven()
-    {
+    public function inschrijven() {
         $data['titel'] = 'Inschrijven voor een Wedstrijd';
         $data['naam'] = 'Neil';
 
@@ -76,8 +75,8 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function haalJsonOp_WedstrijdReeksen()
-    {
+
+    public function haalJsonOp_WedstrijdReeksen() {
 
         $id = $this->input->get('wedstrijdId');
 
@@ -94,6 +93,5 @@ class Wedstrijd extends CI_Controller
         //todo: MOET NOG UITGESCHREVEN WORDEN
         //Hierboven enkel wedstrijd meegeven en dan met json de rest ophalen.
     }
-
 
 }

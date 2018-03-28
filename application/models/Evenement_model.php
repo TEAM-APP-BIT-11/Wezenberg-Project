@@ -39,6 +39,38 @@ class Evenement_model extends CI_Model {
 		$query = $this->db->get('evenement');
 		return $query->result();
 	}
+        
+        /*
+	* Retourneert alle records uit de tabel evenement, inclusief het evenementtypes
+	* @return Alle records met types
+	*/
+
+	function getAllWithType()
+	{
+		$query = $this->db->get('evenement');
+                $evenementen = $query->result();
+                
+                $this->load->model('evenementtype_model');
+                
+                foreach($evenementen as $evenement) {
+                        $evenement->type = $this->evenementtype_model->get($evenement->evenementTypeId);
+                }
+                
+		return $evenementen;
+	}
+        
+        /*
+	* Retourneert alle records uit de tabel evenement, inclusief het evenementtypes
+	* @return Alle records met types
+	*/
+
+	function getTrainingenByEvenementReeks($evenementReeks)
+	{
+		$this->db->where('evenementReeksId', $evenementReeks->id);
+                $query = $this->db->get('evenement');
+                return $query->result();
+
+	}
 
 	/*
 	* Update het record in de tabel evenement met de id die uit $evenement gehaald wordt

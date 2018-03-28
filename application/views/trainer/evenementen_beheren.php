@@ -1,12 +1,33 @@
-<?php
-/*
- * @file evenementen_beheren.php
- * 
- * View waarin een trainer een overzicht krijgt van alle bestaande evenementen en waar hij evenementen kan aanpassen en toevoegen
- * - krijgt een $evenementen-object binnen
- * - gebruikt Bootstrap-tabs
- */
-?>
+<script type="text/javascript">
+    function haalTrainingenOp(evenementReeksNaam){
+        $.ajax({type: "GET",
+                url : site_url + "/trainer/Evenement/haalJsonOp_Trainingen",
+                data : {evenementReeksNaam: evenementReeksNaam},
+                success : function(result){
+                    try {
+                        $('#trainingenLijst').html("");
+                        var trainingen = jQuery.parseJSON(result);
+                        for(var i = 0; i < trainingen.length; i++){
+                            $('#trainingenLijst').append('<option>' + trainingen[i].begindatum + ': ' + trainingen[i].beginuur + ' - ' + trainingen[i].einduur + '</option>');
+                        }
+                    } catch(error){
+                        alert("--- ERROR IN JSON --" + result);
+                    }
+                },
+                error: function(xhr, status, error){
+                    alert("-- ERROR IN AJAX -- \n\n" + xhr.responseText);
+                }
+        });
+    }
+
+    $(document).ready(function(){
+        $('#trainingsReeksen').change(function(){
+            haalTrainingenOp($('#trainingsReeksen').val());
+        });
+
+    });
+</script>
+
 <div class="col-md-10 content">
     <h1>Evenementen beheren</h1>
     <ul class="nav nav-tabs">
@@ -15,31 +36,37 @@
         <li><a data-toggle="tab" href="#medische">Medische testen</a></li>
         <li><a data-toggle="tab" href="#overige">Overige</a></li>
     </ul>
-
     <div class="tab-content">
         <div id="trainingen" class="tab-pane fade in active">
             <h3>Trainingen beheren</h3>
             <table>
                 <tr>
-                    <th>Trainingen</th>
-                    <th>Specifieke trainingen</th>
+                    <th>Trainingen:</th>
+                    <th>Specifieke training:</th>
                 </tr>
                 <tr>
                     <td>
                         <form>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Example multiple select</label>
-                                <select multiple class="form-control" id="exampleFormControlSelect2">
+                                <select size="<?php echo count($evenementreeksen);?>" class="form-control" id="trainingsReeksen">
                                     <?php
-                                    foreach($evenementen as $evenement){
-                                        echo '<option>' + $evenement->naam + '</option>';
+                                    foreach($evenementreeksen as $evenementreeks){
+                                        echo '<option>' . $evenementreeks->naam . '</option>';
                                     }
                                     ?>
                                 </select>
                             </div>
                         </form>
                     </td>
-                    <td></td>
+                    <td>
+                        <form>
+                            <div class="form-group">
+                                <select multiple class="form-control" id="trainingenLijst">
+                                    
+                                </select>
+                            </div>
+                        </form>
+                    </td>
                 </tr>
             </table>
         </div>

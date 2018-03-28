@@ -27,9 +27,28 @@ class Evenement extends CI_Controller {
         $data['naam'] = 'Trainer x';
 
         $this->load->model('evenement_model');
-        $data['evenementen'] = $this->evenement_model->getAll();
+        $data['evenementen'] = $this->evenement_model->getAllWithType();
+        
+        $this->load->model('evenementreeks_model');
+        $data['evenementreeksen'] = $this->evenementreeks_model->getAll();
 
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenementen_beheren');
         $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function haalJsonOp_Trainingen() {
+        $evenementReeksNaam = $this->input->get('evenementReeksNaam');
+        
+        $this->load->model('evenementreeks_model');
+        $evenementReeks = $this->evenementreeks_model->getByNaam($evenementReeksNaam); 
+
+        $this->load->model('evenement_model');
+        $trainingen = $this->evenement_model->getTrainingenByEvenementReeks($evenementReeks);
+        
+        foreach ($trainingen as $training) {
+            $training->begindatum = zetOmNaarDDMMYYYY($training->begindatum);
+        }
+
+        echo json_encode($trainingen);
     }
 }
