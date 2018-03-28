@@ -20,5 +20,5 @@
 		?>
 
 		</table>
-		<button type="button" class="btn btn-primary">Wedstrijd toevoegen</button>
+			<?php echo anchor('trainer/wedstrijd/toevoegen/', 'Voeg een nieuwe wedstrijd toe', 'class="btn btn-primary"');?>
 </div>

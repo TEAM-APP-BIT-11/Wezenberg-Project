@@ -133,10 +133,10 @@ class Wedstrijdreeks_model extends CI_Model
 
 
 		//nieuwe functie
-		public function getAllWithWedstrijdSlagAfstandTest($wedstrijdId)
+		public function getAllWithWedstrijdSlagAfstandById($wedstrijdId)
 		{
 				$this->db->where('wedstrijdId', $wedstrijdId);
-				$query = $this->db->get('wedstrijdReeks');
+				$query = $this->db->get('wedstrijdreeks');
 				$wedstrijdreeksen = $query->result();
 
 				$this->load->model('slag_model');

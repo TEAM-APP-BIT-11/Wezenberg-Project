@@ -67,9 +67,22 @@ class Wedstrijd extends CI_Controller
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
         $this->load->model('wedstrijdreeks_model');
-        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandTest($id);
+        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
 
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_aanpassen');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function toevoegen()
+    {
+        $data['titel'] = 'Wedstrijd beheren';
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $this->load->model('afstand_model');
+        $data['afstanden'] = $this->afstand_model->getAll();
+
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_toevoegen');
 
         $this->template->load('main_master', $partials, $data);
     }

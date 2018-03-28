@@ -2,7 +2,7 @@
 /**
 * @class Wedstrijd_model
 * @brief Model-klasse voor wedstrijden
-* 
+*
 * Model-klasse die alle methodes bevat om te
 * interageren met de database-tabel wedstrijd
 */
