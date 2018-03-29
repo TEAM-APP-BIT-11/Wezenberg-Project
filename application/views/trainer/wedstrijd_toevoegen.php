@@ -14,8 +14,13 @@
 				$slagOpties[$slag->id] = $slag->naam;
 		}
 
+		foreach ($locaties as $locatie ) {
+				$locatieOpties[$locatie->id] = $locatie->naam;
+		}
+
+
     $attributes = array('name' => 'wedstrijdToevoegenFormulier');
-    echo form_open('wedstrijd/toevoegen', $attributes);
+    echo form_open('trainer/wedstrijd/aanmaken', $attributes);
 
     echo form_labelpro('Naam', 'naam');
     echo form_input(array('name' => 'naam',
@@ -33,20 +38,16 @@
 
 
     echo '</br>';
-    echo form_labelpro('Einddatumm', 'einddatumm');
-    echo form_input(array('name' => 'einddatumm',
-        'id' => 'einddatumm',
+    echo form_labelpro('Einddatum', 'einddatum');
+    echo form_input(array('name' => 'einddatum',
+        'id' => 'einddatum',
         'class' => 'form-control',
         'required' => 'required',
         'type' => 'date',));
 
     echo '</br>';
-    echo form_labelpro('Locatie', 'locatie');
-    echo form_input(array('name' => 'locatie',
-        'id' => 'locatie',
-        'class' => 'form-control',
-        'required' => 'required',
-        'type' => 'number',));
+		echo form_labelpro('Locatie', 'locatie');
+		echo form_dropdown('locatie', $locatieOpties);
 
     echo '</br>';
     echo form_labelpro('Extra informatie', 'extra informatie');
@@ -80,11 +81,6 @@
 			'required' => 'required',));
 
 	echo '</br>';
-	// echo form_labelpro('Afstand', 'afstand');
-	// echo form_input(array('name' => 'reeksAfstand',
-	// 		'id' => 'reeksAfstand',
-	// 		'class' => 'form-control',
-	// 		'required' => 'required',));
 	echo form_labelpro('Afstand', 'afstand');
 	echo form_dropdown('afstand', $afstandOpties);
 

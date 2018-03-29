@@ -34,10 +34,26 @@ class Wedstrijd_model extends CI_Model {
 	* @return Alle records
 	*/
 
+
 	function getAll()
 	{
 		$query = $this->db->get('wedstrijd');
 		return $query->result();
+	}
+
+	function getAllWithLocatie()
+	{
+		$query = $this->db->get('wedstrijd');
+		$wedstrijden = $query->result();
+
+		$this->load->model('locatie_model');
+
+		foreach ($wedstrijden as $wedstrijd){
+			$wedstrijd->locatie = $this->locatie_model->get($wedstrijd->locatieId);
+		}
+
+		return $wedstrijden;
+
 	}
 
 	/*
@@ -74,6 +90,7 @@ class Wedstrijd_model extends CI_Model {
 		$this->db->insert('wedstrijd', $wedstrijd);
 		return $this->db->insert_id();
 	}
+
 
 }
 

@@ -82,7 +82,7 @@ $db['default'] = array(
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,
-    'db_debug' => FALSE, // => False; men kan try/catch gebruiken
+    'db_debug' => TRUE, // => False; men kan try/catch gebruiken
     'cache_on' => FALSE,
     'cachedir' => '',
     'char_set' => 'utf8',

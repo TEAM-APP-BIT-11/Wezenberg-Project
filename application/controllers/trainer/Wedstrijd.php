@@ -28,14 +28,14 @@ class Wedstrijd extends CI_Controller
     {
         parent::__construct();
 
-        if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
-        } else {
-            $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoon->typePersoon !== "trainer") {
-                redirect('trainer/locatie');
-            }
-        }
+        // if (!$this->authex->isAangemeld()) {
+        //     redirect('Welcome/logIn');
+        // } else {
+        //     $persoon = $this->authex->getPersoonInfo();
+        //     if ($persoon->typePersoon->typePersoon !== "trainer") {
+        //         redirect('trainer/locatie');
+        //     }
+        // }
 
         $this->load->helper('form');
         $this->load->helper('notation');
@@ -52,7 +52,7 @@ class Wedstrijd extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
 
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijden_beheren');
         $this->template->load('main_master', $partials, $data);
@@ -60,7 +60,7 @@ class Wedstrijd extends CI_Controller
 
     public function aanpassen($id)
     {
-        $data['titel'] = 'Wedstrijd beheren';
+        $data['titel'] = 'Wedstrijd aanpassen';
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');
@@ -76,8 +76,11 @@ class Wedstrijd extends CI_Controller
 
     public function toevoegen()
     {
-        $data['titel'] = 'Wedstrijd beheren';
+        $data['titel'] = 'Wedstrijd toevoegen';
         $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $this->load->model('locatie_model');
+        $data['locaties'] = $this->locatie_model->getAll();
 
         $this->load->model('afstand_model');
         $data['afstanden'] = $this->afstand_model->getAll();
@@ -88,5 +91,26 @@ class Wedstrijd extends CI_Controller
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_toevoegen');
 
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function aanmaken()
+    {
+        $wedstrijd = new stdClass();
+
+        $wedstrijd->naam = $this->input->post('naam');
+        $wedstrijd->locatieId = $this->input->post('locatie');
+        $wedstrijd->begindatum = $this->input->post('begindatum');
+        $wedstrijd->einddatum = $this->input->post('einddatum');
+        $wedstrijd->extraInfo = $this->input->post('extraInfo');
+
+        $data['titel'] = 'Wedstrijd toevoegen';
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $this->load->model('wedstrijd_model');
+        $wedstrijdId = $this->wedstrijd_model->insert($wedstrijd);
+        $data['id'] = $wedstrijdId;
+
+        return $this->beheren();
+        // var_dump($wedstrijd);
     }
 }
