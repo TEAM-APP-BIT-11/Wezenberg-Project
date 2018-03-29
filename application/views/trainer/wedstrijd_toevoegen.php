@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	$("#voegReeksToe").click(function() {
 		var inhoud = "";
-		$("#reeksFormulier").append("inhoud");
+		$("#reeksFormulier").append(inhoud);
 	});
 });
 </script>
