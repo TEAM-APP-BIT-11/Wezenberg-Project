@@ -1,3 +1,12 @@
+<script>
+$(document).ready(function(){
+	$("#voegReeksToe").click(function() {
+		var inhoud = "";
+		$("#reeksFormulier").append("inhoud");
+	});
+});
+</script>
+
 <div class="col-md-10 content">
 
 		<h1 class="">Wedstrijden toevoegen</h1>
@@ -56,61 +65,13 @@
         'class' => 'form-control',
         'required' => 'required',));
 
-	  echo '<hr>';
-	  echo '<h4>Reeksen:</h4>';
+	 echo '<hr>';
+	 echo '<h4>Reeksen:</h4>';
 
-	  echo '</br>';
-	  echo form_labelpro('Einddatum', 'einddatum');
-	  echo form_input(array('name' => 'einddatum',
-			 'id' => 'einddatum',
-			 'class' => 'form-control',
-			 'required' => 'required',
-			 'type' => 'date',));
+	echo '</br>';
 
-	 echo '</br>';
-	 echo form_labelpro('Locatie', 'locatie');
-	 echo form_dropdown('locatie', $locatieOpties);
-
-	 echo '</br>';
-	 echo form_labelpro('Extra informatie', 'extra informatie');
-	 echo form_input(array('name' => 'extraInfo',
-			 'id' => 'extraInfo',
-			 'class' => 'form-control',
-			 'required' => 'required',));
-
-	echo '<hr>';
-	echo '<h4>Reeksen:</h4>';
-
- echo '</br>';
- echo form_labelpro('Datum', 'datum');
- echo form_input(array('name' => 'reeksDatum',
-		 'id' => 'reeksDatum',
-		 'class' => 'form-control',
-		 'required' => 'required',));
-
- echo '</br>';
- echo form_labelpro('Beginuur', 'beginuur');
- echo form_input(array('name' => 'reeksBeginuur',
-		 'id' => 'reeksBeginuur',
-		 'class' => 'form-control',
-		 'required' => 'required',));
-
- echo '</br>';
- echo form_labelpro('Einduur', 'einduur');
- echo form_input(array('name' => 'reeksEinduur',
-		 'id' => 'reeksEinduur',
-		 'class' => 'form-control',
-		 'required' => 'required',));
-
- echo '</br>';
- echo form_labelpro('Afstand', 'afstand');
- echo form_dropdown('afstand', $afstandOpties);
-
- echo '</br>';
- echo form_labelpro('Slag', 'slag');
- echo form_dropdown('slag', $slagOpties);
-
- echo '</br>';
+	echo '<div id="reeksFormulier">';
+	echo '</div>';
 
 	echo '<button type="button" class="btn btn-primary" id="voegReeksToe">Voeg reeks toe</button>';
 
