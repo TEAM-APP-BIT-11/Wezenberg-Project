@@ -66,6 +66,9 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
+        $this->load->model('locatie_model');
+        $data['locaties'] = $this->locatie_model->getAll();
+
         $this->load->model('wedstrijdreeks_model');
         $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
 
@@ -103,14 +106,37 @@ class Wedstrijd extends CI_Controller
         $wedstrijd->einddatum = $this->input->post('einddatum');
         $wedstrijd->extraInfo = $this->input->post('extraInfo');
 
-        $data['titel'] = 'Wedstrijd toevoegen';
-        $data['persoon'] = $this->authex->getPersoonInfo();
-
         $this->load->model('wedstrijd_model');
         $wedstrijdId = $this->wedstrijd_model->insert($wedstrijd);
         $data['id'] = $wedstrijdId;
 
         return $this->beheren();
         // var_dump($wedstrijd);
+    }
+
+    public function pasAan()
+    {
+        $wedstrijd = new stdClass();
+
+        $wedstrijd->naam = $this->input->post('naam');
+        $wedstrijd->locatieId = $this->input->post('locatie');
+        $wedstrijd->begindatum = $this->input->post('begindatum');
+        $wedstrijd->einddatum = $this->input->post('einddatum');
+        $wedstrijd->extraInfo = $this->input->post('extraInfo');
+        $wedstrijd->id = $this->input->post('id');
+
+        $this->load->model('wedstrijd_model');
+        $this->wedstrijd_model->update($wedstrijd);
+
+        return $this->beheren();
+        // var_dump($wedstrijd);
+    }
+
+    public function verwijder($id)
+    {
+        $this->load->model('wedstrijd_model');
+        $this->wedstrijd_model->delete($id);
+
+        return $this->beheren();
     }
 }

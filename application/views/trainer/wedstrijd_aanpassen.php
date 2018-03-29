@@ -5,8 +5,13 @@
 		<h3>Wedstrijd <?php echo $wedstrijd->naam; ?> aanpassen</h3>
 
 		<?php
+
+		foreach ($locaties as $locatie ) {
+				$locatieOpties[$locatie->id] = $locatie->naam;
+		}
+
     $attributes = array('name' => 'wedstrijdAanpassenFormulier');
-    echo form_open('wedstrijd/aanpassen', $attributes);
+    echo form_open('trainer/wedstrijd/pasAan', $attributes);
 
     echo form_labelpro('Naam', 'naam');
     echo form_input(array('name' => 'naam',
@@ -26,22 +31,17 @@
 
 
     echo '</br>';
-    echo form_labelpro('Einddatumm', 'einddatumm');
-    echo form_input(array('name' => 'einddatumm',
-        'id' => 'einddatumm',
+    echo form_labelpro('Einddatum', 'einddatum');
+    echo form_input(array('name' => 'einddatum',
+        'id' => 'einddatum',
         'value' => $wedstrijd->einddatum,
         'class' => 'form-control',
         'required' => 'required',
         'type' => 'date',));
 
-    echo '</br>';
-    echo form_labelpro('Locatie', 'locatie');
-    echo form_input(array('name' => 'locatie',
-        'id' => 'locatie',
-        'value' => $wedstrijd->locatieId,
-        'class' => 'form-control',
-        'required' => 'required',
-        'type' => 'number',));
+		echo '</br>';
+		echo form_labelpro('Locatie', 'locatie');
+		echo form_dropdown('locatie', $locatieOpties);
 
     echo '</br>';
     echo form_labelpro('Extra informatie', 'extra informatie');
@@ -61,7 +61,8 @@ foreach($wedstrijdreeksen as $wedstrijdreeks){
 			'id' => 'reeksDatum',
 			'value' => $wedstrijdreeks->datum,
 			'class' => 'form-control',
-			'required' => 'required',));
+			'required' => 'required',
+			'type' => 'date',));
 
 	echo '</br>';
 	echo form_labelpro('Beginuur', 'beginuur');
@@ -69,7 +70,8 @@ foreach($wedstrijdreeksen as $wedstrijdreeks){
 			'id' => 'reeksBeginuur',
 			'value' => $wedstrijdreeks->beginuur,
 			'class' => 'form-control',
-			'required' => 'required',));
+			'required' => 'required',
+			'type' => 'date',));
 
 	echo '</br>';
 	echo form_labelpro('Einduur', 'einduur');
