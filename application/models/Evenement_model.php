@@ -35,15 +35,20 @@ class Evenement_model extends CI_Model {
 	* @return Het opgevraagde record
 	*/
 
-	function getWithDeelnamesAndPersoon($id)
+	function getWithTypeLocatieDeelnamesAndPersoon($id)
 	{
                 $this->db->where('id', $id);	
                 $query = $this->db->get('evenement');
 		$evenement = $query->row();
                 
                 $this->load->model('evenementdeelname_model');
-                
                 $evenement->deelnames = $this->evenementdeelname_model->getByEventIdWithPerson($id);
+                
+                $this->load->model('evenementtype_model');
+                $evenement->type = $this->evenementtype_model->get($evenement->evenementTypeId);
+                
+                $this->load->model('locatie_model');
+                $evenement->locatie = $this->locatie_model->get($evenement->locatieId);
                 
                 return $evenement;
 	}

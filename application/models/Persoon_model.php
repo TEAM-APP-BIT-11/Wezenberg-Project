@@ -76,6 +76,17 @@ class Persoon_model extends CI_Model
         $query = $this->db->get('persoon');
         return $query->result();
     }
+    
+    /*
+    * Retourneert alle records uit de tabel persoon die een zwemmer zijn
+    * @return Alle records
+    */
+
+    function getZwemmers()
+    {
+        $query = $this->db->get('persoon');
+        return $query->result();
+    }
 
     /*
     * Update het record in de tabel persoon met de id die uit $persoon gehaald wordt

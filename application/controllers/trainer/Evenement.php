@@ -56,7 +56,10 @@ class Evenement extends CI_Controller {
         $evenementId = $this->input->post('trainingsId');
         
         $this->load->model('evenement_model');
-        $data['evenement'] = $this->evenement_model->getWithDeelnamesAndPersoon($evenementId);
+        $data['evenement'] = $this->evenement_model->getWithTypeLocatieDeelnamesAndPersoon($evenementId);
+        
+        $this->load->model('persoon_model');
+        $data['zwemmers'] = $this->persoon_model->getZwemmers();
         
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenement_aanpassen');
         $this->template->load('main_master', $partials, $data);
