@@ -18,7 +18,7 @@
 
     $(document).ready(function () {
 
-        $(".btn").click(function (e) {
+        $(".btn.supplementen").click(function (e) {
             e.preventDefault();
             var datum = $(this).data('datum');
             haalSupplementenOp(datum);
@@ -31,7 +31,7 @@
 </script>
 
 <h1>Agenda</h1>
-<a href="#" class="btn btn-primary" data-datum="2018-08-21">Supplementen</a>
+<a href="#" class="supplementen btn btn-primary" data-datum="2018-08-21">Supplementen</a>
 
 <?php
 
