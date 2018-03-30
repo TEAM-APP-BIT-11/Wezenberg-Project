@@ -28,11 +28,16 @@
 <?php
 $meldingenlijst = "";
 
-foreach ($meldingen as $melding) {
-    $meldingenlijst .= '<div class="alert alert-info alert-dismissible" role="alert">';
-    $meldingenlijst .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close" data-id="' . $melding->id . '"><span aria-hidden="true">x</span></button>';
-    $meldingenlijst .= '<strong>' . $melding->titel . '</strong>  <span class="label label-primary">' . zetOmNaarHHMMDDMMYYYY($melding->momentVerzonden) . '</span><br>' . $melding->boodschap;
-    $meldingenlijst .= '</div>';
+$meldingenlijst = "";
+if (count($meldingen) != 0) {
+    foreach ($meldingen as $melding) {
+        $meldingenlijst .= '<div class="alert alert-info alert-dismissible" role="alert">';
+        $meldingenlijst .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close" data-id="' . $melding->id . '"><span aria-hidden="true">x</span></button>';
+        $meldingenlijst .= '<strong>' . $melding->titel . '</strong>  <span class="label label-primary">' . zetOmNaarHHMMDDMMYYYY($melding->momentVerzonden) . '</span><br>' . $melding->boodschap;
+        $meldingenlijst .= '</div>';
+    }
+} else {
+    $meldingenlijst .= "Er zijn geen nieuwe meldingen beschikbaar.";
 }
 ?>
 
