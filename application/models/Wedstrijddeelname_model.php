@@ -106,6 +106,14 @@ class Wedstrijddeelname_model extends CI_Model
         $this->db->where('resultaatId IS NOT NULL');
         $query = $this->db->get('wedstrijd');
         return $query->result();
+        
+        $this->load->model('wedstrijdreeks_model');
+                
+        $wedstrijden = $this->wedstrijdreeks_model->getAllWithWedstrijdenAndSlagAndAfstand();
+        
+        foreach ($wedstrijden as $wedstrijd) {
+            $wedstrijddeelname->wedstrijd = $wedstrijd;
+        }
     }
 
 }

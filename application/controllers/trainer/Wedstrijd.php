@@ -145,10 +145,10 @@ class Wedstrijd extends CI_Controller
         $data['titel'] = 'Wedstrijdresultaten beheren';
         $data['persoon'] = $this->authex->getPersoonInfo();
 
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        $this->load->model('wedstrijddeelname_model');
+        $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllAndWedstrijdenWhereResultaatIsNotNull();
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijden_beheren');
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaten_beheren');
         $this->template->load('main_master', $partials, $data);
     }
 }
