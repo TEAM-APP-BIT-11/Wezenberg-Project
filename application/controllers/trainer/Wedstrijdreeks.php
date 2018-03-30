@@ -77,8 +77,8 @@ class Wedstrijdreeks extends CI_Controller
 
       $this->load->model('wedstrijdreeks_model');
       $wedstrijdreeks = $this->wedstrijdreeks_model->insert($wedstrijdreeks);
-      $data['id'] = $wedstrijdId;
+      $data['id'] = $wedstrijdreeks;
 
-      return $this->toevoegen();
+
     }
 }

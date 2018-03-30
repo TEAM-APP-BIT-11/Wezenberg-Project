@@ -15,7 +15,16 @@
 
     <?php
     foreach ($wedstrijden as $wedstrijd) {
-        echo "<tr><td>" . $wedstrijd->naam . "</td><td>" . $wedstrijd->locatie->naam . "</td><td>" . $wedstrijd->begindatum . "</td><td>" . $wedstrijd->einddatum . "</td><td>" . anchor('trainer/wedstrijd/aanpassen/'. $wedstrijd->id, 'Aanpassen') . ' '  . anchor('trainer/wedstrijd/verwijder/'. $wedstrijd->id, 'Verwijderen'). ' '  . anchor('trainer/wedstrijdreeks/toevoegen/'. $wedstrijd->id, 'Reeks toevoegen')."</td></tr>";
+        echo
+        "<tr>
+          <td>" . $wedstrijd->naam . "</td>
+          <td>" . $wedstrijd->locatie->naam . "</td>
+          <td>" . $wedstrijd->begindatum . "</td>
+          <td>" . $wedstrijd->einddatum . "</td>
+          <td>" . anchor('trainer/wedstrijd/aanpassen/'. $wedstrijd->id, 'Aanpassen') . ' ' .
+           anchor('trainer/wedstrijd/verwijder/'. $wedstrijd->id, 'Verwijderen'). ' '  .
+           anchor('trainer/wedstrijdreeks/toevoegen/'. $wedstrijd->id, 'Reeks toevoegen')."</td>
+        </tr>";
     }
     ?>
 
