@@ -49,7 +49,7 @@ class Home extends CI_Controller
         // moet variabele worden uit de sessie na het inloggen.
 
         $this->load->model('melding_model');
-        $data['meldingen'] = $this->melding_model->getAllFromPersoon($persoon->id);
+        $data['meldingen'] = $this->melding_model->getAllFromPersoonAndNietGelezen($persoon->id);
 
         $partials = array(
             'menuGebruiker' => 'trainer_menu',
