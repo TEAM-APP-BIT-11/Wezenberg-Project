@@ -55,11 +55,13 @@ class Wedstrijd extends CI_Controller
 
     public function schrijfUit($wedstrijdDeelnameId)
     {
-        // verwijderd de record uit de database met de het ID dat doorgegeven wordt
         $this->load->model('wedstrijddeelname_model');
+        $wedstrijdDeelname = $this->wedstrijddeelname_model->get($wedstrijdDeelnameId);
+        // verwijderd de record uit de database met de het ID dat doorgegeven wordt
+
         $this->wedstrijddeelname_model->delete($wedstrijdDeelnameId);
 
-        redirect('/zwemmer/Wedstrijd/inschrijven' . $wedstrijdReeksId);
+        redirect('/zwemmer/Wedstrijd/inschrijven/' . $wedstrijdDeelname->wedstrijdReeksId);
     }
 
     public function inschrijven($wedstrijd = 0)
@@ -92,9 +94,6 @@ class Wedstrijd extends CI_Controller
         }
 
         echo json_encode($wedstrijdreeksen);
-
-        //todo: MOET NOG UITGESCHREVEN WORDEN
-        //Hierboven enkel wedstrijd meegeven en dan met json de rest ophalen.
     }
 
 }

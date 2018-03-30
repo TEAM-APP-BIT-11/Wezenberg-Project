@@ -1,11 +1,12 @@
 <?php
+
 /**
-* @class Wedstrijd_model
-* @brief Model-klasse voor wedstrijden
-*
-* Model-klasse die alle methodes bevat om te
-* interageren met de database-tabel wedstrijd
-*/
+ * @class Wedstrijd_model
+ * @brief Model-klasse voor wedstrijden
+ *
+ * Model-klasse die alle methodes bevat om te
+ * interageren met de database-tabel wedstrijd
+ */
 class Wedstrijd_model extends CI_Model
 {
     /*
@@ -29,16 +30,16 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
-		//
+    //
     // public function getWithLocatie($id)
     // {
     //     $this->db->where('id', $id);
     //     $query = $this->db->get('wedstrijd');
     //     $wedstrijd = $query->row();
-		//
+    //
     //     $this->load->model('locatie_model');
     //     $wedstrijd->locatie = $this->locatie_model->get($wedstrijd->locatieId);
-		//
+    //
     //     return $wedstrijd;
     // }
 
@@ -51,6 +52,7 @@ class Wedstrijd_model extends CI_Model
 
     public function getAll()
     {
+        $this->db->where('einddatum >=', date('Y-m-d', strtotime()));
         $query = $this->db->get('wedstrijd');
         return $query->result();
     }

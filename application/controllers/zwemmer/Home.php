@@ -32,7 +32,7 @@ class Home extends CI_Controller
             redirect('Welcome/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoonId !== 2) {
+            if ($persoon->typePersoon->typePersoon !== "zwemmer") {
                 redirect('Welcome/logIn');
             }
         }
