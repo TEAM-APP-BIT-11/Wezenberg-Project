@@ -1,12 +1,3 @@
-<script>
-$(document).ready(function(){
-	$("#voegReeksToe").click(function() {
-		var inhoud = "";
-		$("#reeksFormulier").append(inhoud);
-	});
-});
-</script>
-
 <div class="col-md-10 content">
 
 		<h1 class="">Wedstrijden toevoegen</h1>
@@ -65,15 +56,7 @@ $(document).ready(function(){
         'class' => 'form-control',
         'required' => 'required',));
 
-	 echo '<hr>';
-	 echo '<h4>Reeksen:</h4>';
-
-	echo '</br>';
-
-	echo '<div id="reeksFormulier">';
-	echo '</div>';
-
-	echo '<button type="button" class="btn btn-primary" id="voegReeksToe">Voeg reeks toe</button>';
+	  echo '</br>';
 
   echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
   echo form_close();
