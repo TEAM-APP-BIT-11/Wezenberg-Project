@@ -100,6 +100,13 @@ class Wedstrijddeelname_model extends CI_Model
         return $this->db->insert_id();
 
     }
+    
+    public function getAllAndWedstrijdenWhereResultaatIsNotNull()
+    {
+        $this->db->where('resultaatId IS NOT NULL');
+        $query = $this->db->get('wedstrijd');
+        return $query->result();
+    }
 
 }
 
