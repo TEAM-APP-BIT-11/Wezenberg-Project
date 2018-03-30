@@ -28,6 +28,25 @@ class Evenement_model extends CI_Model {
 		$query = $this->db->get('evenement');
 		return $query->row();
 	}
+        
+        /*
+	* Retourneert het record met id=$id uit de tabel evenement met alle bijhorende deelnames en personen
+	* @param $id De id van het record dat opgevraagd wordt
+	* @return Het opgevraagde record
+	*/
+
+	function getWithDeelnamesAndPersoon($id)
+	{
+                $this->db->where('id', $id);	
+                $query = $this->db->get('evenement');
+		$evenement = $query->row();
+                
+                $this->load->model('evenementdeelname_model');
+                
+                $evenement->deelnames = $this->evenementdeelname_model->getByEventIdWithPerson($id);
+                
+                return $evenement;
+	}
 
 	/*
 	* Retourneert alle records uit de tabel evenement

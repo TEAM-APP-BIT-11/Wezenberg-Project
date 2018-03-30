@@ -40,6 +40,8 @@
                 //bewerkTraining('verwijder', trainingsId);
             }
             if($(e.target).text() == 'Training bewerken'){
+                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerk');
+                $('#trainingenForm').submit();
             }
         });
 
@@ -80,7 +82,7 @@
                 <td>
                     <form id="trainingenForm" method="post">
                         <div class="form-group">
-                            <select multiple class="form-control" id="trainingenLijst">
+                            <select multiple class="form-control" id="trainingenLijst" name="trainingsId">
 
                             </select>
                         </div>

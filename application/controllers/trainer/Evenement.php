@@ -51,4 +51,14 @@ class Evenement extends CI_Controller {
 
         echo json_encode($trainingen);
     }
+    
+    public function bewerk(){
+        $evenementId = $this->input->post('trainingsId');
+        
+        $this->load->model('evenement_model');
+        $data['evenement'] = $this->evenement_model->getWithDeelnamesAndPersoon($evenementId);
+        
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenement_aanpassen');
+        $this->template->load('main_master', $partials, $data);
+    }
 }

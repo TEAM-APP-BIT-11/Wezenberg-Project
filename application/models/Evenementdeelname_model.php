@@ -28,6 +28,27 @@ class Evenementdeelname_model extends CI_Model {
 		$query = $this->db->get('evenementdeelname');
 		return $query->row();
 	}
+        
+        /*
+	* Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname inclusief bijhorende persoon
+	* @param $evenementId De id van het record dat opgevraagd wordt
+	* @return De opgevraagde records
+	*/
+        
+        function getByEventIdWithPerson($evenementId)
+        {
+                $this->db->where('evenementId', $evenementId);
+		$query = $this->db->get('evenementdeelname');
+                $evenementdeelnames = $query->result();
+                
+                $this->load->model('persoon_model');
+                
+                foreach($evenementdeelnames as $evenementdeelname){
+                    $evenementdeelname->persoon = $this->persoon_model->get($evenementdeelname->persoonId);
+                }
+
+                return $evenementdeelnames;
+        }
 
 	/*
 	* Retourneert alle records uit de tabel evenementdeelname
@@ -75,16 +96,6 @@ class Evenementdeelname_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-        function getAllJoinLeverancier()
-        {
-            $this->db->select('*, shop_product.id as productId');
-            $this->db->from('shop_product');
-            $this->db->join('shop_leverancier', 
-                    'shop_leverancier.id = shop_product.leverancierId');
-            $this->db->order_by('nederlandseNaam', 'asc');
-            $query = $this->db->get();
-            return $query->result();
-        }
     
 }
 
