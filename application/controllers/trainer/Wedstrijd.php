@@ -139,4 +139,16 @@ class Wedstrijd extends CI_Controller
 
         return $this->beheren();
     }
+    
+    public function resultaten()
+    {
+        $data['titel'] = 'Wedstrijdresultaten beheren';
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijden_beheren');
+        $this->template->load('main_master', $partials, $data);
+    }
 }
