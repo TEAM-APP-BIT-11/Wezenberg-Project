@@ -52,7 +52,17 @@ class Wedstrijd_model extends CI_Model
 
     public function getAll()
     {
-        $this->db->where('einddatum >=', date('Y-m-d', strtotime()));
+        $query = $this->db->get('wedstrijd');
+        return $query->result();
+    }
+
+    /*
+     * Geeft alle wedstrijden waarvan de einddatum na vandaag ligt.
+     * @return Alles records waarvan de einddatum van de wedstrijden na vandaag liggen.
+     */
+    public function getAllAfterToday()
+    {
+        $this->db->where('einddatum >=', date('Y-m-d'));
         $query = $this->db->get('wedstrijd');
         return $query->result();
     }

@@ -87,11 +87,11 @@
             <?php
         } else {
             ?>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Home', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/inschrijven', 'inschrijven Wedstrijd', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Home', 'Home', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '') ?></li>
             <li><?php echo anchor('/zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
             <?php
         }
         echo '</ul > ';

@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 // +----------------------------------------------------------
 // | xxx - notation_helper
@@ -13,7 +13,8 @@
 
 // databasedatum in juiste formaat zetten (van yyyy-mm-dd naar dd/mm/jjjj)
 
-function zetOmNaarDDMMYYYY($input) {
+function zetOmNaarDDMMYYYY($input)
+{
     if ($input == "") {
         return "";
     } else {
@@ -24,7 +25,8 @@ function zetOmNaarDDMMYYYY($input) {
 
 // ingegeven datum in formaat van database plaatsen (van dd/mm/jjjj naar yyyy-mm-dd)
 
-function zetOmNaarYYYYMMDD($input) {
+function zetOmNaarYYYYMMDD($input)
+{
     if ($input == "") {
         return "";
     } else {
@@ -33,34 +35,34 @@ function zetOmNaarYYYYMMDD($input) {
     }
 }
 
-function zetOmNaarHHMMDDMMYYYY($input){
-    if($input = ""){
+function zetOmNaarHHMMDDMMYYYY($input)
+{
+    if ($input == "") {
         return "";
-    }
-    else {
+    } else {
         $datum = strtotime($input);
-        return date('j/m/Y H:j');
+        return date('j/m/Y H:i', $datum);
     }
 
 
 }
 
-function zetOmNaarHHMM($input){
+function zetOmNaarHHMM($input)
+{
     $inputString = (string)$input;
-    if($inputString = ""){
+    if ($inputString = "") {
         return "";
-    }
-    else {
+    } else {
         $datum = strtotime($inputString);
         return date('H:j', $datum);
     }
 }
 
 
-
 // database decimaal getal tonen met komma (van 999.99 naar 999,99)
 
-function zetOmNaarKomma($input) {
+function zetOmNaarKomma($input)
+{
     if ($input == "") {
         return "";
     } else {
@@ -75,7 +77,8 @@ function zetOmNaarKomma($input) {
 
 // ingegeven decimaal getal omzetten in databaseformaat (van 999,99 naar 999.99)
 
-function zetOmNaarPunt($input) {
+function zetOmNaarPunt($input)
+{
     if ($input == "") {
         return "";
     } else {

@@ -70,7 +70,7 @@ class Wedstrijd extends CI_Controller
 
         $this->load->model('wedstrijd_model');
 
-        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        $data['wedstrijden'] = $this->wedstrijd_model->getAllAfterToday();
 
         $data['tonen'] = $wedstrijd;
 

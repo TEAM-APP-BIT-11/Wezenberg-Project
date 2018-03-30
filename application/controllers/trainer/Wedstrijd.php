@@ -28,14 +28,14 @@ class Wedstrijd extends CI_Controller
     {
         parent::__construct();
 
-        // if (!$this->authex->isAangemeld()) {
-        //     redirect('Welcome/logIn');
-        // } else {
-        //     $persoon = $this->authex->getPersoonInfo();
-        //     if ($persoon->typePersoon->typePersoon !== "trainer") {
-        //         redirect('trainer/locatie');
-        //     }
-        // }
+        if (!$this->authex->isAangemeld()) {
+            redirect('Welcome/logIn');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->typePersoon->typePersoon !== "trainer") {
+                redirect('trainer/locatie');
+            }
+        }
 
         $this->load->helper('form');
         $this->load->helper('notation');

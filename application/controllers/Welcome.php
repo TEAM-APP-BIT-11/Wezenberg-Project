@@ -140,6 +140,18 @@ class Welcome extends CI_Controller
         echo $this->authex->meldAan($gebruikersnaam, $wachtwoord);
     }
 
+    public function MeldingGelezen()
+    {
+        $meldingId = $this->input->post('meldingId');
+
+        $this->load->model('melding_model');
+        $melding = $this->melding_model->get($meldingId);
+        $melding->gelezen = 1;
+        $this->melding_model->update($melding);
+
+    }
+
+
     public function toon()
     {
         $data['titel'] = 'Formulier met dialoogvenster';
