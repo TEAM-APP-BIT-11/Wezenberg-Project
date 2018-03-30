@@ -61,20 +61,22 @@ class Welcome extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    function wachtwoord($id) {
+    function wachtwoord($id)
+    {
         $data['titel'] = "Wachtwoord wijzigen";
-        
+
         $this->load->model('persoon_model');
         $data['persoon'] = $this->persoon_model->get($id);
-        
-        $partials = array('hoofding' => 'main_header', 
-			    'inhoud' => 'algemeen/reset_wachtwoord', 
-				'voetnoot' => 'main_footer');
-        
+
+        $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'algemeen/reset_wachtwoord',
+            'voetnoot' => 'main_footer');
+
         $this->template->load('main_master', $partials, $data);
-        }
-        
-    function registreer() {
+    }
+
+    function registreer()
+    {
         $persoon = new stdClass();
 
         $persoon->id = $this->input->post('id');
@@ -95,22 +97,25 @@ class Welcome extends CI_Controller
         } else {
             $this->persoon_model->update($persoon);
         }
-        
+
         redirect('/welcome/controleerAanmelden');
     }
-    
-    function wijzigWachtwoord() {
 
-        $persoon = $this->authex->getPersoonInfo();
-                        
-        $persoon->wachtwoord = password_hash($this->input->post('nieuwWW'), PASSWORD_DEFAULT);
-        
+    function wijzigWachtwoord()
+    {
+        $persoon = new stdClass();
+
+        $persoon->id = $this->input->post('id');
+
+
+        $persoon->wachtwoord = password_hash($this->input->post('nieuw'), PASSWORD_DEFAULT);
+
+
         $this->load->model('persoon_model');
-        
+
         if ($persoon->id == 0) {
             $this->persoon_model->insert($persoon);
-        }
-        else {
+        } else {
             $this->persoon_model->update($persoon);
         }
 
@@ -130,7 +135,7 @@ class Welcome extends CI_Controller
             }
         } else {
             //fout 
-            redirect('Welcome/index');
+            redirect('Welcome/logIn');
         }
         echo $this->authex->meldAan($gebruikersnaam, $wachtwoord);
     }
