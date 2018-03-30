@@ -1,4 +1,19 @@
 <script>
+    
+    function wachtwoordCorrect(nieuwWW)
+    {
+        $.ajax({type : "POST",
+                url : site_url + "/welcome/wijzigWachtwoord/" ,
+                data : {nieuwWW : nieuwWW},
+                success : function(){
+                    $("#success").show();
+                },
+                error: function (xhr, status, error) {
+                    alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                }
+        });
+
+    }
 
     $(document).ready(function () {
         
@@ -13,7 +28,8 @@
             if (nieuw == herhaling)
             {
                 $("div.wachtwoord").hide();
-                $("#success").show();
+                $("#danger").hide();
+                wachtwoordCorrect(nieuw);
             }
             else
             {
@@ -28,7 +44,6 @@
 
 <?php
 $attributen = array('name' => 'mijnFormulier');
-echo form_open('welcome/wijzigWachtwoord', $attributen);
 echo form_hidden('id', $persoon->id);
 ?>
 
@@ -57,7 +72,7 @@ echo form_hidden('id', $persoon->id);
     
     <div class="alert alert-success" id="success">
         <strong>OK! </strong><p>Het wachtwoord is veranderd.</p>
-        <?php echo form_submit('knop', 'Ga terug'); ?>        
+        <?php echo anchor('welcome/wijzig/' . $persoon->id, "Terug"); ?>        
     </div>
 
 

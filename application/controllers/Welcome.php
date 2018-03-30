@@ -100,12 +100,10 @@ class Welcome extends CI_Controller
     }
     
     function wijzigWachtwoord() {
-        $persoon = new stdClass();
 
-        $persoon->id = $this->input->post('id');
-        
-        
-        $persoon->wachtwoord = password_hash($this->input->post('nieuw'), PASSWORD_DEFAULT);
+        $persoon = $this->authex->getPersoonInfo();
+                        
+        $persoon->wachtwoord = password_hash($this->input->post('nieuwWW'), PASSWORD_DEFAULT);
         
         $this->load->model('persoon_model');
         
@@ -115,8 +113,6 @@ class Welcome extends CI_Controller
         else {
             $this->persoon_model->update($persoon);
         }
-        
-        redirect('/welcome/controleerAanmelden');
 
     }
 

@@ -36,7 +36,7 @@ echo form_hidden('id', $persoon->id);
     </tr>
     <tr>
         <td><?php echo form_label('Biografie:', 'biografie'); ?></td>
-        <td><?php echo form_input('biografie', $persoon->biografie, 'size=50', array("style" => "height:50px")); ?></td>
+        <td><?php echo form_textarea('biografie', $persoon->biografie, 'size=50', array("style" => "height:50px")); ?></td>
     </tr>
     <tr>
         <td></td>
