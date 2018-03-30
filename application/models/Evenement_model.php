@@ -71,7 +71,7 @@ class Evenement_model extends CI_Model {
                 return $query->result();
 
 	}
-
+        
 	/*
 	* Update het record in de tabel evenement met de id die uit $evenement gehaald wordt
 	* @param $evenement Het record waarmee we een bestaand record willen vervangen

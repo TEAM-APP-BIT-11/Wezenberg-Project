@@ -8,7 +8,7 @@
                         $('#trainingenLijst').html("");
                         var trainingen = jQuery.parseJSON(result);
                         for(var i = 0; i < trainingen.length; i++){
-                            $('#trainingenLijst').append('<option>' + trainingen[i].begindatum + ': ' + trainingen[i].beginuur + ' - ' + trainingen[i].einduur + '</option>');
+                            $('#trainingenLijst').append('<option value="' + trainingen[i].id +'">' + trainingen[i].begindatum + ': ' + trainingen[i].beginuur + ' - ' + trainingen[i].einduur + '</option>');
                         }
                     } catch(error){
                         alert("--- ERROR IN JSON --" + result);
@@ -19,10 +19,28 @@
                 }
         });
     }
+    
+    function bewerkTraining(functie, trainingsId){
+        
+    }
 
     $(document).ready(function(){
         $('#trainingsReeksen').change(function(){
             haalTrainingenOp($('#trainingsReeksen').val());
+        });
+        
+        $('#trainingControls').click(function(e){
+            if($(e.target).text() == 'Training verwijderen'){
+                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijder');
+                $('#trainingenForm').submit();
+            
+            
+                //var option = document.getElementById('trainingenLijst');
+                //var trainingsId = e.options[e.selectedIndex].value;               
+                //bewerkTraining('verwijder', trainingsId);
+            }
+            if($(e.target).text() == 'Training bewerken'){
+            }
         });
 
     });
@@ -46,7 +64,7 @@
             </tr>
             <tr>
                 <td>
-                    <form>
+                    <form method="post" action="<?php echo site_url() . '/trainer/Evenement/bewerk/';?>">
                         <div class="form-group">
                             <select size="<?php echo count($evenementreeksen);?>" class="form-control" id="trainingsReeksen">
                                 <?php
@@ -56,32 +74,71 @@
                                 ?>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-primary">Reeks bewerken</button>
                     </form>
                 </td>
                 <td>
-                    <form>
+                    <form id="trainingenForm" method="post">
                         <div class="form-group">
                             <select multiple class="form-control" id="trainingenLijst">
 
                             </select>
                         </div>
                     </form>
+                    <div id="trainingControls">
+                        <button class="btn btn-primary">Training verwijderen</button>
+                        <button class="btn btn-primary">Training bewerken</button>
+                    </div>
                 </td>
             </tr>
         </table>
     </div>
-
     <div id="stages" class="tab-pane fade">
         <h3>Stages beheren</h3>
-        <p>Hier komt inhoud van menu 1.</p>
+        <form>
+            <div class="form-group">
+                <select multiple class="form-control" id="stageLijst">
+                    <?php
+                    foreach($evenementen as $evenement){
+                        if($evenement->type->type == 'stage'){
+                            echo '<option>' . $evenement->naam . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </form>
     </div>
-
     <div id="medische" class="tab-pane fade">
         <h3>Medische testen beheren</h3>
-        <p>Hier komt inhoud van menu 2.</p>
+        <form>
+            <div class="form-group">
+                <select multiple class="form-control" id="testenLijst">
+                    <?php
+                    foreach($evenementen as $evenement){
+                        if($evenement->type->type == 'medische test'){
+                            echo '<option>' . $evenement->naam . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </form>
     </div>
     <div id="overige" class="tab-pane fade">
         <h3>Overige evenementen beheren</h3>
-        <p>Hier komt inhoud van menu 2.</p>
+        <form>
+            <div class="form-group">
+                <select multiple class="form-control" id="overigeLijst">
+                    <?php
+                    foreach($evenementen as $evenement){
+                        if($evenement->type->type == 'overige'){
+                            echo '<option>' . $evenement->naam . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </form>
     </div>
 </div>
