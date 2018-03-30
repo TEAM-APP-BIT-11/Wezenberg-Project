@@ -32,7 +32,7 @@ class Agenda extends CI_Controller
             redirect('Welcome/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoonId != 1) {
+            if ($persoon->typePersoon->typePersoon != "zwemmer") {
                 redirect('Welcome/logIn');
             }
         }
@@ -53,8 +53,20 @@ class Agenda extends CI_Controller
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
 
-        $partials = array('inhoud' => 'trainer/locatie_beheren');
- 
+        $partials = array('inhoud' => 'zwemmer/agenda');
+
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function haalAjaxOp_Innames()
+    {
+        $this->load->model("inname_model");
+
+        $persoon = $this->authex->getPersoonInfo();
+        $datum = $this->input->get('datum');
+        $data["innames"] = $this->inname_model->getAllByPersoonAndDate($datum, $persoon->id);
+
+
+        $this->load->view('zwemmer/ajax_innames', $data);
     }
 }
