@@ -22,10 +22,11 @@
             e.preventDefault();
             var datum = $(this).data('datum');
             haalSupplementenOp(datum);
-            $("#datum").html();
+            var DateCreated = new Date(Date.parse(datum));
+            $("#datum").html(DateCreated.toLocaleDateString());
         });
-
-    });
+    })
+    ;
 
 </script>
 
