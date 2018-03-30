@@ -33,7 +33,7 @@ class Wedstrijdreeks extends CI_Controller
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "trainer") {
-                redirect('trainer/locatie');
+                redirect('');
             }
         }
 
@@ -78,7 +78,11 @@ class Wedstrijdreeks extends CI_Controller
       $this->load->model('wedstrijdreeks_model');
       $wedstrijdreeks = $this->wedstrijdreeks_model->insert($wedstrijdreeks);
       $data['id'] = $wedstrijdreeks;
+    }
 
-
+    public function verwijder($id)
+    {
+      $this->load->model('wedstrijdreeks_model');
+      $this->wedstrijdreeks_model->delete($id);
     }
 }

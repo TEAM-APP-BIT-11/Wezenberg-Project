@@ -69,8 +69,8 @@
 						<td>" . $wedstrijdreeks->datum . "</td>
 						<td>" . $wedstrijdreeks->beginuur . "</td>
 						<td>" . $wedstrijdreeks->einduur . "</td>
-						<td>" . anchor('trainer/wedstrijd/aanpassen/'. $wedstrijdreeks->id, 'Aanpassen') . ' ' .
-						anchor('trainer/wedstrijd/verwijder/'. $wedstrijdreeks->id, 'Verwijderen')."</td>
+						<td>" . anchor('trainer/wedstrijdreeks/aanpassen/'. $wedstrijdreeks->id, 'Aanpassen') . ' ' .
+						anchor('trainer/wedstrijdreeks/verwijder/'. $wedstrijdreeks->id, 'Verwijderen')."</td>
 					</tr>";
 
 		  }

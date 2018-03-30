@@ -33,7 +33,7 @@ class Wedstrijd extends CI_Controller
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "trainer") {
-                redirect('trainer/locatie');
+                redirect('');
             }
         }
 
@@ -139,7 +139,7 @@ class Wedstrijd extends CI_Controller
 
         return $this->beheren();
     }
-    
+
     public function resultaten()
     {
         $data['titel'] = 'Wedstrijdresultaten beheren';

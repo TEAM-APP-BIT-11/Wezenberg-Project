@@ -33,7 +33,7 @@ class Locatie extends CI_Controller
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "trainer") {
-                redirect('Welcome/logIn');
+                redirect('');
             }
         }
 
