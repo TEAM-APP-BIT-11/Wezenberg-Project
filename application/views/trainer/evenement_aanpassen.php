@@ -32,7 +32,7 @@ var_dump($evenement);
 
 
 <table>
-    <form id="bewerkEvenementForm">
+    <form method="post" id="bewerkEvenementForm">
         <input type="number" name="evenementId" value="<?php echo $evenement->id;?>" hidden>
         <input type="number" name="evenementReeks" value="<?php echo $evenement->evenementReeksId;?>" hidden>
         <tr>
@@ -45,7 +45,7 @@ var_dump($evenement);
             </td>
             <td>
                 <div class="form-group">
-                    <label for="begindatum">Begindatum</label>
+                    <label for="begindatum"><?php if($evenement->type->type == "training"){echo "Datum";}else{echo "Begindatum";}?></label>
                     <input type="date" class="form-control" id="begindatum" name="begindatum" value="<?php echo $evenement->begindatum;?>">
                 </div>
             </td>
@@ -62,13 +62,13 @@ var_dump($evenement);
                     <input type="text" class="form-control" id="naam" name="naam" value="<?php echo ucfirst($evenement->naam);?>">
                 </div>
             </td>
-            <td>
+            <td <?php if($evenement->type->type == "training"){echo "hidden";}?>>
                 <div class="form-group">
                     <label for="einddatum">Einddatum</label>
                     <input type="date" class="form-control" id="einddatum" name="einddatum" value="<?php echo $evenement->einddatum;?>">
                 </div>
             </td>
-            <td>
+            <td <?php if($evenement->type->type == "training"){echo "hidden";}?>>
                 <div class="form-group">
                     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                 </div>

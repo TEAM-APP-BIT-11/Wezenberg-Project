@@ -71,7 +71,7 @@ class Evenement extends CI_Controller {
         $evenement = new stdClass();
 
         $evenement->id = $this->input->post('evenementId');
-        $evenement->naam = $this->input->post('evenementId');
+        $evenement->naam = $this->input->post('naam');
         $evenement->locatieId = $this->input->post('locatie');
         $evenement->begindatum = $this->input->post('begindatum');
         $evenement->einddatum = $this->input->post('einddatum');
@@ -85,5 +85,59 @@ class Evenement extends CI_Controller {
         $this->evenement_model->update($evenement);
         
         $this->beheren();
+    }
+    
+    public function nieuweTraining(){
+        $this->load->model('persoon_model');
+        $data['zwemmers'] = $this->persoon_model->getZwemmers();
+        
+        $this->load->model('locatie_model');
+        $data['locaties'] = $this->locatie_model->getAll();
+        
+        $data['isNieuweTraining'] = true;
+        
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/training_aanpassen');
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function voegNieuweTrainingenToe(){
+        $evenementreeks = new stdClass();
+        $evenement = new stdClass();
+        
+        $evenementreeks->naam = $this->input->post('naam');
+        $this->load->model('evenementreeks_model');
+        $evenementreeksId = $this->evenementreeks_model->insert($evenementreeks);
+        
+        if($this->input->post('einddatum') == null && (count($this->input->post('check_list')) == 0 || count($this->input->post('check_list')) == 1)){
+            $evenement->naam = $this->input->post('naam');
+            $evenement->locatieId = $this->input->post('locatie');
+            $evenement->begindatum = $this->input->post('begindatum');
+            $evenement->beginuur = $this->input->post('beginuur');
+            $evenement->einduur = $this->input->post('einduur');
+            $evenement->extraInfo = $this->input->post('beschrijving');
+            $evenement->evenementTypeId = 1;
+            $evenement->evenementReeksId = $evenementreeksId;
+        } else if($this->input->post('einddatum') != null && count($this->input->post('check_list')) >= 1){
+            $checklist = array($this->input->post('check_list[]'));
+            for($date = date_create_from_format("Y-m-d", $this->input->post('begindatum')); $date <= date_create_from_format("Y-m-d", $this->input->post('einddatum')); date_add($date, date_interval_create_from_date_string('1 days'))){
+                $dayOfDate = $date->format("N");
+                for($i = 0; $i < count($checklist); $i++){
+                    $days = $checklist[$i];
+                    if(in_array($dayOfDate, $days)){
+                        $evenement->naam = $this->input->post('naam');
+                        $evenement->locatieId = $this->input->post('locatie');
+                        $evenement->begindatum = $date->format("Y-m-d");
+                        $evenement->beginuur = $this->input->post('beginuur');
+                        $evenement->einduur = $this->input->post('einduur');
+                        $evenement->extraInfo = $this->input->post('beschrijving');
+                        $evenement->evenementTypeId = 1;
+                        $evenement->evenementReeksId = $evenementreeksId;
+
+                        $this->load->model('evenement_model');
+                        $evenementId = $this->evenement_model->insert($evenement);
+                    }
+                }
+            }
+        }
     }
 }

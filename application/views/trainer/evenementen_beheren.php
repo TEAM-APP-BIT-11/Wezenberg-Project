@@ -33,7 +33,6 @@
             }
             $('#trainingenForm').submit();
         });
-
     });
 </script>
 
@@ -81,6 +80,9 @@
                         <button class="btn btn-primary">Training bewerken</button>
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td><?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuweTraining', 'Toevoegen', 'class="btn btn-primary"');?></td>
             </tr>
         </table>
     </div>
