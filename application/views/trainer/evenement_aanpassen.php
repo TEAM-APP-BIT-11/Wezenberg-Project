@@ -2,15 +2,45 @@
 var_dump($evenement);
 ?>
 
-<h1><?php echo ucfirst($evenement->type->type) . ' ';?>bewerken</h1>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var isNieuwEvenement = "<?php echo $isNieuwEvenement; ?>";
+        $('#bewerkControls').click(function(e){
+            if($(e.target).text() == 'Opslaan'){
+                if(isNieuwEvenement){
+                    $('#bewerkEvenementForm').attr('action', site_url + '/trainer/Evenement/voegToe');
+                } else{
+                    $('#bewerkEvenementForm').attr('action', site_url + '/trainer/Evenement/pasAan');
+                }
+                $('#bewerkEvenementForm').submit();
+            }
+        });
 
-<form>
-    <table>
+    });
+</script>
+
+<h1>
+    <?php 
+    echo ucfirst($evenement->type->type) . ' ';
+    if($isNieuwEvenement){
+        echo "toevoegen";
+    } else{
+        echo "bewerken";
+    }   
+    ?>
+</h1>
+
+
+<table>
+    <form id="bewerkEvenementForm">
+        <input type="number" name="evenementId" value="<?php echo $evenement->id;?>" hidden>
+        <input type="number" name="evenementReeks" value="<?php echo $evenement->evenementReeksId;?>" hidden>
         <tr>
             <td>
                 <div class="form-group">
                     <label for="evenementType">Type evenement</label>
-                    <input type="text" class="form-control" id="evenementType" name="evenementType" value="<?php echo ucfirst($evenement->type->type);?>" readonly>
+                    <input type="number" id="evenementType" name="evenementType" value="<?php echo $evenement->type->id;?>" hidden>
+                    <input type="text" class="form-control" value="<?php echo ucfirst($evenement->type->type);?>" readonly>
                 </div>
             </td>
             <td>
@@ -61,7 +91,7 @@ var_dump($evenement);
                 <div class="form-group">
                     <label for="locatie">Locatie</label>
                     <select class="form-control" id="locatie" name="locatie">
-                        <option><?php echo $evenement->locatie->naam;?></option>
+                        <option value="<?php echo $evenement->locatie->id;?>"><?php echo $evenement->locatie->naam;?></option>
                     </select>
                 </div>
             </td>
@@ -113,9 +143,9 @@ var_dump($evenement);
                 </div>
             </td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-</form>
+    </form>
+    <tr id="bewerkControls">
+        <td><?php echo anchor($this->config->site_url() . '/trainer/Evenement/beheren', 'Annuleren', 'class="btn btn-primary"');?></td>
+        <td><button class="btn btn-primary">Opslaan</button></td>
+    </tr>
+</table>

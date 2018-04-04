@@ -61,7 +61,29 @@ class Evenement extends CI_Controller {
         $this->load->model('persoon_model');
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
         
+        $data['isNieuwEvenement'] = false;
+        
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenement_aanpassen');
         $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function pasAan(){
+        $evenement = new stdClass();
+
+        $evenement->id = $this->input->post('evenementId');
+        $evenement->naam = $this->input->post('evenementId');
+        $evenement->locatieId = $this->input->post('locatie');
+        $evenement->begindatum = $this->input->post('begindatum');
+        $evenement->einddatum = $this->input->post('einddatum');
+        $evenement->beginuur = $this->input->post('beginuur');
+        $evenement->einduur = $this->input->post('einduur');
+        $evenement->extraInfo = $this->input->post('beschrijving');
+        $evenement->evenementTypeId = $this->input->post('evenementType');
+        $evenement->evenementReeksId = $this->input->post('evenementReeks');
+
+        $this->load->model('evenement_model');
+        $this->evenement_model->update($evenement);
+        
+        $this->beheren();
     }
 }

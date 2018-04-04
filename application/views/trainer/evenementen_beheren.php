@@ -19,11 +19,6 @@
                 }
         });
     }
-    
-    function bewerkTraining(functie, trainingsId){
-        
-    }
-
     $(document).ready(function(){
         $('#trainingsReeksen').change(function(){
             haalTrainingenOp($('#trainingsReeksen').val());
@@ -32,17 +27,11 @@
         $('#trainingControls').click(function(e){
             if($(e.target).text() == 'Training verwijderen'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijder');
-                $('#trainingenForm').submit();
-            
-            
-                //var option = document.getElementById('trainingenLijst');
-                //var trainingsId = e.options[e.selectedIndex].value;               
-                //bewerkTraining('verwijder', trainingsId);
             }
             if($(e.target).text() == 'Training bewerken'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerk');
-                $('#trainingenForm').submit();
             }
+            $('#trainingenForm').submit();
         });
 
     });
