@@ -6,7 +6,7 @@
 
 		<?php
     $attributes = array('name' => 'locatie');
-    echo form_open('locatie/pasAan', $attributes);
+    echo form_open('trainer/locatie/pasAan', $attributes);
 
     echo form_labelpro('Naam', 'naam');
     echo form_input(array('name' => 'naam',
@@ -26,8 +26,8 @@
 
     echo '</br>';
     echo form_labelpro('Nummer', 'nummer');
-    echo form_input(array('name' => 'nummer',
-        'id' => 'nummer',
+    echo form_input(array('name' => 'nr',
+        'id' => 'nr',
         'value' => $locatie->nr,
         'class' => 'form-control',
         'required' => 'required',
