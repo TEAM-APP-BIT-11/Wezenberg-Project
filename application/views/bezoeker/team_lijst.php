@@ -1,8 +1,13 @@
 <?php
+$lijstzwemmers = "";
+foreach ($zwemmers as $zwemmer) {
+    $lijstzwemmers .= '<div class="col-md-3">' . $zwemmer->voornaam . ' ' . $zwemmer->familienaam . '<br />' . anchor('bezoeker/Home/zwemmer/' . $zwemmer->id, 'Bekijken', 'class="btn btn-primary"') . '</div>';
+}
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+?>
+<div class="row">
+    <?php echo $lijstzwemmers; ?>
+
+</div>
+
 

@@ -1,8 +1,12 @@
-<?php
+<h1><?php echo $zwemmer->voornaam; ?></h1>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<h3>Algemene Informatie</h3>
+<ul>
+    <li><?php echo $zwemmer->voornaam . ' ' . $zwemmer->familienaam; ?></li>
+    <li><?php echo $zwemmer->woonplaats; ?></li>
+    <li><?php echo zetOmNaarDDMMYYYY($zwemmer->geboortedatum); ?></li>
+</ul>
 
+<h2>NOG INFORMATIE</h2>
+
+<?php echo anchor('bezoeker/Contact/zwemmer/' . $zwemmer->id, 'Contacteer me', 'class="btn btn-primary"'); ?>
