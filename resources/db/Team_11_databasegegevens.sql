@@ -531,8 +531,8 @@ CREATE TABLE IF NOT EXISTS `wedstrijd` (
 
 INSERT INTO `wedstrijd` (`id`, `naam`, `locatieId`, `begindatum`, `einddatum`, `extraInfo`) VALUES
 (1, 'olympische spelen', 1, '2018-09-21', '2018-11-21', 'extra1'),
-(2, 'WK', 2, '2018-07-21', '2018-08-21', 'extra2'),
-(3, 'BK', 3, '2018-09-18', NULL, 'extra3'),
+(2, 'WK', 2, '2017-07-21', '2017-08-21', 'extra2'),
+(3, 'BK', 3, '2018-02-18', '2017-02-30', 'extra3'),
 (4, 'wedstrijd4', 4, '2019-09-21', NULL, 'extra4'),
 (5, 'wedstrijd5', 5, '2019-08-21', NULL, 'extra5');
 

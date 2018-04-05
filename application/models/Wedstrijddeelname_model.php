@@ -104,7 +104,7 @@ class Wedstrijddeelname_model extends CI_Model
     public function getAllAndWedstrijdenWhereResultaatIsNotNull()
     {
         $this->db->where('resultaatId IS NOT NULL');
-        $query = $this->db->get('wedstrijd');
+        $query = $this->db->get('wedstrijddeelname');
         return $query->result();
         
         $this->load->model('wedstrijdreeks_model');
