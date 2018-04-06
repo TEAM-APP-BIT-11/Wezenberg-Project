@@ -8,12 +8,29 @@
     });
 </script>
 
-<h1>Trainingen toevoegen</h1>
+<h1>Evenementen toevoegen</h1>
 <form id="nieuweTrainingenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweTrainingenToe';?>">
     <div class="row">
-        <div class="col-md-4 form-group">
+        <div class="col-md-2 form-group">
             <label for="type">Type Evenement</label>
-            <input name="type" class="form-control" type="text" value="Training" readonly>
+            <select name="type" class="form-control">
+                <?php
+                foreach($types as $evenementType){
+                    if($evenementType->type === $type){
+                        echo '<option value="' . $evenementType->id . '" selected>' . ucfirst($evenementType->type) . '</option>';
+                    } else{
+                        echo '<option value="' . $evenementType->id . '">' . ucfirst($evenementType->type) . '</option>';
+                    }
+                }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-2 form-group">
+            <label for="hoeveelheid">Hoeveelheid</label>
+            <select name="hoeveelheid" class="form-control">
+                <option value="enkel" selected>Enkel</option>
+                <option value="meerdere">Meerdere</option>
+            </select>
         </div>
         <div class="col-md-4 form-group">
             <label for="naam">Evenementnaam</label>

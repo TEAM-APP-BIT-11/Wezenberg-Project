@@ -25,10 +25,11 @@
         });
         
         $('#trainingControls').click(function(e){
-            if($(e.target).text() == 'Training verwijderen'){
+            if($(e.target).text() === 'Training verwijderen'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijder');
             }
-            if($(e.target).text() == 'Training bewerken'){
+            if($(e.target).text() === 'Training bewerken' && $('#trainingenLijst').val().length !== 0){
+                console.log($('#trainingenLijst').val().length);
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerk');
             }
             $('#trainingenForm').submit();
@@ -82,7 +83,7 @@
                 </td>
             </tr>
             <tr>
-                <td><?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuweTraining', 'Toevoegen', 'class="btn btn-primary"');?></td>
+                <td><?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/1', 'Toevoegen', 'class="btn btn-primary"');?></td>
             </tr>
         </table>
     </div>

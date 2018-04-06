@@ -24,8 +24,6 @@ class Evenement extends CI_Controller {
      * @see evenementen_beheren.php
      */
     public function beheren() {
-        $data['naam'] = 'Trainer x';
-
         $this->load->model('evenement_model');
         $data['evenementen'] = $this->evenement_model->getAllWithType();
         
@@ -61,6 +59,9 @@ class Evenement extends CI_Controller {
         $this->load->model('persoon_model');
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
         
+        $this->load->model('locatie_model');
+        $data['locaties'] = $this->locatie_model->getAll();
+        
         $data['isNieuwEvenement'] = false;
         
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenement_aanpassen');
@@ -74,7 +75,6 @@ class Evenement extends CI_Controller {
         $evenement->naam = $this->input->post('naam');
         $evenement->locatieId = $this->input->post('locatie');
         $evenement->begindatum = $this->input->post('begindatum');
-        $evenement->einddatum = $this->input->post('einddatum');
         $evenement->beginuur = $this->input->post('beginuur');
         $evenement->einduur = $this->input->post('einduur');
         $evenement->extraInfo = $this->input->post('beschrijving');
@@ -87,14 +87,18 @@ class Evenement extends CI_Controller {
         $this->beheren();
     }
     
-    public function nieuweTraining(){
+    public function nieuwEvenement($type){
         $this->load->model('persoon_model');
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
         
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
         
-        $data['isNieuweTraining'] = true;
+        $this->load->model('evenementtype_model');
+        $data['types'] = $this->evenementtype_model->getAll();
+
+        $data['isNieuwEvenement'] = true;
+        $data['type'] = $type;
         
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/training_aanpassen');
         $this->template->load('main_master', $partials, $data);
