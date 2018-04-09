@@ -3,13 +3,14 @@
 <script type="text/javascript">
     $(document).ready(function(){  
         $(function(){
-            //moment.locale('nl-be');
-            //moment().format('L');
-            $('#datetimepicker1').datetimepicker({
+            $('#datetimepickerBegindatum, #datetimepickerEinddatum').datetimepicker({
                 locale: 'nl-be',
                 format: 'L'
             });
-            
+            $('#datetimepickerBeginuur, #datetimepickerEinduur').datetimepicker({
+                locale: 'nl-be',
+                format: 'LT'
+            });
         });
         $("#opslaan").click(function(){
             $("#nieuweTrainingenForm").submit();
@@ -92,6 +93,15 @@
         width: 100%;
         height: 100%;
     }
+    #dagenLabel{
+        margin-left: 15px;
+    }
+    #zwemmerKnoppen{
+        margin-top: 25px;
+    }
+    #zwemmerKnoppen div:first-child{
+        margin-bottom: 10px;
+    }
 </style>
 
 <h1 id="titel"><?php echo ucfirst($type);?> toevoegen</h1>
@@ -125,29 +135,44 @@
     <div class="row">
         <div class="col-md-2 form-group">
             <label for="beginuur">Beginuur</label>
-            <input name="beginuur" class="form-control" type="time" value="">
+            <div class='input-group date' id='datetimepickerBeginuur'>
+                <input name="beginuur" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
         </div>
         <div class="col-md-2 form-group">
             <label for="einduur">Einduur</label>
-            <input name="einduur" class="form-control" type="time" value="">
+            <div class='input-group date' id='datetimepickerEinduur'>
+                <input name="einduur" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
         </div>
         <div class="col-md-2 form-group">
-                <label for="begindatum" id="begindatum">Datum</label>
-                <div class='input-group date' id='datetimepicker1'>
-                    <input name="begindatum" type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
+            <label for="begindatum" id="begindatum">Datum</label>
+            <div class='input-group date' id='datetimepickerBegindatum'>
+                <input name="begindatum" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
         </div>
         <div class="col-md-2 form-group meerdere">
             <label for="einddatum">Einddatum</label>
-            <input name="einddatum" class="form-control" type="date" value="">
+            <div class='input-group date' id='datetimepickerEinddatum'>
+                <input name="einddatum" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
         </div>
     </div>
     <div class="row form-group meerdere">
-        <label>Gaat door op</label>
-        <div class="col-md-12 form-group">
+        <label id="dagenLabel">Gaat door op</label>
+        <div class="col-md-12">
             <?php
             for($i = 0; $i < count($dagen); $i++){
                 echo '<label class="checkbox-inline"><input type="checkbox" name="check_list[]" value="' . ($i+1) . '">' . $dagen[$i] . '</label>';
