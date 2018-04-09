@@ -16,6 +16,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+       
+    <!--Bootstrap datetimepicker script-->
+    <script type="text/javascript" src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="http://localhost:8080/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
+            
     <title> <?php echo $titel; ?> </title>
 
     <script type="text/javascript">
@@ -24,7 +29,7 @@
     </script>
 
 </head>
-<body>
+<body>   
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">

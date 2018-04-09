@@ -101,7 +101,7 @@ class Evenement extends CI_Controller {
         $data['typeId'] = $typeId;
         $data['type'] = $type;
         
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/training_aanpassen');
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenementen_toevoegen');
         $this->template->load('main_master', $partials, $data);
     }
     

@@ -1,7 +1,16 @@
 <?php $dagen = array('Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag');?>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function(){  
+        $(function(){
+            //moment.locale('nl-be');
+            //moment().format('L');
+            $('#datetimepicker1').datetimepicker({
+                locale: 'nl-be',
+                format: 'L'
+            });
+            
+        });
         $("#opslaan").click(function(){
             $("#nieuweTrainingenForm").submit();
         });
@@ -46,12 +55,42 @@
                 $('.meerdere').show();
             }
         });
+        $("#zwemmerKnoppen").click(function(e){
+            if($(e.target).attr('class').substr(0, 18) === 'voegZwemmerToeKnop'){
+                var geselecteerdeZwemmerId = $("#alleZwemmers").val();
+                var geselecteerdeZwemmerNaam = $("#alleZwemmers option:selected").text();
+                if(geselecteerdeZwemmerId !== null){ 
+                    $("#alleZwemmers option").each(function(){
+                        if($(this).val() === geselecteerdeZwemmerId){
+                            $(this).remove();
+                        }
+                    });
+                    $("#deelnemendeZwemmers").append(new Option(geselecteerdeZwemmerNaam, geselecteerdeZwemmerId));
+                }
+            }
+            if($(e.target).attr('class').substr(0, 18) === 'haalZwemmerWegKnop'){
+                var geselecteerdeZwemmerId = $("#deelnemendeZwemmers").val();
+                var geselecteerdeZwemmerNaam = $("#deelnemendeZwemmers option:selected").text();
+                if(geselecteerdeZwemmerId !== null){ 
+                    $("#deelnemendeZwemmers option").each(function(){
+                        if($(this).val() === geselecteerdeZwemmerId){
+                            $(this).remove();
+                        }
+                    });
+                    $("#alleZwemmers").append(new Option(geselecteerdeZwemmerNaam, geselecteerdeZwemmerId));
+                }
+            }
+        });
     });
 </script>
 
 <style>
     .meerdere{
         display: none;
+    }
+    #zwemmerKnoppen button{
+        width: 100%;
+        height: 100%;
     }
 </style>
 
@@ -93,8 +132,13 @@
             <input name="einduur" class="form-control" type="time" value="">
         </div>
         <div class="col-md-2 form-group">
-            <label for="begindatum" id="begindatum">Datum</label>
-            <input name="begindatum" class="form-control" type="date" value="">
+                <label for="begindatum" id="begindatum">Datum</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input name="begindatum" type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
         </div>
         <div class="col-md-2 form-group meerdere">
             <label for="einddatum">Einddatum</label>
@@ -119,7 +163,7 @@
         <div class="col-md-4 form-group">
             <label for="locatie">Locatie</label>
             <select name="locatie" class="form-control">
-                <option value="" disabled selected>Choose a location</option>
+                <option value="" disabled selected>Kies een locatie</option>
                 <?php
                 foreach($locaties as $locatie){
                     echo '<option value="' . $locatie->id . '">' . $locatie->naam . '</option>';
@@ -131,7 +175,7 @@
     <div class="row">
         <div class="col-md-3 form-group">
             <label for="alleZwemmers">Alle zwemmers</label>
-            <select name="alleZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
+            <select name="alleZwemmers" id="alleZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
                 <?php
                 foreach($zwemmers as $zwemmer){
                     echo '<option>' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
@@ -139,13 +183,13 @@
                 ?>
             </select>
         </div>
-        <div class="col-md-2 form-group">
-            <div><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></div>
-            <div><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></div>
+        <div id="zwemmerKnoppen" class="col-md-2 form-group">
+            <div class="voegZwemmerToeKnop"><button class="voegZwemmerToeKnop" type="button"><span class="voegZwemmerToeKnop glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button></div>
+            <div class="haalZwemmerWegKnop"><button class="haalZwemmerWegKnop" type="button"><span class="haalZwemmerWegKnop glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button></div>
         </div>
         <div class="col-md-3 form-group">
             <label for="deelnemendeZwemmers">Deelnemende zwemmers</label>
-            <select name="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>"></select>
+            <select name="deelnemendeZwemmers" id="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>"></select>
         </div>
     </div>
 </form>
