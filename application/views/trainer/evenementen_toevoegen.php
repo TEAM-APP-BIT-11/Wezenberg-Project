@@ -5,20 +5,66 @@
         $("#opslaan").click(function(){
             $("#nieuweTrainingenForm").submit();
         });
+        $("#type, #hoeveelheid").on('change', function(){
+            var type = $("#type option:selected").text();
+            var hoeveelheid = $('#hoeveelheid').val();
+            switch(type){
+                case 'Training':
+                    if(hoeveelheid === 'enkel'){
+                        $('#titel').html('Training toevoegen');
+                    } else{
+                        $('#titel').html('Trainingen toevoegen');
+                    }
+                    break;
+                case 'Medische test':
+                    if(hoeveelheid === 'enkel'){
+                        $('#titel').html('Medische test toevoegen');
+                    } else{
+                        $('#titel').html('Medische testen toevoegen');
+                    }
+                    break;
+                case 'Stage':
+                    if(hoeveelheid === 'enkel'){
+                        $('#titel').html('Stage toevoegen');
+                    } else{
+                        $('#titel').html('Stages toevoegen');
+                    }
+                    break;
+                case 'Overige':
+                    if(hoeveelheid === 'enkel'){
+                        $('#titel').html('Evenement toevoegen');
+                    } else{
+                        $('#titel').html('Evenementen toevoegen');
+                    }
+                    break;
+            }
+            if(hoeveelheid === 'enkel'){
+                $('#begindatum').html('Datum');
+                $('.meerdere').hide();
+            } else{
+                $('#begindatum').html('Begindatum');
+                $('.meerdere').show();
+            }
+        });
     });
 </script>
 
-<h1>Evenementen toevoegen</h1>
+<style>
+    .meerdere{
+        display: none;
+    }
+</style>
+
+<h1 id="titel"><?php echo ucfirst($type);?> toevoegen</h1>
 <form id="nieuweTrainingenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweTrainingenToe';?>">
     <div class="row">
         <div class="col-md-2 form-group">
             <label for="type">Type Evenement</label>
-            <select name="type" class="form-control">
+            <select name="type" id="type" class="form-control">
                 <?php
+                echo '<option value="' . $typeId . '" selected>' . ucfirst($type) . '</option>';
                 foreach($types as $evenementType){
-                    if($evenementType->type === $type){
-                        echo '<option value="' . $evenementType->id . '" selected>' . ucfirst($evenementType->type) . '</option>';
-                    } else{
+                    if($evenementType->id !== $typeId){
                         echo '<option value="' . $evenementType->id . '">' . ucfirst($evenementType->type) . '</option>';
                     }
                 }
@@ -27,7 +73,7 @@
         </div>
         <div class="col-md-2 form-group">
             <label for="hoeveelheid">Hoeveelheid</label>
-            <select name="hoeveelheid" class="form-control">
+            <select name="hoeveelheid" id="hoeveelheid" class="form-control">
                 <option value="enkel" selected>Enkel</option>
                 <option value="meerdere">Meerdere</option>
             </select>
@@ -47,15 +93,15 @@
             <input name="einduur" class="form-control" type="time" value="">
         </div>
         <div class="col-md-2 form-group">
-            <label for="begindatum">Begindatum</label>
+            <label for="begindatum" id="begindatum">Datum</label>
             <input name="begindatum" class="form-control" type="date" value="">
         </div>
-        <div class="col-md-2 form-group">
+        <div class="col-md-2 form-group meerdere">
             <label for="einddatum">Einddatum</label>
             <input name="einddatum" class="form-control" type="date" value="">
         </div>
     </div>
-    <div class="row form-group">
+    <div class="row form-group meerdere">
         <label>Gaat door op</label>
         <div class="col-md-12 form-group">
             <?php

@@ -87,7 +87,7 @@ class Evenement extends CI_Controller {
         $this->beheren();
     }
     
-    public function nieuwEvenement($type){
+    public function nieuwEvenement($typeId, $type){
         $this->load->model('persoon_model');
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
         
@@ -98,6 +98,7 @@ class Evenement extends CI_Controller {
         $data['types'] = $this->evenementtype_model->getAll();
 
         $data['isNieuwEvenement'] = true;
+        $data['typeId'] = $typeId;
         $data['type'] = $type;
         
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/training_aanpassen');

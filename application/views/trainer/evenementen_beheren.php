@@ -83,7 +83,7 @@
                 </td>
             </tr>
             <tr>
-                <td><?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/1', 'Toevoegen', 'class="btn btn-primary"');?></td>
+                <td><?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/1/training', 'Toevoegen', 'class="btn btn-primary"');?></td>
             </tr>
         </table>
     </div>
