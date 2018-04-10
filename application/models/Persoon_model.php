@@ -124,6 +124,38 @@ class Persoon_model extends CI_Model
         $this->db->insert('persoon', $persoon);
         return $this->db->insert_id();
     }
+	function getPersoonWithDeelnamens(){
+        $this->db->order_by('voornaam', 'asc');
+        $query = $this->db->get('persoon');
+        $personen = $query->result();
+        
+        $this->load->model('wedstrijddeelname_model');
+        
+       
+        foreach($personen as $persoon)
+        {
+            $persoon->deelname = $this->wedstrijddeelname_model->getAllByDeelname($persoon->id);
+            
+        }
+      
+        return $personen;
+    }
+    function getPersoonWithInnames(){
+        $this->db->order_by('voornaam', 'asc');
+        $query = $this->db->get('persoon');
+        $personen = $query->result();
+        
+        $this->load->model('inname_model');
+        
+       
+        foreach($personen as $persoon)
+        {
+            $persoon->inname = $this->inname_model->getAllByInname($persoon->id);
+            
+        }
+      
+        return $personen;
+    }
 }
 
 ?>

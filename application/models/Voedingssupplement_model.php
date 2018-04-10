@@ -74,7 +74,7 @@ class Voedingssupplement_model extends CI_Model
     function delete($id)
     {
         $this->db->where('id', $id);
-        $this->db - delete('voedingssupplement', $voedingssupplement);
+        $this->db->delete('voedingssupplement');
     }
 
     /*
@@ -88,7 +88,27 @@ class Voedingssupplement_model extends CI_Model
         $this->db->insert('voedingssupplement', $voedingssupplement);
         return $this->db->insert_id();
     }
+    
+    function getAllByDoelstelling($doelstellingId)
+    {   
+        
+        $this->db->where('doelstellingId', $doelstellingId);
+        $this->db->order_by('Id', 'asc');
+        $query = $this->db->get('voedingssupplement');
 
+        return $query->result();
+    }
+    
+    function verwijderAlleSupplementen($doelstellingId)
+    {
+        $supplementen = $this->db->get('voedingssupplement');
+        
+        foreach($supplementen as $supplement)
+        {
+            $this->db->where('doelstellingId', $doelstellingId);
+            $this->db->delete('voedingssupplement');
+        }
+    }
 }
 
 ?>

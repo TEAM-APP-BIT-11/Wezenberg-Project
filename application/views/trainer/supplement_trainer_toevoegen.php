@@ -4,12 +4,25 @@
 <script>
   var dates = new Array();
 
+    
 
 function addDate(date) {
     if (jQuery.inArray(date, dates) < 0) 
         dates.push(date);
 }
 
+function removeDate(index) {
+    dates.splice(index, 1);
+}
+
+// Adds a date if we don't have it yet, else remove it
+function addOrRemoveDate(date) {
+    var index = jQuery.inArray(date, dates);
+    if (index >= 0) 
+        removeDate(index);
+    else 
+        addDate(date);
+}
 
 // Takes a 1-digit number and inserts a zero before it
 function padNumber(number) {
@@ -22,8 +35,7 @@ function padNumber(number) {
 jQuery(function () {
     jQuery("#datepicker").datepicker({
         onSelect: function (dateText, inst) {
-            dates =[];
-            addDate(dateText);
+            addOrRemoveDate(dateText);
             $("#datums").empty();
             $.each(dates, function(val, text){
                 $('#datums').append($('<option></option>').val(text).html(text));
@@ -49,61 +61,55 @@ jQuery(function () {
         }
     });
 });
-$(document).ready(function(){
-    var datum = '<?php echo $inname->datum; ?>'.split('-');
-    var test = datum[1] + "/"+ datum[2] + "/"+ datum[0]
-    addDate(test);
-   $.each(dates, function(val, text){
-                $('#datums').append($('<option></option>').val(text).html(text));
-            })
-            $('#datums option').prop('selected', true);
-   
-   
-})
   </script>
-  
   <style>
       td {
           width:200px;
           padding:20px;
       }
       #datums{
-         
-          display: none;
+          
+          width:150px;
       }
       
   </style>
-  <form action="<?php echo site_url() ;?>/trainer/supplementschema/aangepast" method="post">
+  
+  <form action="<?php echo site_url() ;?>/trainer/supplementschema/opslaan" method="post">
       <?php
-echo '<h2>'.$title.'</h2>';
+
+echo "<h2>".$title."</h2>";
 echo "<table>";
-echo form_hidden('id', $inname->id);
-echo form_hidden('innameReeksId', $inname->innameReeksId);
-echo form_hidden('persoonId', $inname->persoonId);
-
-echo "<tr> <td>";
-echo form_label('Trainer', 'persoon');
-echo "</td> <td>";
-echo form_input('persoon',$persoon->voornaam . ' '. $persoon->familienaam, "disabled");
-echo "</td> </tr>";
-
-
-
-foreach($innames as $innam)
+$options[0]= '-- Select --';
+foreach($personen as $persoon)
 {
-    $dropdown[$innam->id] = $innam->naam;
+    if($persoon->typePersoonId == 2)
+    {
+        $options[$persoon->id] = $persoon->voornaam . ' ' . $persoon->familienaam;
+    }
+  
+}
+echo "<tr> <td>";
+echo form_label('Trainer:', 'personen');
+echo "</td> <td>";
+echo form_dropdown('personen', $options);
+echo "</td></tr>";
+
+
+foreach($innames as $inname)
+{
+    $dropdown[$inname->id] = $inname->naam;
 }
 echo "<tr> <td>";
 echo form_label('Supplementen:', 'supplementen');
 echo "</td> <td>";
-echo form_multiselect('supplementen', $dropdown, $inname->voedingssupplementId);
-echo "</td><td>";
+echo form_multiselect('supplementen', $dropdown);
+echo '</td><td >';
 ?>
-    <form>
-        <label name="datums">Kies de datum:</label>
-    <input id="datepicker" name="datepicker" value="<?php echo date("m/d/Y",strtotime($inname->datum));?>" />
-</form>
-      
+
+      <label name="datepicker">Kies je datums:</label>  
+        <input id="datepicker" name="datepicker" />
+
+        <label name="datums">Geselecteerde datums:</label>
       <select multiple id="datums" name="datums[]"  >
           
       </select>
@@ -113,12 +119,12 @@ echo "</td><td>";
 echo "</td> </tr><tr> <td>";
 echo form_label('Aantal:', 'aantal');
 echo "</td> <td>";
-echo form_input('aantal', $inname->aantal);
+echo form_input('aantal');
 echo "</td><td></td></tr>";
 echo "</table>";
 
 ?>
 
-      <button type="submit"name="aanpassen" id="aanpassen" class="btn btn-primary">Aanpassen</button>
+      <button type="submit"name="toevoegen" id="toevoegen" class="btn btn-primary">Toevoegen</button>
 
 <?php echo anchor('trainer/supplementschema/beheren', form_button('back', 'annuleren', 'class="btn btn-primary"')) ;?>
