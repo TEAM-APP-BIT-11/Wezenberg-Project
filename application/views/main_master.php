@@ -87,9 +87,10 @@
             <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
             <li><?php echo anchor('/trainer/Wedstrijd/resultaten', 'Resultaten beheren', '') ?></li>
             <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Gebruikers', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Schema supplementen', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Supplementen beheren', '') ?></li>
+           <li><?php echo anchor('/trainer/supplementschema/beheren', 'Schema supplementen', '') ?></li>
+            <li><?php echo anchor('/trainer/supplement/beheren', 'Supplementen beheren', '') ?></li>
             <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
+            <li><?php echo anchor('/trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '') ?></li>
             <?php
         } else {
             ?>
