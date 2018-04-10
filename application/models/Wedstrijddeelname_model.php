@@ -115,7 +115,44 @@ class Wedstrijddeelname_model extends CI_Model
             $wedstrijddeelname->wedstrijd = $wedstrijd;
         }
     }
-
+    
+    function getAllByDeelname($persoonId)
+    {
+        $this->db->where('persoonId', $persoonId);
+        $this->db->order_by('id', 'asc');
+        $query = $this->db->get('wedstrijddeelname');
+        return $query->result();
+    }
+    
+    public function getDeelnamesPersoonReeks()
+    {
+        $this->db->order_by('persoonId', 'asc');
+        $query = $this->db->get('WedstrijdDeelname');
+        $deelnames = $query->result();
+        
+        $this->load->model('persoon_model');
+         $this->load->model('wedstrijdreeks_model');
+        $this->load->model('wedstrijd_model');
+        
+        foreach($deelnames as $deelname)
+        {
+            $deelname->persoon = $this->persoon_model->get($deelname->persoonId);
+            $deelname->reeks = $this->wedstrijdreeks_model->get($deelname->wedstrijdReeksId);
+            $deelname->naam =$this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
+        }
+        
+        return $deelnames;
+    }
+    
+        public function getAllByReeks($wedstrijdReeksId){
+        $controleren = array('wedstrijdreeksId' =>$wedstrijdReeksId, 'statusId' => 1);
+        $this->db->where($controleren);
+        $this->db->order_by('persoonId', 'asc');
+        $query = $this->db->get('wedstrijdDeelname');
+        return $query->result();
+        }
+        
+        
 }
 
 ?>
