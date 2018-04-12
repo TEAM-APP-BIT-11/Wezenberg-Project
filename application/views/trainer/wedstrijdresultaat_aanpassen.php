@@ -1,4 +1,4 @@
-<h1 class="">Resultaten Belgisch Kampioenschap</h1>
+<h1 class="">Resultaten <?php echo $wedstrijd->naam ?></h1>
 <div class="row">
     <div class="col-md-8 coll-md-offset-2">
         <div class="dropdown">
@@ -6,11 +6,11 @@
                 Dropdown
                 <span class="caret"></span>
             </button>
+            
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Slag 1 - XX</a></li>
-                <li><a href="#">Slag 2 - XX</a></li>
-                <li><a href="#">Slag 3 - XX</a></li>
-                <li><a href="#">Slag 4 - XX</a></li>
+                <?php
+                echo "<li>" . "</li>"
+                ?>
             </ul>
         </div>
 

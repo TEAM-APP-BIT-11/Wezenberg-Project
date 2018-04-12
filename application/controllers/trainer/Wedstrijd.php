@@ -151,4 +151,25 @@ class Wedstrijd extends CI_Controller
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaten_beheren');
         $this->template->load('main_master', $partials, $data);
     }
+    
+    public function resultatenBeheren($id)
+    {   
+        $data['titel'] = 'Wedstrijdresultaten beheren';
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $this->load->model('wedstrijdreeks_model');
+        $data['reeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
+        
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
+        
+        $this->load->model('slag_model');
+        $data['slagen'] = $this->wedstrijd_model->getAll();
+        
+        $this->load->model('afstand_model');
+        $data['afstanden'] = $this->afstand_model->getAll();
+
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
+        $this->template->load('main_master', $partials, $data);
+    }
 }

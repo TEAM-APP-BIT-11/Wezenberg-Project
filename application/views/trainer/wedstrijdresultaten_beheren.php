@@ -26,7 +26,7 @@
           <td>" . $wedstrijd->locatie->naam . "</td>
           <td>" . $wedstrijd->begindatum . "</td>
           <td>" . $wedstrijd->einddatum . "</td>
-          <td>" . anchor('trainer/wedstrijd/aanpassen/'. $wedstrijd->id, 'Aanpassen') . "</td>
+          <td>" . anchor('trainer/wedstrijd/resultatenbeheren/'. $wedstrijd->id, 'Aanpassen') . "</td>
         </tr>";
         
         }
