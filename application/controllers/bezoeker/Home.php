@@ -37,7 +37,7 @@ class Home extends CI_Controller
         $data['titel'] = 'Welkom bezoeker!';
 
         $partials = array(
-            'inhoud' => 'trainer/home');
+            'inhoud' => 'algemeen/home');
 
         $this->template->load('main_master', $partials, $data);
     }

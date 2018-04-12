@@ -60,6 +60,32 @@ class Contact extends CI_Controller
 
     }
 
+    public function trainers()
+    {
+        $data['titel'] = 'Contacteer trainers';
+
+        $this->load->model('persoon_model');
+
+        $trainers = $this->persoon_model->getTrainers();
+
+        $emails = "";
+
+        for ($i = 0; $i < count($trainers); $i++) {
+            $emails .= $trainers[$i]->mailadres;
+            if ($i < (count($trainers) - 1)) {
+                $emails .= ",";
+            }
+        }
+
+        $data['email'] = $emails;
+        $data['id'] = "";
+
+        $partials = array(
+            'inhoud' => 'bezoeker/contact');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+
     public function verwerk()
     {
         $email = $this->input->post('email');
@@ -70,9 +96,14 @@ class Contact extends CI_Controller
 
         $onderwerp = "Informatie Wezenberg";
 
-        mail($emailzwemmer, $onderwerp, $bericht, $headers);
+        var_dump($emailzwemmer, $onderwerp, $bericht, $headers);
 
         $id = $this->input->post('id');
-        redirect('bezoeker/Home/zwemmer/' . $id);
+        if ($id == "") {
+            redirect('bezoeker/Home');
+        } else {
+            redirect('bezoeker/Home/zwemmer/' . $id);
+        }
+
     }
 }
