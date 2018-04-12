@@ -72,45 +72,14 @@
         </div>
     </div>
 </nav>
-
-<div class="container-fluid main-container">
-    <?php
-    if ($persoon !== null) {
-        echo '<div class="col-md-2 sidebar" > ';
-        echo '<ul class="nav nav-pills nav-stacked" > ';
-        if ($persoon->typePersoon->typePersoon == "trainer") {
-            ?>
-            <li><?php echo anchor('/trainer/Home', 'Home', '') ?></li>
-            <li><?php echo anchor('/trainer/Evenement/beheren', 'Evenementen beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Locatie/beheren', 'Locatie beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/resultaten', 'Resultaten beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Gebruikers', '') ?></li>
-           <li><?php echo anchor('/trainer/supplementschema/beheren', 'Schema supplementen', '') ?></li>
-            <li><?php echo anchor('/trainer/supplement/beheren', 'Supplementen beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '') ?></li>
-            <?php
-        } else {
-            ?>
-            <li><?php echo anchor('/zwemmer/Home', 'Home', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
-            <?php
-        }
-        echo '</ul > ';
-        echo '</div > ';
-    }
-    ?>
-
-    <div class="col-md-10 content">
+    <div class="content">
         <?php echo $inhoud; ?>
     </div>
 
     <footer>
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Wezenberg</p>
+      </div>
     </footer>
 
 </div>

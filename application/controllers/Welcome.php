@@ -35,7 +35,7 @@ class Welcome extends CI_Controller
 
         $partials = array(
             'inhoud' => 'algemeen/home');
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function logIn()
@@ -134,7 +134,7 @@ class Welcome extends CI_Controller
                 redirect('trainer/Home');
             }
         } else {
-            //fout 
+            //fout
             redirect('Welcome/logIn');
         }
         echo $this->authex->meldAan($gebruikersnaam, $wachtwoord);
