@@ -54,7 +54,7 @@ class Home extends CI_Controller
         $partials = array(
             'inhoud' => 'bezoeker/team_lijst');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function zwemmer($id)
@@ -70,6 +70,6 @@ class Home extends CI_Controller
         $partials = array(
             'inhoud' => 'bezoeker/teamlidsinfo_bekijken');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 }

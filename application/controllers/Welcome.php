@@ -31,7 +31,7 @@ class Welcome extends CI_Controller
 
     public function index()
     {
-        $data['titel'] = "Indexpagina";
+        $data['titel'] = "Welkom";
 
         $partials = array(
             'inhoud' => 'algemeen/home');
