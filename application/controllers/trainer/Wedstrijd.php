@@ -172,4 +172,16 @@ class Wedstrijd extends CI_Controller
         $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
         $this->template->load('main_master', $partials, $data);
     }
+    
+    public function resultatenOphalen()
+    {   
+        $reeksId = $this->input->get('reeksId');
+        
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    
 }

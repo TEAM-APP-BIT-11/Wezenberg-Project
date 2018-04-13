@@ -2,9 +2,9 @@
     
     function wachtwoordCorrect(nieuwWW)
     {
-        $.ajax({type : "POST",
-                url : site_url + "/welcome/wijzigWachtwoord/" ,
-                data : {nieuwWW : nieuwWW},
+        $.ajax({type : "GET",
+                url : site_url + "/trainer/wedstrijd/" ,
+                data : {reeksId : reeksId},
                 success : function(){
                     $("#success").show();
                 },

@@ -152,6 +152,22 @@ class Wedstrijddeelname_model extends CI_Model
         return $query->result();
         }
         
+    public function getAllWithPersoonResultaatById($reeksId)
+    {
+        $this->db->where('reeksId', $reeksId);
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelnames = $query->result();
+
+        $this->load->model('persoon_model');
+        $this->load->model('resultaat_model');
+
+        foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+            $wedstrijddeelname->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+            $wedstrijddeelname->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+        }
+        return $wedstrijddeelnames;
+    }
+        
         
 }
 
