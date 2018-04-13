@@ -2,59 +2,64 @@
 
 <script type="text/javascript">
     $(document).ready(function(){  
-        $(function(){
-            $('#datetimepickerBegindatum, #datetimepickerEinddatum').datetimepicker({
-                locale: 'nl-be',
-                format: 'L'
-            });
-            $('#datetimepickerBeginuur, #datetimepickerEinduur').datetimepicker({
-                locale: 'nl-be',
-                format: 'LT'
-            });
+        $('#datetimepickerBegindatum, #datetimepickerEinddatum').datetimepicker({
+            locale: 'nl-be',
+            format: 'L'
+        });
+        $('#datetimepickerBeginuur, #datetimepickerEinduur').datetimepicker({
+            locale: 'nl-be',
+            format: 'LT'
         });
         $("#opslaan").click(function(){
-            $("#nieuweTrainingenForm").submit();
+            var deelnemendeZwemmers = '';
+            $("#deelnemendeZwemmers option").each(function(){
+                deelnemendeZwemmers += $(this).val() + ',';
+            });
+            $("#zwemmers").val(deelnemendeZwemmers);
+            $("#nieuweEvenementenForm").submit();
         });
         $("#type, #hoeveelheid").on('change', function(){
             var type = $("#type option:selected").text();
             var hoeveelheid = $('#hoeveelheid').val();
-            switch(type){
-                case 'Training':
-                    if(hoeveelheid === 'enkel'){
-                        $('#titel').html('Training toevoegen');
-                    } else{
-                        $('#titel').html('Trainingen toevoegen');
-                    }
-                    break;
-                case 'Medische test':
-                    if(hoeveelheid === 'enkel'){
-                        $('#titel').html('Medische test toevoegen');
-                    } else{
-                        $('#titel').html('Medische testen toevoegen');
-                    }
-                    break;
-                case 'Stage':
-                    if(hoeveelheid === 'enkel'){
-                        $('#titel').html('Stage toevoegen');
-                    } else{
-                        $('#titel').html('Stages toevoegen');
-                    }
-                    break;
-                case 'Overige':
-                    if(hoeveelheid === 'enkel'){
-                        $('#titel').html('Evenement toevoegen');
-                    } else{
-                        $('#titel').html('Evenementen toevoegen');
-                    }
-                    break;
-            }
-            if(hoeveelheid === 'enkel'){
-                $('#begindatum').html('Datum');
-                $('.meerdere').hide();
+            if(type === 'Stage'){
+                $("#titel").html('Stage toevoegen');
+                $("#hoeveelheid").val('enkel');
+                $("#hoeveelheid").prop('disabled', true);
+                $("#begindatum").html('Begindatum');
+                $("#einddatum input").prop('disabled', false);
+                $("#dagen").hide();
             } else{
-                $('#begindatum').html('Begindatum');
-                $('.meerdere').show();
-            }
+                if(type === 'Training' && hoeveelheid === 'enkel'){
+                    $("#titel").html('Training toevoegen');
+                    $("#hoeveelheid").prop('disabled', false);
+                }
+                if(type === 'Training' && hoeveelheid === 'meerdere'){
+                    $("#titel").html('Trainingen toevoegen');
+                }
+                if(type === 'Medische test'){
+                    $("#titel").html('Medische test toevoegen');
+                    $("#hoeveelheid").val('enkel');
+                    hoeveelheid = 'enkel';
+                    $("#hoeveelheid").prop('disabled', true);
+                }
+                if(type === 'Overige' && hoeveelheid === 'enkel'){
+                    $("#titel").html('Evenement toevoegen');
+                    $("#hoeveelheid").prop('disabled', false);
+                }
+                if(type === 'Overige' && hoeveelheid === 'meerdere'){
+                    $("#titel").html('Evenementen toevoegen');
+                }
+                if(hoeveelheid === 'enkel'){
+                    $("#begindatum").html('Datum');
+                    $("#einddatum input").prop('disabled', true);
+                    $("#dagen").hide();
+                } else{
+                    $("#hoeveelheid").prop('disabled', false);
+                    $("#begindatum").html('Begindatum');
+                    $("#einddatum input").prop('disabled', false);
+                    $("#dagen").show();
+                }
+            }     
         });
         $("#zwemmerKnoppen").click(function(e){
             if($(e.target).attr('class').substr(0, 18) === 'voegZwemmerToeKnop'){
@@ -86,7 +91,7 @@
 </script>
 
 <style>
-    .meerdere{
+    #dagen{
         display: none;
     }
     #zwemmerKnoppen button{
@@ -102,10 +107,21 @@
     #zwemmerKnoppen div:first-child{
         margin-bottom: 10px;
     }
+    textarea{
+        resize: vertical;
+    }
+    #formControls div:first-child{
+        text-align: right;
+    }
+    #formControls{
+        margin-top: 50px;
+    }
 </style>
 
 <h1 id="titel"><?php echo ucfirst($type);?> toevoegen</h1>
-<form id="nieuweTrainingenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweTrainingenToe';?>">
+<hr>
+<form id="nieuweEvenementenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweEvenementenToe';?>">
+    <input id="zwemmers" name="zwemmers" value="" hidden>
     <div class="row">
         <div class="col-md-2 form-group">
             <label for="type">Type Evenement</label>
@@ -120,19 +136,37 @@
                 ?>
             </select>
         </div>
-        <div class="col-md-2 form-group">
+        <div id="hoeveelheidskolom" class="col-md-2 form-group">
             <label for="hoeveelheid">Hoeveelheid</label>
-            <select name="hoeveelheid" id="hoeveelheid" class="form-control">
+            <select name="hoeveelheid" id="hoeveelheid" class="form-control" <?php if($type == 'stage' || $type == 'medische test'){echo ' disabled';}?>>
                 <option value="enkel" selected>Enkel</option>
-                <option value="meerdere">Meerdere</option>
+                <option value="meerdere">Reeks</option>
             </select>
         </div>
         <div class="col-md-4 form-group">
-            <label for="naam">Evenementnaam</label>
+            <label for="naam" id="naam">Evenementnaam</label>
             <input name="naam" class="form-control" type="text" value="">
         </div>
     </div>
     <div class="row">
+        <div class="col-md-2 form-group">
+            <label for="begindatum" id="begindatum">Datum</label>
+            <div class='input-group date' id='datetimepickerBegindatum'>
+                <input name="begindatum" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <div id="einddatum" class="col-md-2 form-group meerdere">
+            <label for="einddatum">Einddatum</label>
+            <div class='input-group date' id='datetimepickerEinddatum'>
+                <input name="einddatum" type='text' class="form-control" <?php if($type != 'stage'){echo ' disabled';}?>/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
         <div class="col-md-2 form-group">
             <label for="beginuur">Beginuur</label>
             <div class='input-group date' id='datetimepickerBeginuur'>
@@ -151,26 +185,8 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-2 form-group">
-            <label for="begindatum" id="begindatum">Datum</label>
-            <div class='input-group date' id='datetimepickerBegindatum'>
-                <input name="begindatum" type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-2 form-group meerdere">
-            <label for="einddatum">Einddatum</label>
-            <div class='input-group date' id='datetimepickerEinddatum'>
-                <input name="einddatum" type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
     </div>
-    <div class="row form-group meerdere">
+    <div id="dagen" class="row form-group">
         <label id="dagenLabel">Gaat door op</label>
         <div class="col-md-12">
             <?php
@@ -183,7 +199,7 @@
     <div class="row">
         <div class="col-md-4 form-group">
             <label for="beschrijving">Beschrijving</label>
-            <input name="beschrijving" class="form-control" type="text" value="">
+            <textarea name="beschrijving" class="form-control" rows="3"></textarea>
         </div>
         <div class="col-md-4 form-group">
             <label for="locatie">Locatie</label>
@@ -203,7 +219,7 @@
             <select name="alleZwemmers" id="alleZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
                 <?php
                 foreach($zwemmers as $zwemmer){
-                    echo '<option>' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
+                    echo '<option value="' . $zwemmer->id . '">' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
                 }
                 ?>
             </select>
@@ -218,9 +234,8 @@
         </div>
     </div>
 </form>
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-1"><?php echo anchor($this->config->site_url() . '/trainer/Evenement/beheren', 'Annuleren', 'class="btn btn-primary"');?></div>
-    <div class="col-md-1"><button id="opslaan" class="btn btn-primary">Opslaan</button></div>
-    <div class="col-md-3"></div>
+<div id="formControls" class="row">
+    <div class="col-md-3"><?php echo anchor($this->config->site_url() . '/trainer/Evenement/beheren', 'Annuleren', 'class="btn btn-primary btn-lg"');?></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-3"><button id="opslaan" class="btn btn-primary btn-lg">Opslaan</button></div>
 </div>
