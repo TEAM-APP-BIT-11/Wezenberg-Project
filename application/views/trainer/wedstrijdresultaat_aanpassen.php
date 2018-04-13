@@ -1,20 +1,78 @@
+<script>
+    
+    function wachtwoordCorrect(nieuwWW)
+    {
+        $.ajax({type : "POST",
+                url : site_url + "/welcome/wijzigWachtwoord/" ,
+                data : {nieuwWW : nieuwWW},
+                success : function(){
+                    $("#success").show();
+                },
+                error: function (xhr, status, error) {
+                    alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                }
+        });
+
+    }
+
+    $(document).ready(function () {
+        
+        $(".formResultaten").hide();
+        $(".btnOpslaan").hide();
+        
+        $('#reeks').change(function() {
+                     
+            var e = document.getElementById("reeks");
+            var reeksId = e.options[e.selectedIndex].value;
+            var reeks = e.options[e.selectedIndex].text;
+    
+            if (reeksId != 0)
+            {
+                $('#reeksTitel').html(reeks)
+                $(".formResultaten").show();
+                $(".btnOpslaan").show();
+            }
+        });
+        
+    });
+
+</script>
+
+<style>
+    .btnOpslaan{
+        margin-left: 5px;
+    }
+    
+    .form-group{
+        margin-left: 0px;
+        width: 200px;;
+    }
+</style>
+
 <h1 class="">Resultaten <?php echo $wedstrijd->naam ?></h1>
 <div class="row">
     <div class="col-md-8 coll-md-offset-2">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Dropdown
-                <span class="caret"></span>
-            </button>
+        
+        <div class="form-group">
+            <label for="reeks">Kies een reeks:</label>
             
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <select id="reeks" name="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
                 <?php
-                echo "<li>" . "</li>"
+                
+                echo '<option class="option" value="0">Kies een reeks</option>';
+                                
+                foreach ($reeksen as $reeks) {
+                    
+                    echo '<option class="option" value="' . $reeks->id . '">' . $reeks->slag->naam . " - " . $reeks->afstand->afstand . " meter </option>";
+                    
+                }
                 ?>
-            </ul>
+            </select>
         </div>
+    </div>
 
-        <h3>Slag 1 - XXX</h3>
+    <div class="col-md-8 coll-md-offset-2 formResultaten">
+        <h3 id="reeksTitel">hehe</h3>
 
         <h5>Finale</h5>
 
@@ -91,6 +149,19 @@
             </tr>
         </table>
 
-        <input class="btn btn-primary" type="reset" value="Annuleren"><input class="btn btn-default" type="submit" value="Opslaan">
+        
+    </div>
+    
+    <div class="col-md-8 coll-md-offset-2 ">
+        <p><?php 
+
+        echo anchor('/trainer/Wedstrijd/resultaten', 'Annuleren', 'class="btn btn-primary"'); 
+
+    
+        
+        echo anchor('/trainer/Wedstrijd/resultaten', 'Opslaan', 'class="btn btn-default btnOpslaan"')
+                ?>
+        
+        </p>
     </div>
 </div>

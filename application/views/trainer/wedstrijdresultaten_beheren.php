@@ -15,7 +15,7 @@
 
     <?php
     foreach ($wedstrijden as $wedstrijd) {
-        $date_today= date("Y-m-d");
+        $date_today = date("Y-m-d");
         
         if($wedstrijd->einddatum < $date_today && $wedstrijd->begindatum < $date_today)
         {
@@ -26,7 +26,7 @@
           <td>" . $wedstrijd->locatie->naam . "</td>
           <td>" . $wedstrijd->begindatum . "</td>
           <td>" . $wedstrijd->einddatum . "</td>
-          <td>" . anchor('trainer/wedstrijd/resultatenbeheren/'. $wedstrijd->id, 'Aanpassen') . "</td>
+          <td>" . anchor('trainer/wedstrijd/resultatenbeheren/'. $wedstrijd->id, 'Resultaten aanpassen') . "</td>
         </tr>";
         
         }

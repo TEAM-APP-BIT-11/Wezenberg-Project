@@ -142,7 +142,6 @@ class Wedstrijdreeks_model extends CI_Model
         $this->load->model('slag_model');
         $this->load->model('afstand_model');
         $this->load->model('wedstrijd_model');
-        $this->load->model('wedstrijddeelname_model');
 
         foreach ($wedstrijdreeksen as $wedstrijdreeks) {
             $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
@@ -174,4 +173,5 @@ class Wedstrijdreeks_model extends CI_Model
 
         return $wedstrijdreeksen;
     }
+    
 }
