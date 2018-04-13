@@ -17,17 +17,17 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <!--Bootstrap datetimepicker script & style-->
-    <link rel="stylesheet" href="http://localhost:8080/Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css" />
-    <script type="text/javascript" src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
-
     <title> <?php echo $titel; ?> </title>
 
     <script type="text/javascript">
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
+    
+    <!--Bootstrap datetimepicker script & style-->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css" />
+    <script type="text/javascript" src="<?php echo base_url(); ?>/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
 
 </head>
 <body>
