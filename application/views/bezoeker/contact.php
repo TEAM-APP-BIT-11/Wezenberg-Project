@@ -1,3 +1,8 @@
+<h2>Contact</h2>
+
+<p>Op deze pagina kan u een bericht intypen.</p>
+
+
 <?php
 $attributes = array('name' => 'contact');
 echo form_open('bezoeker/Contact/verwerk', $attributes);
