@@ -32,18 +32,22 @@ class Welcome extends CI_Controller
     public function index()
     {
         $data['titel'] = "Welkom";
+        $data['eindverantwoordelijke'] = "Iemand";
 
         $partials = array(
-            'inhoud' => 'algemeen/home');
+            'inhoud' => 'algemeen/home',
+            'footer' => 'main_footer');
         $this->template->load('main_home', $partials, $data);
     }
 
     public function logIn()
     {
         $data['titel'] = "Login";
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $partials = array(
-            'inhoud' => 'algemeen/inloggen');
+            'inhoud' => 'algemeen/inloggen',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 

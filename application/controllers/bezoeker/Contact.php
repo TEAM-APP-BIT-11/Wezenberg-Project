@@ -89,7 +89,7 @@ class Contact extends CI_Controller
             'inhoud' => 'bezoeker/contact',
             'footer' => 'main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function verwerk()

@@ -79,25 +79,25 @@
         echo '<div class="col-md-2 sidebar" > ';
         echo '<ul class="nav nav-pills nav-stacked" > ';
         if ($persoon->typePersoon->typePersoon == "trainer") {
-            ?>
-            <li><?php echo anchor('/trainer/Home', 'Home', '') ?></li>
-            <li><?php echo anchor('/trainer/Evenement/beheren', 'Evenementen beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Locatie/beheren', 'Locatie beheren', '') ?></li>            <li><?php echo anchor('/trainer/Wedstrijd/resultaten', 'Resultaten beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Gebruikers', '') ?></li>
-            <li><?php echo anchor('/trainer/supplementschema/beheren', 'Schema supplementen', '') ?></li>
-            <li><?php echo anchor('/trainer/supplement/beherenBis', 'Supplementen beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
-            <li><?php echo anchor('/trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '') ?></li>
-            <?php
+
+            echo activeAnchor('trainer/Home', 'Home');
+            echo activeAnchor('trainer/Evenement/beheren', 'Evenementen beheren', '');
+            echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
+            echo activeAnchor('trainer/Locatie/beheren', 'Locatie beheren', '');
+            echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
+            echo activeAnchor('trainer/Wedstrijd/beheren', 'Gebruikers', '');
+            echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
+            echo activeAnchor('trainer/supplement/beherenBis', 'Supplementen beheren', '');
+            echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
+            echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
         } else {
-            ?>
-            <li><?php echo anchor('/zwemmer/Home', 'Home', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
-            <?php
+
+            echo activeAnchor('zwemmer/Home', 'Home', '');
+            echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '');
+            echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '');
+            echo activeAnchor('zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '');
+            echo activeAnchor('zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '');
+
         }
         echo '</ul > ';
         echo '</div > ';
