@@ -1,5 +1,3 @@
-
-
 <h1 class="">Wedstrijden beheren</h1>
 <hr>
 <h3>Wedstrijden</h3>

@@ -41,7 +41,7 @@ class Resultaat_model extends CI_Model
     {
         $query = $this->db->get('resultaat');
         return $query->result();
-        
+
     }
 
     /*
@@ -80,18 +80,18 @@ class Resultaat_model extends CI_Model
         $this->db->insert('resultaat', $resultaat);
         return $this->db->insert_id();
     }
-    
+
     public function getWithRondetypeById($id)
-    {        
+    {
         $this->db->where('id', $id);
         $query = $this->db->get('resultaat');
         $resultaat = $query->row();
 
         $this->load->model('rondetype_model');
-        
-        
+
+
             $resultaat->rondetype = $this->rondetype_model->get($resultaat->rondeTypeId);
-        
+
         return $resultaat;
     }
 

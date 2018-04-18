@@ -38,17 +38,34 @@ class wedstrijdresultaten extends CI_Controller {
 
     public function bekijken() {
         $data['titel']  = 'Persoonlijke wedstrijdresultaten bekijken';
-        $data['naam'] = 'Zwemmer x';
+
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
 
         $this->load->model('resultaat_model');
         $data['resultaten'] = $this->resultaat_model->getAll();
 
-        $this->load->model('wedstrijdDeelname_model');
+        $this->load->model('wedstrijddeelname_model');
         $data['deelnamens'] = $this->resultaat_model->getAll();
 
         $partials = array(
             'inhoud' => 'zwemmer/persoonlijke_resultaten');
 
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function haalAjaxOp_Resultaten() {
+      $persoon = $this->authex->getPersoonInfo();
+
+      $wedstrijdId = $this->input->get('id');
+
+      // $this->load->model('wedstrijddeelname_model');
+      // $data['deelnamens'] = $this->wedstrijddeelname_model->getAllAndWedstrijdenWhereResultaatIsNotNull($persoon->id);
+      $this->load->model('wedstrijdreeks_model');
+      $data['deelnamens'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
+
+      var_dump($data);
+
+      // $this->load->view("zwemmer/persoonlijke_resultaten", $data);
     }
 }

@@ -179,12 +179,12 @@ class Wedstrijd extends CI_Controller
 
         $this->load->model('wedstrijddeelname_model');
         $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithPersoonResultaatById($reeksId);
-        
+
         $this->load->model('rondetype_model');
         $data["rondetypes"] = $this->rondetype_model->getAll();
-        
+
         $data["personen"] = $this->wedstrijddeelname_model->getAllWithPersoonResultaatById($reeksId);
-        
+
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->view("trainer/ajax_haalResultatenOp", $data);

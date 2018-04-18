@@ -173,5 +173,5 @@ class Wedstrijdreeks_model extends CI_Model
 
         return $wedstrijdreeksen;
     }
-    
+
 }
