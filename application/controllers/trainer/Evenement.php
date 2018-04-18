@@ -47,6 +47,7 @@ class Evenement extends CI_Controller
         $partials = array('inhoud' => 'trainer/evenementen_beheren');
         $this->template->load('main_master', $partials, $data);
     }
+<<<<<<< HEAD
 
     public function haalJsonOp_Evenementen()
     {
@@ -58,6 +59,18 @@ class Evenement extends CI_Controller
         $this->load->model('evenement_model');
         $trainingen = $this->evenement_model->getTrainingenByEvenementReeks($evenementReeks);
 
+=======
+    
+    public function haalJsonOp_Evenementen() {
+        $evenementReeksId = $this->input->get('evenementReeksId');
+        
+        $this->load->model('evenementreeks_model');
+        $evenementReeks = $this->evenementreeks_model->get($evenementReeksId); 
+
+        $this->load->model('evenement_model');
+        $trainingen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
+        
+>>>>>>> evenementen beheren
         foreach ($trainingen as $training) {
             $training->begindatum = zetOmNaarDDMMYYYY($training->begindatum);
         }
@@ -81,7 +94,11 @@ class Evenement extends CI_Controller
         $data['isNieuwEvenement'] = true;
         $data['typeId'] = $typeId;
         $data['type'] = $evenementtype->type;
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> evenementen beheren
         $partials = array('inhoud' => 'trainer/evenementen_toevoegen');
         $this->template->load('main_master', $partials, $data);
     }
@@ -194,10 +211,60 @@ class Evenement extends CI_Controller
             $this->melding_model->insert($melding);
         }
     }
+<<<<<<< HEAD
 
 
     public function bewerk()
     {
+=======
+    
+    public function verwijderEvenement(){
+        $evenemenId = $this->input->post('trainingsId');
+        
+        $this->load->model('evenementdeelname_model');
+        $deelnames = $this->evenementdeelname_model->getByEventId($evenemenId);
+        
+        foreach($deelnames as $deelname){
+            $this->evenementdeelname_model->delete($deelname->id);
+        }
+        
+        $this->load->model('evenement_model');
+        $this->evenement_model->delete($evenemenId);
+        Redirect('/trainer/Evenement/beheren');
+    }
+    
+    public function verwijderReeks(){
+        if($this->input->post('reeksSoort') == 'trainingReeks'){
+            $evenementReeksId = $this->input->post('trainingsreeksen');
+        } else{
+            $evenementReeksId = $this->input->post('overigereeksen');
+        }
+        
+        $this->load->model('evenement_model');
+        $trainingen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
+        
+        foreach($trainingen as $training){
+            $this->evenement_model->delete($training->id);
+        }
+        
+        $this->load->model('evenementreeks_model');
+        $this->evenementreeks_model->delete($evenementReeksId);
+        Redirect('/trainer/Evenement/beheren');
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public function bewerk(){
+>>>>>>> evenementen beheren
         $evenementId = $this->input->post('trainingsId');
 
         $this->load->model('evenement_model');

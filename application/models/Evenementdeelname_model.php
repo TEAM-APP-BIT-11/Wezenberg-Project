@@ -30,6 +30,21 @@ class Evenementdeelname_model extends CI_Model {
 	}
         
         /*
+	* Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname
+	* @param $evenementId De id van het record dat opgevraagd wordt
+	* @return De opgevraagde records
+	*/
+
+	function getByEventId($evenementId)
+	{
+		$this->db->where('evenementId', $evenementId);
+		$query = $this->db->get('evenementdeelname');
+                $evenementdeelnames = $query->result();
+                
+                return $evenementdeelnames;
+	}
+        
+        /*
 	* Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname inclusief bijhorende persoon
 	* @param $evenementId De id van het record dat opgevraagd wordt
 	* @return De opgevraagde records
@@ -81,7 +96,7 @@ class Evenementdeelname_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('evenementdeelname', $evenementdeelname);
+		$this->db->delete('evenementdeelname');
 	}
 
 	/*

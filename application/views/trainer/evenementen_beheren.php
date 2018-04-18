@@ -3,7 +3,7 @@ $trainingReeksen = $overigeReeksen = $medischeTesten = $stages = [];
 foreach($evenementen as $evenement){
     if($evenement->type->type == 'training'){
         foreach($evenementreeksen as $evenementreeks){
-            if($evenement->evenementReeksId == $evenementreeks->id && array_search($evenementreeks, $trainingReeksen) == false){
+            if($evenement->evenementReeksId == $evenementreeks->id && !in_array($evenementreeks, $trainingReeksen)){
                 array_push($trainingReeksen, $evenementreeks);
             }
         }
@@ -16,7 +16,7 @@ foreach($evenementen as $evenement){
     }
     if($evenement->type->type == 'overige'){
         foreach($evenementreeksen as $evenementreeks){
-            if($evenement->evenementReeksId == $evenementreeks->id && array_search($evenementreeks, $overigeReeksen) == false){
+            if($evenement->evenementReeksId == $evenementreeks->id && !in_array($evenementreeks, $overigeReeksen)){
                 array_push($overigeReeksen, $evenementreeks);
             }
         }
@@ -25,10 +25,10 @@ foreach($evenementen as $evenement){
 ?>
 
 <script type="text/javascript">
-    function haalEvenementenOp(evenementReeksNaam, evenementType){
+    function haalEvenementenOp(evenementReeksId, evenementType){
         $.ajax({type: "GET",
                 url : site_url + "/trainer/Evenement/haalJsonOp_Evenementen",
-                data : {evenementReeksNaam: evenementReeksNaam},
+                data : {evenementReeksId: evenementReeksId},
                 success : function(result){
                     try {
                         var lijst;
@@ -60,10 +60,13 @@ foreach($evenementen as $evenement){
         });
         $('#trainingControls button').click(function(e){
             if($(e.target).text() === 'Training verwijderen'){
-                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijder');
+                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
             }
-            if($(e.target).text() === 'Training bewerken' && $('#trainingenLijst').val().length !== 0){
-                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerk');
+            $('#trainingenForm').submit();
+        });
+        $('#trainingReeksControls button').click(function(e){
+            if($(e.target).text() === 'Reeks verwijderen'){
+                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
             }
             $('#trainingenForm').submit();
         });
@@ -97,30 +100,33 @@ foreach($evenementen as $evenement){
     <div id="trainingen" class="tab-pane fade in active">
         <h3>Trainingen beheren</h3>
         <hr>
-        <div class="row">
-            <div class="col-md-4 form-group">
-                <label for="trainingsreeksen">Trainingreeksen</label>
-                <select name="trainingsreeksen" class="form-control" id="trainingsReeksen" size="<?php echo count($trainingReeksen);?>" multiple>
-                    <?php
-                    foreach($trainingReeksen as $trainingReeks){
-                        echo '<option>' . $trainingReeks->naam . '</option>';
-                    }
-                    ?>
-                </select>
-                <div id="trainingReeksControl" class="controls">
-                    <button class="btn btn-primary" type="button">Reeks verwijderen</button>
-                    <button class="btn btn-primary" type="button">Reeks bewerken</button>
+        <form id="trainingenForm" method="POST">
+            <input name="reeksSoort" value="trainingReeks" hidden>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="trainingsreeksen">Trainingreeksen</label>
+                    <select name="trainingsreeksen" class="form-control" id="trainingsReeksen" size="<?php echo count($trainingReeksen);?>" multiple>
+                        <?php
+                        foreach($trainingReeksen as $trainingReeks){
+                            echo '<option value="' . $trainingReeks->id . '">' . $trainingReeks->naam . '</option>';
+                        }
+                        ?>
+                    </select>
+                    <div id="trainingReeksControls" class="controls">
+                        <button class="btn btn-primary" type="button">Reeks verwijderen</button>
+                        <button class="btn btn-primary" type="button">Reeks bewerken</button>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="trainingsId">Specifieke trainingen</label>
+                    <select name="trainingsId" class="form-control" id="trainingenLijst" size="<?php echo count($trainingReeksen);?>" multiple></select>
+                    <div id="trainingControls" class="controls">
+                        <button class="btn btn-primary" type="button">Training verwijderen</button>
+                        <button class="btn btn-primary" type="button">Training bewerken</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 form-group">
-                <label for="trainingsId">Specifieke trainingen</label>
-                <select name="trainingsId" class="form-control" id="trainingenLijst" size="<?php echo count($trainingReeksen);?>" multiple></select>
-                <div id="trainingControls" class="controls">
-                    <button class="btn btn-primary" type="button">Training verwijderen</button>
-                    <button class="btn btn-primary" type="button">Training bewerken</button>
-                </div>
-            </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>
@@ -186,30 +192,33 @@ foreach($evenementen as $evenement){
     <div id="overige" class="tab-pane fade">
         <h3>Overige evenementen beheren</h3>
         <hr>
-        <div class="row">
-            <div class="col-md-4 form-group">
-                <label for="overigereeksen">Overige reeksen</label>
-                <select name="overigereeksen" class="form-control" id="overigeReeksen" size="<?php echo count($overigeReeksen);?>" multiple>
-                    <?php
-                    foreach($overigeReeksen as $overigeReeks){
-                        echo '<option>' . $overigeReeks->naam . '</option>';
-                    }
-                    ?>
-                </select>
-                <div id="overigeReeksControl" class="controls">
-                    <button class="btn btn-primary" type="button">Reeks verwijderen</button>
-                    <button class="btn btn-primary" type="button">Reeks bewerken</button>
+        <form id="overigeForm" method="POST">
+            <input name="reeksSoort" value="overigeReeks" hidden>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="overigereeksen">Overige reeksen</label>
+                    <select name="overigereeksen" class="form-control" id="overigeReeksen" size="<?php echo count($overigeReeksen);?>" multiple>
+                        <?php
+                        foreach($overigeReeksen as $overigeReeks){
+                            echo '<option value="' . $overigeReeks->id . '">' . $overigeReeks->naam . '</option>';
+                        }
+                        ?>
+                    </select>
+                    <div id="overigeReeksControl" class="controls">
+                        <button class="btn btn-primary" type="button">Reeks verwijderen</button>
+                        <button class="btn btn-primary" type="button">Reeks bewerken</button>
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="overigeId">Specifieke evenementen</label>
+                    <select name="overigeId" class="form-control" id="overigeLijst" size="<?php echo count($overigeReeksen);?>" multiple></select>
+                    <div id="overigeControls" class="controls">
+                        <button class="btn btn-primary" type="button">Evenement verwijderen</button>
+                        <button class="btn btn-primary" type="button">Evenement bewerken</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 form-group">
-                <label for="overigeId">Specifieke evenementen</label>
-                <select name="overigeId" class="form-control" id="overigeLijst" size="<?php echo count($overigeReeksen);?>" multiple></select>
-                <div id="overigeControls" class="controls">
-                    <button class="btn btn-primary" type="button">Evenement verwijderen</button>
-                    <button class="btn btn-primary" type="button">Evenement bewerken</button>
-                </div>
-            </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>

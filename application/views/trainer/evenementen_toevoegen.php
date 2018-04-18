@@ -1,7 +1,8 @@
 <?php $dagen = array('Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag');?>
 
 <script type="text/javascript">
-    $(document).ready(function(){  
+    $(document).ready(function(){
+        //DateTimePicker
         $('#datetimepickerBegindatum, #datetimepickerEinddatum').datetimepicker({
             locale: 'nl-be',
             format: 'L'
@@ -10,6 +11,7 @@
             locale: 'nl-be',
             format: 'LT'
         });
+        //Submit Form
         $("#opslaan").click(function(){
             var deelnemendeZwemmers = '';
             $("#deelnemendeZwemmers option").each(function(){
@@ -18,6 +20,7 @@
             $("#zwemmers").val(deelnemendeZwemmers);
             $("#nieuweEvenementenForm").submit();
         });
+        //Change Form
         $("#type, #hoeveelheid").on('change', function(){
             var type = $("#type option:selected").text();
             var hoeveelheid = $('#hoeveelheid').val();
@@ -61,6 +64,7 @@
                 }
             }     
         });
+        //Select Swimmers
         $("#zwemmerKnoppen").click(function(e){
             if($(e.target).attr('class').substr(0, 18) === 'voegZwemmerToeKnop'){
                 var geselecteerdeZwemmerId = $("#alleZwemmers").val();
