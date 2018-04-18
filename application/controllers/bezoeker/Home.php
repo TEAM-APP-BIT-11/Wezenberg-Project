@@ -29,6 +29,7 @@ class Home extends CI_Controller
         parent::__construct();
 
         $this->load->helper('form');
+        $this->load->helper('html');
         $this->load->helper('notation');
     }
 
