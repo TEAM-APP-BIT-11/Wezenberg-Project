@@ -3,7 +3,7 @@
 echo "<h2>" . $title ."</h2>";
 echo "<div>";
 
-echo form_label('Naam supplement:', 'supplement'); 
+echo form_label('Naam supplement:', 'supplement');
 echo form_input('supplement');
 echo "</div>";
 $options[0] = '-- select --';

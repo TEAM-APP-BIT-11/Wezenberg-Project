@@ -54,7 +54,7 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijden_beheren');
+        $partials = array('inhoud' => 'trainer/wedstrijden_beheren');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -72,7 +72,7 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijdreeks_model');
         $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_aanpassen');
+        $partials = array('inhoud' => 'trainer/wedstrijd_aanpassen');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -91,7 +91,7 @@ class Wedstrijd extends CI_Controller
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAll();
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijd_toevoegen');
+        $partials = array('inhoud' => 'trainer/wedstrijd_toevoegen');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -148,40 +148,40 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaten_beheren');
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function resultatenBeheren($id)
-    {   
+    {
         $data['titel'] = 'Wedstrijdresultaten beheren';
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijdreeks_model');
         $data['reeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
-        
+
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        
+
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAll();
-        
+
         $this->load->model('afstand_model');
         $data['afstanden'] = $this->afstand_model->getAll();
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function resultatenOphalen()
-    {   
+    {
         $reeksId = $this->input->get('reeksId');
-        
+
         $data['persoon'] = $this->authex->getPersoonInfo();
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
         $this->template->load('main_master', $partials, $data);
     }
-    
-    
+
+
 }

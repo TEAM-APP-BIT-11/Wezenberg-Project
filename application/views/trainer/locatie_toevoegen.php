@@ -8,7 +8,7 @@
 
 				<?php
 		    $attributes = array('name' => 'locatieToevoegenFormulier');
-		    echo form_open('locatie/pasAan', $attributes);
+		    echo form_open('trainer/locatie/voegToe', $attributes);
 
 		    echo form_labelpro('Naam', 'naam');
 		    echo form_input(array('name' => 'naam',
@@ -26,8 +26,8 @@
 
 		    echo '</br>';
 		    echo form_labelpro('Nummer', 'nummer');
-		    echo form_input(array('name' => 'nummer',
-		        'id' => 'nummer',
+		    echo form_input(array('name' => 'nr',
+		        'id' => 'nr',
 		        'class' => 'form-control',
 		        'required' => 'required',
 		        'type' => 'number',));
@@ -71,8 +71,7 @@
 		    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
 		    echo form_close();
 		    ?>
-		<a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
+<?php echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
 		</div>
-
 </form>
 </div>

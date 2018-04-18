@@ -1,4 +1,3 @@
-
 <?php echo $msg; ?>
 <h1 class="">Locaties beheren</h1>
 <hr>
@@ -12,10 +11,13 @@
 
     <?php
     foreach ($locaties as $locatie) {
-        echo "<tr><td>" . $locatie->naam . "</td><td>" . anchor('trainer/locatie/aanpassen/' . $locatie->id, 'Aanpassen/Verwijderen') . "</td></tr>";
+        echo
+        "<tr>
+          <td>". $locatie->naam . "</td>
+          <td>" . anchor('trainer/locatie/aanpassen/' . $locatie->id, 'Aanpassen') . ' '  . anchor('trainer/locatie/verwijder/' . $locatie->id, 'Verwijderen') . "</td>
+        </tr>";
     }
     ?>
 </table>
 
 <?php echo anchor('trainer/locatie/toevoegen/', 'Voeg een nieuwe locatie toe', 'class="btn btn-primary"'); ?>
-

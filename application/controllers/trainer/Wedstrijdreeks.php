@@ -60,7 +60,7 @@ class Wedstrijdreeks extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/wedstrijdreeks_toevoegen');
+        $partials = array('inhoud' => 'trainer/wedstrijdreeks_toevoegen');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -78,6 +78,8 @@ class Wedstrijdreeks extends CI_Controller
       $this->load->model('wedstrijdreeks_model');
       $wedstrijdreeks = $this->wedstrijdreeks_model->insert($wedstrijdreeks);
       $data['id'] = $wedstrijdreeks;
+
+      redirect('trainer/Wedstrijd/beheren');
     }
 
     public function verwijder($id)

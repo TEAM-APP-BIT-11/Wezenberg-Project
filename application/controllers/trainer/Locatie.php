@@ -108,6 +108,26 @@ class Locatie extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    public function voegToe()
+    {
+      $locatie = new stdClass();
+
+      $locatie->naam = $this->input->post('naam');
+      $locatie->straat = $this->input->post('straat');
+      $locatie->nr = $this->input->post('nr');
+      $locatie->postcode = $this->input->post('postcode');
+      $locatie->gemeente = $this->input->post('gemeente');
+      $locatie->zaal = $this->input->post('zaal');
+      $locatie->land = $this->input->post('land');
+      $locatie->extraInfo = $this->input->post('extraInfo');
+      $locatie->id = $this->input->post('id');
+
+      $this->load->model('locatie_model');
+      $this->locatie_model->insert($locatie);
+
+      return $this->beheren();
+    }
+
     public function verwijder($id)
     {
         $this->load->model('locatie_model');
