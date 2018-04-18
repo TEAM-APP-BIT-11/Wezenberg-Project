@@ -18,9 +18,12 @@
             crossorigin="anonymous"></script>
 
     <!--Bootstrap datetimepicker script & style-->
-    <link rel="stylesheet" href="http://localhost:8080/Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css" />
-    <script type="text/javascript" src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="http://localhost:8080/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="http://localhost:8080/Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css"/>
+    <script type="text/javascript"
+            src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
+    <script type="text/javascript"
+            src="http://localhost:8080/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
 
     <title> <?php echo $titel; ?> </title>
 
@@ -72,12 +75,13 @@
         </div>
     </div>
 </nav>
-    <div class="content">
-        <?php echo $inhoud; ?>
-    </div>
+<div class="content">
+    <?php echo $inhoud; ?>
+</div>
 
-    <footer>
-    </footer>
+<footer>
+    <?php echo $footer; ?>
+</footer>
 
 </div>
 </body>

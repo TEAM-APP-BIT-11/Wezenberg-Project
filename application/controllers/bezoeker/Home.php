@@ -46,6 +46,7 @@ class Home extends CI_Controller
     public function team()
     {
         $data['titel'] = 'Team';
+        $data['eindverantwoordelijke'] = 'Iemand';
 
         $this->load->model('persoon_model');
 
@@ -53,7 +54,8 @@ class Home extends CI_Controller
 
 
         $partials = array(
-            'inhoud' => 'bezoeker/team_lijst');
+            'inhoud' => 'bezoeker/team_lijst',
+            'footer' => 'main_footer');
 
         $this->template->load('main_home', $partials, $data);
     }

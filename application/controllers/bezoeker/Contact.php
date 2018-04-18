@@ -35,9 +35,11 @@ class Contact extends CI_Controller
     public function index()
     {
         $data['titel'] = 'Contacteer';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $partials = array(
-            'inhoud' => 'trainer/home');
+            'inhoud' => 'trainer/home',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -45,6 +47,7 @@ class Contact extends CI_Controller
     public function zwemmer($id)
     {
         $data['titel'] = 'Contacteer';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $this->load->model('persoon_model');
 
@@ -54,7 +57,8 @@ class Contact extends CI_Controller
         $data['id'] = $zwemmer->id;
 
         $partials = array(
-            'inhoud' => 'bezoeker/contact');
+            'inhoud' => 'bezoeker/contact',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
 
@@ -63,6 +67,7 @@ class Contact extends CI_Controller
     public function trainers()
     {
         $data['titel'] = 'Contacteer trainers';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $this->load->model('persoon_model');
 
@@ -81,7 +86,8 @@ class Contact extends CI_Controller
         $data['id'] = "";
 
         $partials = array(
-            'inhoud' => 'bezoeker/contact');
+            'inhoud' => 'bezoeker/contact',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }

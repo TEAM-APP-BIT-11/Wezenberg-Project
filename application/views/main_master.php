@@ -25,9 +25,9 @@
     </script>
 
     <!--Bootstrap datetimepicker script & style-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css" />
-    <script type="text/javascript" src="<?php echo base_url(); ?>Wezenberg-Project/resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/bootstrap-datetimepicker.min.css"/>
+    <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/bootstrap-datetimepicker.min.js"></script>
 
 </head>
 <body>
@@ -109,6 +109,7 @@
     </div>
 
     <footer>
+        <?php echo $footer; ?>
     </footer>
 
 </div>
