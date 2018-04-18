@@ -1,13 +1,13 @@
 <script>
     
-    function wachtwoordCorrect(nieuwWW)
+    function haalResultatenOp(reeksId)
     {
         $.ajax({type : "GET",
-                url : site_url + "/trainer/wedstrijd/" ,
+                url : site_url + "/trainer/wedstrijd/resultatenOphalen" ,
                 data : {reeksId : reeksId},
-                success : function(){
-                    $("#success").show();
-                },
+                success: function (result) {
+                $("#success").html(result);
+            },
                 error: function (xhr, status, error) {
                     alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
                 }
@@ -19,6 +19,7 @@
         
         $(".formResultaten").hide();
         $(".btnOpslaan").hide();
+        $("#success").hide();
         
         $('#reeks').change(function() {
                      
@@ -29,7 +30,9 @@
             if (reeksId != 0)
             {
                 $('#reeksTitel').html(reeks)
+                haalResultatenOp(reeksId);
                 $(".formResultaten").show();
+                $("#success").show();
                 $(".btnOpslaan").show();
             }
         });
@@ -74,81 +77,12 @@
     <div class="col-md-8 coll-md-offset-2 formResultaten">
         <h3 id="reeksTitel">hehe</h3>
 
-        <h5>Finale</h5>
+        
 
-        <table class="table">
-            <tr class="active">
-                <td>Ranking</td>
-                <td>Zwemmer</td>
-                <td>Resultaat</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-        </table>
-
-        <h5>Halve finale</h5>
-
-        <table class="table">
-            <tr class="active">
-                <td>Ranking</td>
-                <td>Zwemmer</td>
-                <td>Resultaat</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-        </table>
-
-        <h5>Voorronden</h5>
-
-        <table class="table">
-            <tr class="active">
-                <td>Ranking</td>
-                <td>Zwemmer</td>
-                <td>Resultaat</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>XXXX</td>
-                <td></td>
-            </tr>
-        </table>
-
+        
+    </div>
+    
+    <div id="success" class="col-md-8 coll-md-offset-2">
         
     </div>
     
