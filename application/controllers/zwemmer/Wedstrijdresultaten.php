@@ -43,8 +43,10 @@ class wedstrijdresultaten extends CI_Controller {
         $this->load->model('resultaat_model');
         $data['resultaten'] = $this->resultaat_model->getAll();
 
+        $this->load->model('wedstrijdDeelname_model');
+        $data['deelnamens'] = $this->resultaat_model->getAll();
+
         $partials = array(
-            'menuGebruiker' => 'zwemmer_menu',
             'inhoud' => 'zwemmer/persoonlijke_resultaten');
 
         $this->template->load('main_master', $partials, $data);

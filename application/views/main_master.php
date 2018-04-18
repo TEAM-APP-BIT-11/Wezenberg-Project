@@ -23,7 +23,7 @@
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
-    
+
     <!--Bootstrap datetimepicker script & style-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css" />
     <script type="text/javascript" src="<?php echo base_url(); ?>Wezenberg-Project/resources/js/moment-with-locales.js"></script>
@@ -97,7 +97,7 @@
             <li><?php echo anchor('/zwemmer/Home', 'Home', '') ?></li>
             <li><?php echo anchor('/zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '') ?></li>
             <li><?php echo anchor('/zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '') ?></li>
-            <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Resultaten bekijken', '') ?></li>
+            <li><?php echo anchor('/zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '') ?></li>
             <li><?php echo anchor('/zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '') ?></li>
             <?php
         }
