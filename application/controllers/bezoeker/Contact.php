@@ -41,7 +41,7 @@ class Contact extends CI_Controller
             'inhoud' => 'trainer/home',
             'footer' => 'main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function zwemmer($id)
@@ -58,7 +58,7 @@ class Contact extends CI_Controller
 
         $partials = array(
             'inhoud' => 'bezoeker/contact',
-            'footer' => 'main_footer');
+            'footer' => 'main_home');
 
         $this->template->load('main_master', $partials, $data);
 
