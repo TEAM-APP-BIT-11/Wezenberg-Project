@@ -52,7 +52,6 @@ class Home extends CI_Controller
         $data['meldingen'] = $this->melding_model->getAllFromPersoonAndNietGelezen($persoon->id);
 
         $partials = array(
-            'menuGebruiker' => 'trainer_menu',
             'inhoud' => 'trainer/home');
 
         $this->template->load('main_master', $partials, $data);
