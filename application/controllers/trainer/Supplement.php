@@ -46,6 +46,7 @@ class Supplement extends CI_Controller
     public function beherenBis()
     {
         $data['title'] = 'supplementen beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('voedingssupplement_model');
