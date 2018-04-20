@@ -153,6 +153,7 @@ class Welcome extends CI_Controller
         $melding->gelezen = 1;
         $this->melding_model->update($melding);
 
+        return 'ok';
     }
 
 

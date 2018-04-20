@@ -1,11 +1,12 @@
 <?php
+
 /**
-* @class Wedstrijdreeks_model
-* @brief Model-klasse voor wedstrijdreeksen
-*
-* Model-klasse die alle methodes bevat om te
-* interageren met de database-tabel wedstrijdreeks
-*/
+ * @class Wedstrijdreeks_model
+ * @brief Model-klasse voor wedstrijdreeksen
+ *
+ * Model-klasse die alle methodes bevat om te
+ * interageren met de database-tabel wedstrijdreeks
+ */
 class Wedstrijdreeks_model extends CI_Model
 {
     /*
@@ -174,4 +175,20 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
+    public function getWithWedstrijdAndSlagAndAfstand($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('wedstrijdreeks');
+        $wedstrijdreeks = $query->row();
+
+        $this->load->model('wedstrijd_model');
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+
+        $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+        $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+        $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+
+        return $wedstrijdreeks;
+    }
 }

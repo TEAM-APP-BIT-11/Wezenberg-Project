@@ -102,7 +102,8 @@ class Contact extends CI_Controller
 
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'newline' => "\r\n",
             'smtp_port' => 465,
             'smtp_user' => 'projectwezenberg@gmail.com',
             'smtp_pass' => 'wezenberg',
@@ -115,7 +116,7 @@ class Contact extends CI_Controller
         $this->email->from('projectwezenberg@gmail.com');
 
         $this->email->subject('Informatie van wezenberg');
-        $this->email->message($bericht);
+        $this->email->message('bericht van ' . $email . "\n" . $bericht);
 
         if (!$this->email->send()) {
             echo "FOUT";

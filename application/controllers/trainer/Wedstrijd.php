@@ -113,6 +113,9 @@ class Wedstrijd extends CI_Controller
         $wedstrijdId = $this->wedstrijd_model->insert($wedstrijd);
         $data['id'] = $wedstrijdId;
 
+        $this->load->model('persoon_model');
+        $this->melding->genereerMeldingen($this->persoon_model->getZwemmers(), 'Er is een nieuwe wedstrijd ' . $wedstrijd->naam . ' toegevoegd', 'Nieuwe Wedstrijd');
+
         return $this->beheren();
         // var_dump($wedstrijd);
     }

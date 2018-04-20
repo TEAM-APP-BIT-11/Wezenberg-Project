@@ -46,6 +46,7 @@ class Home extends CI_Controller
         $data['titel'] = 'Home van de Zwemmer';
         $persoon = $this->authex->getPersoonInfo();
         $data['persoon'] = $persoon;
+        $data['eindverantwoordelijke'] = "Iemand ? ";
 
         // moet variabele worden uit de sessie na het inloggen.
 
@@ -53,7 +54,8 @@ class Home extends CI_Controller
         $data['meldingen'] = $this->melding_model->getAllFromPersoonAndNietGelezen($persoon->id);
 
         $partials = array(
-            'inhoud' => 'zwemmer/home');
+            'inhoud' => 'zwemmer/home',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
