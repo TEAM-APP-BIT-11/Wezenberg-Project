@@ -6,23 +6,24 @@
  * and open the template in the editor.
  */
 
-class wedstrijdresultaten extends CI_Controller {
+class wedstrijdresultaten extends CI_Controller
+{
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+    /**
+     * Index Page for this controller.
+     *
+     * Maps to the following URL
+     * 		http://example.com/index.php/welcome
+     *	- or -
+     * 		http://example.com/index.php/welcome/index
+     *	- or -
+     * Since this controller is set as the default controller in
+     * config/routes.php, it's displayed at http://example.com/
+     *
+     * So any other public methods not prefixed with an underscore will
+     * map to /index.php/welcome/<method_name>
+     * @see https://codeigniter.com/user_guide/general/urls.html
+     */
     public function __construct()
     {
         parent::__construct();
@@ -33,10 +34,11 @@ class wedstrijdresultaten extends CI_Controller {
 
     public function index()
     {
-	     $this->load->view('welcome_message');
+        $this->load->view('welcome_message');
     }
 
-    public function bekijken() {
+    public function bekijken()
+    {
         $persoon = $this->authex->getPersoonInfo();
 
         $data['titel']  = 'Persoonlijke wedstrijdresultaten bekijken';
@@ -50,19 +52,21 @@ class wedstrijdresultaten extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function haalAjaxOp_Resultaten() {
-      $persoon = $this->authex->getPersoonInfo();
+    public function haalAjaxOp_Resultaten()
+    {
+        $persoon = $this->authex->getPersoonInfo();
 
-      $wedstrijdId = $this->input->get('id');
+        $wedstrijdId = $this->input->get('id');
 
-      // $this->load->model('wedstrijdreeks_model');
-      // $data['deelnamens'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
+        // $this->load->model('wedstrijdreeks_model');
+        // $data['deelnamens'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
 
-      $this->load->model('wedstrijddeelname_model');
-      $data['resultaten'] = $this->wedstrijddeelname_model->getAllResultatenByPersoonAndWedstrijd($persoon->id, $wedstrijdId);
-
-
+        $this->load->model('wedstrijdreeks_model');
+        // $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
+        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandResultaatRankingById($persoon->id, $wedstrijdId);
+        // var_dump($this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandResultaatRankingById($persoon->id, $wedstrijdId));
+        // return $data;
       //
-      // $this->load->view("zwemmer/persoonlijke_resultaten", $data);
+      $this->load->view("zwemmer/ajax_haalResultatenOp", $data);
     }
 }

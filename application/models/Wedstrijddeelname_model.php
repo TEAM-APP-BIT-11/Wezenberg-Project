@@ -205,26 +205,4 @@ class Wedstrijddeelname_model extends CI_Model
         return $wedstrijddeelnames;
     }
 
-
-    public function getAllResultatenByPersoonAndWedstrijd($persoonId, $gekozenWedstrijdId)
-    {
-        $this->db->where('id', $persoonId);
-        $query = $this->db->get('wedstrijddeelname');
-        $wedstrijddeelnames = $query->result();
-
-        $this->load->model('wedstrijdreeks_model');
-        $this->load->model('resultaat_model');
-        $this->load->model('wedstrijd_model');
-
-        foreach ($wedstrijddeelnames as $wedstrijddeelname) {
-            $wedstrijdreeks = $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
-
-            if ($wedstrijdreeks->wedstrijdId == $gekozenWedstrijdId) {
-
-                $resultaat->reeks = $this->wedstrijdreeks_model->get($resultaat->wedstrijdReeksId);
-            }
-        }
-
-        return $wedstrijddeelnames;
-    }
 }

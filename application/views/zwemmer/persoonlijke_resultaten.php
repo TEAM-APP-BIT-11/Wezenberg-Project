@@ -6,7 +6,7 @@
             url: site_url + "/zwemmer/wedstrijdresultaten/haalAjaxOp_Resultaten",
             data: {id: id},
             success: function (result) {
-                $("#resultaat").html("result");
+                $("#resultaat").html(result);
             },
             error: function (xhr, status, error) {
                 alert("-- ERROR IN AJAX -- \n\n" + xhr.responseText)
@@ -42,7 +42,7 @@
         echo
         "<tr>
           <td>" . $wedstrijddeelname->wedstrijd->naam . "</td>
-          <td>" .  divAnchor('', 'Bekijken', array('class' => 'resultaat', 'data-id' => $wedstrijddeelname->wedstrijd->naam)) ."</td>
+          <td>" .  divAnchor('', 'Bekijken', array('class' => 'resultaat', 'data-id' => $wedstrijddeelname->wedstrijd->id)) ."</td>
         </tr>";
     }
     ?>
