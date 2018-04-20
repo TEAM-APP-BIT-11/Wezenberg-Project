@@ -81,6 +81,20 @@ class Wedstrijd_model extends CI_Model
         return $wedstrijden;
     }
 
+    // public function getAllByDeelname()
+    // {
+    //     $query = $this->db->get('wedstrijd');
+    //     $wedstrijden = $query->result();
+    //
+    //     $this->load->model('locatie_model');
+    //
+    //     foreach ($wedstrijden as $wedstrijd) {
+    //         $wedstrijd->locatie = $this->locatie_model->get($wedstrijd->locatieId);
+    //     }
+    //
+    //     return $wedstrijden;
+    // }
+
     /*
     * Update het record in de tabel wedstrijd met de id die uit $wedstrijd gehaald wordt
     * @param $wedstrijd Het record waarmee we een bestaand record willen vervangen

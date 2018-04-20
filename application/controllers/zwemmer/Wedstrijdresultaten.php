@@ -37,16 +37,12 @@ class wedstrijdresultaten extends CI_Controller {
     }
 
     public function bekijken() {
+        $persoon = $this->authex->getPersoonInfo();
+
         $data['titel']  = 'Persoonlijke wedstrijdresultaten bekijken';
 
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
-
-        $this->load->model('resultaat_model');
-        $data['resultaten'] = $this->resultaat_model->getAll();
-
         $this->load->model('wedstrijddeelname_model');
-        $data['deelnamens'] = $this->resultaat_model->getAll();
+        $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithWedstrijdByPersoon($persoon->id);
 
         $partials = array(
             'inhoud' => 'zwemmer/persoonlijke_resultaten');
@@ -59,13 +55,14 @@ class wedstrijdresultaten extends CI_Controller {
 
       $wedstrijdId = $this->input->get('id');
 
-      // $this->load->model('wedstrijddeelname_model');
-      // $data['deelnamens'] = $this->wedstrijddeelname_model->getAllAndWedstrijdenWhereResultaatIsNotNull($persoon->id);
-      $this->load->model('wedstrijdreeks_model');
-      $data['deelnamens'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
+      // $this->load->model('wedstrijdreeks_model');
+      // $data['deelnamens'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
 
-      var_dump($data);
+      $this->load->model('wedstrijddeelname_model');
+      $data['resultaten'] = $this->wedstrijddeelname_model->getAllResultatenByPersoonAndWedstrijd($persoon->id, $wedstrijdId);
 
+
+      //
       // $this->load->view("zwemmer/persoonlijke_resultaten", $data);
     }
 }

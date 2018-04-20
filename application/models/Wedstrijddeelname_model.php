@@ -13,7 +13,7 @@ class Wedstrijddeelname_model extends CI_Model
     * Constructor
     */
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -24,7 +24,7 @@ class Wedstrijddeelname_model extends CI_Model
     * @return Het opgevraagde record
     */
 
-    function get($id)
+    public function get($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('wedstrijddeelname');
@@ -36,7 +36,7 @@ class Wedstrijddeelname_model extends CI_Model
     * @return Alle records
     */
 
-    function getAll()
+    public function getAll()
     {
         $query = $this->db->get('wedstrijddeelname');
         return $query->result();
@@ -48,7 +48,7 @@ class Wedstrijddeelname_model extends CI_Model
      * @return De opgevraagde wedstrijddeelnames met status
      */
 
-    function getAllForPersoonWithStatus($persoonId)
+    public function getAllForPersoonWithStatus($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
         $query = $this->db->get('wedstrijddeelname');
@@ -68,7 +68,7 @@ class Wedstrijddeelname_model extends CI_Model
     * @param $wedstrijddeelname Het record waarmee we een bestaand record willen vervangen
     */
 
-    function update($wedstrijddeelname)
+    public function update($wedstrijddeelname)
     {
         $this->db->where('id', $wedstrijddeelname->id);
         $this->db->update('wedstrijddeelname', $wedstrijddeelname);
@@ -80,7 +80,7 @@ class Wedstrijddeelname_model extends CI_Model
     */
 
 
-    function delete($id)
+    public function delete($id)
     {
         $this->db->where('id', $id);
         $this->db->delete('wedstrijddeelname');
@@ -92,13 +92,12 @@ class Wedstrijddeelname_model extends CI_Model
     * @return De id van het nieuw toegevoegde record
     */
 
-    function insert($wedstrijdDeelname)
+    public function insert($wedstrijdDeelname)
     {
         $this->db->insert('wedstrijddeelname', $wedstrijdDeelname);
         var_dump($wedstrijdDeelname);
         //echo($this->db->insert_id());
         return $this->db->insert_id();
-
     }
 
     public function getAllAndWedstrijdenWhereResultaatIsNotNull()
@@ -134,7 +133,7 @@ class Wedstrijddeelname_model extends CI_Model
         }
     }
 
-    function getAllByDeelname($persoonId)
+    public function getAllByDeelname($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
         $this->db->order_by('id', 'asc');
@@ -149,11 +148,10 @@ class Wedstrijddeelname_model extends CI_Model
         $deelnames = $query->result();
 
         $this->load->model('persoon_model');
-         $this->load->model('wedstrijdreeks_model');
+        $this->load->model('wedstrijdreeks_model');
         $this->load->model('wedstrijd_model');
 
-        foreach($deelnames as $deelname)
-        {
+        foreach ($deelnames as $deelname) {
             $deelname->persoon = $this->persoon_model->get($deelname->persoonId);
             $deelname->reeks = $this->wedstrijdreeks_model->get($deelname->wedstrijdReeksId);
             $deelname->naam =$this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
@@ -162,13 +160,14 @@ class Wedstrijddeelname_model extends CI_Model
         return $deelnames;
     }
 
-        public function getAllByReeks($wedstrijdReeksId){
+    public function getAllByReeks($wedstrijdReeksId)
+    {
         $controleren = array('wedstrijdreeksId' =>$wedstrijdReeksId, 'statusId' => 1);
         $this->db->where($controleren);
         $this->db->order_by('persoonId', 'asc');
         $query = $this->db->get('wedstrijdDeelname');
         return $query->result();
-        }
+    }
 
     public function getAllWithPersoonResultaatById($reeksId)
     {
@@ -187,9 +186,43 @@ class Wedstrijddeelname_model extends CI_Model
         return $wedstrijddeelnames;
     }
 
+    public function getAllWithWedstrijdByPersoon($persoonId)
+    {
+        $this->db->where('persoonId', $persoonId);
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelnames = $query->result();
 
+        $this->load->model('wedstrijdreeks_model');
+        $this->load->model('wedstrijd_model');
 
+        foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+            $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
+            $wedstrijdId = $wedstrijddeelname->wedstrijdreeks->wedstrijdId;
+            $wedstrijddeelname->wedstrijd = $this->wedstrijd_model->get($wedstrijdId);
+        }
 
+        return $wedstrijddeelnames;
+    }
+
+    public function getAllResultatenByPersoonAndWedstrijd($persoonId, $gekozenWedstrijdId)
+    {
+        $this->db->where('id', $persoonId);
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelnames = $query->result();
+
+        $this->load->model('wedstrijdreeks_model');
+        $this->load->model('resultaat_model');
+        $this->load->model('wedstrijd_model');
+
+        foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+            $wedstrijdreeks = $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
+
+            if ($wedstrijdreeks->wedstrijdId == $gekozenWedstrijdId) {
+                
+                $resultaat->reeks = $this->wedstrijdreeks_model->get($resultaat->wedstrijdReeksId);
+            }
+        }
+
+        return $wedstrijddeelnames;
+    }
 }
-
-?>

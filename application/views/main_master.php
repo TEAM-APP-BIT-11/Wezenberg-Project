@@ -87,7 +87,7 @@
             echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Gebruikers', '');
             echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
-            echo activeAnchor('trainer/supplement/beherenBis', 'Supplementen beheren', '');
+            echo activeAnchor('trainer/Supplement/beherenBis', 'Supplementen beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
         } else {
