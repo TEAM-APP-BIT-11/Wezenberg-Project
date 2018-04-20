@@ -30,6 +30,7 @@ class Contact extends CI_Controller
 
         $this->load->helper('form');
         $this->load->helper('notation');
+        $this->load->library('mail');
     }
 
     public function index()
