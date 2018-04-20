@@ -54,7 +54,8 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
 
-        $partials = array('inhoud' => 'trainer/wedstrijden_beheren');
+        $partials = array('inhoud' => 'trainer/wedstrijden_beheren',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -72,7 +73,8 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijdreeks_model');
         $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
 
-        $partials = array('inhoud' => 'trainer/wedstrijd_aanpassen');
+        $partials = array('inhoud' => 'trainer/wedstrijd_aanpassen',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -91,7 +93,8 @@ class Wedstrijd extends CI_Controller
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAll();
 
-        $partials = array('inhoud' => 'trainer/wedstrijd_toevoegen');
+        $partials = array('inhoud' => 'trainer/wedstrijd_toevoegen',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -148,7 +151,8 @@ class Wedstrijd extends CI_Controller
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
 
-        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren');
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -169,7 +173,8 @@ class Wedstrijd extends CI_Controller
         $this->load->model('afstand_model');
         $data['afstanden'] = $this->afstand_model->getAll();
 
-        $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen');
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 

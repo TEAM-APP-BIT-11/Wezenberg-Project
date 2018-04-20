@@ -30,6 +30,8 @@ class Contact extends CI_Controller
 
         $this->load->helper('form');
         $this->load->helper('notation');
+        $this->load->library('email');
+        $this->load->library('encrypt');
     }
 
     public function index()
@@ -78,7 +80,7 @@ class Contact extends CI_Controller
         for ($i = 0; $i < count($trainers); $i++) {
             $emails .= $trainers[$i]->mailadres;
             if ($i < (count($trainers) - 1)) {
-                $emails .= ",";
+                $emails .= ", ";
             }
         }
 
@@ -98,18 +100,34 @@ class Contact extends CI_Controller
         $emailzwemmer = $this->input->post('emailzwemmer');
         $bericht = $this->input->post('bericht');
 
-        $headers = 'From: ' . $email;
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'projectwezenberg@gmail.com',
+            'smtp_pass' => 'wezenberg',
+            'mailtype' => 'html',
+            'charset' => 'utf-8'
+        );
+        $this->email->initialize($config);
 
-        $onderwerp = "Informatie Wezenberg";
+        $this->email->to($emailzwemmer);
+        $this->email->from('projectwezenberg@gmail.com');
 
-        var_dump($emailzwemmer, $onderwerp, $bericht, $headers);
+        $this->email->subject('Informatie van wezenberg');
+        $this->email->message($bericht);
 
-        $id = $this->input->post('id');
-        if ($id == "") {
-            redirect('bezoeker/Home');
+        if (!$this->email->send()) {
+            echo "FOUT";
         } else {
-            redirect('bezoeker/Home/zwemmer/' . $id);
-        }
 
+
+            $id = $this->input->post('id');
+            if ($id == "") {
+                redirect('bezoeker/Home');
+            } else {
+                redirect('bezoeker/Home/zwemmer/' . $id);
+            }
+        }
     }
 }

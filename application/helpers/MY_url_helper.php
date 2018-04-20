@@ -28,7 +28,7 @@ function activeAnchor($uri = '', $title = '', $attributes = '')
         $active = false;
     }
 
-    return '<li ' . ($active == true ? 'class="active"' : '') . '>' . anchor($uri, $title, $attributes) . "</li>";
+    return '<li' . ($active == true ? ' class="active"' : '') . '>' . anchor($uri, $title, $attributes) . "</li>";
 
 }
 

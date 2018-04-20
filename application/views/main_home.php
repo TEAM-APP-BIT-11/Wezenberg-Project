@@ -19,7 +19,9 @@
 
     <!--Bootstrap datetimepicker script & style-->
     <link rel="stylesheet"
-          href="http://localhost:8080/Wezenberg-Project/resources/css/bootstrap-datetimepicker.min.css"/>
+          href="<?php echo base_url(); ?>resources/css/bootstrap-datetimepicker.min.css"/>
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
     <script type="text/javascript"
             src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
     <script type="text/javascript"
@@ -75,14 +77,15 @@
         </div>
     </div>
 </nav>
-<div class="content">
-    <?php echo $inhoud; ?>
+<div class="container-fluid main-container">
+    <div class="col-md-12 content">
+        <?php echo $inhoud; ?>
+    </div>
 </div>
-
-<footer>
-    <?php echo $footer; ?>
-</footer>
-
+<div id="footer">
+    <footer>
+        <?php echo $footer; ?>
+    </footer>
 </div>
 </body>
 
