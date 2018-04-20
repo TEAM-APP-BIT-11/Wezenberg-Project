@@ -47,19 +47,6 @@ class Evenement extends CI_Controller
         $partials = array('inhoud' => 'trainer/evenementen_beheren');
         $this->template->load('main_master', $partials, $data);
     }
-<<<<<<< HEAD
-
-    public function haalJsonOp_Evenementen()
-    {
-        $evenementReeksNaam = $this->input->get('evenementReeksNaam');
-
-        $this->load->model('evenementreeks_model');
-        $evenementReeks = $this->evenementreeks_model->getByNaam($evenementReeksNaam);
-
-        $this->load->model('evenement_model');
-        $trainingen = $this->evenement_model->getTrainingenByEvenementReeks($evenementReeks);
-
-=======
     
     public function haalJsonOp_Evenementen() {
         $evenementReeksId = $this->input->get('evenementReeksId');
@@ -70,7 +57,6 @@ class Evenement extends CI_Controller
         $this->load->model('evenement_model');
         $trainingen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
         
->>>>>>> evenementen beheren
         foreach ($trainingen as $training) {
             $training->begindatum = zetOmNaarDDMMYYYY($training->begindatum);
         }
@@ -94,11 +80,7 @@ class Evenement extends CI_Controller
         $data['isNieuwEvenement'] = true;
         $data['typeId'] = $typeId;
         $data['type'] = $evenementtype->type;
-<<<<<<< HEAD
 
-=======
-       
->>>>>>> evenementen beheren
         $partials = array('inhoud' => 'trainer/evenementen_toevoegen');
         $this->template->load('main_master', $partials, $data);
     }
@@ -211,12 +193,6 @@ class Evenement extends CI_Controller
             $this->melding_model->insert($melding);
         }
     }
-<<<<<<< HEAD
-
-
-    public function bewerk()
-    {
-=======
     
     public function verwijderEvenement(){
         $evenemenId = $this->input->post('trainingsId');
@@ -264,7 +240,6 @@ class Evenement extends CI_Controller
     
     
     public function bewerk(){
->>>>>>> evenementen beheren
         $evenementId = $this->input->post('trainingsId');
 
         $this->load->model('evenement_model');
