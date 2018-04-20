@@ -49,11 +49,12 @@ class Agenda extends CI_Controller
     public function raadplegen()
     {
         $data['titel'] = 'Agenda raadplegen';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
 
-        $partials = array('inhoud' => 'zwemmer/agenda');
+        $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -68,5 +69,50 @@ class Agenda extends CI_Controller
 
 
         $this->load->view('zwemmer/ajax_innames', $data);
+    }
+
+    public function haalAjaxOp_AgendaItems()
+    {
+// Our Start and End Dates
+        $start = $this->input->get("start");
+        $end = $this->input->get("end");
+
+        $startdt = new DateTime('now'); // setup a local datetime
+        $startdt->setTimestamp($start); // Set the date based on timestamp
+        $start_format = $startdt->format('Y-m-d H:i:s');
+
+        $enddt = new DateTime('now'); // setup a local datetime
+        $enddt->setTimestamp($end); // Set the date based on timestamp
+        $end_format = $enddt->format('Y-m-d H:i:s');
+
+
+        $this->load->model('evenementdeelname_model');
+
+        $persoon = $this->authex->getPersoonInfo();
+
+        $evenementdeelnames = $this->evenementdeelname_model->getAllFromPersoonWithEvenement($start_format, $end_format, $persoon->id);
+
+        $data_events = array();
+
+        foreach ($evenementdeelnames as $evenementdeelname) {
+
+            if ($evenementdeelname->evenement->einddatum == null) {
+                $evenementdeelname->evenement->einddatum = $evenementdeelname->evenement->begindatum;
+            }
+            if ($evenementdeelname->evenement->einduur == null) {
+                $evenementdeelname->evenement->einduur = "23:59:00";
+            }
+
+            $data_events[] = array(
+                "id" => $evenementdeelname->evenement->id,
+                "title" => $evenementdeelname->evenement->naam,
+                "description" => $evenementdeelname->evenement->naam,
+                "end" => $evenementdeelname->evenement->einddatum . ' ' . $evenementdeelname->evenement->einduur,
+                "start" => $evenementdeelname->evenement->begindatum . ' ' . $evenementdeelname->evenement->beginuur
+            );
+        }
+
+        echo json_encode(array("events" => $data_events));
+        exit();
     }
 }
