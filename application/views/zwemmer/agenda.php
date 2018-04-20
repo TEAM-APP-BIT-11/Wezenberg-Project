@@ -34,6 +34,35 @@
                 slotLabelFormat: 'HH:mm',
                 slotLabelInterval: {hours: 1},
                 firstDay: 1,
+                columnHeaderHtml: function (mom) {
+                    var weergeven = "";
+                    $.ajax({
+                        type: "GET",
+                        async: true,
+                        url: site_url + "/zwemmer/Agenda/haalAjaxOp_Inname",
+                        data:
+                            {
+                                datum: mom.format('YYYY-MM-DD')
+                            }
+                        ,
+                        success: function (result) {
+                            console.log(result);
+                            if (result == "true") {
+                                console.log("TRUE");
+                                weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
+                            }
+
+                        }
+                        ,
+                        error: function (xhr, status, error) {
+                            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                        }
+                    })
+                    ;
+                    return weergeven + mom.format('ddd DD/MM');
+
+                    <!-- FOUTEN IN -->
+                },
                 header:
                     {
                         left: 'prev,next today myCustomButton',
@@ -69,13 +98,13 @@
             })
         ;
 
-        $(".btn.supplementen").click(function (e) {
+        $("body").on('click', '.btn.supplementen', (function (e) {
             e.preventDefault();
             var datum = $(this).data('datum');
             haalSupplementenOp(datum);
             var DateCreated = new Date(Date.parse(datum));
             $("#datum").html(DateCreated.toLocaleDateString());
-        });
+        }));
     })
     ;
 

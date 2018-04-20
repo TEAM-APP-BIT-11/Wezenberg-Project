@@ -91,39 +91,53 @@ class Inname_model extends CI_Model
         $this->db->insert('inname', $inname);
         return $this->db->insert_id();
     }
-    
-    function getInnamesPersonen(){
+
+    function getInnamesPersonen()
+    {
         $query = $this->db->get('inname');
-       
+
         $innamespersonen = $query->result();
 
         $this->load->model('persoon_model');
         $this->load->model('voedingssupplement_model');
-        
-        
+
+
         foreach ($innamespersonen as $inname) {
             $inname->persoon = $this->persoon_model->get($inname->persoonId);
             $inname->voedingssupplement = $this->voedingssupplement_model->get($inname->voedingssupplementId);
-            
+
         }
 
         return $innamespersonen;
     }
-    function getAllByInname($persoonId){
-         $this->db->where('persoonId', $persoonId);
+
+    function getAllByInname($persoonId)
+    {
+        $this->db->where('persoonId', $persoonId);
         $this->db->order_by('id', 'asc');
         $query = $this->db->get('inname');
         return $query->result();
     }
-    
+
     function getWithPersoon($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('inname');
         return $query->row();
-        
     }
-    
+
+    function existsInname($persoonId, $datum)
+    {
+        $this->db->where('datum', $datum);
+        $this->db->where('persoonId', $persoonId);
+        $query = $this->db->get('inname');
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
 

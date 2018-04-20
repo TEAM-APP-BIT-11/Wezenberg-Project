@@ -71,6 +71,17 @@ class Agenda extends CI_Controller
         $this->load->view('zwemmer/ajax_innames', $data);
     }
 
+    public function haalAjaxOp_Inname()
+    {
+        $this->load->model("inname_model");
+
+        $persoon = $this->authex->getPersoonInfo();
+        $datum = $this->input->get('datum');
+        $bestaat = $this->inname_model->existsInname($persoon->id, $datum);
+
+        echo json_encode($bestaat);
+    }
+
     public function haalAjaxOp_AgendaItems()
     {
 // Our Start and End Dates
