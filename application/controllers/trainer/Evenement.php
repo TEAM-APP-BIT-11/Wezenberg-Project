@@ -38,13 +38,16 @@ class Evenement extends CI_Controller
      */
     public function beheren()
     {
+        $data['titel'] = "????";
+        $data['eindverantwoordelijke'] = "?????";
         $this->load->model('evenement_model');
         $data['evenementen'] = $this->evenement_model->getAllWithType();
 
         $this->load->model('evenementreeks_model');
         $data['evenementreeksen'] = $this->evenementreeks_model->getAll();
 
-        $partials = array('inhoud' => 'trainer/evenementen_beheren');
+        $partials = array('inhoud' => 'trainer/evenementen_beheren',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
     
@@ -81,7 +84,8 @@ class Evenement extends CI_Controller
         $data['typeId'] = $typeId;
         $data['type'] = $evenementtype->type;
 
-        $partials = array('inhoud' => 'trainer/evenementen_toevoegen');
+        $partials = array('inhoud' => 'trainer/evenementen_toevoegen',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -253,7 +257,8 @@ class Evenement extends CI_Controller
 
         $data['isNieuwEvenement'] = false;
 
-        $partials = array('menuGebruiker' => 'trainer_menu', 'inhoud' => 'trainer/evenement_aanpassen');
+        $partials = array('inhoud' => 'trainer/evenement_aanpassen',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 

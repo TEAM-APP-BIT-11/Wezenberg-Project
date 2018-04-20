@@ -36,10 +36,11 @@ class Supplement extends CI_Controller
 
         $this->load->model('supplementdoelstelling_model');
         $this->load->model('voedingssupplement_model');
-        $data['doelstellingen']=$this->supplementdoelstelling_model->getAll();
-        $data['voedingen']= $this->voedingssupplement_model->getAllByDoelstelling(4);
+        $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
+        $data['voedingen'] = $this->voedingssupplement_model->getAllByDoelstelling(4);
         $partials = array(
-            'inhoud' => 'trainer/supplementen_beheren');
+            'inhoud' => 'trainer/supplementen_beheren',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -50,7 +51,7 @@ class Supplement extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('voedingssupplement_model');
-        $data['voedingssupplementen']= $this->voedingssupplement_model->getAllWithDoelstelling();
+        $data['voedingssupplementen'] = $this->voedingssupplement_model->getAllWithDoelstelling();
         $partials = array(
             'inhoud' => 'trainer/supplementen_beherenBis',
             'footer' => 'main_footer');
@@ -63,64 +64,66 @@ class Supplement extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('voedingssupplement_model');
-        $data['voedingssupplement']= $this->voedingssupplement_model->get($id);
+        $data['voedingssupplement'] = $this->voedingssupplement_model->get($id);
 
         $this->load->model('supplementdoelstelling_model');
-        $data['doelstellingen']= $this->supplementdoelstelling_model->getAll();
+        $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
 
         $partials = array(
-            'inhoud' => 'trainer/supplement_aanpassenBis');
+            'inhoud' => 'trainer/supplement_aanpassenBis',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
 
     public function pasAan()
     {
-      $voedingssupplement = new stdClass();
+        $voedingssupplement = new stdClass();
 
-      $voedingssupplement->naam = $this->input->post('naam');
-      $voedingssupplement->doelstellingId = $this->input->post('doelstelling');
-      $voedingssupplement->id = $this->input->post('id');
+        $voedingssupplement->naam = $this->input->post('naam');
+        $voedingssupplement->doelstellingId = $this->input->post('doelstelling');
+        $voedingssupplement->id = $this->input->post('id');
 
-      $this->load->model('voedingssupplement_model');
-      $this->voedingssupplement_model->update($voedingssupplement);
+        $this->load->model('voedingssupplement_model');
+        $this->voedingssupplement_model->update($voedingssupplement);
 
-      return $this->beherenBis();
+        return $this->beherenBis();
     }
 
     public function toevoegenBis()
     {
-      $data['title'] = 'supplement aanpassen';
-      $data['persoon'] = $this->authex->getPersoonInfo();
+        $data['title'] = 'supplement aanpassen';
+        $data['persoon'] = $this->authex->getPersoonInfo();
 
-      $this->load->model('supplementdoelstelling_model');
-      $data['doelstellingen']= $this->supplementdoelstelling_model->getAll();
+        $this->load->model('supplementdoelstelling_model');
+        $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
 
-      $partials = array(
-          'inhoud' => 'trainer/supplement_toevoegenBis');
+        $partials = array(
+            'inhoud' => 'trainer/supplement_toevoegenBis',
+            'footer' => 'main_footer');
 
-      $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
 
     public function verwijderBis($id)
     {
-      $this->load->model('voedingssupplement_model');
-      $this->voedingssupplement_model->delete($id);
+        $this->load->model('voedingssupplement_model');
+        $this->voedingssupplement_model->delete($id);
 
-      return $this->beherenBis();
+        return $this->beherenBis();
     }
 
     public function aanmakenBis()
     {
-      $voedingssupplement = new stdClass();
+        $voedingssupplement = new stdClass();
 
-      $voedingssupplement->naam = $this->input->post('naam');
-      $voedingssupplement->doelstellingId = $this->input->post('doelstelling');
+        $voedingssupplement->naam = $this->input->post('naam');
+        $voedingssupplement->doelstellingId = $this->input->post('doelstelling');
 
-      $this->load->model('voedingssupplement_model');
-      $this->voedingssupplement_model->insert($voedingssupplement);
+        $this->load->model('voedingssupplement_model');
+        $this->voedingssupplement_model->insert($voedingssupplement);
 
-      return $this->beherenBis();
+        return $this->beherenBis();
     }
 
     public function wijzigen()
@@ -138,12 +141,14 @@ class Supplement extends CI_Controller
 
 
             $partials = array(
-            'inhoud' => 'trainer/doelstelling_aanpassen');
-        } elseif ($uitvoeren =='toevoegen') {
+                'inhoud' => 'trainer/doelstelling_aanpassen',
+                'footer' => 'main_footer');
+        } elseif ($uitvoeren == 'toevoegen') {
             $data['title'] = 'Doelstelling toevoegen';
             $partials = array(
-            'inhoud' => 'trainer/doelstelling_toevoegen');
-        } elseif ($uitvoeren =='verwijderen') {
+                'inhoud' => 'trainer/doelstelling_toevoegen',
+                'footer' => 'main_footer');
+        } elseif ($uitvoeren == 'verwijderen') {
             $this->load->model('voedingssupplement_model');
             $this->voedingssupplement_model->verwijderAlleSupplementen($supplement);
             $this->supplementdoelstelling_model->delete($supplement);
@@ -152,6 +157,7 @@ class Supplement extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
     public function haalVoedingProducten()
     {
         $doelstellingId = $this->input->get('doelstellingId');
@@ -172,7 +178,6 @@ class Supplement extends CI_Controller
         $this->load->model('supplementdoelstelling_model');
 
         $this->supplementdoelstelling_model->update($doelstelling);
-
 
 
         redirect('trainer/supplement/beheren');
@@ -208,13 +213,15 @@ class Supplement extends CI_Controller
 
 
             $partials = array(
-            'inhoud' => 'trainer/supplement_aanpassen');
-        } elseif ($uitvoeren =='toevoegen') {
+                'inhoud' => 'trainer/supplement_aanpassen',
+                'footer' => 'main_footer');
+        } elseif ($uitvoeren == 'toevoegen') {
             $data['title'] = 'Supplement toevoegen';
             $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
             $partials = array(
-            'inhoud' => 'trainer/supplement_toevoegen');
-        } elseif ($uitvoeren =='verwijderen') {
+                'inhoud' => 'trainer/supplement_toevoegen',
+                'footer' => 'main_footer');
+        } elseif ($uitvoeren == 'verwijderen') {
             $this->voedingssupplement_model->delete($supplement);
             redirect('/trainer/supplement/beheren');
         }
@@ -235,9 +242,9 @@ class Supplement extends CI_Controller
         $this->voedingssupplement_model->update($supplement);
 
 
-
         redirect('trainer/supplement/beheren');
     }
+
     public function supplementToevoegen()
     {
         $supplement = new stdClass();
