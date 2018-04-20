@@ -68,6 +68,9 @@ foreach($evenementen as $evenement){
             if($(e.target).text() === 'Reeks verwijderen'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
             }
+            if($(e.target).text() === 'Reeks bewerken'){
+                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerkReeks');
+            }
             $('#trainingenForm').submit();
         });
     });
@@ -105,7 +108,7 @@ foreach($evenementen as $evenement){
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label for="trainingsreeksen">Trainingreeksen</label>
-                    <select name="trainingsreeksen" class="form-control" id="trainingsReeksen" size="<?php echo count($trainingReeksen);?>" multiple>
+                    <select name="trainingsreeksen" class="form-control" id="trainingsReeksen" multiple>
                         <?php
                         foreach($trainingReeksen as $trainingReeks){
                             echo '<option value="' . $trainingReeks->id . '">' . $trainingReeks->naam . '</option>';
@@ -119,7 +122,7 @@ foreach($evenementen as $evenement){
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="trainingsId">Specifieke trainingen</label>
-                    <select name="trainingsId" class="form-control" id="trainingenLijst" size="<?php echo count($trainingReeksen);?>" multiple></select>
+                    <select name="trainingsId" class="form-control" id="trainingenLijst" multiple></select>
                     <div id="trainingControls" class="controls">
                         <button class="btn btn-primary" type="button">Training verwijderen</button>
                         <button class="btn btn-primary" type="button">Training bewerken</button>
@@ -130,7 +133,7 @@ foreach($evenementen as $evenement){
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>
-                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/1', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
+                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/laadEvenement/1/true', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
             </div>
         </div> 
     </div>
@@ -157,7 +160,7 @@ foreach($evenementen as $evenement){
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>
-                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/2/', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
+                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/laadEvenement/2/true', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
             </div>
         </div>    
     </div>
@@ -184,7 +187,7 @@ foreach($evenementen as $evenement){
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>
-                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/3', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
+                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/laadEvenement/3/true', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
             </div>
         </div>
     </div>
@@ -197,7 +200,7 @@ foreach($evenementen as $evenement){
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label for="overigereeksen">Overige reeksen</label>
-                    <select name="overigereeksen" class="form-control" id="overigeReeksen" size="<?php echo count($overigeReeksen);?>" multiple>
+                    <select name="overigereeksen" class="form-control" id="overigeReeksen" multiple>
                         <?php
                         foreach($overigeReeksen as $overigeReeks){
                             echo '<option value="' . $overigeReeks->id . '">' . $overigeReeks->naam . '</option>';
@@ -211,7 +214,7 @@ foreach($evenementen as $evenement){
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="overigeId">Specifieke evenementen</label>
-                    <select name="overigeId" class="form-control" id="overigeLijst" size="<?php echo count($overigeReeksen);?>" multiple></select>
+                    <select name="overigeId" class="form-control" id="overigeLijst" multiple></select>
                     <div id="overigeControls" class="controls">
                         <button class="btn btn-primary" type="button">Evenement verwijderen</button>
                         <button class="btn btn-primary" type="button">Evenement bewerken</button>
@@ -222,7 +225,7 @@ foreach($evenementen as $evenement){
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>
-                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/nieuwEvenement/4', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
+                <?php echo anchor($this->config->site_url() . '/trainer/Evenement/laadEvenement/4/true', 'Evenementen toevoegen', 'class="btn btn-primary"');?>
             </div>
         </div>
     </div>

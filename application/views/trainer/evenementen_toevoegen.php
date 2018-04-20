@@ -96,7 +96,7 @@
 
 <style>
     #dagen{
-        display: none;
+        <?php if($isNieuw && !$isReeks){echo 'display: none;';}?>
     }
     #zwemmerKnoppen button{
         width: 100%;
@@ -122,16 +122,16 @@
     }
 </style>
 
-<h1 id="titel"><?php echo ucfirst($type);?> toevoegen</h1>
+<h1 id="titel"><?php echo ucfirst($evenementtype->type);?> toevoegen</h1>
 <hr>
 <form id="nieuweEvenementenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweEvenementenToe';?>">
     <input id="zwemmers" name="zwemmers" value="" hidden>
     <div class="row">
         <div class="col-md-2 form-group">
             <label for="type">Type Evenement</label>
-            <select name="type" id="type" class="form-control">
+            <select name="type" id="type" class="form-control" <?php if(!$isNieuw){echo 'disabled';}?>
                 <?php
-                echo '<option value="' . $typeId . '" selected>' . ucfirst($type) . '</option>';
+                echo '<option value="' . $evenementtype->id . '" selected>' . ucfirst($evenementtype->type) . '</option>';
                 foreach($types as $evenementType){
                     if($evenementType->id !== $typeId){
                         echo '<option value="' . $evenementType->id . '">' . ucfirst($evenementType->type) . '</option>';
@@ -142,21 +142,28 @@
         </div>
         <div id="hoeveelheidskolom" class="col-md-2 form-group">
             <label for="hoeveelheid">Hoeveelheid</label>
-            <select name="hoeveelheid" id="hoeveelheid" class="form-control" <?php if($type == 'stage' || $type == 'medische test'){echo ' disabled';}?>>
-                <option value="enkel" selected>Enkel</option>
-                <option value="meerdere">Reeks</option>
+            <select name="hoeveelheid" id="hoeveelheid" class="form-control" <?php if($evenementtype->type == 'stage' || $evenementtype->type == 'medische test' || !$isNieuw){echo ' disabled';}?>>
+                <?php
+                if(!$isNieuw && $isReeks){
+                    echo '<option value="meerdere" selected>Reeks</option>';
+                } else{
+                    echo '<option value="enkel" selected>Enkel</option>';
+                    echo  nl2br ("\n");
+                    echo '<option value="meerdere">Reeks</option>';
+                }
+                ?>
             </select>
         </div>
         <div class="col-md-4 form-group">
             <label for="naam" id="naam">Evenementnaam</label>
-            <input name="naam" class="form-control" type="text" value="">
+            <input name="naam" class="form-control" type="text" value="<?php if(!$isNieuw){echo $evenement->naam;}?>">
         </div>
     </div>
     <div class="row">
         <div class="col-md-2 form-group">
-            <label for="begindatum" id="begindatum">Datum</label>
+            <label for="begindatum" id="begindatum"><?php if(!$isNieuw && $isReeks){echo 'Begindatum';}else{echo 'Datum';}?></label>
             <div class='input-group date' id='datetimepickerBegindatum'>
-                <input name="begindatum" type='text' class="form-control" />
+                <input name="begindatum" type='text' class="form-control" <?php if(!$isNieuw){echo 'value="' . zetOmNaarDDMMYYYY($evenement->begindatum) . '"';}?>/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -165,7 +172,15 @@
         <div id="einddatum" class="col-md-2 form-group meerdere">
             <label for="einddatum">Einddatum</label>
             <div class='input-group date' id='datetimepickerEinddatum'>
-                <input name="einddatum" type='text' class="form-control" <?php if($type != 'stage'){echo ' disabled';}?>/>
+                <input name="einddatum" type='text' class="form-control"
+                    <?php
+                    if(!$isNieuw && $evenement->einddatum != ""){
+                        echo 'value="' . zetOmNaarDDMMYYYY($evenement->einddatum) . '"';
+                    }
+                    if(in_array($evenementtype->type, ['training','medische test','overige']) && !$isReeks){
+                        echo ' disabled';
+                    }
+                    ?>/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -174,7 +189,7 @@
         <div class="col-md-2 form-group">
             <label for="beginuur">Beginuur</label>
             <div class='input-group date' id='datetimepickerBeginuur'>
-                <input name="beginuur" type='text' class="form-control" />
+                <input name="beginuur" type='text' class="form-control" <?php if(!$isNieuw){echo 'value="' . $evenement->beginuur . '"';}?>/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -183,7 +198,7 @@
         <div class="col-md-2 form-group">
             <label for="einduur">Einduur</label>
             <div class='input-group date' id='datetimepickerEinduur'>
-                <input name="einduur" type='text' class="form-control" />
+                <input name="einduur" type='text' class="form-control" <?php if(!$isNieuw && $evenement->einduur != ""){echo 'value="' . $evenement->einduur . '"';}?>/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -195,7 +210,12 @@
         <div class="col-md-12">
             <?php
             for($i = 0; $i < count($dagen); $i++){
-                echo '<label class="checkbox-inline"><input type="checkbox" name="check_list[]" value="' . ($i+1) . '">' . $dagen[$i] . '</label>';
+                //hier bezig
+                if(in_array($dagen[$i], $days)){
+                    echo '<label class="checkbox-inline"><input type="checkbox" name="check_list[]" value="' . ($i+1) . '" checked>' . $dagen[$i] . '</label>';
+                } else{
+                    echo '<label class="checkbox-inline"><input type="checkbox" name="check_list[]" value="' . ($i+1) . '">' . $dagen[$i] . '</label>';
+                }
             }
             ?>
         </div>

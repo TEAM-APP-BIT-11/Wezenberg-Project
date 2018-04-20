@@ -38,16 +38,15 @@ class Evenement extends CI_Controller
      */
     public function beheren()
     {
-        $data['titel'] = "????";
-        $data['eindverantwoordelijke'] = "?????";
+        $data['titel'] = "Evenementen Beheren";
+        $data['eindverantwoordelijke'] = "Senne Cools";
         $this->load->model('evenement_model');
         $data['evenementen'] = $this->evenement_model->getAllWithType();
 
         $this->load->model('evenementreeks_model');
         $data['evenementreeksen'] = $this->evenementreeks_model->getAll();
 
-        $partials = array('inhoud' => 'trainer/evenementen_beheren',
-            'footer' => 'main_footer');
+        $partials = array('inhoud' => 'trainer/evenementen_beheren', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
     
@@ -67,8 +66,13 @@ class Evenement extends CI_Controller
         echo json_encode($trainingen);
     }
 
-    public function nieuwEvenement($typeId)
+    public function laadEvenement($typeId, $isNieuw, $id = null, $isReeks = false)
     {
+        $evenement = new stdClass();
+        
+        $data['titel'] = "Evenementen Beheren";
+        $data['eindverantwoordelijke'] = "Senne Cools";
+        
         $this->load->model('persoon_model');
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
 
@@ -76,16 +80,38 @@ class Evenement extends CI_Controller
         $data['locaties'] = $this->locatie_model->getAll();
 
         $this->load->model('evenementtype_model');
-        $evenementtype = $this->evenementtype_model->get($typeId);
+        $data['evenementtype'] = $this->evenementtype_model->get($typeId);
         $data['types'] = $this->evenementtype_model->getAll();
 
+        $data['isNieuw'] = $isNieuw;
+        $data['isReeks'] = $isReeks;
+        
+        if(!$isNieuw){
+            $this->load->model('evenement_model');
+            if($isReeks){
+                $evenementen = $this->evenement_model->getEvenementenByEvenementReeksId($id);
+                $dagen = [];
+                foreach($evenementen as $reeksEvenement){
+                    $sqldag = date_create_from_format("Y-m-d", $reeksEvenement->begindatum);
+                    $dag = $sqldag->format("N");
+                    if(!in_array($dag, $dagen)){
+                        array_push($dagen, $dag);
+                    }
+                }
+                $data['days'] = $dagen;
+                $evenement = $evenementen[0];
+                $laatsteEvent = $evenementen[count($evenementen) - 1];
+                $evenement->einddatum = $laatsteEvent->begindatum;
 
-        $data['isNieuwEvenement'] = true;
-        $data['typeId'] = $typeId;
-        $data['type'] = $evenementtype->type;
-
-        $partials = array('inhoud' => 'trainer/evenementen_toevoegen',
-            'footer' => 'main_footer');
+            } else{
+                $evenement = $this->evenement_model->get($id);
+            }
+            $data['evenement'] = $evenement;
+        }
+        
+        var_dump($evenement);
+        
+        $partials = array('inhoud' => 'trainer/evenementen_toevoegen', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -230,36 +256,18 @@ class Evenement extends CI_Controller
         $this->load->model('evenementreeks_model');
         $this->evenementreeks_model->delete($evenementReeksId);
         Redirect('/trainer/Evenement/beheren');
-    }
+    } 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public function bewerk(){
-        $evenementId = $this->input->post('trainingsId');
-
-        $this->load->model('evenement_model');
-        $data['evenement'] = $this->evenement_model->getWithTypeLocatieDeelnamesAndPersoon($evenementId);
-
-        $this->load->model('persoon_model');
-        $data['zwemmers'] = $this->persoon_model->getZwemmers();
-
-        $this->load->model('locatie_model');
-        $data['locaties'] = $this->locatie_model->getAll();
-
-        $data['isNieuwEvenement'] = false;
-
-        $partials = array('inhoud' => 'trainer/evenement_aanpassen',
-            'footer' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
+    public function bewerkReeks(){
+        if($this->input->post('reeksSoort') == 'trainingReeks'){
+            $evenementReeksId = $this->input->post('trainingsreeksen');
+            $typeId = 1;
+        } else{
+            $evenementReeksId = $this->input->post('overigereeksen');
+            $typeId = 4;
+        }
+        
+        $this->laadEvenement($typeId, false, $evenementReeksId, true);
     }
 
     public function pasAan()
