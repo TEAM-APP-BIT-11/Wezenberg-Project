@@ -8,12 +8,11 @@
 
 <?php
 
-    foreach($wedstrijdreeksen as $wedstrijdreeks)
+    foreach($wedstrijddeelnames as $wedstrijddeelname)
     {
-        echo "<tr><td> " . $wedstrijdreeks->slag->naam . "</td>";
-        // echo "<td> " . $wedstrijdreeks->resultaat->tijd . "</td>";
-        // echo "<td> " . $wedstrijdreeks->ranking->ranking . "</td>";
+        echo "<tr><td> " . $wedstrijddeelname->resultaat->rondetype->type . "</td>";
+        echo "<td> " . $wedstrijddeelname->resultaat->tijd . "</td>";
+        echo "<td> " . $wedstrijddeelname->ranking . "</td>";
     }
-
 ?>
 </table>

@@ -58,15 +58,12 @@ class wedstrijdresultaten extends CI_Controller
 
         $wedstrijdId = $this->input->get('id');
 
-        // $this->load->model('wedstrijdreeks_model');
-        // $data['deelnamens'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
-
         $this->load->model('wedstrijdreeks_model');
-        // $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $wedstrijdId);
-        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandResultaatRankingById($persoon->id, $wedstrijdId);
-        // var_dump($this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandResultaatRankingById($persoon->id, $wedstrijdId));
-        // return $data;
-      //
+        $this->load->model('wedstrijddeelname_model');
+
+        $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($wedstrijdId);
+        $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithWedstrijdAndResultaatByPersoon($persoon->id, $wedstrijdreeksen);
+
       $this->load->view("zwemmer/ajax_haalResultatenOp", $data);
     }
 }
