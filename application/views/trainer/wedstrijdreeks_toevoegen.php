@@ -47,9 +47,7 @@
   echo form_hidden('id', $wedstrijd->id);
   echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
   echo form_close();
-  ?>
-		<a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
-	<footer>
-	</footer>
-
+	
+	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+	?>
 </div>

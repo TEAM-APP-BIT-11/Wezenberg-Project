@@ -3,9 +3,6 @@
 		<h1 class="">Locaties beheren</h1>
 		<hr>
 		<h3>Locatie toevoegen</h3>
-
-		<div class="col-md-10 content">
-
 				<?php
 		    $attributes = array('name' => 'locatieToevoegenFormulier');
 		    echo form_open('trainer/locatie/voegToe', $attributes);
@@ -70,8 +67,7 @@
 
 		    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
 		    echo form_close();
-		    ?>
-<?php echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-		</div>
-</form>
+
+				echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+				?>
 </div>

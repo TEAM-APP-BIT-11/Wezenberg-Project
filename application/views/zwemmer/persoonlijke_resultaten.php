@@ -25,7 +25,19 @@
     });
 </script>
 
-
+<?php
+$deelnameCount = 0;
+$wedstrijdNamen = [];
+$wedstrijden = [];
+foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+  if(count(array_keys($wedstrijdNamen, $wedstrijddeelname->wedstrijd->naam)) < 1){
+    $wedstrijdNamen[$deelnameCount] = $wedstrijddeelname->wedstrijd->naam;
+    $wedstrijden[$deelnameCount]['naam'] = $wedstrijddeelname->wedstrijd->naam;
+    $wedstrijden[$deelnameCount]['id'] = $wedstrijddeelname->wedstrijd->id;
+    $deelnameCount++;
+  }
+}
+?>
 
 <h1 class="">Resultaten bekijken</h1>
 <hr>
@@ -38,12 +50,14 @@
     </tr>
 
     <?php
-    foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+    $wedstrijdenCount = 0;
+    foreach ($wedstrijden as $wedstrijd) {
         echo
         "<tr>
-          <td>" . $wedstrijddeelname->wedstrijd->naam . "</td>
-          <td>" .  divAnchor('', 'Bekijken', array('class' => 'resultaat', 'data-id' => $wedstrijddeelname->wedstrijd->id)) ."</td>
+          <td>" . $wedstrijden[$wedstrijdenCount]['naam'] . "</td>
+          <td>" .  divAnchor('', 'Bekijken', array('class' => 'resultaat', 'data-id' => $wedstrijden[$wedstrijdenCount]['id'])) ."</td>
         </tr>";
+        $wedstrijdenCount++;
     }
     ?>
 </table>

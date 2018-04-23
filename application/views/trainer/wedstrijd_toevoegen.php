@@ -60,9 +60,8 @@
 
   echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
   echo form_close();
-  ?>
-	<?php echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-	<footer>
-	</footer>
 
+	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+	?>
+	
 </div>

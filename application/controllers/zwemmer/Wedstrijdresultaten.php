@@ -28,6 +28,15 @@ class wedstrijdresultaten extends CI_Controller
     {
         parent::__construct();
 
+        if (!$this->authex->isAangemeld()) {
+            redirect('Welcome/logIn');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->typePersoon->typePersoon !== "zwemmer") {
+                redirect('');
+            }
+        }
+
         $this->load->helper('form');
         $this->load->helper('notation');
     }
@@ -40,6 +49,7 @@ class wedstrijdresultaten extends CI_Controller
     public function bekijken()
     {
         $persoon = $this->authex->getPersoonInfo();
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
 
         $data['titel']  = 'Persoonlijke wedstrijdresultaten bekijken';
 
@@ -47,7 +57,8 @@ class wedstrijdresultaten extends CI_Controller
         $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithWedstrijdByPersoon($persoon->id);
 
         $partials = array(
-            'inhoud' => 'zwemmer/persoonlijke_resultaten');
+            'inhoud' => 'zwemmer/persoonlijke_resultaten',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -64,6 +75,6 @@ class wedstrijdresultaten extends CI_Controller
         $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($wedstrijdId);
         $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithWedstrijdAndResultaatByPersoon($persoon->id, $wedstrijdreeksen);
 
-      $this->load->view("zwemmer/ajax_haalResultatenOp", $data);
+        $this->load->view("zwemmer/ajax_haalResultatenOp", $data);
     }
 }

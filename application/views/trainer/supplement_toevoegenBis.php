@@ -26,7 +26,4 @@
     echo form_close();
     ?>
     <?php echo anchor('trainer/Supplement/beherenBis', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
-
 </div>

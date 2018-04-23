@@ -49,6 +49,7 @@ class Wedstrijd extends CI_Controller
     public function beheren()
     {
         $data['titel'] = 'Wedstrijden beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');
@@ -62,6 +63,7 @@ class Wedstrijd extends CI_Controller
     public function aanpassen($id)
     {
         $data['titel'] = 'Wedstrijd aanpassen';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');
@@ -82,6 +84,7 @@ class Wedstrijd extends CI_Controller
     public function toevoegen()
     {
         $data['titel'] = 'Wedstrijd toevoegen';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
@@ -135,7 +138,6 @@ class Wedstrijd extends CI_Controller
         $this->wedstrijd_model->update($wedstrijd);
 
         return $this->beheren();
-        // var_dump($wedstrijd);
     }
 
     public function verwijder($id)
@@ -149,6 +151,7 @@ class Wedstrijd extends CI_Controller
     public function resultaten()
     {
         $data['titel'] = 'Wedstrijdresultaten beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');
@@ -162,6 +165,7 @@ class Wedstrijd extends CI_Controller
     public function resultatenBeheren($id)
     {
         $data['titel'] = 'Wedstrijdresultaten beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijdreeks_model');

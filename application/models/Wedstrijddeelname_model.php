@@ -197,24 +197,12 @@ class Wedstrijddeelname_model extends CI_Model
         $this->load->model('wedstrijdreeks_model');
         $this->load->model('wedstrijd_model');
 
-        function key_value_pair_exists(array $haystack, $key, $value) {
-          return array_key_exists($key, $haystack) && $haystack[$key] == $value;
-        }
-
         foreach ($wedstrijddeelnames as $wedstrijddeelname) {
-            // var_dump($wedstrijddeelname);
-
             $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
             $wedstrijdId = $wedstrijddeelname->wedstrijdreeks->wedstrijdId;
             $wedstrijddeelname->wedstrijd = $this->wedstrijd_model->get($wedstrijdId);
 
-            if(isset($wedstrijddeelname->wedstrijd->naam)){
-              // var_dump(in_array($wedstrijddeelname->wedstrijd->naam, $wedstrijddeelnames));
-              // var_dump($wedstrijddeelname->wedstrijd->naam);
-              var_dump(property_exists("wedstrijddeelnames", "naam"));
-            }
         }
-        var_dump($wedstrijddeelnames);
         return $wedstrijddeelnames;
     }
 
