@@ -1,3 +1,11 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+  });
+</script>
+
 <h1 class="">Wedstrijden beheren</h1>
 <hr>
 <h3>Wedstrijden</h3>
@@ -19,12 +27,12 @@
           <td>" . $wedstrijd->locatie->naam . "</td>
           <td>" . $wedstrijd->begindatum . "</td>
           <td>" . $wedstrijd->einddatum . "</td>
-          <td>" . anchor('trainer/wedstrijd/aanpassen/'. $wedstrijd->id, 'Aanpassen') . ' ' .
-           anchor('trainer/wedstrijd/verwijder/'. $wedstrijd->id, 'Verwijderen'). ' '  .
-           anchor('trainer/wedstrijdreeks/toevoegen/'. $wedstrijd->id, 'Reeks toevoegen')."</td>
+          <td>" . anchor('trainer/wedstrijd/aanpassen/'. $wedstrijd->id, 'Aanpassen', 'data-toggle="tooltip" data-placement="top" title="Met deze actie kan je de wedstrijd aanpassen"') . ' ' .
+           anchor('trainer/wedstrijd/verwijder/'. $wedstrijd->id, 'Verwijderen', 'data-toggle="tooltip" data-placement="top" title="Met deze actie kan je de wedstrijd verwijderen"'). ' '  .
+           anchor('trainer/wedstrijdreeks/toevoegen/'. $wedstrijd->id, 'Reeks toevoegen', 'data-toggle="tooltip" data-placement="top" title="Met deze actie kan je een reeks toevoegen aan de wedstrijd"')."</td>
         </tr>";
     }
     ?>
 
 </table>
-<?php echo anchor('trainer/wedstrijd/toevoegen/', 'Voeg een nieuwe wedstrijd toe', 'class="btn btn-primary"'); ?>
+<?php echo anchor('trainer/wedstrijd/toevoegen/', 'Voeg een nieuwe wedstrijd toe', 'class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Met deze actie kan je een nieuwe wedstrijd toevoegen"'); ?>
