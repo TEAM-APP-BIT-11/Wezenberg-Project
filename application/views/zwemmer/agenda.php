@@ -51,7 +51,6 @@
                                 console.log("TRUE");
                                 weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
                             }
-
                         }
                         ,
                         error: function (xhr, status, error) {
