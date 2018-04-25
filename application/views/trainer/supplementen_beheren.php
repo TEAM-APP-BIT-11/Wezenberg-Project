@@ -69,7 +69,7 @@ echo "</div>";
 
 ?>
     <div>
- <button class="btn btn-primary" name ="doelstellingen" type="submit" value="toevoegen" >toevo egen</button>   
+ <button class="btn btn-primary" name ="doelstellingen" type="submit" value="toevoegen" >toevoegen</button>   
 <button class="btn btn-primary" name ="doelstellingen" type="submit" value="aanpassen">Aanpassen</button>
 <button class="btn btn-primary" name ="doelstellingen" type="submit" value="verwijderen">verwijderen</button>  
     </div>
