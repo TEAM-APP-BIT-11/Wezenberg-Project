@@ -10,8 +10,6 @@ $(document).ready(function(){
 });
 </script>
 
-
-
 <h1>Zoeken</h1>
 <div class="row">
   <div class="col-lg-4">
@@ -21,7 +19,7 @@ $(document).ready(function(){
   echo form_input(array('name' => 'zoek',
       'id' => 'zoek',
       'class' => 'form-control',
-      'placeholder' => 'Wedstrijd beheren, Evenement en training beheren, Gebruikers beheren, ect.'));
+      'placeholder' => 'Wedstrijd beheren, Evenement en training beheren, Ect.'));
    ?>
   </div>
 </div>

@@ -46,7 +46,7 @@ class Help extends CI_Controller
     public function index()
     {
         $data['titel'] = 'Help functie';
-        $data['eindverantwoordelijke'] = "Iemand";
+        $data['eindverantwoordelijke'] = "Stef Schoeters, vul namen in -> de rest die zijn functionaliteit bij het menu heeft staan";
         $persoon = $this->authex->getPersoonInfo();
 
         $partials = array(
