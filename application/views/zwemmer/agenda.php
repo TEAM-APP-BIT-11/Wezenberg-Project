@@ -51,7 +51,6 @@
                                 console.log("TRUE");
                                 weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
                             }
-
                         }
                         ,
                         error: function (xhr, status, error) {
@@ -109,11 +108,6 @@
     ;
 
 </script>
-
-<link rel="stylesheet" href="<?php echo base_url() ?>resources/css/fullcalendar.min.css"/>
-<script src="<?php echo base_url() ?>resources/js/moment.min.js"></script>
-<script src="<?php echo base_url() ?>resources/js/fullcalendar.min.js"></script>
-<script src="<?php echo base_url() ?>resources/js/gcal.js"></script>
 
 <h1>Agenda</h1>
 <a href="#" class="supplementen btn btn-primary" data-datum="2018-08-21">Supplementen</a>

@@ -29,6 +29,12 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
     <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/moment-with-locales.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/bootstrap-datetimepicker.min.js"></script>
+    
+    <!--Agenda js en css-->
+    <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/fullcalendar.min.css"/>
+    <script src="<?php echo base_url() ?>resources/js/moment.min.js"></script>
+    <script src="<?php echo base_url() ?>resources/js/fullcalendar.min.js"></script>
+    <script src="<?php echo base_url() ?>resources/js/gcal.js"></script>
 
 </head>
 <body>
@@ -88,7 +94,7 @@
             echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Gebruikers', '');
             echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
-            echo activeAnchor('trainer/Supplement/beherenBis', 'Supplementen beheren', '');
+            echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
         } else {
