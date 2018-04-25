@@ -81,22 +81,28 @@ class Evenement extends CI_Controller
 
         $this->load->model('evenementtype_model');
         $data['evenementtype'] = $this->evenementtype_model->get($typeId);
-        $data['types'] = $this->evenementtype_model->getAll();
+        $data['types'] = $this->evenementtype_model->getAll();       
 
         $data['isNieuw'] = $isNieuw;
         $data['isReeks'] = $isReeks;
         
         if(!$isNieuw){
             $this->load->model('evenement_model');
+            $this->load->model('evenementdeelname_model');
             if($isReeks){
                 $evenementen = $this->evenement_model->getEvenementenByEvenementReeksId($id);
                 $dagen = [];
+                $count = 0;
                 foreach($evenementen as $reeksEvenement){
+                    if($count == 0){
+                        $evenementDeelnames = $this->evenementdeelname_model->getByEventId($reeksEvenement->id);
+                    }
                     $sqldag = date_create_from_format("Y-m-d", $reeksEvenement->begindatum);
                     $dag = $sqldag->format("N");
                     if(!in_array($dag, $dagen)){
                         array_push($dagen, $dag);
                     }
+                    $count++;
                 }
                 $data['days'] = $dagen;
                 $evenement = $evenementen[0];
@@ -105,8 +111,15 @@ class Evenement extends CI_Controller
 
             } else{
                 $evenement = $this->evenement_model->get($id);
+                $evenementDeelnames = $this->evenementdeelname_model->getByEventId($id);
             }
             $data['evenement'] = $evenement;
+            $deelnemendeZwemmers = [];
+            foreach($evenementDeelnames as $evenementDeelname){
+                $deelnemendeZwemmer = $this->persoon_model->get($evenementDeelname->persoonId);
+                array_push($deelnemendeZwemmers, $deelnemendeZwemmer);
+            }
+            $data['deelnemendeZwemmers'] = $deelnemendeZwemmers;
         }
         
         var_dump($evenement);

@@ -250,7 +250,9 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             <select name="alleZwemmers" id="alleZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
                 <?php
                 foreach($zwemmers as $zwemmer){
-                    echo '<option value="' . $zwemmer->id . '">' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
+                    if(!in_array($zwemmer, $deelnemendeZwemmers)){
+                        echo '<option value="' . $zwemmer->id . '">' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
+                    }
                 }
                 ?>
             </select>
@@ -261,7 +263,15 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
         </div>
         <div class="col-md-3 form-group">
             <label for="deelnemendeZwemmers">Deelnemende zwemmers</label>
-            <select name="deelnemendeZwemmers" id="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>"></select>
+            <select name="deelnemendeZwemmers" id="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
+                <?php
+                if(!$isNieuw){
+                    foreach($deelnemendeZwemmers as $deelnemendeZwemmer){
+                        echo '<option value="' . $deelnemendeZwemmer->id . '">' . ucfirst($deelnemendeZwemmer->voornaam) . ' ' . ucfirst($deelnemendeZwemmer->familienaam) . '</option>';
+                    }
+                }
+                ?>
+            </select>
         </div>
     </div>
 </form>
