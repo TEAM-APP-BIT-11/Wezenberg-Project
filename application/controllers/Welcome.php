@@ -54,6 +54,7 @@ class Welcome extends CI_Controller
     public function wijzig($id)
     {
         $data['titel'] = "Profiel wijzigen";
+        $data['eindverantwoordelijke'] = "Dieter Verboven";
 
         $this->load->model('persoon_model');
         $data['persoon'] = $this->persoon_model->get($id);
@@ -68,6 +69,7 @@ class Welcome extends CI_Controller
     function wachtwoord($id)
     {
         $data['titel'] = "Wachtwoord wijzigen";
+        $data['eindverantwoordelijke'] = "Dieter Verboven";
 
         $this->load->model('persoon_model');
         $data['persoon'] = $this->persoon_model->get($id);
@@ -101,8 +103,7 @@ class Welcome extends CI_Controller
         } else {
             $this->persoon_model->update($persoon);
         }
-
-        redirect('/welcome/controleerAanmelden');
+        $this->index();
     }
 
     function wijzigWachtwoord()
