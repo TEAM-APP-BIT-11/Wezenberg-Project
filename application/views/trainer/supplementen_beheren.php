@@ -1,124 +1,94 @@
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script>
-  var dates = new Array();
+<script type="text/javascript">
+    
+    function supplementenHalen(doelstellingId) {
+        $.ajax({
+            type: "GET",
+            url: site_url + "/trainer/supplement/haalVoedingProducten",
+            data: {doelstellingId: doelstellingId},
+            success: function (result) {
+                try {
+                    var lijst = new Array()
+                    var voedingen = jQuery.parseJSON(result);
+                    
+                    for (var i = 0; i < voedingen.length; i++) {
+                        lijst.push("<option value=" + voedingen[i].id + ">"+ voedingen[i].naam +"</option>");
+                                
 
-
-function addDate(date) {
-    if (jQuery.inArray(date, dates) < 0)
-        dates.push(date);
-}
-
-
-// Takes a 1-digit number and inserts a zero before it
-function padNumber(number) {
-    var ret = new String(number);
-    if (ret.length == 1)
-        ret = "0" + ret;
-    return ret;
-}
-
-jQuery(function () {
-    jQuery("#datepicker").datepicker({
-        onSelect: function (dateText, inst) {
-            dates =[];
-            addDate(dateText);
-            $("#datums").empty();
-            $.each(dates, function(val, text){
-                $('#datums').append($('<option></option>').val(text).html(text));
-            })
-            $('#datums option').prop('selected', true);
-
-        },
-        beforeShowDay: function (date) {
-            var year = date.getFullYear();
-            // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
-            var month = padNumber(date.getMonth() + 1);
-            var day = padNumber(date.getDate());
-            // This depends on the datepicker's date format
-            var dateString = month + "/" + day + "/" + year;
-
-            var gotDate = jQuery.inArray(dateString, dates);
-            if (gotDate >= 0) {
-                // Enable date so it can be deselected. Set style to be highlighted
-                return [true, "ui-state-highlight"];
+                        
+                    }
+                        $('#supplementen').html(lijst);
+                   
+                        
+                       
+                       
+                        
+                   
+                } catch (error) {
+                    alert("--- ERROR IN JSON --" + result);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("-- ERROR IN AJAX -- \n\n" + xhr.responseText);
             }
-            // Dates not in the array are left enabled, but with no extra style
-            return [true, ""];
-        }
-    });
-});
-$(document).ready(function(){
-    var datum = '<?php echo $inname->datum; ?>'.split('-');
-    var test = datum[1] + "/"+ datum[2] + "/"+ datum[0]
-    addDate(test);
-   $.each(dates, function(val, text){
-                $('#datums').append($('<option></option>').val(text).html(text));
-            })
-            $('#datums option').prop('selected', true);
+        });
+    }
+   
+    $(document).ready(function () {
+        
+        $('#doelstelling').change(function () {
+            supplementenHalen($('#doelstelling').val());
+        });
 
+    })
+    ;
 
-})
-  </script>
-
-  <style>
-      td {
-          width:200px;
-          padding:20px;
-      }
-      #datums{
-
-          display: none;
-      }
-
-  </style>
-  <form action="<?php echo site_url() ;?>/trainer/supplementschema/aangepast" method="post">
-      <?php
-echo '<h2>'.$title.'</h2>';
-echo "<table>";
-echo form_hidden('id', $inname->id);
-echo form_hidden('innameReeksId', $inname->innameReeksId);
-echo form_hidden('persoonId', $inname->persoonId);
-
-echo "<tr> <td>";
-echo form_label('Trainer', 'persoon');
-echo "</td> <td>";
-echo form_input('persoon',$persoon->voornaam . ' '. $persoon->familienaam, "disabled");
-echo "</td> </tr>";
+</script>
+<style>
+    #supplementen{
+        width:200px;
+    }
+    #doelstelling{
+        width:200px;
+    }
+</style>
 
 
 
-foreach($innames as $innam)
-{
-    $dropdown[$innam->id] = $innam->naam;
-}
-echo "<tr> <td>";
-echo form_label('Supplementen:', 'supplementen');
-echo "</td> <td>";
-echo form_multiselect('supplementen', $dropdown, $inname->voedingssupplementId);
-echo "</td><td>";
+<form action="<?php echo site_url() ;?>/trainer/supplement/wijzigen" method="post">
+    
+
+<?php
+$attributes = array('name' => 'formulier');
+    echo form_open('trainer/supplement/wijzigen', $attributes);
+echo "<h2>".$title."</h2>";
+echo "<div>";
+echo "<h3> Doelstelling Supplement:</h3>";
+echo form_dropdownpro("doelstelling", $doelstellingen, "id", "doelstelling", 0, 'id="doelstelling" class="form-control"'); 
+echo "</div>";
+
+
 ?>
-    <form>
-        <label name="datums">Kies de datum:</label>
-    <input id="datepicker" name="datepicker" value="<?php echo date("m/d/Y",strtotime($inname->datum));?>" />
+    <div>
+ <button class="btn btn-primary" name ="doelstellingen" type="submit" value="toevoegen" >toevo egen</button>   
+<button class="btn btn-primary" name ="doelstellingen" type="submit" value="aanpassen">Aanpassen</button>
+<button class="btn btn-primary" name ="doelstellingen" type="submit" value="verwijderen">verwijderen</button>  
+    </div>
 </form>
+<form action="<?php echo site_url(); ?>/trainer/supplement/supplementVerandering" method="post">
+    <div>
+        <h3>Supplementen:</h3>
+<select multiple id="supplementen" name="supplementen" class="form-control" >
+    
+</select>
+        <button class="btn btn-primary" name ="supplement" type="submit" value="toevoegen" >toevoegen</button>   
+<button class="btn btn-primary" name ="supplement" type="submit" value="aanpassen">Aanpassen</button>
+<button class="btn btn-primary" name ="supplement" type="submit" value="verwijderen">verwijderen</button>  
+    </div>  
 
-      <select multiple id="datums" name="datums[]"  >
-
-      </select>
-  <?php
+</form> 
 
 
-echo "</td> </tr><tr> <td>";
-echo form_label('Aantal:', 'aantal');
-echo "</td> <td>";
-echo form_input('aantal', $inname->aantal);
-echo "</td><td></td></tr>";
-echo "</table>";
 
-?>
+                        
 
-      <button type="submit"name="aanpassen" id="aanpassen" class="btn btn-primary">Aanpassen</button>
 
-<?php echo anchor('trainer/supplementschema/beheren', form_button('back', 'annuleren', 'class="btn btn-primary"')) ;?>
