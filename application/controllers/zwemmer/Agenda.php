@@ -54,6 +54,16 @@ class Agenda extends CI_Controller
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
 
+        $persoon = $this->authex->getPersoonInfo();
+        $this->load->model('inname_model');
+
+        $innames = $this->inname_model->getAllFromPersoon($persoon->id);
+        $innamesarray = array();
+        foreach ($innames as $inname) {
+            array_push($innamesarray, $inname->datum);
+        }
+        $data['innames'] = json_encode($innamesarray);
+
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);

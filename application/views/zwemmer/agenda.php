@@ -19,14 +19,6 @@
 
         $('#calendar').fullCalendar(
             {
-                customButtons: {
-                    myCustomButton: {
-                        text: 'custom!',
-                        click: function () {
-                            alert('clicked the custom button!');
-                        }
-                    }
-                },
                 allDaySlot: false,
                 themeSystem: 'bootstrap3',
                 minTime: "6:00:00",
@@ -36,31 +28,12 @@
                 firstDay: 1,
                 columnHeaderHtml: function (mom) {
                     var weergeven = "";
-                    $.ajax({
-                        type: "GET",
-                        async: true,
-                        url: site_url + "/zwemmer/Agenda/haalAjaxOp_Inname",
-                        data:
-                            {
-                                datum: mom.format('YYYY-MM-DD')
-                            }
-                        ,
-                        success: function (result) {
-                                
-                                console.log(result);
-                                console.log("TRUE");
-                                weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
-                                return weergeven + mom.format('ddd DD/MM');
-                        }
-                        ,
-                        error: function (xhr, status, error) {
-                            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
-                        }
-                    })
-                    ;
-                    //return weergeven + mom.format('ddd DD/MM');
+                    var innames = <?php echo $innames; ?>;
+                    if ($.inArray(mom.format('YYYY-MM-DD').toString(), innames) != -1) {
+                        weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
+                    }
+                    return weergeven + mom.format("ddd DD / MM");
 
-                    <!-- FOUTEN IN -->
                 },
                 header:
                     {

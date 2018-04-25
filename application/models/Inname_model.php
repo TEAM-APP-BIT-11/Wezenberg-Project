@@ -126,18 +126,12 @@ class Inname_model extends CI_Model
         return $query->row();
     }
 
-    function existsInname($persoonId, $datum)
+    function getAllFromPersoon($persoonId)
     {
-        $this->db->where('datum', $datum);
         $this->db->where('persoonId', $persoonId);
         $query = $this->db->get('inname');
-        if ($query->num_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return $query->result();
     }
-
 
 }
 
