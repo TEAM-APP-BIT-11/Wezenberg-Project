@@ -30,6 +30,19 @@ class Wedstrijddeelname_model extends CI_Model
         $query = $this->db->get('wedstrijddeelname');
         return $query->row();
     }
+    
+    /*
+    * Retourneert het record met resultaatId=$id uit de tabel wedstrijddeelname
+    * @param $id De resultaatId van het record dat opgevraagd wordt
+    * @return Het opgevraagde record
+    */
+    
+    public function getByResultaatId($id)
+    {
+        $this->db->where('resultaatId', $id);
+        $query = $this->db->get('wedstrijddeelname');
+        return $query->row();
+    }
 
     /*
     * Retourneert alle records uit de tabel wedstrijddeelname

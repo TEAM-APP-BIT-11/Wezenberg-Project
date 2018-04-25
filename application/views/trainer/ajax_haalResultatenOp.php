@@ -14,6 +14,7 @@
                 <td><label for="type">Ranking</label></td>
                 <td><label for="type">Zwemmer</label></td>
                 <td><label for="type">Resultaat</label></td>
+                <td><label for="type">Actie</label></td>
             </tr>
 
 
@@ -24,7 +25,8 @@
         echo "<tr><td> " . ucfirst($wedstrijddeelname->resultaat->rondetype->type) . "</td>";
         echo "<td> " . $wedstrijddeelname->resultaat->ranking . "</td>";
         echo "<td> " . ucfirst($wedstrijddeelname->persoon->voornaam) . "</td>";
-        echo "<td> " . $wedstrijddeelname->resultaat->tijd . "</td></tr>";
+        echo "<td> " . $wedstrijddeelname->resultaat->tijd . "</td>";
+        echo "<td> ". anchor('trainer/Wedstrijdresultaat/resultatenAanpassen/'. $wedstrijddeelname->resultaatId, 'Aanpassen') . "</td></tr>";
     }
 
 ?>

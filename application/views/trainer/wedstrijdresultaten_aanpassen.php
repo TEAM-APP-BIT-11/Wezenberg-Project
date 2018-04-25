@@ -3,7 +3,7 @@
     function haalResultatenOp(reeksId)
     {
         $.ajax({type : "GET",
-                url : site_url + "/trainer/wedstrijd/resultatenOphalen" ,
+                url : site_url + "/trainer/wedstrijdresultaat/resultatenOphalen" ,
                 data : {reeksId : reeksId},
                 success: function (result) {
                 $("#success").html(result);
@@ -18,7 +18,7 @@
     $(document).ready(function () {
         
         $(".formResultaten").hide();
-        $(".btnOpslaan").hide();
+        $(".btnToevoegen").hide();
         $("#success").hide();
         
         $('#reeks').change(function() {
@@ -33,7 +33,8 @@
                 haalResultatenOp(reeksId);
                 $(".formResultaten").show();
                 $("#success").show();
-                $(".btnOpslaan").show();
+                $(".btnToevoegen").show();
+                $(".btnToevoegen").attr('href', '../../../trainer/wedstrijdresultaat/toevoegen/' + reeksId);
             }
         });
         
@@ -91,10 +92,9 @@
 
         echo anchor('/trainer/Wedstrijd/resultaten', 'Annuleren', 'class="btn btn-primary"'); 
 
-    
-        
-        echo anchor('/trainer/Wedstrijd/resultaten', 'Opslaan', 'class="btn btn-default btnOpslaan"')
                 ?>
+            
+            <a class="btn btn-default btnToevoegen">Resultaat toevoegen</a>
         
         </p>
     </div>
