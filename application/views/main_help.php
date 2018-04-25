@@ -65,9 +65,6 @@
                     echo anchor('Welcome/wijzig/' . $persoon->id, 'Wijzig profiel');
                     echo '</li > ';
                     echo '<li> ';
-                    echo anchor('trainer/Help/index', 'Help');
-                    echo '</li > ';
-                    echo '<li> ';
                     echo anchor('Welcome/meldAf', 'Afmelden');
                     echo '</li > ';
                     echo '</ul > ';
@@ -89,24 +86,13 @@
         echo '<div class="col-md-2 sidebar" > ';
         echo '<ul class="nav nav-pills nav-stacked" > ';
         if ($persoon->typePersoon->typePersoon == "trainer") {
-
-            echo activeAnchor('trainer/Home', 'Home');
-            echo activeAnchor('trainer/Evenement/beheren', 'Evenementen beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
-            echo activeAnchor('trainer/Locatie/beheren', 'Locatie beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Gebruikers', '');
-            echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
-            echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
-            echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
+            echo activeAnchor('trainer/help/#wedstrijdBeheren', 'Wedstrijden beheren');
+            echo activeAnchor('trainer/help/#evenementenEnTrainingenBeheren', 'Evenementen en trainingen beheren', '');
+            echo activeAnchor('trainer/help/#gebruikersBeheren', 'Gebruikers beheren', '');
+            echo activeAnchor('trainer/help/#startPaginaBeheren', 'Startpagina beheren', '');
         } else {
 
-            echo activeAnchor('zwemmer/Home', 'Home', '');
-            echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '');
-            echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '');
-            echo activeAnchor('zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '');
-            echo activeAnchor('zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '');
+            echo activeAnchor('zwemmer/Home', 'Nog geen help functie voor zwemmer', '');
 
         }
         echo '</ul > ';
