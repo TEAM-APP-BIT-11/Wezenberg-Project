@@ -88,12 +88,11 @@ class Evenement_model extends CI_Model {
 	* @return Alle records met types
 	*/
 
-	function getTrainingenByEvenementReeks($evenementReeks)
+	function getEvenementenByEvenementReeksId($evenementReeksId)
 	{
-		$this->db->where('evenementReeksId', $evenementReeks->id);
+		$this->db->where('evenementReeksId', $evenementReeksId);
                 $query = $this->db->get('evenement');
                 return $query->result();
-
 	}
         
 	/*
@@ -116,7 +115,7 @@ class Evenement_model extends CI_Model {
 	function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('evenement', $evenement);
+		$this->db->delete('evenement');
 	}
 
 	/*

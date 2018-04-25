@@ -13,7 +13,7 @@ class Resultaat_model extends CI_Model
     * Constructor
     */
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -25,7 +25,7 @@ class Resultaat_model extends CI_Model
     */
 
 
-    function get($id)
+    public function get($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('resultaat');
@@ -37,7 +37,7 @@ class Resultaat_model extends CI_Model
     * @return Alle records
     */
 
-    function getAll()
+    public function getAll()
     {
         $query = $this->db->get('resultaat');
         return $query->result();
@@ -49,7 +49,7 @@ class Resultaat_model extends CI_Model
     */
 
 
-    function update($resultaat)
+    public function update($resultaat)
     {
         $this->db->where('id', $resultaat->id);
         $this->db->update('resultaat', $resultaat);
@@ -61,7 +61,7 @@ class Resultaat_model extends CI_Model
     */
 
 
-    function delete($id)
+    public function delete($id)
     {
         $this->db->where('id', $id);
         $this->db->delete('resultaat', $resultaat);
@@ -74,12 +74,23 @@ class Resultaat_model extends CI_Model
     */
 
 
-    function insert($resultaat)
+    public function insert($resultaat)
     {
         $this->db->insert('resultaat', $resultaat);
         return $this->db->insert_id();
     }
 
-}
+    public function getWithRondetypeById($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('resultaat');
+        $resultaat = $query->row();
 
-?>
+        $this->load->model('rondetype_model');
+
+
+        $resultaat->rondetype = $this->rondetype_model->get($resultaat->rondeTypeId);
+
+        return $resultaat;
+    }
+}

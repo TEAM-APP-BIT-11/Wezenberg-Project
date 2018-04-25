@@ -40,6 +40,7 @@ class Rondetype_model extends CI_Model
     function getAll()
     {
         $query = $this->db->get('rondetype');
+        $this->db->order_by("id", "desc");
         return $query->result();
     }
 

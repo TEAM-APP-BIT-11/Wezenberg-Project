@@ -1,11 +1,12 @@
 <?php
+
 /**
-* @class Wedstrijdreeks_model
-* @brief Model-klasse voor wedstrijdreeksen
-*
-* Model-klasse die alle methodes bevat om te
-* interageren met de database-tabel wedstrijdreeks
-*/
+ * @class Wedstrijdreeks_model
+ * @brief Model-klasse voor wedstrijdreeksen
+ *
+ * Model-klasse die alle methodes bevat om te
+ * interageren met de database-tabel wedstrijdreeks
+ */
 class Wedstrijdreeks_model extends CI_Model
 {
     /*
@@ -80,6 +81,7 @@ class Wedstrijdreeks_model extends CI_Model
         $this->load->model('afstand_model');
         $this->load->model('wedstrijd_model');
         $this->load->model('wedstrijddeelname_model');
+        $this->load->model('resultaat_model');
 
         $deelnames = $this->wedstrijddeelname_model->getAllForPersoonWithStatus($persoonId);
 
@@ -88,8 +90,11 @@ class Wedstrijdreeks_model extends CI_Model
             $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
             $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
             foreach ($deelnames as $deelname) {
-                if ($wedstrijdreeks->id == $deelname->wedstrijdReeksId) {
+                if ($wedstrijdreeks->wedstrijdId == $wedstrijdId) {
                     $wedstrijdreeks->deelname = $deelname;
+                    $wedstrijdreeks->resultaat = $this->resultaat_model->get($deelname->resultaatId);
+                } else {
+                    $wedstrijdreeks->resultaat = "Geen resultaat";
                 }
             }
         }
@@ -142,12 +147,41 @@ class Wedstrijdreeks_model extends CI_Model
         $this->load->model('slag_model');
         $this->load->model('afstand_model');
         $this->load->model('wedstrijd_model');
-        $this->load->model('wedstrijddeelname_model');
 
         foreach ($wedstrijdreeksen as $wedstrijdreeks) {
             $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
             $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
             $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+        }
+        return $wedstrijdreeksen;
+    }
+
+    public function getAllWithWedstrijdSlagAfstandResultaatRankingById($persoonId, $wedstrijdId)
+    {
+        $this->db->where('wedstrijdId', $wedstrijdId);
+        $query = $this->db->get('wedstrijdreeks');
+        $wedstrijdreeksen = $query->result();
+
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+        $this->load->model('wedstrijd_model');
+        $this->load->model('wedstrijddeelname_model');
+        $this->load->model('resultaat_model');
+
+        $deelnamens = $this->wedstrijddeelname_model->getAll();
+
+
+        foreach ($wedstrijdreeksen as $wedstrijdreeks) {
+                $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+                $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+                $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+            foreach ($deelnamens as $deelname) {
+              if($wedstrijdreeks->id == $deelname->wedstrijdReeksId && $deelname->persoonId == $persoonId){
+                // $wedstrijdreeksen->resultaat = $this->resultaat_model->get($deelname->resultaatId);
+                $wedstrijdreeks->ranking = $deelname->ranking;
+              }
+
+            }
         }
         return $wedstrijdreeksen;
     }
@@ -173,5 +207,22 @@ class Wedstrijdreeks_model extends CI_Model
         }
 
         return $wedstrijdreeksen;
+    }
+
+    public function getWithWedstrijdAndSlagAndAfstand($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('wedstrijdreeks');
+        $wedstrijdreeks = $query->row();
+
+        $this->load->model('wedstrijd_model');
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+
+        $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+        $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+        $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+
+        return $wedstrijdreeks;
     }
 }

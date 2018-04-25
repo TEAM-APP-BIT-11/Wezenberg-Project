@@ -29,6 +29,7 @@ class Home extends CI_Controller
         parent::__construct();
 
         $this->load->helper('form');
+        $this->load->helper('html');
         $this->load->helper('notation');
     }
 
@@ -37,7 +38,7 @@ class Home extends CI_Controller
         $data['titel'] = 'Welkom bezoeker!';
 
         $partials = array(
-            'inhoud' => 'trainer/home');
+            'inhoud' => 'algemeen/home');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -45,6 +46,7 @@ class Home extends CI_Controller
     public function team()
     {
         $data['titel'] = 'Team';
+        $data['eindverantwoordelijke'] = 'Iemand';
 
         $this->load->model('persoon_model');
 
@@ -52,9 +54,10 @@ class Home extends CI_Controller
 
 
         $partials = array(
-            'inhoud' => 'bezoeker/team_lijst');
+            'inhoud' => 'bezoeker/team_lijst',
+            'footer' => 'main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function zwemmer($id)
@@ -70,6 +73,6 @@ class Home extends CI_Controller
         $partials = array(
             'inhoud' => 'bezoeker/teamlidsinfo_bekijken');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 }

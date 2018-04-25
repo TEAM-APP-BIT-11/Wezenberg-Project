@@ -74,56 +74,11 @@
     }
     echo '</table>';
 
-// foreach($wedstrijdreeksen as $wedstrijdreeks){
-// 	echo '</br>';
-// 	echo form_labelpro('Datum', 'datum');
-// 	echo form_input(array('name' => 'reeksDatum',
-// 			'id' => 'reeksDatum',
-// 			'value' => $wedstrijdreeks->datum,
-// 			'class' => 'form-control',
-// 			'required' => 'required',
-// 			'type' => 'date',));
-//
-// 	echo '</br>';
-// 	echo form_labelpro('Beginuur', 'beginuur');
-// 	echo form_input(array('name' => 'reeksBeginuur',
-// 			'id' => 'reeksBeginuur',
-// 			'value' => $wedstrijdreeks->beginuur,
-// 			'class' => 'form-control',
-// 			'required' => 'required',
-// 			'type' => 'date',));
-//
-// 	echo '</br>';
-// 	echo form_labelpro('Einduur', 'einduur');
-// 	echo form_input(array('name' => 'reeksEinduur',
-// 			'id' => 'reeksEinduur',
-// 			'value' => $wedstrijdreeks->einduur,
-// 			'class' => 'form-control',
-// 			'required' => 'required',));
-//
-// 	echo '</br>';
-// 	echo form_labelpro('Afstand', 'afstand');
-// 	echo form_input(array('name' => 'reeksAfstand',
-// 			'id' => 'reeksAfstand',
-// 			'value' => $wedstrijdreeks->afstand->afstand,
-// 			'class' => 'form-control',
-// 			'required' => 'required',));
-//
-// 	echo '</br>';
-// 	echo form_labelpro('Slag', 'slag');
-// 	echo form_input(array('name' => 'reeksslag',
-// 				'id' => 'reeksslag',
-// 				'value' => $wedstrijdreeks->slag->naam,
-// 				'class' => 'form-control',
-// 				'required' => 'required',));
-// }
-
-
     echo form_hidden('id', $wedstrijd->id);
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
     ?>
-    <a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
+    <?php echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
     <footer>
     </footer>
 

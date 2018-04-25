@@ -49,6 +49,7 @@ class Locatie extends CI_Controller
     public function beheren()
     {
         $data['titel'] = 'Locaties beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
@@ -56,7 +57,8 @@ class Locatie extends CI_Controller
         $data['msg'] = "";
 
         $partials = array(
-            'inhoud' => 'trainer/locatie_beheren');
+            'inhoud' => 'trainer/locatie_beheren',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -64,13 +66,15 @@ class Locatie extends CI_Controller
     public function aanpassen($id)
     {
         $data['titel'] = 'Locatie beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
         $data['locatie'] = $this->locatie_model->get($id);
 
         $partials = array(
-            'inhoud' => 'trainer/locatie_aanpassen');
+            'inhoud' => 'trainer/locatie_aanpassen',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -98,19 +102,42 @@ class Locatie extends CI_Controller
     public function toevoegen()
     {
         $data['titel'] = 'Locatie beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('locatie_model');
 
         $partials = array(
-            'inhoud' => 'trainer/locatie_toevoegen');
+            'inhoud' => 'trainer/locatie_toevoegen',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
+    }
+
+    public function voegToe()
+    {
+      $locatie = new stdClass();
+
+      $locatie->naam = $this->input->post('naam');
+      $locatie->straat = $this->input->post('straat');
+      $locatie->nr = $this->input->post('nr');
+      $locatie->postcode = $this->input->post('postcode');
+      $locatie->gemeente = $this->input->post('gemeente');
+      $locatie->zaal = $this->input->post('zaal');
+      $locatie->land = $this->input->post('land');
+      $locatie->extraInfo = $this->input->post('extraInfo');
+      $locatie->id = $this->input->post('id');
+
+      $this->load->model('locatie_model');
+      $this->locatie_model->insert($locatie);
+
+      return $this->beheren();
     }
 
     public function verwijder($id)
     {
         $this->load->model('locatie_model');
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['msg'] = $this->locatie_model->delete($id);
 
         $data['titel'] = 'Locaties beheren';
@@ -119,9 +146,9 @@ class Locatie extends CI_Controller
         $data['locaties'] = $this->locatie_model->getAll();
 
         $partials = array(
-            'inhoud' => 'trainer/locatie_beheren');
+            'inhoud' => 'trainer/locatie_beheren',
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
-        // redirect('trainer/locatie/beheer');
     }
 }

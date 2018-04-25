@@ -28,19 +28,6 @@ class Evenementreeks_model extends CI_Model {
 		$query = $this->db->get('evenementreeks');
 		return $query->row();
 	}
-        
-        /*
-	* Retourneert het record met naam=$evenementReeksNaam uit de tabel evenementreeks
-	* @param $evenementReeksNaam De naam van het record dat opgevraagd wordt
-	* @return Het opgevraagde record
-	*/
-
-	function getByNaam($evenementReeksNaam)
-	{
-		$this->db->where('naam', $evenementReeksNaam);
-		$query = $this->db->get('evenementreeks');
-		return $query->row();
-	}
 
 	/*
 	* Retourneert alle records uit de tabel evenementreeks
@@ -70,10 +57,10 @@ class Evenementreeks_model extends CI_Model {
 	*/
 
 
-	function delete($id)
+	public function delete($id)
 	{
 		$this->db->where('id', $id);
-		$this->db-delete('evenementreeks', $evenementreeks);
+		$this->db->delete('evenementreeks');
 	}
 
 	/*

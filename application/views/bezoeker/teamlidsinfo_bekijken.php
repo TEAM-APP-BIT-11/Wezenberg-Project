@@ -1,12 +1,15 @@
-<h1><?php echo $zwemmer->voornaam; ?></h1>
-
-<h3>Algemene Informatie</h3>
-<ul>
-    <li><?php echo $zwemmer->voornaam . ' ' . $zwemmer->familienaam; ?></li>
-    <li><?php echo $zwemmer->woonplaats; ?></li>
-    <li><?php echo zetOmNaarDDMMYYYY($zwemmer->geboortedatum); ?></li>
-</ul>
-
-<h2>NOG INFORMATIE</h2>
-
-<?php echo anchor('bezoeker/Contact/zwemmer/' . $zwemmer->id, 'Contacteer me', 'class="btn btn-primary"'); ?>
+<h1 class="text-center">Mijn informatie</h1>
+<div class="container-fluid well text-center">
+    <div class="row-fluid">
+        <?php echo toonAfbeelding('personen/' . $zwemmer->voornaam . $zwemmer->familienaam . '.jpg'); ?>
+        <h2><?php echo $zwemmer->voornaam . ' ' . $zwemmer->familienaam; ?></h2>
+        <h3>Woonplaats: <?php echo $zwemmer->woonplaats; ?></h3>
+        <h3>Geboortedatum: <?php echo zetOmNaarDDMMYYYY($zwemmer->geboortedatum); ?></h3>
+        <h3>Biografie:</h3>
+        <p><?php echo $zwemmer->biografie; ?></p>
+        <?php echo anchor('bezoeker/Contact/zwemmer/' . $zwemmer->id, 'Contacteer me', 'class="btn btn-primary"'); ?>
+    </div>
+</div>
+<a href=" javascript:history.go(-1);">
+    <button type="button" class="btn btn-secundary">Terug</button>
+</a>

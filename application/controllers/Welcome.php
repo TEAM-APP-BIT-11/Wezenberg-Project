@@ -31,19 +31,23 @@ class Welcome extends CI_Controller
 
     public function index()
     {
-        $data['titel'] = "Indexpagina";
+        $data['titel'] = "Welkom";
+        $data['eindverantwoordelijke'] = "Iemand";
 
         $partials = array(
-            'inhoud' => 'algemeen/home');
-        $this->template->load('main_master', $partials, $data);
+            'inhoud' => 'algemeen/home',
+            'footer' => 'main_footer');
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function logIn()
     {
         $data['titel'] = "Login";
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $partials = array(
-            'inhoud' => 'algemeen/inloggen');
+            'inhoud' => 'algemeen/inloggen',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -134,7 +138,7 @@ class Welcome extends CI_Controller
                 redirect('trainer/Home');
             }
         } else {
-            //fout 
+            //fout
             redirect('Welcome/logIn');
         }
         echo $this->authex->meldAan($gebruikersnaam, $wachtwoord);
@@ -149,6 +153,7 @@ class Welcome extends CI_Controller
         $melding->gelezen = 1;
         $this->melding_model->update($melding);
 
+        return 'ok';
     }
 
 

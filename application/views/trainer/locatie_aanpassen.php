@@ -78,9 +78,6 @@
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
     ?>
-
-<a href="javascript:history.go(-1);"><button type="button" class="btn btn-secundary">Annuleren</button></a>
-<?php echo anchor('trainer/locatie/verwijder/'.$locatie->id, 'Verwijder', 'class="btn btn-danger"');?>
-
+<?php echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
 </form>
 </div>

@@ -11,7 +11,7 @@
  *
  * @author Ruben
  */
-class supplementschema extends CI_Controller {
+class Supplementschema extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
@@ -29,37 +29,37 @@ class supplementschema extends CI_Controller {
         $this->load->helper('notation');
         $this->load->helper('date');
     }
-    
+
     public function beheren(){
         $data['title'] = 'Schema van de supplementen';
         $data['persoon'] = $this->authex->getPersoonInfo();
-           
-           
+
+
           $this->load->model('persoon_model');
-          
+
           $this->load->model('inname_model');
          $data['personen']=$this->persoon_model->getPersoonWithInnames();
           $data['innames']=$this->inname_model->getInnamesPersonen();
-         
-          
+
+
            $partials = array(
             'inhoud' => 'trainer/supplementen_schema_beheren');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function toevoegen(){
         $data['title'] = 'Supplement toevoegen aan een zwemmer';
         $this->load->model('persoon_model');
-          
+
           $this->load->model('voedingssupplement_model');
          $data['personen']=$this->persoon_model->getAll();
           $data['innames']=$this->voedingssupplement_model->getAll();
-       
+
            $partials = array(
             'inhoud' => 'trainer/supplement_trainer_toevoegen');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function opslaan(){
            $datum = $this->input->post('datums');
             $this->load->model('inname_model');
@@ -70,17 +70,17 @@ class supplementschema extends CI_Controller {
             $inname->voedingssupplementId = $this->input->post('supplementen');
              $inname->aantal = $this->input->post('aantal');
              $inname->datum = DateTime::createFromFormat('m/d/Y',$date)->format('Y-m-d');
-           
+
              $inname->innameReeksId = 1;
              $this->inname_model->insert($inname);
            }
-     
-            
+
+
             redirect('trainer/supplementschema/beheren');
     }
-    
+
     public function aanpassen($id){
-        
+
           $data['title'] = 'Supplement aanpassen';
           $this->load->model('inname_model');
           $this->load->model('persoon_model');
@@ -88,13 +88,13 @@ class supplementschema extends CI_Controller {
           $data['inname']=$this->inname_model->getWithPersoon($id);
           $data['persoon'] = $this->persoon_model->get($data['inname']->persoonId);
           $data['innames'] = $this->voedingssupplement_model->getAll();
-          
-       
+
+
            $partials = array(
             'inhoud' => 'trainer/supplement_aanpassen_in_schema');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function aangepast(){
         $datum = $this->input->post('datums');
         $this->load->model('inname_model');
@@ -105,16 +105,16 @@ class supplementschema extends CI_Controller {
             $inname->voedingssupplementId = $this->input->post('supplementen');
              $inname->aantal = $this->input->post('aantal');
              $inname->datum = DateTime::createFromFormat('m/d/Y',$date)->format('Y-m-d');
-           
+
              $inname->innameReeksId = $this->input->post('innameReeksId');
               $this->inname_model->update($inname);
         }
                redirect('trainer/supplementschema/beheren');
     }
-    
+
     public function verwijderen($id){
         $this->load->model('inname_model');
-         
+
         $this->inname_model->delete($id);
             redirect('/trainer/supplementschema/beheren');
     }

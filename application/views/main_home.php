@@ -17,18 +17,22 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <!--Bootstrap datetimepicker script & style-->
+    <link rel="stylesheet"
+          href="<?php echo base_url(); ?>resources/css/bootstrap-datetimepicker.min.css"/>
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
+    <script type="text/javascript"
+            src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
+    <script type="text/javascript"
+            src="http://localhost:8080/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
+
     <title> <?php echo $titel; ?> </title>
 
     <script type="text/javascript">
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
-
-    <!--Bootstrap datetimepicker script & style-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/bootstrap-datetimepicker.min.css"/>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
-    <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/bootstrap-datetimepicker.min.js"></script>
 
 </head>
 <body>
@@ -73,47 +77,16 @@
         </div>
     </div>
 </nav>
-
 <div class="container-fluid main-container">
-    <?php
-    if ($persoon !== null) {
-        echo '<div class="col-md-2 sidebar" > ';
-        echo '<ul class="nav nav-pills nav-stacked" > ';
-        if ($persoon->typePersoon->typePersoon == "trainer") {
-
-            echo activeAnchor('trainer/Home', 'Home');
-            echo activeAnchor('trainer/Evenement/beheren', 'Evenementen beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
-            echo activeAnchor('trainer/Locatie/beheren', 'Locatie beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Gebruikers', '');
-            echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
-            echo activeAnchor('trainer/Supplement/beherenBis', 'Supplementen beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
-            echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
-        } else {
-
-            echo activeAnchor('zwemmer/Home', 'Home', '');
-            echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '');
-            echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '');
-            echo activeAnchor('zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '');
-            echo activeAnchor('zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '');
-
-        }
-        echo '</ul > ';
-        echo '</div > ';
-    }
-    ?>
-
-    <div class="col-md-10 content">
+    <div class="col-md-12 content">
         <?php echo $inhoud; ?>
     </div>
-
-
 </div>
-<footer>
-    <?php echo $footer; ?>
-</footer>
+<div id="footer">
+    <footer>
+        <?php echo $footer; ?>
+    </footer>
+</div>
 </body>
 
 </html>

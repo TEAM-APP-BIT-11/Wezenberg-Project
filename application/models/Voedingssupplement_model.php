@@ -43,6 +43,20 @@ class Voedingssupplement_model extends CI_Model
         return $voedingssupplement;
     }
 
+    function getAllWithDoelstelling()
+    {
+        $query = $this->db->get('voedingssupplement');
+        $voedingssupplementen = $query->result();
+
+        $this->load->model('supplementdoelstelling_model');
+
+        foreach($voedingssupplementen as $voedingssupplement){
+          $voedingssupplement->doelstelling = $this->supplementdoelstelling_model->get($voedingssupplement->doelstellingId);
+        }
+
+        return $voedingssupplementen;
+    }
+
     /*
     * Retourneert alle records uit de tabel voedingssupplement
     * @return Alle records
@@ -88,21 +102,21 @@ class Voedingssupplement_model extends CI_Model
         $this->db->insert('voedingssupplement', $voedingssupplement);
         return $this->db->insert_id();
     }
-    
+
     function getAllByDoelstelling($doelstellingId)
-    {   
-        
+    {
+
         $this->db->where('doelstellingId', $doelstellingId);
         $this->db->order_by('Id', 'asc');
         $query = $this->db->get('voedingssupplement');
 
         return $query->result();
     }
-    
+
     function verwijderAlleSupplementen($doelstellingId)
     {
         $supplementen = $this->db->get('voedingssupplement');
-        
+
         foreach($supplementen as $supplement)
         {
             $this->db->where('doelstellingId', $doelstellingId);

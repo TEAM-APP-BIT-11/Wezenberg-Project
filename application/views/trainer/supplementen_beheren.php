@@ -6,7 +6,7 @@
 
 
 function addDate(date) {
-    if (jQuery.inArray(date, dates) < 0) 
+    if (jQuery.inArray(date, dates) < 0)
         dates.push(date);
 }
 
@@ -14,7 +14,7 @@ function addDate(date) {
 // Takes a 1-digit number and inserts a zero before it
 function padNumber(number) {
     var ret = new String(number);
-    if (ret.length == 1) 
+    if (ret.length == 1)
         ret = "0" + ret;
     return ret;
 }
@@ -29,7 +29,7 @@ jQuery(function () {
                 $('#datums').append($('<option></option>').val(text).html(text));
             })
             $('#datums option').prop('selected', true);
-                
+
         },
         beforeShowDay: function (date) {
             var year = date.getFullYear();
@@ -57,21 +57,21 @@ $(document).ready(function(){
                 $('#datums').append($('<option></option>').val(text).html(text));
             })
             $('#datums option').prop('selected', true);
-   
-   
+
+
 })
   </script>
-  
+
   <style>
       td {
           width:200px;
           padding:20px;
       }
       #datums{
-         
+
           display: none;
       }
-      
+
   </style>
   <form action="<?php echo site_url() ;?>/trainer/supplementschema/aangepast" method="post">
       <?php
@@ -103,13 +103,13 @@ echo "</td><td>";
         <label name="datums">Kies de datum:</label>
     <input id="datepicker" name="datepicker" value="<?php echo date("m/d/Y",strtotime($inname->datum));?>" />
 </form>
-      
+
       <select multiple id="datums" name="datums[]"  >
-          
+
       </select>
   <?php
-  
-  
+
+
 echo "</td> </tr><tr> <td>";
 echo form_label('Aantal:', 'aantal');
 echo "</td> <td>";

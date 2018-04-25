@@ -30,21 +30,26 @@ class Contact extends CI_Controller
 
         $this->load->helper('form');
         $this->load->helper('notation');
+        $this->load->library('email');
+        $this->load->library('encrypt');
     }
 
     public function index()
     {
         $data['titel'] = 'Contacteer';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $partials = array(
-            'inhoud' => 'trainer/home');
+            'inhoud' => 'trainer/home',
+            'footer' => 'main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function zwemmer($id)
     {
         $data['titel'] = 'Contacteer';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $this->load->model('persoon_model');
 
@@ -54,10 +59,39 @@ class Contact extends CI_Controller
         $data['id'] = $zwemmer->id;
 
         $partials = array(
-            'inhoud' => 'bezoeker/contact');
+            'inhoud' => 'bezoeker/contact',
+            'footer' => 'main_home');
 
         $this->template->load('main_master', $partials, $data);
 
+    }
+
+    public function trainers()
+    {
+        $data['titel'] = 'Contacteer trainers';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
+
+        $this->load->model('persoon_model');
+
+        $trainers = $this->persoon_model->getTrainers();
+
+        $emails = "";
+
+        for ($i = 0; $i < count($trainers); $i++) {
+            $emails .= $trainers[$i]->mailadres;
+            if ($i < (count($trainers) - 1)) {
+                $emails .= ", ";
+            }
+        }
+
+        $data['email'] = $emails;
+        $data['id'] = "";
+
+        $partials = array(
+            'inhoud' => 'bezoeker/contact',
+            'footer' => 'main_footer');
+
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function verwerk()
@@ -66,13 +100,35 @@ class Contact extends CI_Controller
         $emailzwemmer = $this->input->post('emailzwemmer');
         $bericht = $this->input->post('bericht');
 
-        $headers = 'From: ' . $email;
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'newline' => "\r\n",
+            'smtp_port' => 465,
+            'smtp_user' => 'projectwezenberg@gmail.com',
+            'smtp_pass' => 'wezenberg',
+            'mailtype' => 'html',
+            'charset' => 'utf-8'
+        );
+        $this->email->initialize($config);
 
-        $onderwerp = "Informatie Wezenberg";
+        $this->email->to($emailzwemmer);
+        $this->email->from('projectwezenberg@gmail.com');
 
-        mail($emailzwemmer, $onderwerp, $bericht, $headers);
+        $this->email->subject('Informatie van wezenberg');
+        $this->email->message('bericht van ' . $email . "\n" . $bericht);
 
-        $id = $this->input->post('id');
-        redirect('bezoeker/Home/zwemmer/' . $id);
+        if (!$this->email->send()) {
+            echo "FOUT";
+        } else {
+
+
+            $id = $this->input->post('id');
+            if ($id == "") {
+                redirect('bezoeker/Home');
+            } else {
+                redirect('bezoeker/Home/zwemmer/' . $id);
+            }
+        }
     }
 }
