@@ -2,57 +2,89 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Class Wedstrijd
+ * @class Wedstrijd
+ * @brief Controller om wedstrijdaanvragen te doen voor de zwemmer
+ * @author Neil Van den Broeck
+ */
 class Wedstrijd extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
 
     function __construct()
     {
         parent::__construct();
+
+        if (!$this->authex->isAangemeld()) {
+            redirect('Welcome/logIn');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->typePersoon->typePersoon != "zwemmer") {
+                redirect('Welcome/logIn');
+            }
+        }
+
         $this->load->helper('form');
         $this->load->helper('notation');
+
     }
+
+    /**
+     * Indexpagina gaat naar inschrijven.
+     */
 
     public function index()
     {
         redirect('zwemmer/Wedstrijd/inschrijven');
     }
 
+    /**
+     * Haalt de informatie van de aangemelde persoon uit de Authex-library
+     * Als er voor de zwemmer al een deelname voor die wedstrijdreeks bestaat dan word er geen nieuwe deelname aangemaakt (komt voor bij refreshen pagina)
+     * Genereert een nieuwe deelname aan een wedstrijd voor een zwemmer met een standaard ingestelde status van 1 (= in afwachting)
+     * Er wordt een melding gegenereerd voor de trainers dat er een nieuwe inschrijving is.
+     * @param $wedstrijdReeksId WedstrijdreeksID waar de zwemmer voor wil inschrijven
+     * @see \Wedstrijddeelname_model::insert()
+     * @see \Wedstrijddeelname_model::exists()
+     * @see \Wedstrijddeelname_model::getWithWedstrijdSlagAfstand()
+     * @author Neil Van den Broeck
+     */
     public function schrijfIn($wedstrijdReeksId)
     {
-        //voeg een nieuwe record toe in de database met standaardwaardes.
-        //Status op 1 = in afwachting --> standaard voor een ingeschrijving.
-        $wedstrijdDeelname = new stdClass();
-
+        $this->load->model("wedstrijddeelname_model");
+        $this->load->model("persoon_model");
+        $this->load->model("wedstrijdreeks_model");
         $persoon = $this->authex->getPersoonInfo();
 
-        $wedstrijdDeelname->persoonId = $persoon->id;
-        $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdReeksId;
-        $wedstrijdDeelname->resultaatId = null;
-        $wedstrijdDeelname->statusId = '1';
-        $wedstrijdDeelname->ranking = null;
+        if (!($this->wedstrijddeelname_model->exists($wedstrijdReeksId, $persoon->id))) {
+            $wedstrijdDeelname = new stdClass();
 
-        $this->load->model("wedstrijddeelname_model");
-        $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
+            $wedstrijdDeelname->persoonId = $persoon->id;
+            $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdReeksId;
+            $wedstrijdDeelname->resultaatId = null;
+            $wedstrijdDeelname->statusId = '1';
+            $wedstrijdDeelname->ranking = null;
+
+            //voegt een nieuwe record toe in de database met standaardwaardes.
+            //Status op 1 = in afwachting --> standaard voor een inschrijving.
+            $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
+
+            $wedstrijdreeks = $this->wedstrijdreeks_model->getWithWedstrijdSlagAfstand($wedstrijdReeksId);
+            $melding = $persoon->voornaam . ' ' . $persoon->familienaam . ' heeft zich ingeschreven voor de wedstrijd: "' . $wedstrijdreeks->wedstrijd->naam . '" ' . $wedstrijdreeks->afstand->afstand . 'm ' . $wedstrijdreeks->slag->naam;
+
+            $this->melding->genereerMeldingen($this->persoon_model->getTrainers(), $melding, 'Inschrijving voor wedstrijd');
+
+        }
+        //teruggaan naar de inschrijfpagina met de juiste reeks open
         $this->inschrijven($wedstrijdReeksId);
     }
 
-
+    /**
+     * Verwijdert een deelname voor een zwemmer voor een wedstrijdreeks waar hij niet langer aan wil deelnemen.
+     * @author Neil Van den Broeck
+     * @param $wedstrijdDeelnameId Wedstrijddeelname die uit de database moet gehaald worden.
+     * @see \Wedstrijddeelname_model::delete()
+     */
     public function schrijfUit($wedstrijdDeelnameId)
     {
         $this->load->model('wedstrijddeelname_model');
@@ -61,12 +93,21 @@ class Wedstrijd extends CI_Controller
 
         $this->wedstrijddeelname_model->delete($wedstrijdDeelnameId);
 
-        redirect('/zwemmer/Wedstrijd/inschrijven/' . $wedstrijdDeelname->wedstrijdReeksId);
+        redirect('zwemmer/Wedstrijd/inschrijven/' . $wedstrijdDeelname->wedstrijdReeksId);
     }
 
+    /**
+     * Haalt alle wedstrijden op uit Wedstrijd_Model die in de toekomst vallen.
+     * toont via wedstrijd_aanvragen deze data.
+     * @author Neil Van den Broeck
+     * @param int $wedstrijdId Optionele parameter om meteen de reeksen weer te geven voor een wedstrijd
+     * @see wedstrijd_aanvragen.php
+     * @see \Wedstrijd_model::getAllAfterToday()
+     */
     public function inschrijven($wedstrijdId = 0)
     {
         $data['titel'] = 'Inschrijven voor een Wedstrijd';
+        $data['eindverantwoordelijke'] = 'Neil Van den Broeck';
 
         $this->load->model('wedstrijd_model');
 
@@ -75,14 +116,19 @@ class Wedstrijd extends CI_Controller
         $data['tonen'] = $wedstrijdId;
 
         $partials = array(
-            'inhoud' => 'zwemmer/wedstrijd_aanvragen');
+            'inhoud' => 'zwemmer/wedstrijd_aanvragen',
+            'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
 
-
+    /** Geeft alle de wedstrijdreeksen voor een wedstrijdId via Wedstrijdreeks_model. Hier wordt een deelname aan toegevoegd indien er een is.
+     *  De datum word omgezet naar een leesbare standaard.
+     *  Geeft de wedstrijdreeksen via JSON terug.
+     * @author Neil Van den Broeck
+     * @see \Wedstrijdreeks_model::getAllFromWedstrijdSlagAfstandAndDeelnamePersoon()
+     */
     public function haalJsonOp_WedstrijdReeksen()
     {
-
         $id = $this->input->get('wedstrijdId');
 
         $this->load->model('wedstrijdreeks_model');

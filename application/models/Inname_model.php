@@ -42,7 +42,15 @@ class Inname_model extends CI_Model
         return $query->result();
     }
 
-    function getAllByPersoonAndDate($datum, $persoonId)
+    /**
+     * Geeft alle innames met hun voedingssupplement (en doelstelling) terug waar datum=$datum en persoonId=$persoonId uit de tabel inname
+     * @author Neil Van den Broeck
+     * @param $datum datum waarvoor de innames worden opgevraagt
+     * @param $persoonId ID van de persoon waarvoor de innames worden opgevraagd
+     * @return Innames met voedingssupplement voor een datum voor een persoon.
+     * @see \Voedingssupplement_model::getWithDoelstelling()
+     */
+    function getAllByPersoonAndDateWithVoedingssupplement($datum, $persoonId)
     {
         $this->db->where('persoonId', $persoonId);
         $this->db->where('datum', $datum);

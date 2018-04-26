@@ -31,6 +31,13 @@ class Voedingssupplement_model extends CI_Model
         return $query->row();
     }
 
+    /**
+     * geeft een inname met doelstelling terug waar id=$id uit de tabel voedingssupplement
+     * @author Neil Van den Broeck
+     * @param $id id van de opgevraagde inname.
+     * @return geeft een voedingssupplement met een supplementdoelstelling terug.
+     * @see \Supplementdoelstelling_model::get()
+     */
     function getWithDoelstelling($id)
     {
         $this->db->where('id', $id);
@@ -50,8 +57,8 @@ class Voedingssupplement_model extends CI_Model
 
         $this->load->model('supplementdoelstelling_model');
 
-        foreach($voedingssupplementen as $voedingssupplement){
-          $voedingssupplement->doelstelling = $this->supplementdoelstelling_model->get($voedingssupplement->doelstellingId);
+        foreach ($voedingssupplementen as $voedingssupplement) {
+            $voedingssupplement->doelstelling = $this->supplementdoelstelling_model->get($voedingssupplement->doelstellingId);
         }
 
         return $voedingssupplementen;
@@ -117,8 +124,7 @@ class Voedingssupplement_model extends CI_Model
     {
         $supplementen = $this->db->get('voedingssupplement');
 
-        foreach($supplementen as $supplement)
-        {
+        foreach ($supplementen as $supplement) {
             $this->db->where('doelstellingId', $doelstellingId);
             $this->db->delete('voedingssupplement');
         }

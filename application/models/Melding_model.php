@@ -42,11 +42,13 @@ class Melding_model extends CI_Model
         return $query->result();
     }
 
-    /*
-         * Retourneert alle meldingen voor de persoon met id=$persoonId en gelezen=0
-         * @param De id van de persoon waarvoor de meldingen opgevraagd worden
-         * @return De opgevraagde records
-         */
+    /**
+     *
+     * Retourneert alle meldingen voor de persoon met id=$persoonId en gelezen=0
+     * @param De id van de persoon waarvoor de meldingen opgevraagd worden
+     * @return De opgevraagde records
+     * @author Neil Van den Broeck
+     */
 
     function getAllFromPersoonAndNietGelezen($persoonId)
     {

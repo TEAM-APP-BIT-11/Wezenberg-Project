@@ -240,13 +240,22 @@ class Wedstrijddeelname_model extends CI_Model
         return $wedstrijddeelnames;
     }
 
+    /**
+     * Geeft alle deelnames weer voor een persoon persoonId=$persoonId waarvoor de statusId=2 (Goedgekeurd) Inclusief Wedstrijdreeks,Wedstrijd en Locatie uit de tabel wedstrijddeelname
+     * @param $persoonId id van de persoon waarvoor er de deelnames worden opgehaald
+     * @return geeft de wedstrijddeelnames met reeks,wedstrijd en locatie terug.
+     * @author Neil Van den Broeck
+     * @see \Wedstrijdreeks_model::get()
+     * @see \Wedstrijd_model::get()
+     * @see \Locatie_model::get()
+     */
+
     public function getAllByPersoonAndStatus2WithWedstrijd($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
         $this->db->where('statusId', 2);
         $query = $this->db->get('wedstrijddeelname');
         $wedstrijddeelnames = $query->result();
-        
 
         $this->load->model('wedstrijdreeks_model');
         $this->load->model('wedstrijd_model');
@@ -274,6 +283,29 @@ class Wedstrijddeelname_model extends CI_Model
             
         }
         return $wedstrijddeelnamens;
+    }
+
+    /**
+     * Geeft weer of er een deelname is voor een bepaalde reeks voor een bepaalde persoon
+     * Controleerd persoonId=$persoonId en wedstrijdReeksId=$wedstrijdReeksId.
+     * Indien er hiervoor een record is in de database wordt de waarde true teruggegeven
+     * False wordt teruggegeven indien er geen deelnames bestaan.
+     * @author Neil Van den Broeck
+     * @param $wedstrijdReeksId Id van de wedstrijdReeks waarvoor er een deelname moet bestaan
+     * @param $persoonId Id van de persoon waarvoor er een deelname moet bestaan
+     * @return bool geeft weer of een deelname bestaat in de database(true) of niet bestaat (false)
+     */
+    public function exists($wedstrijdReeksId, $persoonId)
+    {
+        $this->db->where('persoonId', $persoonId);
+        $this->db->where('wedstrijdReeksId', $wedstrijdReeksId);
+        $this->db->from('wedstrijddeelname');
+        if ($this->db->count_all_results() >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 

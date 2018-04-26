@@ -1,3 +1,16 @@
+<?php
+/**
+ * @file home.php
+ * @author Neil Van den Broeck
+ *
+ * View waar de homepagina van een zwemmer wordt weergegeven
+ * - krijgt $meldingen-object binnen
+ * - gebruikt bootstrap-alerts
+ */
+
+
+?>
+
 <script type="text/javascript">
     function verwijderMelding(meldingId) {
         $.ajax({

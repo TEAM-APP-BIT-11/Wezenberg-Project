@@ -6,6 +6,11 @@
  * and open the template in the editor.
  */
 
+/**
+ * @class Contact
+ * @brief Controller-klasse
+ * Controller-klasse voor de contacteermethoden die gebruikt worden in de webapplicatie
+ */
 class Contact extends CI_Controller
 {
 
@@ -31,20 +36,26 @@ class Contact extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('notation');
         $this->load->library('email');
-        $this->load->library('encrypt');
     }
+
+    /**
+     * Geeft contactpagina voor de trainers weer
+     * (Index wordt normaal gezien niet opgeroepen)
+     * @author Neil Van den Broeck
+     * @see <trainers>
+     */
 
     public function index()
     {
-        $data['titel'] = 'Contacteer';
-        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
-
-        $partials = array(
-            'inhoud' => 'trainer/home',
-            'footer' => 'main_footer');
-
-        $this->template->load('main_home', $partials, $data);
+        redirect('bezoeker/Contact/trainers');
     }
+
+    /**
+     * Contacteerfunctie voor een zwemmer
+     * de persoon word opgehaald uit Persoon_model en het mailadres ($email) en ($id) ervan worden doorgestuurd naar de view bezoeker/contact.php
+     * @param $id is de id van de zwemmer die de persoon wilt contacteren
+     * @author Neil Van den Broeck
+     */
 
     public function zwemmer($id)
     {
@@ -65,6 +76,14 @@ class Contact extends CI_Controller
         $this->template->load('main_master', $partials, $data);
 
     }
+
+    /**
+     * Contacteer voor de trainers van Wezenberg.
+     * De trainers worden opgehaald uit Persoon_model.
+     * De de emailadressen van de trainers worden gescheiden door een komma door in de variabele $email aan bezoeker/contact.php
+     * $id = "" omdat er na het verzenden van het formulier moet teruggekeerd worden naar de homepagina (@see <verwerk>)
+     * @author Neil Van den Broeck
+     */
 
     public function trainers()
     {
@@ -94,6 +113,13 @@ class Contact extends CI_Controller
         $this->template->load('main_home', $partials, $data);
     }
 
+    /**
+     * Stuurt een mail naar de geselecteerde e-mailadressen via de g-mailserver en mailfunctie van CodeIgniter.
+     * voor een mail naar een zwemmer bevat $id de id van de zwemmer waarnaar de functie terugkeert.
+     * Indien de mail naar wezenberg gestuurd werd (trainers) dan is $id = "" en word er naar de homepagina voor de bezoeker teruggekeerd.
+     * @author Neil Van den Broeck
+     * @return Stuurt de pagina terug naar de pagina waar ze waren voordat ze het formulier om te contacteren invulden.
+     */
     public function verwerk()
     {
         $email = $this->input->post('email');

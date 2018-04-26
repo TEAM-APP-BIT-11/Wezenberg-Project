@@ -1,3 +1,16 @@
+<?php
+/**
+ * @file zwemmer/agenda.php
+ *
+ * View waarin de zwemmer zijn persoonlijke agenda kan raadplegen
+ * - krijgt $innames-array binnen met datums waarop er innames zijn.
+ * - krijgt $evenementen-objecten binnen met de gegevens van de verschillende evenementen.
+ * - gebruikt FullCalender.js om de agenda te genereren.
+ * - gebruikt Bootstrap-modals om extra informatie omtrent Supplementen of Evenementen weer te geven.
+ */
+
+?>
+
 <script>
     function haalSupplementenOp(datum) {
         // hier vervolledigen (oef 3b)
@@ -63,7 +76,7 @@
                 },
                 header:
                     {
-                        left: 'prev,next today myCustomButton',
+                        left: 'prev,next today',
                         center:
                             'title',
                         right:

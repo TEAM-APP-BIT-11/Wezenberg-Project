@@ -6,6 +6,12 @@
  * and open the template in the editor.
  */
 
+/**
+ * Home controller met alle methoden die gebruikt worden op de homepagina voor de zwemmer
+ * @class Home
+ * @brief Controller voor de Homepagina van de zwemmer
+ * @author Neil Van den Broeck
+ */
 class Home extends CI_Controller
 {
 
@@ -41,14 +47,19 @@ class Home extends CI_Controller
         $this->load->helper('notation');
     }
 
+    /**Geeft de homepagina van de zwemmer weer met de ongelezen meldingen via Melding_model in de view zwemmer/home.php
+     * Geeft een lijst van objecten melding door naar de view.
+     * @author Neil Van den Broeck
+     * @see \Melding_model::getAllFromPersoonAndNietGelezen()
+     * @see zwemmer/home.php
+     */
     public function index()
     {
         $data['titel'] = 'Home van de Zwemmer';
         $persoon = $this->authex->getPersoonInfo();
         $data['persoon'] = $persoon;
-        $data['eindverantwoordelijke'] = "Iemand ? ";
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
-        // moet variabele worden uit de sessie na het inloggen.
 
         $this->load->model('melding_model');
         $data['meldingen'] = $this->melding_model->getAllFromPersoonAndNietGelezen($persoon->id);

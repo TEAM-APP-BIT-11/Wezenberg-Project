@@ -90,7 +90,7 @@ class Persoon_model extends CI_Model
     }
 
     /*
-* Retourneert alle records uit de tabel persoon die een trainer zijn
+* Retourneert alle records uit de tabel persoon die een trainer zijn ( typePersoonId = 1)
 * @return Alle records
 */
 

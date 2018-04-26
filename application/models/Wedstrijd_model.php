@@ -48,8 +48,7 @@ class Wedstrijd_model extends CI_Model
     * Retourneert alle records uit de tabel wedstrijd
     * @return Alle records
     */
-
-
+    
     public function getAll()
     {
         $query = $this->db->get('wedstrijd');
@@ -58,7 +57,8 @@ class Wedstrijd_model extends CI_Model
 
     /*
      * Geeft alle wedstrijden waarvan de einddatum na vandaag ligt.
-     * @return Alles records waarvan de einddatum van de wedstrijden na vandaag liggen.
+     * @return Alles records waarvan de einddatum van de wedstrijden na vandaag liggen.7
+     * @author Neil Van den Broeck
      */
     public function getAllAfterToday()
     {

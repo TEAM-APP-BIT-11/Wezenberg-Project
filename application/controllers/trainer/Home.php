@@ -6,6 +6,14 @@
  * and open the template in the editor.
  */
 
+/**
+ * Class Home
+ * @class Home
+ * @brief Controller-klasse voor Home van de trainer
+ * @author Neil Van den Broeck
+ *
+ * Controller-klasse met alle methoden die gebruikt worden in de homepagina van de trainer
+ */
 class Home extends CI_Controller
 {
 
@@ -36,11 +44,16 @@ class Home extends CI_Controller
                 redirect('Welcome/logIn');
             }
         }
-
         $this->load->helper('form');
         $this->load->helper('notation');
     }
 
+    /**Geeft de homepagina van de trainer weer met de ongelezen meldingen via Melding_model in de view trainer/home.php
+     * Geeft een lijst van objecten melding door naar de view.
+     * @author Neil Van den Broeck
+     * @see \Melding_model::getAllFromPersoonAndNietGelezen()
+     * @see trainer/home.php
+     */
     public function index()
     {
         $data['titel'] = 'Home van de Trainer';

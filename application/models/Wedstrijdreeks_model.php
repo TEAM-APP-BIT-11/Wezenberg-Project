@@ -31,6 +31,31 @@ class Wedstrijdreeks_model extends CI_Model
         return $query->row();
     }
 
+    /**
+     * Retourneert het record met id=$id uit de tabel wedstrijdreeks
+     * Samen met slag, afstand en wedstrijd
+     * @param $id De id van het record dat wordt opgevraagd
+     * @return Het opgevraagde record met slag, afstand en wedstrijd
+     * @author Neil Van den Broeck
+     */
+
+    public function getWithWedstrijdSlagAfstand($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('wedstrijdreeks');
+        $wedstrijdreeks = $query->row();
+
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+        $this->load->model('wedstrijd_model');
+
+        $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+        $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+        $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+
+        return $wedstrijdreeks;
+    }
+
     /*
     * Retourneert alle records uit de tabel wedstrijdreeks
     * @return Alle records

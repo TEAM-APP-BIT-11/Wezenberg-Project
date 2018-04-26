@@ -1,9 +1,10 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Class Agenda
+ * @class Agenda
+ * @brief Controller-klasse met de benodigde methodes die gebruikt worden om de Agenda voor de zwemmer te voorzien.
+ * @author Neil Van den Broeck
  */
 
 class Agenda extends CI_Controller
@@ -41,68 +42,73 @@ class Agenda extends CI_Controller
         $this->load->helper('notation');
     }
 
-    public function index()
-    {
-        $this->load->view('welcome_message');
-    }
-
+    /**
+     * Haalt de aangemelde persoon uit de Authex-library.
+     * Haalt de innames voor de aangemelde persoon binnen en zet de datums in een array.
+     * Haalt agendaitems op en stuurt deze door naar de view
+     * @see zwemmer/agenda.php
+     * @see Inname_model::getAllFromPersoon()
+     * @author Neil Van den Broeck
+     */
     public function raadplegen()
     {
         $data['titel'] = 'Agenda raadplegen';
         $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
-        $this->load->model('locatie_model');
-        $data['locaties'] = $this->locatie_model->getAll();
-
         $persoon = $this->authex->getPersoonInfo();
         $this->load->model('inname_model');
 
         $innames = $this->inname_model->getAllFromPersoon($persoon->id);
+
         $innamesarray = array();
         foreach ($innames as $inname) {
             array_push($innamesarray, $inname->datum);
         }
         $data['innames'] = json_encode($innamesarray);
 
-        $data['datums'] = $this->agendaItems();
+        $data['datums'] = $this->agendaItems($persoon->id);
 
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Haalt de aangemelde persoon uit de Authex-library.
+     * Krijgt van de functie de datum mee waarvoor de voedingssuplementen moeten worden ingenomen.
+     * Geeft de in te nemen innames van voedingssupplementen weer in een tabel.
+     * @author Neil Van den Broeck
+     * @see \Inname_model::getAllByPersoonAndDate()
+     * @see zwemmer/ajax_innames
+     */
     public function haalAjaxOp_Innames()
     {
         $this->load->model("inname_model");
 
         $persoon = $this->authex->getPersoonInfo();
         $datum = $this->input->get('datum');
-        $data["innames"] = $this->inname_model->getAllByPersoonAndDate($datum, $persoon->id);
-
+        $data["innames"] = $this->inname_model->getAllByPersoonAndDateWithVoedingssupplement($datum, $persoon->id);
 
         $this->load->view('zwemmer/ajax_innames', $data);
     }
 
-    public function haalAjaxOp_Inname()
-    {
-        $this->load->model("inname_model");
-
-        $persoon = $this->authex->getPersoonInfo();
-        $datum = $this->input->get('datum');
-        $bestaat = $this->inname_model->existsInname($persoon->id, $datum);
-
-        echo json_encode($bestaat);
-    }
-
-    public function agendaItems()
+    /**
+     * @param $persoonId De van de persoon waarvan de gegevens moeten opgehaald worden.
+     * Geeft de agenda-items van een persoon weer die weergegeven worden in de Agenda voor de zwemmer.
+     * @return JSON-array met de evenementen en wedstrijden voor een persoon.
+     * @see agenda.php
+     * @see Evenementdeelname_model::getAllFromPersoonWithEvenement
+     * @see Wedstrijddeelname_model::getAllByPersoonAndStatus2WithWedstrijd
+     * @author Neil Van den Broeck
+     */
+    public function agendaItems($persoonId)
     {
         $this->load->model('evenementdeelname_model');
         $this->load->model('wedstrijddeelname_model');
 
-        $persoon = $this->authex->getPersoonInfo();
 
-        $evenementdeelnames = $this->evenementdeelname_model->getAllFromPersoonWithEvenement($persoon->id);
-        $wedstrijddeelnames = $this->wedstrijddeelname_model->getAllByPersoonAndStatus2WithWedstrijd($persoon->id);
+        $evenementdeelnames = $this->evenementdeelname_model->getAllFromPersoonWithEvenement($persoonId);
+        $wedstrijddeelnames = $this->wedstrijddeelname_model->getAllByPersoonAndStatus2WithWedstrijd($persoonId);
 
         $data_events = array();
 
@@ -145,6 +151,5 @@ class Agenda extends CI_Controller
         }
 
         return json_encode($data_events);
-        exit();
     }
 }
