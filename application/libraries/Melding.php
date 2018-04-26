@@ -33,14 +33,11 @@ class Melding
         } else {
             foreach ($ids as $id) {
                 array_push($persoonIds, $id->id);
-                var_dump($id);
             }
         }
 
-        var_dump($persoonIds);
         $CI->load->model('melding_model');
         foreach ($persoonIds as $id) {
-            var_dump($id);
             $melding = new stdClass();
             $melding->persoonId = $id;
             $melding->titel = $titel;
