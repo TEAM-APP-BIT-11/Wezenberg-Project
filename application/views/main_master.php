@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
     <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/moment-with-locales.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/bootstrap-datetimepicker.min.js"></script>
-    
+
     <!--Agenda js en css-->
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/fullcalendar.min.css"/>
     <script src="<?php echo base_url() ?>resources/js/moment.min.js"></script>
@@ -66,6 +66,9 @@
                     echo '</li > ';
                     echo '<li> ';
                     echo anchor('Welcome/meldAf', 'Afmelden');
+                    echo '</li > ';
+                    echo '<li> ';
+                    echo anchor('trainer/Help/index', 'Help');
                     echo '</li > ';
                     echo '</ul > ';
                     echo '</li > ';
