@@ -62,6 +62,9 @@ foreach($evenementen as $evenement){
             if($(e.target).text() === 'Training verwijderen'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
             }
+            if($(e.target).text() === 'Training bewerken'){
+                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+            }
             $('#trainingenForm').submit();
         });
         $('#trainingReeksControls button').click(function(e){
@@ -143,7 +146,7 @@ foreach($evenementen as $evenement){
         <hr>
         <div class="row">
             <div class="col-md-8 form-group">
-                <label for="testen">Stages</label>
+                <label for="testen">Medische Testen</label>
                 <select name="testen" class="form-control" id="testenLijst" multiple>
                     <?php
                     foreach($medischeTesten as $medischeTest){
