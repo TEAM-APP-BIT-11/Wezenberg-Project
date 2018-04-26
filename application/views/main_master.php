@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><?php echo anchor('bezoeker/Home/team', 'Team'); ?></li>
-                <li><?php echo anchor('bezoeker/Home/resultaten', 'resultaten'); ?>Resultaten</a></li>
+                <li><?php echo anchor('bezoeker/Home/resultaten', 'Resultaten'); ?></a></li>
                 <?php
                 $persoon = $this->session->gebruiker;
                 if ($persoon !== null) {
