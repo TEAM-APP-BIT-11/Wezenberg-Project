@@ -172,14 +172,14 @@ class Wedstrijdreeks_model extends CI_Model
 
 
         foreach ($wedstrijdreeksen as $wedstrijdreeks) {
-                $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
-                $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
-                $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+            $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+            $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+            $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
             foreach ($deelnamens as $deelname) {
-              if($wedstrijdreeks->id == $deelname->wedstrijdReeksId && $deelname->persoonId == $persoonId){
-                // $wedstrijdreeksen->resultaat = $this->resultaat_model->get($deelname->resultaatId);
-                $wedstrijdreeks->ranking = $deelname->ranking;
-              }
+                if ($wedstrijdreeks->id == $deelname->wedstrijdReeksId && $deelname->persoonId == $persoonId) {
+                    // $wedstrijdreeksen->resultaat = $this->resultaat_model->get($deelname->resultaatId);
+                    $wedstrijdreeks->ranking = $deelname->ranking;
+                }
 
             }
         }
@@ -224,5 +224,31 @@ class Wedstrijdreeks_model extends CI_Model
         $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
 
         return $wedstrijdreeks;
+    }
+
+    public function getAllFromWedstrijdSlagAfstandAndDeelnamePersoon($persoonId, $wedstrijdId)
+    {
+        $this->db->where('wedstrijdId', $wedstrijdId);
+        $query = $this->db->get('wedstrijdreeks');
+        $wedstrijdreeksen = $query->result();
+
+        $this->load->model('slag_model');
+        $this->load->model('afstand_model');
+        $this->load->model('wedstrijd_model');
+        $this->load->model('wedstrijddeelname_model');
+
+        $deelnames = $this->wedstrijddeelname_model->getAllForPersoonWithStatus($persoonId);
+
+        foreach ($wedstrijdreeksen as $wedstrijdreeks) {
+            $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
+            $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
+            $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
+            foreach ($deelnames as $deelname) {
+                if ($deelname->wedstrijdReeksId == $wedstrijdreeks->id) {
+                    $wedstrijdreeks->deelname = $deelname;
+                }
+            }
+        }
+        return $wedstrijdreeksen;
     }
 }

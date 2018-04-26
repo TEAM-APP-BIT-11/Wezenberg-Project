@@ -47,26 +47,19 @@
                 defaultView: 'agendaWeek',
                 nowIndicator:
                     'True',
-                eventSources:
-                    [
-                        {
-                            events: function (start, end, timezone, callback) {
-                                $.ajax({
-                                    url: site_url + "/zwemmer/Agenda/haalAjaxOp_AgendaItems",
-                                    dataType: 'json',
-                                    data: {
-                                        // our hypothetical feed requires UNIX timestamps
-                                        start: start.unix(),
-                                        end: end.unix()
-                                    },
-                                    success: function (msg) {
-                                        var events = msg.events;
-                                        callback(events);
-                                    }
-                                });
-                            }
-                        },
-                    ]
+
+                events: <?php echo $datums; ?>,
+                eventClick: function (calEvent) {
+
+                    $('#begin').html(calEvent.start.toString());
+                    $('#eind').html(calEvent.end.toString());
+                    $('#titel').html(calEvent.title);
+                    $('#locatie').html(calEvent.locatie);
+                    $('#extra').html(calEvent.description);
+
+                    $('#mijnDetailscherm').modal('show');
+                }
+
             })
         ;
 
@@ -99,6 +92,46 @@
             <div class="modal-body">
                 <p>
                 <div id="resultaat"></div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class=" modal fade" id="mijnDetailscherm" role="dialog">
+    <div class="modal-dialog">
+        <!-- Inhoud dialoogvenster-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="titel"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <table>
+                    <tr>
+                        <td>Begindatum</td>
+                        <td><span id="begin"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Einddatum</td>
+                        <td><span id="eind"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Extra</td>
+                        <td><span id="extra"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Locatie</td>
+                        <td><span id="locatie"></span></td>
+                    </tr>
+
+
+                </table>
                 </p>
             </div>
             <div class="modal-footer">

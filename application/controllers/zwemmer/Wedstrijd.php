@@ -49,7 +49,7 @@ class Wedstrijd extends CI_Controller
 
         $this->load->model("wedstrijddeelname_model");
         $this->wedstrijddeelname_model->insert($wedstrijdDeelname);
-        redirect('/zwemmer/Wedstrijd/inschrijven/' . $wedstrijdReeksId);
+        $this->inschrijven($wedstrijdReeksId);
     }
 
 
@@ -64,7 +64,7 @@ class Wedstrijd extends CI_Controller
         redirect('/zwemmer/Wedstrijd/inschrijven/' . $wedstrijdDeelname->wedstrijdReeksId);
     }
 
-    public function inschrijven($wedstrijd = 0)
+    public function inschrijven($wedstrijdId = 0)
     {
         $data['titel'] = 'Inschrijven voor een Wedstrijd';
 
@@ -72,7 +72,7 @@ class Wedstrijd extends CI_Controller
 
         $data['wedstrijden'] = $this->wedstrijd_model->getAllAfterToday();
 
-        $data['tonen'] = $wedstrijd;
+        $data['tonen'] = $wedstrijdId;
 
         $partials = array(
             'inhoud' => 'zwemmer/wedstrijd_aanvragen');
@@ -87,7 +87,7 @@ class Wedstrijd extends CI_Controller
 
         $this->load->model('wedstrijdreeks_model');
         $persoon = $this->authex->getPersoonInfo();
-        $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $id);
+        $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllFromWedstrijdSlagAfstandAndDeelnamePersoon($persoon->id, $id);
 
         foreach ($wedstrijdreeksen as $wedstrijdreeks) {
             $wedstrijdreeks->datum = zetOmNaarDDMMYYYY($wedstrijdreeks->datum);

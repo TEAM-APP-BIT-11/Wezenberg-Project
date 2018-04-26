@@ -30,13 +30,13 @@ class Wedstrijddeelname_model extends CI_Model
         $query = $this->db->get('wedstrijddeelname');
         return $query->row();
     }
-    
+
     /*
     * Retourneert het record met resultaatId=$id uit de tabel wedstrijddeelname
     * @param $id De resultaatId van het record dat opgevraagd wordt
     * @return Het opgevraagde record
     */
-    
+
     public function getByResultaatId($id)
     {
         $this->db->where('resultaatId', $id);
@@ -230,15 +230,35 @@ class Wedstrijddeelname_model extends CI_Model
         $this->load->model('resultaat_model');
 
         foreach ($wedstrijddeelnames as $wedstrijddeelname) {
-          foreach($wedstrijdreeksen as $wedstrijdreeks){
-            if($wedstrijdreeks->id == $wedstrijddeelname->wedstrijdReeksId){
-              $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
-              $wedstrijddeelname->resultaat = $this->resultaat_model->getWithRondetypeById($wedstrijddeelname->resultaatId);
+            foreach ($wedstrijdreeksen as $wedstrijdreeks) {
+                if ($wedstrijdreeks->id == $wedstrijddeelname->wedstrijdReeksId) {
+                    $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
+                    $wedstrijddeelname->resultaat = $this->resultaat_model->getWithRondetypeById($wedstrijddeelname->resultaatId);
+                }
             }
-          }
         }
-
         return $wedstrijddeelnames;
     }
+
+    public function getAllByPersoonAndStatus2WithWedstrijd($persoonId)
+    {
+        $this->db->where('persoonId', $persoonId);
+        $this->db->where('statusId', 2);
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelnames = $query->result();
+        
+
+        $this->load->model('wedstrijdreeks_model');
+        $this->load->model('wedstrijd_model');
+        $this->load->model('locatie_model');
+
+        foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+            $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
+            $wedstrijddeelname->wedstrijd = $this->wedstrijd_model->get($wedstrijddeelname->wedstrijdreeks->wedstrijdId);
+            $wedstrijddeelname->wedstrijd->locatie = $this->locatie_model->get($wedstrijddeelname->wedstrijd->locatieId);
+        }
+        return $wedstrijddeelnames;
+    }
+
 
 }

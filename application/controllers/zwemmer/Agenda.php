@@ -64,6 +64,8 @@ class Agenda extends CI_Controller
         }
         $data['innames'] = json_encode($innamesarray);
 
+        $data['datums'] = $this->agendaItems();
+
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
@@ -92,28 +94,33 @@ class Agenda extends CI_Controller
         echo json_encode($bestaat);
     }
 
-    public function haalAjaxOp_AgendaItems()
+    public function agendaItems()
     {
-// Our Start and End Dates
-        $start = $this->input->get("start");
-        $end = $this->input->get("end");
-
-        $startdt = new DateTime('now'); // setup a local datetime
-        $startdt->setTimestamp($start); // Set the date based on timestamp
-        $start_format = $startdt->format('Y-m-d H:i:s');
-
-        $enddt = new DateTime('now'); // setup a local datetime
-        $enddt->setTimestamp($end); // Set the date based on timestamp
-        $end_format = $enddt->format('Y-m-d H:i:s');
-
-
         $this->load->model('evenementdeelname_model');
+        $this->load->model('wedstrijddeelname_model');
 
         $persoon = $this->authex->getPersoonInfo();
 
-        $evenementdeelnames = $this->evenementdeelname_model->getAllFromPersoonWithEvenement($start_format, $end_format, $persoon->id);
+        $evenementdeelnames = $this->evenementdeelname_model->getAllFromPersoonWithEvenement($persoon->id);
+        $wedstrijddeelnames = $this->wedstrijddeelname_model->getAllByPersoonAndStatus2WithWedstrijd($persoon->id);
 
         $data_events = array();
+
+        foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+            if ($wedstrijddeelname->wedstrijd->einddatum == null) {
+                $wedstrijddeelname->wedstrijd->einddatum = $wedstrijddeelname->wedstrijd->begindatum;
+            }
+
+            $data_events[] = array(
+                "id" => $wedstrijddeelname->wedstrijd->id,
+                "title" => $wedstrijddeelname->wedstrijd->naam,
+                "description" => $wedstrijddeelname->wedstrijd->naam,
+                "end" => $wedstrijddeelname->wedstrijd->einddatum . ' ' . "23:59:00",
+                "start" => $wedstrijddeelname->wedstrijd->begindatum . ' ' . "00:00:00",
+                "locatie" => $wedstrijddeelname->wedstrijd->locatie->naam,
+                "color" => "green"
+            );
+        }
 
         foreach ($evenementdeelnames as $evenementdeelname) {
 
@@ -124,16 +131,20 @@ class Agenda extends CI_Controller
                 $evenementdeelname->evenement->einduur = "23:59:00";
             }
 
+            $kleuren = array('blue', 'hotpink', 'red', 'purple');
+
             $data_events[] = array(
                 "id" => $evenementdeelname->evenement->id,
                 "title" => $evenementdeelname->evenement->naam,
                 "description" => $evenementdeelname->evenement->naam,
                 "end" => $evenementdeelname->evenement->einddatum . ' ' . $evenementdeelname->evenement->einduur,
-                "start" => $evenementdeelname->evenement->begindatum . ' ' . $evenementdeelname->evenement->beginuur
+                "start" => $evenementdeelname->evenement->begindatum . ' ' . $evenementdeelname->evenement->beginuur,
+                "locatie" => $evenementdeelname->evenement->locatieId,
+                "color" => $kleuren[$evenementdeelname->evenement->evenementTypeId]
             );
         }
 
-        echo json_encode(array("events" => $data_events));
+        return json_encode($data_events);
         exit();
     }
 }

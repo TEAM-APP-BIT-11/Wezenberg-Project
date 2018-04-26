@@ -113,7 +113,7 @@ class Evenementdeelname_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    function getAllFromPersoonWithEvenement($start, $eind, $persoonId)
+    function getAllFromPersoonWithEvenement($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
         $query = $this->db->get('evenementdeelname');
