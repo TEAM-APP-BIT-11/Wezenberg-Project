@@ -75,4 +75,37 @@ class Home extends CI_Controller
 
         $this->template->load('main_home', $partials, $data);
     }
+	public function resultaten(){
+        $this->load->model('wedstrijd_model');
+        $data['eindverantwoordelijke'] = "Ruben Tuytens";
+        $data['titel'] = 'Resultaten van de wedstrijden bekijken';
+       
+        $data['wedstrijden'] = $this->wedstrijd_model->getAll();
+        
+        $partials = array(
+            'inhoud' => 'bezoeker/wedstrijd_resultaat' ,'footer' => 'main_footer');
+
+        $this->template->load('main_home', $partials, $data);
+    }
+    
+    public function resultaatDetail($id){
+        $data['eindverantwoordelijke'] = "Ruben Tuytens";
+        
+        $this->load->model('wedstrijd_model');
+        $this->load->model('wedstrijdreeks_model');
+        $this->load->model('wedstrijddeelname_model');
+        $this->load->model('persoon_model');
+        $data['wedstrijdnaam'] = $this->wedstrijd_model->get($id);
+        $data['personen'] = $this->persoon_model->getAll();
+        
+        $data['titel'] = 'Wedstrijd';
+        
+        $data['slagen'] = $this->wedstrijdreeks_model->getReeksenSlag($id);
+        $data['deelnamens'] = $this->wedstrijddeelname_model->getDeelnamensResultaten();
+        
+        $partials = array(
+            'inhoud' => 'bezoeker/wedstrijd_details_bezoeker' ,'footer' => 'main_footer');
+
+        $this->template->load('main_home', $partials, $data);
+    }
 }

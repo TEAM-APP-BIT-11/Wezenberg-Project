@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
     <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/moment-with-locales.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/bootstrap-datetimepicker.min.js"></script>
-
+    
     <!--Agenda js en css-->
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/fullcalendar.min.css"/>
     <script src="<?php echo base_url() ?>resources/js/moment.min.js"></script>
@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><?php echo anchor('bezoeker/Home/team', 'Team'); ?></li>
-                <li><a href="#">Resultaten</a></li>
+                <li><?php echo anchor('bezoeker/Home/resultaten', 'resultaten'); ?>Resultaten</a></li>
                 <?php
                 $persoon = $this->session->gebruiker;
                 if ($persoon !== null) {
@@ -63,9 +63,6 @@
                     echo '<ul class="dropdown-menu" role="menu">';
                     echo '<li> ';
                     echo anchor('Welcome/wijzig/' . $persoon->id, 'Wijzig profiel');
-                    echo '</li > ';
-                    echo '<li> ';
-                    echo anchor('trainer/Help/index', 'Help');
                     echo '</li > ';
                     echo '<li> ';
                     echo anchor('Welcome/meldAf', 'Afmelden');
@@ -94,12 +91,13 @@
             echo activeAnchor('trainer/Evenement/beheren', 'Evenementen beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
             echo activeAnchor('trainer/Locatie/beheren', 'Locatie beheren', '');
-            echo activeAnchor('trainer/Wedstrijdresultaat/resultaten', 'Resultaten beheren', '');
-            echo activeAnchor('trainer/gebruiker/beheren', 'Gebruikers', '');
+            echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
+            echo activeAnchor('trainer/Wedstrijd/beheren', 'Gebruikers', '');
             echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
             echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
+            echo activeAnchor('trainer/startpagina/beheren', 'Startpagina beheren', '');
         } else {
 
             echo activeAnchor('zwemmer/Home', 'Home', '');

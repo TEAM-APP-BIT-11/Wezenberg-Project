@@ -8,7 +8,7 @@
                 try {
                     $('#resultaat').html("");
                     var wedstrijdreeksen = jQuery.parseJSON(result);
-                    console.log(result);
+                    console.log("succes");
                     for (var i = 0; i < wedstrijdreeksen.length; i++) {
                         var lijst = "<tr><td>" + wedstrijdreeksen[i].slag.naam +
                             "</td><td>" + wedstrijdreeksen[i].afstand.afstand +

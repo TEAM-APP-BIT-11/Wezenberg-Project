@@ -19,6 +19,14 @@
 
         $('#calendar').fullCalendar(
             {
+                customButtons: {
+                    myCustomButton: {
+                        text: 'custom!',
+                        click: function () {
+                            alert('clicked the custom button!');
+                        }
+                    }
+                },
                 allDaySlot: false,
                 themeSystem: 'bootstrap3',
                 minTime: "6:00:00",
@@ -28,12 +36,30 @@
                 firstDay: 1,
                 columnHeaderHtml: function (mom) {
                     var weergeven = "";
-                    var innames = <?php echo $innames; ?>;
-                    if ($.inArray(mom.format('YYYY-MM-DD').toString(), innames) != -1) {
-                        weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
-                    }
-                    return weergeven + mom.format("ddd DD / MM");
+                    $.ajax({
+                        type: "GET",
+                        async: true,
+                        url: site_url + "/zwemmer/Agenda/haalAjaxOp_Inname",
+                        data:
+                            {
+                                datum: mom.format('YYYY-MM-DD')
+                            }
+                        ,
+                        success: function (result) {
+                            console.log(result);
+                                console.log("TRUE");
+                                weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
+                                return weergeven + mom.format('ddd DD/MM');
+                        }
+                        ,
+                        error: function (xhr, status, error) {
+                            alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                        }
+                    })
+                    ;
+                    //return weergeven + mom.format('ddd DD/MM');
 
+                    <!-- FOUTEN IN -->
                 },
                 header:
                     {
@@ -47,19 +73,26 @@
                 defaultView: 'agendaWeek',
                 nowIndicator:
                     'True',
-
-                events: <?php echo $datums; ?>,
-                eventClick: function (calEvent) {
-
-                    $('#begin').html(calEvent.start.toString());
-                    $('#eind').html(calEvent.end.toString());
-                    $('#titel').html(calEvent.title);
-                    $('#locatie').html(calEvent.locatie);
-                    $('#extra').html(calEvent.description);
-
-                    $('#mijnDetailscherm').modal('show');
-                }
-
+                eventSources:
+                    [
+                        {
+                            events: function (start, end, timezone, callback) {
+                                $.ajax({
+                                    url: site_url + "/zwemmer/Agenda/haalAjaxOp_AgendaItems",
+                                    dataType: 'json',
+                                    data: {
+                                        // our hypothetical feed requires UNIX timestamps
+                                        start: start.unix(),
+                                        end: end.unix()
+                                    },
+                                    success: function (msg) {
+                                        var events = msg.events;
+                                        callback(events);
+                                    }
+                                });
+                            }
+                        },
+                    ]
             })
         ;
 
@@ -92,46 +125,6 @@
             <div class="modal-body">
                 <p>
                 <div id="resultaat"></div>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class=" modal fade" id="mijnDetailscherm" role="dialog">
-    <div class="modal-dialog">
-        <!-- Inhoud dialoogvenster-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span id="titel"></span></h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                <table>
-                    <tr>
-                        <td>Begindatum</td>
-                        <td><span id="begin"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Einddatum</td>
-                        <td><span id="eind"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Extra</td>
-                        <td><span id="extra"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Locatie</td>
-                        <td><span id="locatie"></span></td>
-                    </tr>
-
-
-                </table>
                 </p>
             </div>
             <div class="modal-footer">

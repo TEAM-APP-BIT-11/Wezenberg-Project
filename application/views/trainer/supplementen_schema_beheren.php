@@ -1,6 +1,6 @@
 <?php
 
-echo "<h2>hopelijk werkt dit</h2>";
+echo "<h2>". $title."</h2>";
 $vorigepersoon ="";
 
 foreach($personen as $persoon)

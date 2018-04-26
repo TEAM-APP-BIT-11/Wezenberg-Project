@@ -1,7 +1,4 @@
-<?php 
-$dagen = array('Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag');
-$nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
-?>
+<?php $dagen = array('Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag');?>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -212,8 +209,9 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
         <label id="dagenLabel">Gaat door op</label>
         <div class="col-md-12">
             <?php
-            for($i = 0; $i < count($nummerdagen); $i++){
-                if(!$isNieuw && $isReeks && in_array($nummerdagen[$i], $days)){
+            for($i = 0; $i < count($dagen); $i++){
+                //hier bezig
+                if(in_array($dagen[$i], $days)){
                     echo '<label class="checkbox-inline"><input type="checkbox" name="check_list[]" value="' . ($i+1) . '" checked>' . $dagen[$i] . '</label>';
                 } else{
                     echo '<label class="checkbox-inline"><input type="checkbox" name="check_list[]" value="' . ($i+1) . '">' . $dagen[$i] . '</label>';
@@ -225,22 +223,17 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
     <div class="row">
         <div class="col-md-4 form-group">
             <label for="beschrijving">Beschrijving</label>
-            <textarea name="beschrijving" class="form-control" <?php if(!$isNieuw && $evenement->extraInfo != ""){echo 'value="' . $evenement->extraInfo . '"';}?> rows="3"></textarea>
+            <textarea name="beschrijving" class="form-control" rows="3"></textarea>
         </div>
         <div class="col-md-4 form-group">
             <label for="locatie">Locatie</label>
             <select name="locatie" class="form-control">
+                <option value="" disabled selected>Kies een locatie</option>
                 <?php
-                if($isNieuw){
-                    echo '<option value="" disabled selected>Kies een locatie</option>';
-                } else{
-                    echo '<option value="' . $evenement->locatieId . '" selected>' . $locaties[$id=$evenement->locatieId]->naam . '</option>';
-                    unset($locaties[$evenement->locatieId]);
-                }
                 foreach($locaties as $locatie){
                     echo '<option value="' . $locatie->id . '">' . $locatie->naam . '</option>';
                 }
-                ?>    
+                ?>
             </select>
         </div>
     </div>
@@ -250,9 +243,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             <select name="alleZwemmers" id="alleZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
                 <?php
                 foreach($zwemmers as $zwemmer){
-                    if(!in_array($zwemmer, $deelnemendeZwemmers)){
-                        echo '<option value="' . $zwemmer->id . '">' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
-                    }
+                    echo '<option value="' . $zwemmer->id . '">' . ucfirst($zwemmer->voornaam) . ' ' . ucfirst($zwemmer->familienaam) . '</option>';
                 }
                 ?>
             </select>
@@ -263,15 +254,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
         </div>
         <div class="col-md-3 form-group">
             <label for="deelnemendeZwemmers">Deelnemende zwemmers</label>
-            <select name="deelnemendeZwemmers" id="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
-                <?php
-                if(!$isNieuw){
-                    foreach($deelnemendeZwemmers as $deelnemendeZwemmer){
-                        echo '<option value="' . $deelnemendeZwemmer->id . '">' . ucfirst($deelnemendeZwemmer->voornaam) . ' ' . ucfirst($deelnemendeZwemmer->familienaam) . '</option>';
-                    }
-                }
-                ?>
-            </select>
+            <select name="deelnemendeZwemmers" id="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>"></select>
         </div>
     </div>
 </form>

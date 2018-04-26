@@ -259,6 +259,22 @@ class Wedstrijddeelname_model extends CI_Model
         }
         return $wedstrijddeelnames;
     }
+	public function getDeelnamensResultaten(){
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelnamens = $query->result();
+        
+        $this->load->model('resultaat_model');
+        
+        foreach($wedstrijddeelnamens as $deelname)
+        {
+            if($deelname->resultaatId != NULL)
+            {
+                $deelname->resultaat = $this->resultaat_model->getWithRondetypeById($deelname->resultaatId);
+            }
+            
+        }
+        return $wedstrijddeelnamens;
+    }
 
 
 }

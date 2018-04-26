@@ -1,53 +1,101 @@
-<div class="col-md-10 content">
+<script>
+    
+    function haalResultatenOp(reeksId)
+    {
+        $.ajax({type : "GET",
+                url : site_url + "/trainer/wedstrijd/resultatenOphalen" ,
+                data : {reeksId : reeksId},
+                success: function (result) {
+                $("#success").html(result);
+            },
+                error: function (xhr, status, error) {
+                    alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+                }
+        });
 
-    <h1 class="">Wedstrijdresultaat aanpassen</h1>
-    <hr>
+    }
 
-    <?php
-    foreach ($rondetypes as $rondetype) {
-        $rondetypeOpties[$rondetype->id] = $rondetype->type;
+    $(document).ready(function () {
+        
+        $(".formResultaten").hide();
+        $(".btnOpslaan").hide();
+        $("#success").hide();
+        
+        $('#reeks').change(function() {
+                     
+            var e = document.getElementById("reeks");
+            var reeksId = e.options[e.selectedIndex].value;
+            var reeks = e.options[e.selectedIndex].text;
+    
+            if (reeksId != 0)
+            {
+                $('#reeksTitel').html(reeks)
+                haalResultatenOp(reeksId);
+                $(".formResultaten").show();
+                $("#success").show();
+                $(".btnOpslaan").show();
+            }
+        });
+        
+    });
+
+</script>
+
+<style>
+    .btnOpslaan{
+        margin-left: 5px;
     }
     
-    foreach ($zwemmers as $zwemmer) {
-        $zwemmerOpties[$zwemmer->id] = $zwemmer->voornaam;
+    .form-group{
+        margin-left: 0px;
+        width: 200px;;
     }
+</style>
 
-    $attributes = array('name' => 'wedstrijdResultaatAanpassenFormulier');
-    echo form_open('trainer/wedstrijdresultaat/pasAan', $attributes);
+<h1 class="">Resultaten <?php echo $wedstrijd->naam ?></h1>
+<div class="row">
+    <div class="col-md-8 coll-md-offset-2">
+        
+        <div class="form-group">
+            <label for="reeks">Kies een reeks:</label>
+            
+            <select id="reeks" name="deelnemendeZwemmers" class="form-control" size="<?php echo count($zwemmers);?>">
+                <?php
+                
+                echo '<option class="option" value="0">Kies een reeks</option>';
+                                
+                foreach ($reeksen as $reeks) {
+                    
+                    echo '<option class="option" value="' . $reeks->id . '">' . $reeks->slag->naam . " - " . $reeks->afstand->afstand . " meter </option>";
+                    
+                }
+                ?>
+            </select>
+        </div>
+    </div>
 
-    echo form_labelpro('Ranking', 'ranking');
-    echo form_input(array('name' => 'ranking',
-        'id' => 'ranking',
-        'value' => $resultaat->ranking,
-        'class' => 'form-control',
-        'required' => 'required'));
+    <div class="col-md-8 coll-md-offset-2 formResultaten">
+        <h3 id="reeksTitel">hehe</h3>
 
-    echo '</br>';
-    echo form_labelpro('Ronde', 'rondetype');
-    echo form_dropdown('rondetype', $rondetypeOpties);
+        
+
+        
+    </div>
     
-    echo '</br>';
-    echo form_labelpro('Zwemmer', 'zwemmer');
-    echo form_dropdown('zwemmer', $zwemmerOpties);
-
-    echo '</br>';
-    echo form_labelpro('Tijd (xx:xx:xx)', 'tijd');
-    echo form_input(array('name' => 'tijd',
-        'id' => 'tijd',
-        'value' => $resultaat->tijd,
-        'class' => 'form-control',
-        'required' => 'required',));
+    <div id="success" class="col-md-8 coll-md-offset-2">
+        
+    </div>
     
+    <div class="col-md-8 coll-md-offset-2 ">
+        <p><?php 
+
+        echo anchor('/trainer/Wedstrijd/resultaten', 'Annuleren', 'class="btn btn-primary"'); 
+
     
-    echo '<hr>';
-
-    echo form_hidden('id', $resultaat->id);
-    echo form_hidden('wedstrijddeelnameId', $wedstrijddeelname->id);
-    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
-    echo form_close();
-    ?>
-    <?php echo anchor('trainer/Wedstrijdresultaat/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
-
+        
+        echo anchor('/trainer/Wedstrijd/resultaten', 'Opslaan', 'class="btn btn-default btnOpslaan"')
+                ?>
+        
+        </p>
+    </div>
 </div>
