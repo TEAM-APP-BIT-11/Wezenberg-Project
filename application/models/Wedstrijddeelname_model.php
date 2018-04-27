@@ -321,6 +321,36 @@ class Wedstrijddeelname_model extends CI_Model
         }
 
     }
+    
+    
+    public function getDeelnemers($id)
+    {
+        $this->db->where('resultaatId', $id);
+        $query = $this->db->get('wedstrijddeelname');
+        $deelnemers = $query->result();
+
+        $this->load->model('persoon_model');
+
+        foreach ($deelnemers as $deelnemer) {
+            $deelnemer->persoon = $this->persoon_model->get($deelnemer->persoonId);
+       }
+
+        return $deelnemers;
+    }
+    
+    public function getZwemmers()
+    {
+        $query = $this->db->get('wedstrijddeelname');
+        $deelnemers = $query->result();
+
+        $this->load->model('persoon_model');
+
+        foreach ($deelnemers as $deelnemer) {
+            $deelnemer->persoon = $this->persoon_model->getZwemmers();
+       }
+
+        return $deelnemers;
+    }
 
 
 }

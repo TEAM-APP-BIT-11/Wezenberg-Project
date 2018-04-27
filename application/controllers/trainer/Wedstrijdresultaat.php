@@ -39,21 +39,17 @@ class Wedstrijdresultaat extends CI_Controller
     {
         $this->load->view('welcome_message');
     }
-    public function aanpassen($id)
-    {
-        $data['titel'] = 'Wedstrijd aanpassen';
-        $data['eindverantwoordelijke'] = "Stef Schoeters";
-        $data['persoon'] = $this->authex->getPersoonInfo();
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        $this->load->model('locatie_model');
-        $data['locaties'] = $this->locatie_model->getAll();
-        $this->load->model('wedstrijdreeks_model');
-        $data['wedstrijdreeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
-        $partials = array('inhoud' => 'trainer/wedstrijd_aanpassen',
-            'footer' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
-    }
+
+    /**
+     * Haalt de aangemelde persoon uit de Authex-library.
+     * Krijgt van de functie de elke ronde, elke persoon en aan welke reeks, slag en afstand van deze reeks, een resultaat moet toegevoegd worden.
+     * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan .
+     * @author Dieter Verboven
+     * @see \rondetype_model::getAll()
+     * @see \persoon_model::getZwemmers()
+     * @see \wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
+     * @see zwemmer/ajax_innames
+     */
     public function toevoegen($reeksId)
     {
         $data['titel'] = 'Resultaat toevoegen';
@@ -65,7 +61,7 @@ class Wedstrijdresultaat extends CI_Controller
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
         
         $this->load->model('wedstrijdreeks_model');
-        $data['reeks'] = $this->wedstrijdreeks_model->get($reeksId);
+        $data['reeks'] = $this->wedstrijdreeks_model->getWithWedstrijdSlagAfstand($reeksId);
         $partials = array('inhoud' => 'trainer/wedstrijdresultaat_toevoegen',
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
@@ -161,8 +157,8 @@ class Wedstrijdresultaat extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
         $this->load->model('rondetype_model');
         $data["rondetypes"] = $this->rondetype_model->getAll();
-        $this->load->model('persoon_model');
-        $data['zwemmers'] = $this->persoon_model->getZwemmers();
+        $this->load->model('wedstrijddeelname_model');
+        $data['zwemmers'] = $this->wedstrijddeelname_model->getDeelnemers($id);     
         
         $this->load->model('resultaat_model');
         $data['resultaat'] = $this->resultaat_model->get($id);

@@ -9,7 +9,7 @@
     }
     
     foreach ($zwemmers as $zwemmer) {
-        $zwemmerOpties[$zwemmer->id] = $zwemmer->voornaam;
+        $zwemmerOpties[$zwemmer->persoon->id] = $zwemmer->persoon->voornaam;
     }
     $attributes = array('name' => 'wedstrijdResultaatAanpassenFormulier');
     echo form_open('trainer/wedstrijdresultaat/pasAan', $attributes);

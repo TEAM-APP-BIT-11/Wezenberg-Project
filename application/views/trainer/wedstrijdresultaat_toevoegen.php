@@ -1,6 +1,6 @@
 <div class="col-md-10 content">
 
-    <h1 class="">Wedstrijdresultaat toevoegen</h1>
+    <h1 class="">Wedstrijdresultaat toevoegen - <?php echo $reeks->wedstrijd->naam . " - " . $reeks->afstand->afstand . " meter " . $reeks->slag->naam ?></h1>
     <hr>
 
     <?php
