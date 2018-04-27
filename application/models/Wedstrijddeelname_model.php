@@ -231,7 +231,9 @@ class Wedstrijddeelname_model extends CI_Model
             foreach ($wedstrijdreeksen as $wedstrijdreeks) {
                 if ($wedstrijdreeks->id == $wedstrijddeelname->wedstrijdReeksId) {
                     $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
-                    $wedstrijddeelname->resultaat = $this->resultaat_model->getWithRondetypeById($wedstrijddeelname->resultaatId);
+                    if(!empty($wedstrijddeelname->resultaatId)){
+                      $wedstrijddeelname->resultaat = $this->resultaat_model->getWithRondetypeById($wedstrijddeelname->resultaatId);
+                    }
                 }
             }
         }
