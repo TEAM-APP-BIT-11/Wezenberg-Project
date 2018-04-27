@@ -113,6 +113,7 @@ class Evenement extends CI_Controller
                 $evenement->einddatum = $laatsteEvent->begindatum;
 
             } else{
+                var_dump($id);
                 $evenement = $this->evenement_model->get($id);
                 $evenementDeelnames = $this->evenementdeelname_model->getByEventId($id);
                 $data['id'] = $id;
@@ -334,15 +335,14 @@ class Evenement extends CI_Controller
     }
     
     public function bewerkEvenement(){ 
+        $id = $this->input->post('evenementId');
         if($this->input->post('reeksSoort') == 'trainingReeks'){
-            $Id = $this->input->post('trainingsId');
             $typeId = 1;
         } else{
-            $Id = $this->input->post('overigeId');
             $typeId = 4;
         }
         
-        $this->laadEvenement($typeId, false, $Id);
+        $this->laadEvenement($typeId, false, $id);
     }
 
     public function pasAan()

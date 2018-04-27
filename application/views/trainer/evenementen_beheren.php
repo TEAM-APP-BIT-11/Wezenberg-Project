@@ -94,6 +94,15 @@ foreach($evenementen as $evenement){
             }
             $('#overigeForm').submit();
         });
+        $('#medischeControls button').click(function(e){
+            if($(e.target).text() === 'Medische test verwijderen'){
+                $('#medischForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+            }
+            if($(e.target).text() === 'Medische test bewerken'){
+                $('#medischForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+            }
+            $('#medischForm').submit();
+        });
     });
 </script>
 
@@ -162,22 +171,24 @@ foreach($evenementen as $evenement){
     <div id="testen" class="tab-pane fade">
         <h3>Medische testen beheren</h3>
         <hr>
-        <div class="row">
-            <div class="col-md-8 form-group">
-                <label for="testen">Medische Testen</label>
-                <select name="testen" class="form-control" id="testenLijst" multiple>
-                    <?php
-                    foreach($medischeTesten as $medischeTest){
-                        echo '<option>' . $medischeTest->naam . '</option>';
-                    }
-                    ?>
-                </select>
-                <div id="testControls" class="controls">
-                    <button class="btn btn-primary" type="button">Medische test verwijderen</button>
-                    <button class="btn btn-primary" type="button">Medische test bewerken</button>
+        <form id="medischForm" method="POST">
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <label for="evenementId">Medische Testen</label>
+                    <select name="evenementId" class="form-control" id="testenLijst" multiple>
+                        <?php
+                        foreach($medischeTesten as $medischeTest){
+                            echo '<option value="' . $medischeTest->id . '">' . $medischeTest->naam . '</option>';
+                        }
+                        ?>
+                    </select>
+                    <div id="medischeControls" class="controls">
+                        <button class="btn btn-primary" type="button">Medische test verwijderen</button>
+                        <button class="btn btn-primary" type="button">Medische test bewerken</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>
