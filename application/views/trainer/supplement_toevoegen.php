@@ -13,8 +13,10 @@ foreach($doelstellingen as $doelstelling)
     $options[$doelstelling->id] = $doelstelling->doelstelling;
 }
 echo '<div>';
+
+echo $geselecteerde;
 echo form_label('Naam doelstelling:', 'doelstelling');
-echo form_dropdown('doelstelling', $options);
+echo form_dropdown('doelstelling', $options, $geselecteerde);
 echo '</div>';
 echo form_hidden('supplementId', 0);
 ?>

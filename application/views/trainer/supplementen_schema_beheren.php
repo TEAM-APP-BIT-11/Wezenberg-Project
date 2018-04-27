@@ -36,4 +36,6 @@ foreach($personen as $persoon)
     
 }
 echo "</table>";
+echo anchor('trainer/supplementschema/toevoegen', form_button('toevoegen', 'toevoegen', 'class="btn btn-primary"')) ;
+        echo anchor('trainer/home/index', form_button('back', 'annuleren', 'class="btn btn-primary"'));?>
  

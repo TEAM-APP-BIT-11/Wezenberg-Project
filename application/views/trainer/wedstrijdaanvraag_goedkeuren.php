@@ -36,9 +36,18 @@ foreach($personen as $persoon)
             echo "<tr><td>".$deel->wedstrijd->naam . "</td>";
             echo "<td>".$deel->slag->naam. "</td>" ;
             echo "<td>".$deel->afstand->afstand . "</td>";
-            echo "<td>".anchor(('trainer/wedstrijdaanvraag/goedkeuren/'.$deelname->id),'goedkeuren'). "</td>";
+            if($deelname->statusId ==1)
+            {
+                echo "<td>".anchor(('trainer/wedstrijdaanvraag/goedkeuren/'.$deelname->id),'goedkeuren'). "</td>";
              echo "<td>".anchor(('trainer/wedstrijdaanvraag/afwijzen/'.$deelname->id),'afwijzen'). "</td>";
               echo "<td>".anchor(('trainer/wedstrijdaanvraag/wijzigen/'.$deelname->id),'wijzigen'). "</td> </tr>";
+            }
+           elseif($deelname->statusId ==2)
+           {
+             echo "<td></td><td>".anchor(('trainer/wedstrijdaanvraag/afwijzen/'.$deelname->id),'afwijzen'). "</td>"; 
+             echo "<td>".anchor(('trainer/wedstrijdaanvraag/wijzigen/'.$deelname->id),'wijzigen'). "</td> </tr>";
+            }
+           
             $vorigepersoon = $persoon->voornaam;
             
             $teller++;

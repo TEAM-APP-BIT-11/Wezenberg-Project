@@ -82,7 +82,7 @@ echo form_hidden('innameReeksId', $inname->innameReeksId);
 echo form_hidden('persoonId', $inname->persoonId);
 
 echo "<tr> <td>";
-echo form_label('Trainer', 'persoon');
+echo form_label('Zwemmer', 'persoon');
 echo "</td> <td>";
 echo form_input('persoon',$persoon->voornaam . ' '. $persoon->familienaam, "disabled");
 echo "</td> </tr>";

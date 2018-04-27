@@ -89,7 +89,7 @@ foreach($personen as $persoon)
   
 }
 echo "<tr> <td>";
-echo form_label('Trainer:', 'personen');
+echo form_label('Zwemmer:', 'personen');
 echo "</td> <td>";
 echo form_dropdown('personen', $options);
 echo "</td></tr>";
