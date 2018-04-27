@@ -151,4 +151,24 @@ class Locatie extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+    
+    public function haalJsonOp_Locaties() {
+        $locatie = new stdClass();
+
+        $locatie->naam = $this->input->get('naam');
+        $locatie->straat = $this->input->get('straat');
+        $locatie->nr = $this->input->get('nr');
+        $locatie->postcode = $this->input->get('postcode');
+        $locatie->gemeente = $this->input->get('gemeente');
+        $locatie->zaal = $this->input->get('zaal');
+        $locatie->land = $this->input->get('land');
+        $locatie->extraInfo = $this->input->get('extraInfo');
+
+        $this->load->model('locatie_model');
+        $this->locatie_model->insert($locatie);
+        
+        $locaties = $this->locatie_model->getAll(); 
+
+        echo json_encode($locaties);
+    }
 }
