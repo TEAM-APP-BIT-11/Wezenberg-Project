@@ -73,6 +73,7 @@ class wedstrijdresultaten extends CI_Controller
         $this->load->model('wedstrijddeelname_model');
 
         $wedstrijdreeksen = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($wedstrijdId);
+        $data['wedstrijdreeksen'] = $wedstrijdreeksen;
         $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithWedstrijdAndResultaatByPersoon($persoon->id, $wedstrijdreeksen);
 
         $this->load->view("zwemmer/ajax_haalResultatenOp", $data);

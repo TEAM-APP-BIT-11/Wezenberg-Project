@@ -162,7 +162,7 @@ class Wedstrijdreeks_model extends CI_Model
     }
 
 
-    //nieuwe functie
+
     public function getAllWithWedstrijdSlagAfstandById($wedstrijdId)
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
