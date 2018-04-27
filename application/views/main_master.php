@@ -108,9 +108,8 @@
             echo activeAnchor('trainer/gebruiker/beheren', 'Gebruikers', '');
             echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
             echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
-            echo activeAnchor('trainer/Wedstrijd/beheren', 'Homepagina beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
-            echo activeAnchor('trainer/startpagina/beheren', 'Startpagina beheren', '');
+            echo activeAnchor('trainer/Startpagina/beheren', 'Startpagina beheren', '');
         } else {
 
             echo activeAnchor('zwemmer/Home', 'Home', '');
