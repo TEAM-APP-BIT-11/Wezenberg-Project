@@ -111,6 +111,20 @@ class Wedstrijddeelname_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    /**
+     * @author Neil Van den Broeck
+     * @param $id
+     */
+    public function getWithReeksAndWedstrijdSlagAfstand($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelname = $query->row();
+        $this->load->model('wedstrijdreeks_model');
+        $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->getWithWedstrijdSlagAfstand($wedstrijddeelname->wedstrijdReeksId);
+        return $wedstrijddeelname;
+    }
+
     public function getAllAndWedstrijdenWhereResultaatIsNotNull()
     {
         $this->db->where('resultaatId IS NOT NULL');

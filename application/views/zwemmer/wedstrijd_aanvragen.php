@@ -19,11 +19,15 @@
                         console.log(wedstrijdreeksen);
                         //geen deelname
                         if (wedstrijdreeksen[i].deelname == null) {
-                            lijst += '<td><a class="button" href="' + site_url + '/zwemmer/Wedstrijd/schrijfIn/' + wedstrijdreeksen[i].id + '"> Schrijf in </a></td><td>Niet ingeschreven</td></tr>';
+                            lijst += '<td><a class="btn btn-sm btn-success" href="' + site_url + '/zwemmer/Wedstrijd/schrijfIn/' + wedstrijdreeksen[i].id + '"> Schrijf in </a></td><td>Niet ingeschreven</td></tr>';
                         }
                         // wel deelname dus status tonen
                         else {
-                            lijst += '<td><a class="button" href="' + site_url + '/zwemmer/Wedstrijd/schrijfUit/' + wedstrijdreeksen[i].deelname.id + '">Schrijf uit</a></td>';
+                            var disabled = "";
+                            if (wedstrijdreeksen[i].deelname.status.id == 2 || wedstrijdreeksen[i].deelname.status.id == 3) {
+                                disabled = "disabled";
+                            }
+                            lijst += '<td><a class="btn btn-sm btn-danger ' + disabled + '" href="' + site_url + '/zwemmer/Wedstrijd/schrijfUit/' + wedstrijdreeksen[i].deelname.id + '">Schrijf uit</a></td>';
                             lijst += '<td class="' + wedstrijdreeksen[i].deelname.status.status.replace(/ /g, '') + '"> <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> ' + wedstrijdreeksen[i].deelname.status.status + '</td></tr>';
                         }
 

@@ -1,3 +1,16 @@
+<?php
+/**
+ * @file agenda.php
+ *
+ * View waarin de agenda van de zwemmer wordt weergegeven.
+ * - krijgt $innames-array binnen met datums waarop er een inname is.
+ * - krijgt $datums-objecten binnen
+ * - toont via FullCalendar.JS de agenda van de zwemmer
+ * - haalt via Ajax supplementen binnen
+ */
+?>
+
+
 <script>
     function haalSupplementenOp(datum) {
         // hier vervolledigen (oef 3b)
@@ -16,7 +29,6 @@
     }
 
     $(document).ready(function () {
-
         $('#calendar').fullCalendar(
             {
                 allDaySlot: false,
@@ -50,26 +62,28 @@
 
                 events: <?php echo $datums; ?>,
                 eventClick: function (calEvent) {
-
-                    $('#begin').html(calEvent.start.toString());
-                    $('#eind').html(calEvent.end.toString());
+                    var begin = moment(calEvent.start.toString());
+                    $('#begin').html(begin.utcOffset(0).format("DD/MM/YYYY HH:mm"));
+                    var eind = moment(calEvent.end.toString());
+                    $('#eind').html(eind.utcOffset(0).format("DD/MM/YYYY HH:mm"));
                     $('#titel').html(calEvent.title);
                     $('#locatie').html(calEvent.locatie);
                     $('#extra').html(calEvent.description);
-
                     $('#mijnDetailscherm').modal('show');
                 }
-
             })
         ;
 
         $("body").on('click', '.btn.supplementen', (function (e) {
-            e.preventDefault();
-            var datum = $(this).data('datum');
-            haalSupplementenOp(datum);
-            var DateCreated = new Date(Date.parse(datum));
-            $("#datum").html(DateCreated.toLocaleDateString());
-        }));
+                e.preventDefault();
+                var datum = $(this).data('datum');
+                haalSupplementenOp(datum);
+                var DateCreated = moment(Date.parse(datum));
+                $("#datum").html(DateCreated.format("MM-DD-YYYY"));
+
+            })
+        )
+        ;
     })
     ;
 
@@ -111,7 +125,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                <table>
+                <table class="table">
                     <tr>
                         <td>Begindatum</td>
                         <td><span id="begin"></span></td>

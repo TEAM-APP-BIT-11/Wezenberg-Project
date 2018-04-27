@@ -76,7 +76,7 @@ class Wedstrijd extends CI_Controller
 
         }
         //teruggaan naar de inschrijfpagina met de juiste reeks open
-        $this->inschrijven($wedstrijdReeksId);
+        $this->inschrijven($wedstrijdreeks->wedstrijdId);
     }
 
     /**
@@ -88,12 +88,22 @@ class Wedstrijd extends CI_Controller
     public function schrijfUit($wedstrijdDeelnameId)
     {
         $this->load->model('wedstrijddeelname_model');
-        $wedstrijdDeelname = $this->wedstrijddeelname_model->get($wedstrijdDeelnameId);
+        $wedstrijddeelname = $this->wedstrijddeelname_model->getWithReeksAndWedstrijdSlagAfstand($wedstrijdDeelnameId);
         // verwijderd de record uit de database met de het ID dat doorgegeven wordt
 
         $this->wedstrijddeelname_model->delete($wedstrijdDeelnameId);
 
-        redirect('zwemmer/Wedstrijd/inschrijven/' . $wedstrijdDeelname->wedstrijdReeksId);
+
+        //Melding genereren
+        $this->load->model("persoon_model");
+        $persoon = $this->authex->getPersoonInfo();
+
+        $melding = $persoon->voornaam . ' ' . $persoon->familienaam . ' heeft zich uitgeschreven voor de wedstrijd: "' . $wedstrijddeelname->wedstrijdreeks->wedstrijd->naam . '" ' . $wedstrijddeelname->wedstrijdreeks->afstand->afstand . 'm ' . $wedstrijddeelname->wedstrijdreeks->slag->naam;
+
+        $this->melding->genereerMeldingen($this->persoon_model->getTrainers(), $melding, 'Inschrijving voor wedstrijd');
+
+        redirect('zwemmer/Wedstrijd/inschrijven/' . $wedstrijddeelname->wedstrijdreeks->wedstrijdId);
+
     }
 
     /**
