@@ -120,11 +120,11 @@ class Gebruiker extends CI_Controller
         $persoon->gebruikersnaam = $this->input->post('gebruikersnaam');
         if ($type == 1)
         {
-            $persoon->wachtwoord = 'trainer123';
+            $persoon->wachtwoord = password_hash('trainer123', PASSWORD_DEFAULT) ;
         }
         else
         {
-            $persoon->wachtwoord = 'zwemmer123';
+            $persoon->wachtwoord = password_hash('zwemmer123', PASSWORD_DEFAULT);
         }
         $persoon->actief = '1';
 
