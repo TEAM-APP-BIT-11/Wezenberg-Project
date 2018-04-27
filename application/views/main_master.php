@@ -117,8 +117,7 @@
             echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '');
             echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '');
             echo activeAnchor('zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '');
-            echo activeAnchor('zwemmer/Wedstrijd/beheren', 'Homepagina beheren', '');
-
+            echo activeAnchor('Welcome/wijzig/' . $persoon->id, 'Mijn informatie beheren', '');
         }
         echo '</ul > ';
         echo '</div > ';

@@ -61,7 +61,7 @@ class Welcome extends CI_Controller
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'algemeen/profiel_beheren',
-            'voetnoot' => 'main_footer');
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
@@ -76,7 +76,7 @@ class Welcome extends CI_Controller
 
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'algemeen/reset_wachtwoord',
-            'voetnoot' => 'main_footer');
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
     }
