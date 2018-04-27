@@ -71,7 +71,7 @@ class Contact extends CI_Controller
 
         $partials = array(
             'inhoud' => 'bezoeker/contact',
-            'footer' => 'main_home');
+            'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
 
