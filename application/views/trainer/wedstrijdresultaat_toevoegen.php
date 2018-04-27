@@ -11,16 +11,13 @@
     foreach ($zwemmers as $zwemmer) {
         $zwemmerOpties[$zwemmer->id] = $zwemmer->voornaam;
     }
-
     $attributes = array('name' => 'wedstrijdResultaatToevoegenFormulier');
     echo form_open('trainer/wedstrijdresultaat/aanmaken', $attributes);
-
     echo form_labelpro('Ranking', 'ranking');
     echo form_input(array('name' => 'ranking',
         'id' => 'ranking',
         'class' => 'form-control',
         'required' => 'required'));
-
     echo '</br>';
     echo form_labelpro('Ronde', 'rondetype');
     echo form_dropdown('rondetype', $rondetypeOpties);
@@ -28,7 +25,6 @@
     echo '</br>';
     echo form_labelpro('Zwemmer', 'zwemmer');
     echo form_dropdown('zwemmer', $zwemmerOpties);
-
     echo '</br>';
     echo form_labelpro('Tijd (xx:xx:xx)', 'tijd');
     echo form_input(array('name' => 'tijd',
@@ -38,7 +34,6 @@
     
     
     echo '<hr>';
-
     echo form_hidden('reeksId', $reeks->id);
     //echo form_hidden('wedstrijddeelnameId', $wedstrijddeelname->id);
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
