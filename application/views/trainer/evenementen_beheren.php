@@ -76,6 +76,24 @@ foreach($evenementen as $evenement){
             }
             $('#trainingenForm').submit();
         });
+        $('#overigeReeksControl button').click(function(e){
+            if($(e.target).text() === 'Reeks verwijderen'){
+                $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
+            }
+            if($(e.target).text() === 'Reeks bewerken'){
+                $('#overigeForm').attr('action', site_url + '/trainer/Evenement/bewerkReeks');
+            }
+            $('#overigeForm').submit();
+        });
+        $('#overigeControls button').click(function(e){
+            if($(e.target).text() === 'Evenement verwijderen'){
+                $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+            }
+            if($(e.target).text() === 'Evenement bewerken'){
+                $('#overigeForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+            }
+            $('#overigeForm').submit();
+        });
     });
 </script>
 
@@ -124,8 +142,8 @@ foreach($evenementen as $evenement){
                     </div>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="trainingsId">Specifieke trainingen</label>
-                    <select name="trainingsId" class="form-control" id="trainingenLijst" multiple></select>
+                    <label for="evenementId">Specifieke trainingen</label>
+                    <select name="evenementId" class="form-control" id="trainingenLijst" multiple></select>
                     <div id="trainingControls" class="controls">
                         <button class="btn btn-primary" type="button">Training verwijderen</button>
                         <button class="btn btn-primary" type="button">Training bewerken</button>
@@ -216,8 +234,8 @@ foreach($evenementen as $evenement){
                     </div>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="overigeId">Specifieke evenementen</label>
-                    <select name="overigeId" class="form-control" id="overigeLijst" multiple></select>
+                    <label for="evenementId">Specifieke evenementen</label>
+                    <select name="evenementId" class="form-control" id="overigeLijst" multiple></select>
                     <div id="overigeControls" class="controls">
                         <button class="btn btn-primary" type="button">Evenement verwijderen</button>
                         <button class="btn btn-primary" type="button">Evenement bewerken</button>

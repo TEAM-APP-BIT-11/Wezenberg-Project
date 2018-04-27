@@ -126,8 +126,6 @@ class Evenement extends CI_Controller
             $data['deelnemendeZwemmers'] = $deelnemendeZwemmers;
         }
         
-        var_dump($evenement);
-        
         $partials = array('inhoud' => 'trainer/evenementen_toevoegen', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
@@ -283,7 +281,7 @@ class Evenement extends CI_Controller
     }
     
     public function verwijderEvenement(){
-        $evenemenId = $this->input->post('trainingsId');
+        $evenemenId = $this->input->post('evenementId');
         
         $this->load->model('evenementdeelname_model');
         $deelnames = $this->evenementdeelname_model->getByEventId($evenemenId);
@@ -305,10 +303,17 @@ class Evenement extends CI_Controller
         }
         
         $this->load->model('evenement_model');
-        $trainingen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
+        $evenementen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
         
-        foreach($trainingen as $training){
-            $this->evenement_model->delete($training->id);
+        $this->load->model('evenementdeelname_model');
+        
+        foreach($evenementen as $evenement){
+            $deelnames = $this->evenementdeelname_model->getByEventId($evenement->id);
+        
+            foreach($deelnames as $deelname){
+                $this->evenementdeelname_model->delete($deelname->id);
+            }
+            $this->evenement_model->delete($evenement->id);
         }
         
         $this->load->model('evenementreeks_model');
