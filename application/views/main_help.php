@@ -87,7 +87,7 @@
         echo '<ul class="nav nav-pills nav-stacked" > ';
         if ($persoon->typePersoon->typePersoon == "trainer") {
             echo activeAnchor('trainer/help/#wedstrijdBeheren', 'Wedstrijden beheren');
-            echo activeAnchor('trainer/help/#evenementenEnTrainingenBeheren', 'Evenementen en trainingen beheren', '');
+            echo activeAnchor('trainer/help/#evenementenBeheren', 'Evenementen beheren', '');
             echo activeAnchor('trainer/help/#gebruikersBeheren', 'Gebruikers beheren', '');
             echo activeAnchor('trainer/help/#startPaginaBeheren', 'Startpagina beheren', '');
         } else {

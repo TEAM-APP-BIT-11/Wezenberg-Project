@@ -33,7 +33,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
                 $("#hoeveelheid").val('enkel');
                 $("#hoeveelheid").prop('disabled', true);
                 $("#begindatum").html('Begindatum');
-                $("#einddatum input").prop('disabled', false);
+                $("#einddatum").prop('disabled', false);
                 $("#dagen").hide();
             } else{
                 if(type === 'Training' && hoeveelheid === 'enkel'){
@@ -58,12 +58,12 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
                 }
                 if(hoeveelheid === 'enkel'){
                     $("#begindatum").html('Datum');
-                    $("#einddatum input").prop('disabled', true);
+                    $("#einddatum").prop('disabled', true);
                     $("#dagen").hide();
                 } else{
                     $("#hoeveelheid").prop('disabled', false);
                     $("#begindatum").html('Begindatum');
-                    $("#einddatum input").prop('disabled', false);
+                    $("#einddatum").prop('disabled', false);
                     $("#dagen").show();
                 }
             }     
