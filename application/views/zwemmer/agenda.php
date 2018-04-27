@@ -76,7 +76,6 @@
 </script>
 
 <h1>Agenda</h1>
-<a href="#" class="supplementen btn btn-primary" data-datum="2018-08-21">Supplementen</a>
 
 <div id="calendar">
 </div>

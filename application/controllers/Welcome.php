@@ -157,7 +157,6 @@ class Welcome extends CI_Controller
         return 'ok';
     }
 
-
     public function toon()
     {
         $data['titel'] = 'Formulier met dialoogvenster';
