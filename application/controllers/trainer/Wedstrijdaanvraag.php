@@ -73,4 +73,17 @@ class Wedstrijdaanvraag extends CI_Controller
 
         redirect('trainer/wedstrijdaanvraag/beheren');
     }
+	public function wijzigen($id){
+        $data['eindverantwoordelijke'] = "Ruben Tuytens";
+        $data['title'] = 'Wedstrijdaanvraag wijzigen';
+        
+        $data['persoon'] = $this->authex->getPersoonInfo();
+        $this->load->model('wedstrijdreeks_model');
+        
+        $partials = array(
+            'inhoud' => 'trainer/Wedstrijdaanvraag_aanpassen',
+            'footer' => 'main_footer');
+         
+        $this->template->load('main_master', $partials, $data);
+    }
 }
