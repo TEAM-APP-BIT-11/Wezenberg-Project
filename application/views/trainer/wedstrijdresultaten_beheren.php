@@ -30,6 +30,10 @@
         </tr>";
         
         }
+        else
+        {
+            echo "<p>Er zijn nog geen afgelopen wedstrijden</p>";
+        }
     }
     ?>
 
