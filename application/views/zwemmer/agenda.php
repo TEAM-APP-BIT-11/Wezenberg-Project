@@ -40,11 +40,15 @@
                 firstDay: 1,
                 columnHeaderHtml: function (mom) {
                     var weergeven = "";
+                    mom = mom.locale('nl-be');
+                    moment.locale('nl');
+                    console.log(moment.locale());
+                    console.log(mom);
                     var innames = <?php echo $innames; ?>;
                     if ($.inArray(mom.format('YYYY-MM-DD').toString(), innames) != -1) {
                         weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
                     }
-                    return weergeven + mom.format("ddd DD / MM");
+                    return weergeven + mom.locale('nl-be').format("ddd DD / MM");
 
                 },
                 header:

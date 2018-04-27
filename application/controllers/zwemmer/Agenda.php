@@ -146,7 +146,7 @@ class Agenda extends CI_Controller
                 "end" => $evenementdeelname->evenement->einddatum . ' ' . $evenementdeelname->evenement->einduur,
                 "start" => $evenementdeelname->evenement->begindatum . ' ' . $evenementdeelname->evenement->beginuur,
                 "locatie" => $evenementdeelname->evenement->locatieId,
-                "color" => $kleuren[$evenementdeelname->evenement->evenementTypeId]
+                "color" => $kleuren[($evenementdeelname->evenement->evenementTypeId - 1)]
             );
         }
 
