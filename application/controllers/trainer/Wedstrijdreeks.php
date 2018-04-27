@@ -132,5 +132,6 @@ class Wedstrijdreeks extends CI_Controller
     {
       $this->load->model('wedstrijdreeks_model');
       $this->wedstrijdreeks_model->delete($id);
+      redirect('trainer/Wedstrijd/beheren');
     }
 }
