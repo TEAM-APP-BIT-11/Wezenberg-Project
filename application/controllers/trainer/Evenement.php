@@ -176,9 +176,9 @@ class Evenement extends CI_Controller
                 $dayOfDate = $date->format("N");
                 if (in_array($dayOfDate, $days)) {
                     if(strcmp($nieuw,'false') == 0){
-                        $this->maakEvenement($naam, $locatieId, $date->format("Y-m-d"), $einddatum, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId, $evenementIds[$count]);
+                        $this->maakEvenement($naam, $locatieId, $date->format("Y-m-d"), $einddatum, $beginuur, null, $extraInfo, $evenementTypeId, $evenementReeksId, $evenementIds[$count]);
                     } else{
-                        $evenementId = $this->maakEvenement($naam, $locatieId, $date->format("Y-m-d"), $einddatum, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId);
+                        $evenementId = $this->maakEvenement($naam, $locatieId, $date->format("Y-m-d"), null, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId);
                         $this->maakEvenementDeelname($zwemmerIds, $evenementId);
                     } 
                     $count++;
