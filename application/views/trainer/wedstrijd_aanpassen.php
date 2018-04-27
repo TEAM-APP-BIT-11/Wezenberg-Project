@@ -79,7 +79,5 @@
     echo form_close();
     ?>
     <?php echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
 
 </div>

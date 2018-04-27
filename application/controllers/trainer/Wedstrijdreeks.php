@@ -63,7 +63,7 @@ class Wedstrijdreeks extends CI_Controller
 
         $partials = array('inhoud' => 'trainer/wedstrijdreeks_toevoegen',
         'footer' => 'main_footer');
-        
+
         $this->template->load('main_master', $partials, $data);
     }
 
@@ -84,6 +84,49 @@ class Wedstrijdreeks extends CI_Controller
 
       redirect('trainer/Wedstrijd/beheren');
     }
+
+    public function aanpassen($id)
+    {
+        $data['titel'] = 'Wedstrijd aanpassen';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
+        $data['persoon'] = $this->authex->getPersoonInfo();
+
+        $this->load->model('wedstrijdreeks_model');
+        $data['wedstrijdreeks'] = $this->wedstrijdreeks_model->get($id);
+
+        $this->load->model('slag_model');
+        $data['slagen'] = $this->slag_model->getAll();
+
+        $this->load->model('afstand_model');
+        $data['afstanden'] = $this->afstand_model->getAll();
+
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
+
+        $partials = array('inhoud' => 'trainer/wedstrijdreeks_aanpassen',
+            'footer' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function pasAan()
+    {
+      $wedstrijdreeks = new stdClass();
+
+      $wedstrijdreeks->datum = $this->input->post('reeksDatum');
+      $wedstrijdreeks->beginuur = $this->input->post('reeksBeginuur');
+      $wedstrijdreeks->einduur = $this->input->post('reeksEinduur');
+      $wedstrijdreeks->afstandId = $this->input->post('afstand');
+      $wedstrijdreeks->slagId = $this->input->post('slag');
+      $wedstrijdreeks->id = $this->input->post('id');
+      $wedstrijdreeks->wedstrijdId = $this->input->post('wedstrijdId');
+
+      $this->load->model('wedstrijdreeks_model');
+      $this->wedstrijdreeks_model->update($wedstrijdreeks);
+
+      redirect('trainer/Wedstrijd/beheren');
+    }
+
 
     public function verwijder($id)
     {
