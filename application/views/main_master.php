@@ -65,6 +65,9 @@
                     switch ($persoon->typePersoonId) {
                         case 1:
                             echo anchor('trainer/Home/', 'Home trainer');
+                            echo '</li><li>';
+                            echo anchor('trainer/Help/index', 'Help');
+                            echo '<li> ';
                             break;
                         case 2:
                             echo anchor('zwemmer/Home/', 'Home zwemmer');
@@ -76,9 +79,6 @@
                     echo '</li > ';
                     echo '<li> ';
                     echo anchor('Welcome/meldAf', 'Afmelden');
-                    echo '</li > ';
-                    echo '<li> ';
-                    echo anchor('trainer/Help/index', 'Help');
                     echo '</li > ';
                     echo '</ul > ';
                     echo '</li > ';
