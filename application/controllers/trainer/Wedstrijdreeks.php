@@ -92,16 +92,13 @@ class Wedstrijdreeks extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijdreeks_model');
-        $data['wedstrijdreeks'] = $this->wedstrijdreeks_model->get($id);
+        $data['wedstrijdreeks'] = $this->wedstrijdreeks_model->getWithWedstrijd($id);
 
         $this->load->model('slag_model');
         $data['slagen'] = $this->slag_model->getAll();
 
         $this->load->model('afstand_model');
         $data['afstanden'] = $this->afstand_model->getAll();
-
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
 
         $partials = array('inhoud' => 'trainer/wedstrijdreeks_aanpassen',
             'footer' => 'main_footer');

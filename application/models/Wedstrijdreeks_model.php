@@ -165,7 +165,6 @@ class Wedstrijdreeks_model extends CI_Model
     public function getAllWithWedstrijdSlagAfstandById($wedstrijdId)
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
-        echo $wedstrijdId;
 
         $query = $this->db->get('wedstrijdreeks');
         $wedstrijdreeksen = $query->result();
@@ -248,7 +247,6 @@ class Wedstrijdreeks_model extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->get('wedstrijdreeks');
         $wedstrijdreeks = $query->row();
-        var_dump($wedstrijdreeks);
         $this->load->model('wedstrijd_model');
         $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
 

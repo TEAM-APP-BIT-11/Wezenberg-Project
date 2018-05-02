@@ -2,7 +2,7 @@
 
 		<h1 class="">Wedstrijden reeks aanpassen</h1>
 		<hr>
-		<h3>Reeks van <?php echo $wedstrijd->naam; ?> aanpassen</h3>
+		<h3>Reeks van <?php echo $wedstrijdreeks->wedstrijd->naam; ?> aanpassen</h3>
 
 		<?php
 
