@@ -1,7 +1,7 @@
 <h2>Contact</h2>
 
-<p>Op deze pagina kan u een bericht intypen.</p>
-
+<p>Op deze pagina kan u een bericht intypen voor <?php echo $melding; ?></p>
+<hr class="colorgraph"/>
 
 <?php
 $attributes = array('name' => 'contact');
@@ -23,6 +23,7 @@ echo form_textarea(array('name' => 'bericht',
 
 echo form_hidden('emailzwemmer', $email);
 echo form_hidden('id', $id);
+echo '<p></p>';
 echo form_submit('knop', 'Verzend', 'class="btn btn-primary"');
 echo form_reset('knop', 'Reset', 'class="btn btn-default"');
 echo form_close();

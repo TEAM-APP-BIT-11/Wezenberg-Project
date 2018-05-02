@@ -1,24 +1,23 @@
 <?php
-$attributes = array('name' => 'mijnFormulier');
+$attributes = array('name' => 'mijnFormulier', 'class' => 'form-signin');
 echo form_open('Welcome/controleerAanmelden', $attributes);
 ?>
-    <table>
-        <tr>
-            <td><?php echo form_label('Gebruikersnaam:', 'gebruikersnaam'); ?></td>
-            <td><?php echo form_input(array('name' => 'gebruikersnaam', 'id' => 'gebruikersnaam', 'size' => '30')); ?></td>
-        </tr>
-        <tr>
-            <td><?php echo form_label('Wachtwoord:', 'wachtwoord'); ?></td>
-            <td><?php
-                $data = array('name' => 'wachtwoord', 'id' => 'wachtwoord', 'size' => '30');
-                echo form_password($data);
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><?php echo form_submit('knop', 'Verzenden'); ?></td>
-        </tr>
-    </table>
+<div class="wrapper">
+    <h2 class="form-signin-heading">Inloggen</h2>
+    <hr class="colorgraph">
+    <p></p>
+    <br>
+    <?php echo form_label('Gebruikersnaam:', 'gebruikersnaam'); ?>
+    <?php $gebruikersnaam = array('name' => 'gebruikersnaam', 'id' => 'gebruikersnaam', 'size' => '30', 'required' => 'required', 'placeholder' => 'Gebruikersnaam', 'class' => 'form-control'); ?>
+    <?php echo form_input($gebruikersnaam); ?>
 
-<?php echo form_close(); ?>
+    <?php echo form_label('Wachtwoord:', 'wachtwoord'); ?>
+    <?php
+    $data = array('name' => 'wachtwoord', 'id' => 'wachtwoord', 'size' => '30', 'required' => 'required', 'placeholder' => 'Wachtwoord', 'class' => 'form-control');
+    echo form_password($data);
+    ?>
+
+    <td><?php echo form_submit('knop', 'Inloggen', 'class="btn btn-lg btn-primary btn-block"'); ?></td>
+
+    <?php echo form_close(); ?>
+</div>

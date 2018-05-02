@@ -66,6 +66,8 @@ class Contact extends CI_Controller
 
         $zwemmer = $this->persoon_model->get($id);
 
+        $data['melding'] = $zwemmer->voornaam . ' ' . $zwemmer->familienaam;
+
         $data['email'] = $zwemmer->mailadres;
         $data['id'] = $zwemmer->id;
 
@@ -73,7 +75,7 @@ class Contact extends CI_Controller
             'inhoud' => 'bezoeker/contact',
             'footer' => 'main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
 
     }
 
@@ -93,6 +95,8 @@ class Contact extends CI_Controller
         $this->load->model('persoon_model');
 
         $trainers = $this->persoon_model->getTrainers();
+
+        $data['melding'] = "Wezenberg";
 
         $emails = "";
 
@@ -144,17 +148,46 @@ class Contact extends CI_Controller
         $this->email->subject('Informatie van wezenberg');
         $this->email->message('bericht van ' . $email . "\n" . $bericht);
 
-        if (!$this->email->send()) {
-            echo "FOUT";
+        $id = $this->input->post('id');
+        if ($id == "") {
+            $naarPagina = ('bezoeker/Home');
         } else {
-
-
-            $id = $this->input->post('id');
-            if ($id == "") {
-                redirect('bezoeker/Home');
-            } else {
-                redirect('bezoeker/Home/zwemmer/' . $id);
-            }
+            $naarPagina = ('bezoeker/Home/zwemmer/' . $id);
         }
+
+        //controleren of mail verzonden word.
+        if (!$this->email->send()) {
+            $this->mailNietVerzonden($naarPagina);
+        } else {
+            $this->mailVerzonden($naarPagina);
+        }
+    }
+
+    public function mailVerzonden($naarPagina)
+    {
+        $data['titel'] = 'Mail succesvol verstuurd';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
+
+        $data['naarPagina'] = $naarPagina;
+
+        $partials = array(
+            'inhoud' => 'bezoeker/mail_verzonden',
+            'footer' => 'main_footer');
+
+        $this->template->load('main_home', $partials, $data);
+    }
+
+    public function mailNietVerzonden($naarPagina)
+    {
+        $data['titel'] = 'Mail niet succesvol verstuurd';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
+
+        $data['naarPagina'] = $naarPagina;
+
+        $partials = array(
+            'inhoud' => 'bezoeker/mail_nietverzonden',
+            'footer' => 'main_footer');
+
+        $this->template->load('main_home', $partials, $data);
     }
 }

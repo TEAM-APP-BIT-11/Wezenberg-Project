@@ -45,10 +45,22 @@ class Welcome extends CI_Controller
         $data['titel'] = "Login";
         $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
+        if ($this->authex->isAangemeld()) {
+            $persoon = $this->authex->getPersoonInfo();
+            switch ($persoon->typePersoon->typePersoon) {
+                case 'zwemmer':
+                    redirect('zwemmer/Home');
+                    break;
+                case 'trainer':
+                    redirect('trainer/Home');
+                    break;
+            }
+        }
+
         $partials = array(
             'inhoud' => 'algemeen/inloggen',
             'footer' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('main_home', $partials, $data);
     }
 
     public function wijzig($id)
@@ -126,6 +138,19 @@ class Welcome extends CI_Controller
 
     }
 
+    public function fout()
+    {
+        $data['titel'] = "Fout";
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
+
+        $data['error'] = "Er is iets fout gelopen, probeer opnieuw!";
+
+        $partials = array(
+            'inhoud' => 'algemeen/fout_inloggen',
+            'footer' => 'main_footer');
+        $this->template->load('main_home', $partials, $data);
+    }
+
     public function controleerAanmelden()
     {
         $gebruikersnaam = $this->input->post('gebruikersnaam');
@@ -140,9 +165,8 @@ class Welcome extends CI_Controller
             }
         } else {
             //fout
-            redirect('Welcome/logIn');
+            redirect('Welcome/fout');
         }
-        echo $this->authex->meldAan($gebruikersnaam, $wachtwoord);
     }
 
     public function MeldingGelezen()
@@ -171,4 +195,5 @@ class Welcome extends CI_Controller
         $this->authex->meldAf();
         redirect('Welcome/index');
     }
+
 }
