@@ -42,16 +42,16 @@ class Wedstrijdresultaat extends CI_Controller
 
     /**
      * Haalt de aangemelde persoon uit de Authex-library.
-     * Krijgt van de functie de elke ronde, elke persoon en aan welke reeks, slag en afstand van deze reeks, een resultaat moet toegevoegd worden.
+     * Krijgt van de functie elke ronde, elke persoon en aan welke reeks, slag en afstand van deze reeks, een resultaat moet toegevoegd worden.
      * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan .
      * @author Dieter Verboven
      * @see \rondetype_model::getAll()
      * @see \persoon_model::getZwemmers()
      * @see \wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
-     * @see zwemmer/ajax_innames
+     * @see trainer/wedstrijdresultaat_toevoegen.php
      */
     public function toevoegen($reeksId)
-    {
+    { 
         $data['titel'] = 'Resultaat toevoegen';
         $data['eindverantwoordelijke'] = "Dieter Verboven";
         $data['persoon'] = $this->authex->getPersoonInfo();
@@ -66,6 +66,15 @@ class Wedstrijdresultaat extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+    
+    /**
+     * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan.
+     * Geeft alle ingegeven gegevens uit het formulier door via een post en voegt daarna het resultaat en de wedstrijddeelname toe aan de database.
+     * @author Dieter Verboven
+     * @see \resultaat_model::insert()
+     * @see \wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
+     * @see trainer/wedstrijdresultaat_toevoegen.php
+     */
     public function aanmaken()
     {
         $resultaat = new stdClass();
@@ -83,8 +92,104 @@ class Wedstrijdresultaat extends CI_Controller
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->insert($wedstrijddeelname);
         return $this->resultaten();
-        // var_dump($wedstrijd);
     }
+    
+    /**
+     * Haalt alle wedstrijden  en de bijhorende locaties op
+     * Stuurt deze door naar de view
+     * @author Dieter Verboven
+     * @see \wedstrijd_model::getAllWithLocatie()
+     * @see trainer/wedstrijdresultaten_beheren.php
+     */
+    public function resultaten()
+    {
+        $data['titel'] = 'Wedstrijdresultaten beheren';
+        $data['eindverantwoordelijke'] = "Dieter Verboven";
+        $data['persoon'] = $this->authex->getPersoonInfo();
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren',
+            'footer' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+    /**
+     * @param id De id van de wedstrijd waarvan de gegevens moeten opgehaald worden.
+     * Geeft alle reeksen, slagen en afstanden bij de reeksen van de meegegeven wedstrijd.
+     * @see trainer/resultaten_aanpassen.php
+     * @see wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
+     * @see wedstrijd_model::get()
+     * @author Dieter Verboven
+     */
+    public function resultatenBeheren($id)
+    {
+        $data['titel'] = 'Wedstrijdresultaten beheren';
+        $data['eindverantwoordelijke'] = "Dieter Verboven";
+        $data['persoon'] = $this->authex->getPersoonInfo();
+        $this->load->model('wedstrijdreeks_model');
+        $data['reeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_aanpassen',
+            'footer' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+    /**
+     * @param reeksId De id van de reeks waarvan de gegevens moeten opgehaald worden in wedstrijdresultaten_aanpassen.
+     * Geeft alle resultaten, personen en rondes bij de reeks die is meegegeven.
+     * @see trainer/ajax_haalResultatenOp.php
+     * @see wedstrijddeelname_model::getAllWithPersoonResultaatById()
+     * @see rondetype_model::getAll()
+     * @author Dieter Verboven
+     */
+    public function resultatenOphalen()
+    {
+        $reeksId = $this->input->get('reeksId');
+        $this->load->model('wedstrijddeelname_model');
+        $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithPersoonResultaatById($reeksId);
+        
+        $this->load->model('rondetype_model');
+        $data["rondetypes"] = $this->rondetype_model->getAll();
+        
+        $data['persoon'] = $this->authex->getPersoonInfo();
+        $this->load->view("trainer/ajax_haalResultatenOp", $data);
+    }
+    
+    /**
+     * @param id De id van het resultaat waarvan de gegevens moeten opgehaald worden.
+     * Haalt alle bijhorende gegegevens van het resultaat door, tijd, ronde, ranking, zwemmer ...op. Geeft een in te vullen formulier weer waar het gekozen resultaat kan aangepast worden.
+     * @see trainer/wedstrijdresultaat_aanpassen.php
+     * @see wedstrijddeelname_model::getDeelnemers()
+     * @see wedstrijddeelname_model::getByResultaatId()
+     * @see rondetype_model::getAll()
+     * @see resultaat_model::get()
+     * @author Dieter Verboven
+     */
+    public function resultatenAanpassen($id)
+    {
+        $data['titel'] = 'Wedstrijdresultaten aanpassen';
+        $data['eindverantwoordelijke'] = "Dieter Verboven";
+        $data['persoon'] = $this->authex->getPersoonInfo();
+        $this->load->model('rondetype_model');
+        $data["rondetypes"] = $this->rondetype_model->getAll();
+        $this->load->model('wedstrijddeelname_model');
+        $data['zwemmers'] = $this->wedstrijddeelname_model->getDeelnemers($id);   
+        $data['wedstrijddeelname'] = $this->wedstrijddeelname_model->getByResultaatId($id);
+        
+        $this->load->model('resultaat_model');
+        $data['resultaat'] = $this->resultaat_model->get($id);
+        
+        
+        $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen',
+            'footer' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
+    }
+    /**
+     * Past het resultaat aan indien nodig
+     * keert hierna terug naar de resultaten van een wedstrijd (wedstrijdresultaten_aanpassen.php)
+     * @author Dieter Verboven
+     * @see \wedstrijddeelname_model::update()
+     * @see trainer/wedstrijdresultaten_aanpassen.php
+     */
     public function pasAan()
     {
         $resultaat = new stdClass();
@@ -103,71 +208,6 @@ class Wedstrijdresultaat extends CI_Controller
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->update($wedstrijddeelname);
         return $this->resultaten();
-    }
-    public function verwijder($id)
-    {
-        $this->load->model('wedstrijd_model');
-        $this->wedstrijd_model->delete($id);
-        return $this->beheren();
-    }
-    public function resultaten()
-    {
-        $data['titel'] = 'Wedstrijdresultaten beheren';
-        $data['eindverantwoordelijke'] = "Dieter Verboven";
-        $data['persoon'] = $this->authex->getPersoonInfo();
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
-        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_beheren',
-            'footer' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
-    }
-    public function resultatenBeheren($id)
-    {
-        $data['titel'] = 'Wedstrijdresultaten beheren';
-        $data['eindverantwoordelijke'] = "Dieter Verboven";
-        $data['persoon'] = $this->authex->getPersoonInfo();
-        $this->load->model('wedstrijdreeks_model');
-        $data['reeksen'] = $this->wedstrijdreeks_model->getAllWithWedstrijdSlagAfstandById($id);
-        $this->load->model('wedstrijd_model');
-        $data['wedstrijd'] = $this->wedstrijd_model->get($id);
-        $this->load->model('slag_model');
-        $data['slagen'] = $this->slag_model->getAll();
-        $this->load->model('afstand_model');
-        $data['afstanden'] = $this->afstand_model->getAll();
-        $partials = array('inhoud' => 'trainer/wedstrijdresultaten_aanpassen',
-            'footer' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
-    }
-    public function resultatenOphalen()
-    {
-        $reeksId = $this->input->get('reeksId');
-        $this->load->model('wedstrijddeelname_model');
-        $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithPersoonResultaatById($reeksId);
-        $this->load->model('rondetype_model');
-        $data["rondetypes"] = $this->rondetype_model->getAll();
-        $data["personen"] = $this->wedstrijddeelname_model->getAllWithPersoonResultaatById($reeksId);
-        $data['persoon'] = $this->authex->getPersoonInfo();
-        $this->load->view("trainer/ajax_haalResultatenOp", $data);
-    }
-    
-    public function resultatenAanpassen($id)
-    {
-        $data['titel'] = 'Wedstrijdresultaten aanpassen';
-        $data['eindverantwoordelijke'] = "Dieter Verboven";
-        $data['persoon'] = $this->authex->getPersoonInfo();
-        $this->load->model('rondetype_model');
-        $data["rondetypes"] = $this->rondetype_model->getAll();
-        $this->load->model('wedstrijddeelname_model');
-        $data['zwemmers'] = $this->wedstrijddeelname_model->getDeelnemers($id);     
-        
-        $this->load->model('resultaat_model');
-        $data['resultaat'] = $this->resultaat_model->get($id);
-        
-        $this->load->model('wedstrijddeelname_model');
-        $data['wedstrijddeelname'] = $this->wedstrijddeelname_model->getByResultaatId($id);
-        $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen',
-            'footer' => 'main_footer');
-        $this->template->load('main_master', $partials, $data);
     }
     
     

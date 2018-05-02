@@ -30,11 +30,13 @@ class Gebruiker extends CI_Controller
         $this->load->helper('notation');
     }
 
-    /*
-     * Haalt alle evenement-records op via Evenement_model en toont de lijst in de view evenementen_beheren.php
-     * 
-     * @see Evenement_mode::getAll()
-     * @see evenementen_beheren.php
+    /**
+     * Haalt alle zwemmers en trianers op
+     * Stuurt deze door naar de view gebruikers_beheren.php waar men een actie kan kiezen
+     * @author Dieter Verboven
+     * @see \persoon_model::getZwemmers()
+     * @see \persoon_model::getTrainers()
+     * @see trainer/gebruikers_beheren.php
      */
     public function beheren()
     {
@@ -47,7 +49,14 @@ class Gebruiker extends CI_Controller
         $partials = array('inhoud' => 'trainer/gebruikers_beheren', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+    /**
+     * @param ^$id De id van de persoon waarvan de gegevens moeten opgehaald worden.
+     * Geeft een formulier weer waar men de gegevens van de gekozen persoon kan aanpassen.
+     * @see trainer/gebruiker_aanpassen.php
+     * @see persoon_model::get()
+     * @see typepersoon_model::getAll()
+     * @author NeDieter Verboven
+     */
     public function aanpassen($id)
     {
         $data['titel'] = "Gebruiker aanpassen";
@@ -62,7 +71,12 @@ class Gebruiker extends CI_Controller
         $partials = array('inhoud' => 'trainer/gebruiker_aanpassen', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+    /**
+     * Geeft een in te vullen formulier weer waar men een nieuwe gebruiker kan toevoegen.
+     * @author Dieter Verboven
+     * @see \typepersoon_model::getAll()
+     * @see trainer/gebruiker_toevoegen.php
+     */
     public function toevoegen()
     {
         $data['titel'] = "Gebruiker toevoegen";
@@ -74,7 +88,12 @@ class Gebruiker extends CI_Controller
         $partials = array('inhoud' => 'trainer/gebruiker_toevoegen', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-
+    /**
+     * Past het aangepaste formulier toe op de betrokken persoon.
+     * @author Dieter Verboven
+     * @see \persoon_model::update()
+     * @see trainer/gebruiker_aanpassen.php
+     */
     public function pasAan()
     {
         $persoon = new stdClass();
@@ -100,7 +119,12 @@ class Gebruiker extends CI_Controller
         $this->beheren();
     }
     
-    
+    /**
+     * Voegt de ingevulde gegevens uit het formulier toe aan de database als een nieuwe persoon.
+     * @author Dieter Verboven
+     * @see \persoon_model::insert()
+     * @see trainer/gebruiker_toevoegen.php
+     */
     public function voegToe()
     {
         $persoon = new stdClass();
@@ -135,7 +159,14 @@ class Gebruiker extends CI_Controller
 
         $this->beheren();
     }
-    
+    /**
+     * Past de activiteitsstatus aan van een gebruiker.
+     * @param De id van de persoon waar actief moet aangepast worden.
+     * @author Dieter Verboven
+     * @see \persoon_model::update()
+     * @see \persoon_model::get()
+     * @see trainer/gebruikers_beheren.php
+     */
      public function activiteitVeranderen($id)
     {
         $this->load->model('persoon_model'); 

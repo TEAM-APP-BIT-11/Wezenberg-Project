@@ -38,11 +38,8 @@
     echo '<hr>';
     echo form_hidden('id', $resultaat->id);
     echo form_hidden('wedstrijddeelnameId', $wedstrijddeelname->id);
-    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
+    echo "<p>" . form_submit('knop', 'Opslaan', 'class="btn btn-primary"'). "</p>";
     echo form_close();
-    ?>
-    <?php echo anchor('trainer/Wedstrijdresultaat/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
+    echo anchor($this->config->site_url() . '/trainer/wedstrijdresultaat/resultaten/', 'Annuleren', 'class="btn btn-warning"');?>
 
 </div>
