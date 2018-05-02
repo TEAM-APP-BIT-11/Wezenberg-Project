@@ -156,36 +156,30 @@ class Contact extends CI_Controller
         }
 
         //controleren of mail verzonden word.
-        if (!$this->email->send()) {
-            $this->mailNietVerzonden($naarPagina);
+        if ($this->email->send()) {
+            $this->mailResultaat($naarPagina, true);
         } else {
-            $this->mailVerzonden($naarPagina);
+            $this->mailResultaat($naarPagina, false);
         }
     }
 
-    public function mailVerzonden($naarPagina)
+    public function mailResultaat($naarPagina, $succesvol)
     {
         $data['titel'] = 'Mail succesvol verstuurd';
         $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $data['naarPagina'] = $naarPagina;
 
-        $partials = array(
-            'inhoud' => 'bezoeker/mail_verzonden',
-            'footer' => 'main_footer');
-
-        $this->template->load('main_home', $partials, $data);
-    }
-
-    public function mailNietVerzonden($naarPagina)
-    {
-        $data['titel'] = 'Mail niet succesvol verstuurd';
-        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
-
-        $data['naarPagina'] = $naarPagina;
+        if ($succesvol) {
+            $data['resultaat'] = "succesvol";
+            $data['melding'] = "Uw bericht is succesvol verstuurd.";
+        } else {
+            $data['resultaat'] = "niet";
+            $data['melding'] = 'Uw bericht is niet verstuurd. Probeer later opnieuw';
+        }
 
         $partials = array(
-            'inhoud' => 'bezoeker/mail_nietverzonden',
+            'inhoud' => 'bezoeker/mail_resultaat',
             'footer' => 'main_footer');
 
         $this->template->load('main_home', $partials, $data);
