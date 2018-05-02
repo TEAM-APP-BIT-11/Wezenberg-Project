@@ -163,6 +163,12 @@ class Contact extends CI_Controller
         }
     }
 
+    /**
+     *
+     * @param $naarPagina link naar de pagina waar de bezoeker naartoe wordt gestuurd nadat hij op de knop in de view klikt
+     * @param $succesvol Boolean, afhankelijk van het succesvol(true) verzenden van het bericht of false indien er een fout optrad.
+     */
+
     public function mailResultaat($naarPagina, $succesvol)
     {
         $data['titel'] = 'Mail succesvol verstuurd';

@@ -11,7 +11,7 @@
 <h2>Uw bericht is <?php echo $resultaat; ?> verzonden</h2>
 <hr class="colorgraph"/>
 
-<p><?php echo   $melding ?></p>
+<p><?php echo $melding; ?></p>
 <p>Ga terug naar de pagina waar u was door op onderstaande knop te klikken.</p>
 
 <p> <?php echo anchor($naarPagina, 'Ga verder waar u was gebleven', 'class="btn btn-default"'); ?> </p>

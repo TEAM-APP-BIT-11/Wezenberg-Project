@@ -62,6 +62,16 @@
                     echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' . ucfirst($persoon->voornaam) . '<span class="caret"></span></a>';
                     echo '<ul class="dropdown-menu" role="menu">';
                     echo '<li> ';
+                    switch ($persoon->typePersoonId) {
+                        case 1:
+                            echo anchor('trainer/Home/', 'Home trainer');
+                            break;
+                        case 2:
+                            echo anchor('zwemmer/Home/', 'Home zwemmer');
+                            break;
+                    }
+                    echo '</li> ';
+                    echo '<li> ';
                     echo anchor('Welcome/wijzig/' . $persoon->id, 'Wijzig profiel');
                     echo '</li > ';
                     echo '<li> ';

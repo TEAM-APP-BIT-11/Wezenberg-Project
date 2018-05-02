@@ -25,6 +25,11 @@ class Agenda extends CI_Controller
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+
+    /**
+     * Agenda constructor.
+     * Indien de persoon die is aangemeld geen zwemmer is wordt deze geredirect naar de inlogpagina.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -37,7 +42,6 @@ class Agenda extends CI_Controller
                 redirect('Welcome/logIn');
             }
         }
-
         $this->load->helper('form');
         $this->load->helper('notation');
     }
