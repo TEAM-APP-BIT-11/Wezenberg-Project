@@ -62,7 +62,15 @@ class Welcome extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_home', $partials, $data);
     }
-
+    
+    /**
+     * @param $id De id van de persoon die aangemeld is waarvan de gegevens moeten opgehaald worden.
+     * Geeft een formulier weer waar de gebruiker zijn gegevens kan aanpassen.
+     * @see algemeen/profiel_beheren.php
+     * @see algemeen/fout_wijzigen.php
+     * @see persoon_model::get()
+     * @author Dieter Verboven
+     */
     public function wijzig($id)
     {
         $persoon = $this->authex->getPersoonInfo();
@@ -95,16 +103,20 @@ class Welcome extends CI_Controller
         $this->template->load('main_master', $partials, $data); 
        
     }
-
+    /**
+     * @param $id De id van de persoon die aangemeld is.
+     * Geeft een formulier weer waar de gebruiker zijn wachtwoord kan aanpassen.
+     * @see algemeen/reset_wachtwoord.php
+     * @see algemeen/fout_wijzigen.php
+     * @see persoon_model::get()
+     * @author Dieter Verboven
+     */
     function wachtwoord($id)
     {                
         $persoon = $this->authex->getPersoonInfo();
-        
-        
+
         $data['eindverantwoordelijke'] = "Dieter Verboven";
         
-        
-
         if($persoon->id == $id)
         {
             $data['titel'] = "Wachtwoord wijzigen";
@@ -127,7 +139,12 @@ class Welcome extends CI_Controller
         }
         $this->template->load('main_master', $partials, $data);
     }
-
+    /**
+     * Haalt de gegevens uit het formulier op en past de gegevens van de ingelogde persoon aan in de database
+     * @see algemeen/profiel_beheren.php
+     * @see persoon_model::update()
+     * @author Dieter Verboven
+     */
     function registreer()
     {
         $persoon = new stdClass();
@@ -153,6 +170,12 @@ class Welcome extends CI_Controller
         $this->index();
     }
 
+    /**
+     * Haalt het nieuwe wachtwoord uit het formulier op en past deze van de ingelogde persoon aan in de database
+     * @see algemeen/reset_wachtwoord.php
+     * @see persoon_model::update()
+     * @author Dieter Verboven
+     */
     function wijzigWachtwoord()
     {
         $persoon = new stdClass();
