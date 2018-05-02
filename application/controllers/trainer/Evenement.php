@@ -51,16 +51,15 @@ class Evenement extends CI_Controller
     }
     
     public function haalJsonOp_Evenementen() {
-        $evenementReeksId = $this->input->get('evenementReeksId');
-        
-        $this->load->model('evenementreeks_model');
-        $evenementReeks = $this->evenementreeks_model->get($evenementReeksId); 
+        $evenementReeksId = $this->input->get('evenementReeksId'); 
 
         $this->load->model('evenement_model');
         $trainingen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
         
         foreach ($trainingen as $training) {
             $training->begindatum = zetOmNaarDDMMYYYY($training->begindatum);
+            $training->beginuur = zetOmNaarHHMM($training->beginuur);
+            if($training->einduur != null){$training->einduur = zetOmNaarHHMM($training->einduur);}
         }
 
         echo json_encode($trainingen);
@@ -113,7 +112,6 @@ class Evenement extends CI_Controller
                 $evenement->einddatum = $laatsteEvent->begindatum;
 
             } else{
-                var_dump($id);
                 $evenement = $this->evenement_model->get($id);
                 $evenementDeelnames = $this->evenementdeelname_model->getByEventId($id);
                 $data['id'] = $id;
@@ -152,7 +150,7 @@ class Evenement extends CI_Controller
         } else{$extraInfo = null;}
         $evenementTypeId = $this->input->post('type');
         $evenementReeksId = null;
-        $zwemmerIds = array_filter(explode(',', $this->input->post('zwemmers')));
+        $zwemmerIds = $this->input->post('zwemmers');
         $nieuw = $this->input->post('nieuw');
 
         $this->load->model('evenementreeks_model');
@@ -164,7 +162,11 @@ class Evenement extends CI_Controller
             }
             $evenementReeks->naam = $naam;
             $evenementReeksId = 0;
-            if(strcmp($nieuw,'false') == 0){
+            
+            //reeksen genereren
+            //$this->genereerReeks($this->input->post('begindatum'), $this->input->post('einddatum'), $days, $nieuw, );
+            
+            if(strcmp($nieuw, 'false') == 0){
                 $evenementIds = array_filter(explode(',', $this->input->post('ids')));
                 $evenementReeksId = $this->input->post('evenementreeksId');
                 $evenementReeks->id = $evenementReeksId;
@@ -223,7 +225,7 @@ class Evenement extends CI_Controller
         
         $this->load->model('evenement_model');
         
-        if(strcmp($evenementBestaat,'false') == 0){
+        if(strcmp($evenementBestaat, 'false') == 0){
             $evenementId = $this->evenement_model->insert($evenement);
             return $evenementId;
         } else{
@@ -244,14 +246,10 @@ class Evenement extends CI_Controller
         }
     }
 
-    private function genereerMeldingen($zwemmerIds, $evenementType, $evenementNaam, $isReeks)
-    {
-        //Variabelen
-        $boodschap = '';
-        $titel = '';
+    private function genereerMeldingen($zwemmerIds, $evenementType, $evenementNaam, $isReeks){
+        $boodschap = $titel = '';
         $this->load->model('evenementtype_model');
         $type = $this->evenementtype_model->get($evenementType)->type;
-        //Titels en boodschappen genereren
         if (!$isReeks) {
             if ($evenementType == 'overige') {
                 $titel = 'Nieuw evenement';
@@ -269,16 +267,7 @@ class Evenement extends CI_Controller
                 $boodschap = 'Er is een nieuwe reeks trainingen aan je schema toegevoegd: ' . $evenementNaam . '.';
             }
         }
-        $this->load->model('melding_model');
-        foreach ($zwemmerIds as $zwemmerId) {
-            $melding = new stdClass();
-            $melding->persoonId = $zwemmerId;
-            $melding->titel = $titel;
-            $melding->boodschap = $boodschap;
-            $melding->momentVerzonden = date("Y-m-d H:i:s");
-            $melding->gelezen = 0;
-            $this->melding_model->insert($melding);
-        }
+        $this->melding->genereerMeldingen($zwemmerIds, $boodschap, $titel);
     }
     
     public function verwijderEvenement(){
@@ -336,11 +325,7 @@ class Evenement extends CI_Controller
     
     public function bewerkEvenement(){ 
         $id = $this->input->post('evenementId');
-        if($this->input->post('reeksSoort') == 'trainingReeks'){
-            $typeId = 1;
-        } else{
-            $typeId = 4;
-        }
+        $typeId = $this->input->post('typeId');
         
         $this->laadEvenement($typeId, false, $id);
     }

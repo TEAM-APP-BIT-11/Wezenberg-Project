@@ -40,7 +40,11 @@ foreach($evenementen as $evenement){
                         $(lijst).html("");
                         var evenementen = jQuery.parseJSON(result);
                         for(var i = 0; i < evenementen.length; i++){
-                            $(lijst).append('<option value="' + evenementen[i].id +'">' + evenementen[i].begindatum + ': ' + evenementen[i].beginuur + ' - ' + evenementen[i].einduur + '</option>');
+                            if(evenementen[i].einduur !== null){
+                                $(lijst).append('<option value="' + evenementen[i].id +'">' + evenementen[i].begindatum + ' van ' + evenementen[i].beginuur + ' tot ' + evenementen[i].einduur + '</option>');
+                            } else {
+                                $(lijst).append('<option value="' + evenementen[i].id +'">' + evenementen[i].begindatum + ' om ' + evenementen[i].beginuur + '</option>');
+                            }
                         }
                     } catch(error){
                         alert("--- ERROR IN JSON --" + result);
@@ -102,6 +106,15 @@ foreach($evenementen as $evenement){
                 $('#medischForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
             }
             $('#medischForm').submit();
+        });
+        $('#stageControls button').click(function(e){
+            if($(e.target).text() === 'Stage verwijderen'){
+                $('#stageForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+            }
+            if($(e.target).text() === 'Stage bewerken'){
+                $('#stageForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+            }
+            $('#stageForm').submit();
         });
     });
 </script>
@@ -172,13 +185,18 @@ foreach($evenementen as $evenement){
         <h3>Medische testen beheren</h3>
         <hr>
         <form id="medischForm" method="POST">
+            <input name="typeId" value="2" hidden>
             <div class="row">
                 <div class="col-md-8 form-group">
                     <label for="evenementId">Medische Testen</label>
                     <select name="evenementId" class="form-control" id="testenLijst" multiple>
                         <?php
                         foreach($medischeTesten as $medischeTest){
-                            echo '<option value="' . $medischeTest->id . '">' . $medischeTest->naam . '</option>';
+                            if($medischeTest->einddatum != null){
+                                echo '<option value="' . $medischeTest->id . '">' . zetOmNaarDDMMYYYY($medischeTest->begindatum) . ': ' . $medischeTest->naam . ' om ' . zetOmNaarHHMM($medischeTest->beginuur) . '</option>';
+                            } else{
+                                echo '<option value="' . $medischeTest->id . '">' . zetOmNaarDDMMYYYY($medischeTest->begindatum) . ': ' . $medischeTest->naam . ' om ' . zetOmNaarHHMM($medischeTest->beginuur) . '</option>';
+                            }
                         }
                         ?>
                     </select>
@@ -200,22 +218,37 @@ foreach($evenementen as $evenement){
     <div id="stages" class="tab-pane fade">
         <h3>Stages beheren</h3>
         <hr>
-        <div class="row">
-            <div class="col-md-8 form-group">
-                <label for="stages">Stages</label>
-                <select name="stages" class="form-control" id="stageLijst" multiple>
-                    <?php
-                    foreach($stages as $stage){
-                        echo '<option>' . $stage->naam . '</option>';
-                    }
-                    ?>
-                </select>
-                <div id="stageControls" class="controls">
-                    <button class="btn btn-primary" type="button">Stage verwijderen</button>
-                    <button class="btn btn-primary" type="button">Stage bewerken</button>
+        <form id="stageForm" method="POST">
+            <input name="typeId" value="3" hidden>
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <label for="evenementId">Stages</label>
+                    <select name="evenementId" class="form-control" id="stageLijst" multiple>
+                        <?php
+                        foreach($stages as $stage){
+                            if($stage->einddatum != null){
+                                if($stage->einduur != null){
+                                    echo '<option value="' . $stage->id . '">' . zetOmNaarDDMMYYYY($stage->begindatum) . ' - ' . zetOmNaarDDMMYYYY($stage->einddatum) . ': ' . $stage->naam . ' van ' . zetOmNaarHHMM($stage->beginuur) . ' tot ' . zetOmNaarHHMM($stage->einduur) . '</option>';
+                                } else{
+                                    echo '<option value="' . $stage->id . '">' . zetOmNaarDDMMYYYY($stage->begindatum) . ' - ' . zetOmNaarDDMMYYYY($stage->einddatum) . ': ' . $stage->naam . ' om ' . zetOmNaarHHMM($stage->beginuur) . '</option>';
+                                }
+                            } else{
+                                if($stage->einduur != null){
+                                    echo '<option value="' . $stage->id . '">' . zetOmNaarDDMMYYYY($stage->begindatum) . ': ' . $stage->naam . ' van ' . zetOmNaarHHMM($stage->beginuur) . ' tot ' . zetOmNaarHHMM($stage->einduur) . '</option>';
+                                } else{
+                                    echo '<option value="' . $stage->id . '">' . zetOmNaarDDMMYYYY($stage->begindatum) . ': ' . $stage->naam . ' om ' . zetOmNaarHHMM($stage->beginuur) . '</option>';
+                                }
+                            }
+                        }
+                        ?>
+                    </select>
+                    <div id="stageControls" class="controls">
+                        <button class="btn btn-primary" type="button">Stage verwijderen</button>
+                        <button class="btn btn-primary" type="button">Stage bewerken</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="row">
             <div class="col-md-8 evenementToevoegen form-group">
                 <hr>

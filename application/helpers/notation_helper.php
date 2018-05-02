@@ -50,11 +50,12 @@ function zetOmNaarHHMMDDMMYYYY($input)
 function zetOmNaarHHMM($input)
 {
     $inputString = (string)$input;
-    if ($inputString = "") {
+    //var_dump($inputString);
+    if ($inputString == "") {
         return "";
     } else {
         $datum = strtotime($inputString);
-        return date('H:j', $datum);
+        return date('H:i', $datum);
     }
 }
 
