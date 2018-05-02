@@ -55,7 +55,7 @@ class Gebruiker extends CI_Controller
      * @see trainer/gebruiker_aanpassen.php
      * @see persoon_model::get()
      * @see typepersoon_model::getAll()
-     * @author NeDieter Verboven
+     * @author Dieter Verboven
      */
     public function aanpassen($id)
     {

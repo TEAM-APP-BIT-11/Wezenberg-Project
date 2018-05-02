@@ -65,23 +65,49 @@ class Welcome extends CI_Controller
 
     public function wijzig($id)
     {
-        $data['titel'] = "Profiel wijzigen";
+        $persoon = $this->authex->getPersoonInfo();
+        
+        
         $data['eindverantwoordelijke'] = "Dieter Verboven";
+        
+        
 
-        $this->load->model('persoon_model');
-        $data['persoon'] = $this->persoon_model->get($id);
-
-        $partials = array('hoofding' => 'main_header',
+        if($persoon->id == $id)
+        {
+            $data['titel'] = "Profiel wijzigen";
+            $this->load->model('persoon_model');
+            $data['persoon'] = $this->persoon_model->get($id);
+            $partials = array('hoofding' => 'main_header',
             'inhoud' => 'algemeen/profiel_beheren',
             'footer' => 'main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        
+        }
+        else
+        {
+            $data["titel"] = "Fout!";
+            $data['error'] = "Er is iets fout gelopen! U kan dit niet aanpassen!";
+                
+            $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'algemeen/fout_wijzigen',
+            'footer' => 'main_footer');
+        }
+        $this->template->load('main_master', $partials, $data); 
+       
     }
 
     function wachtwoord($id)
-    {
-        $data['titel'] = "Wachtwoord wijzigen";
+    {                
+        $persoon = $this->authex->getPersoonInfo();
+        
+        
         $data['eindverantwoordelijke'] = "Dieter Verboven";
+        
+        
+
+        if($persoon->id == $id)
+        {
+            $data['titel'] = "Wachtwoord wijzigen";
 
         $this->load->model('persoon_model');
         $data['persoon'] = $this->persoon_model->get($id);
@@ -89,7 +115,16 @@ class Welcome extends CI_Controller
         $partials = array('hoofding' => 'main_header',
             'inhoud' => 'algemeen/reset_wachtwoord',
             'footer' => 'main_footer');
-
+        }
+        else
+        {
+            $data["titel"] = "Fout!";
+            $data['error'] = "Er is iets fout gelopen! U kan dit niet aanpassen!";
+                
+            $partials = array('hoofding' => 'main_header',
+            'inhoud' => 'algemeen/fout_wijzigen',
+            'footer' => 'main_footer');
+        }
         $this->template->load('main_master', $partials, $data);
     }
 
