@@ -48,7 +48,7 @@ class Wedstrijd_model extends CI_Model
     * Retourneert alle records uit de tabel wedstrijd
     * @return Alle records
     */
-    
+
     public function getAll()
     {
         $query = $this->db->get('wedstrijd');
@@ -114,8 +114,13 @@ class Wedstrijd_model extends CI_Model
 
     public function delete($id)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('wedstrijd');
+      $this->db->where('id', $id);
+      if(!$this->db->delete('wedstrijd')){
+        $errors = $this->db->error();
+        if($errors){
+          return "Verwijderen mislukt! Er hangen nog wedstrijdreeksen aan de wedstrijd";
+        }
+      }
     }
 
     /*

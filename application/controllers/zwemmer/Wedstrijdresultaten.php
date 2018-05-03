@@ -66,7 +66,6 @@ class wedstrijdresultaten extends CI_Controller
     public function haalAjaxOp_Resultaten()
     {
         $persoon = $this->authex->getPersoonInfo();
-
         $wedstrijdId = $this->input->get('id');
 
         $this->load->model('wedstrijdreeks_model');

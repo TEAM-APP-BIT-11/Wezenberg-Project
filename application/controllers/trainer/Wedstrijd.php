@@ -51,6 +51,7 @@ class Wedstrijd extends CI_Controller
         $data['titel'] = 'Wedstrijden beheren';
         $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
+        $data['error'] = "";
 
         $this->load->model('wedstrijd_model');
         $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
@@ -142,10 +143,19 @@ class Wedstrijd extends CI_Controller
 
     public function verwijder($id)
     {
-        $this->load->model('wedstrijd_model');
-        $this->wedstrijd_model->delete($id);
+        $data['titel'] = 'Wedstrijden beheren';
+        $data['eindverantwoordelijke'] = "Stef Schoeters";
+        $data['persoon'] = $this->authex->getPersoonInfo();
 
-        return $this->beheren();
+        $this->load->model('wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
+
+        $this->load->model('wedstrijd_model');
+        $data['error'] = $this->wedstrijd_model->delete($id);
+
+        $partials = array('inhoud' => 'trainer/wedstrijden_beheren',
+            'footer' => 'main_footer');
+        $this->template->load('main_master', $partials, $data);
     }
 
     public function resultaten()

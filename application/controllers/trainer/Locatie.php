@@ -51,10 +51,10 @@ class Locatie extends CI_Controller
         $data['titel'] = 'Locaties beheren';
         $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
+        $data['error'] = "";
 
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
-        $data['msg'] = "";
 
         $partials = array(
             'inhoud' => 'trainer/locatie_beheren',
@@ -138,7 +138,7 @@ class Locatie extends CI_Controller
     {
         $this->load->model('locatie_model');
         $data['eindverantwoordelijke'] = "Stef Schoeters";
-        $data['msg'] = $this->locatie_model->delete($id);
+        $data['error'] = $this->locatie_model->delete($id);
 
         $data['titel'] = 'Locaties beheren';
         $data['persoon'] = $this->authex->getPersoonInfo();
@@ -151,7 +151,7 @@ class Locatie extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function haalJsonOp_Locaties() {
         $locatie = new stdClass();
 
@@ -166,8 +166,8 @@ class Locatie extends CI_Controller
 
         $this->load->model('locatie_model');
         $this->locatie_model->insert($locatie);
-        
-        $locaties = $this->locatie_model->getAll(); 
+
+        $locaties = $this->locatie_model->getAll();
 
         echo json_encode($locaties);
     }

@@ -10,6 +10,15 @@
 <hr>
 <h3>Wedstrijden</h3>
 
+<?php
+if ($error != null) {
+    echo '<div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    '. $error .'
+  </div>';
+}
+?>
+
 <table class="table">
     <tr>
         <th>Naam</th>

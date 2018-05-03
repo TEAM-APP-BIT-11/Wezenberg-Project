@@ -1,5 +1,4 @@
 <script>
-//Locatie toevoegen
 $(document).ready(function () {
   $("#locatieOpslaan").click(function(){
 			var naam = $("input[name=locatieNaam]").val();

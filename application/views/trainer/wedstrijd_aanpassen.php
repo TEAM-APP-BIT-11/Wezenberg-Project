@@ -1,5 +1,4 @@
 <script>
-//Locatie toevoegen
 $(document).ready(function () {
   $("#locatieOpslaan").click(function(){
 			var naam = $("input[name=locatieNaam]").val();
@@ -10,7 +9,15 @@ $(document).ready(function () {
 				$('#errorZin').text("Gelieven naam in te vullen aub");
 			}
   });
+
+  $("#reeksKnop").click(function(){
+      var id = $("input[name=id]").val();
+      console.log('test');
+      document.location.href = site_url + '/trainer/Wedstrijdreeks/toevoegen/' + id;
+    });
+
 });
+
 function schrijfLocatieWegEnHaalLocatiesOp(){
 $.ajax({type: "GET",
         url : site_url + "/trainer/Locatie/haalJsonOp_Locaties",
@@ -112,6 +119,8 @@ $.ajax({type: "GET",
     echo '<th>Datum</th>';
     echo '<th>Beginuur</th>';
     echo '<th>Einduur</th>';
+    echo '<th>Slag</th>';
+    echo '<th>Afstand</th>';
     echo '<th>Actie</th>';
     echo '</tr>';
 
@@ -121,12 +130,18 @@ $.ajax({type: "GET",
 						<td>" . $wedstrijdreeks->datum . "</td>
 						<td>" . $wedstrijdreeks->beginuur . "</td>
 						<td>" . $wedstrijdreeks->einduur . "</td>
+            <td>" . $wedstrijdreeks->slag->naam . "</td>
+						<td>" . $wedstrijdreeks->afstand->afstand . "</td>
 						<td>" . anchor('trainer/wedstrijdreeks/aanpassen/' . $wedstrijdreeks->id, 'Aanpassen') . ' ' .
-        anchor('trainer/wedstrijdreeks/verwijder/' . $wedstrijdreeks->id, 'Verwijderen') . "</td>
+            anchor('trainer/wedstrijdreeks/verwijder/' . $wedstrijdreeks->id . '/' .$wedstrijdreeks->wedstrijdId, 'Verwijderen') . "</td>
 					</tr>";
     }
     echo '</table>';
+    echo '<div id="reeksKnop">
+				<button type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+		</div>';
 
+    echo '</br>';
     echo form_hidden('id', $wedstrijd->id);
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();

@@ -60,13 +60,11 @@ class Locatie_model extends CI_Model {
 	public function delete($id)
 	{
 			$this->db->where('id', $id);
-			if (!$this->db->delete('locatie')) {
-					$error = $this->db->error();
-					$msg = "Locatie heeft evenement!";
-					return $msg;
-			} else {
-					$msg = "Locatie verwijderd!";
-					return $msg;
+			if(!$this->db->delete('locatie')){
+				$errors = $this->db->error();
+				if($errors){
+					return "Verwijderen mislukt! Er hangen nog wedstrijden aan de locatie";
+				}
 			}
 	}
 

@@ -29,13 +29,17 @@
   	echo form_input(array('name' => 'reeksBeginuur',
   			'id' => 'reeksBeginuur',
   			'class' => 'form-control',
-  			'required' => 'required',));
+  			'required' => 'required',
+				'type' => 'time',));
+
   	echo '</br>';
   	echo form_labelpro('Einduur', 'einduur');
   	echo form_input(array('name' => 'reeksEinduur',
   			'id' => 'reeksEinduur',
   			'class' => 'form-control',
-  			'required' => 'required',));
+  			'required' => 'required',
+				'type' => 'time',));
+
   	echo '</br>';
   	echo form_labelpro('Afstand', 'afstand');
   	echo form_dropdown('afstand', $afstandOpties);

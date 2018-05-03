@@ -25,20 +25,25 @@
   			'class' => 'form-control',
   			'required' => 'required',
         'type' => 'date',));
+
   	echo '</br>';
   	echo form_labelpro('Beginuur', 'beginuur');
   	echo form_input(array('name' => 'reeksBeginuur',
   			'id' => 'reeksBeginuur',
         'value' => $wedstrijdreeks->beginuur,
   			'class' => 'form-control',
-  			'required' => 'required',));
+  			'required' => 'required',
+				'type' => 'time',));
+
   	echo '</br>';
   	echo form_labelpro('Einduur', 'einduur');
   	echo form_input(array('name' => 'reeksEinduur',
   			'id' => 'reeksEinduur',
         'value' => $wedstrijdreeks->einduur,
   			'class' => 'form-control',
-  			'required' => 'required',));
+  			'required' => 'required',
+				'type' => 'time',));
+
   	echo '</br>';
   	echo form_labelpro('Afstand', 'afstand');
   	echo form_dropdown('afstand', $afstandOpties);

@@ -76,13 +76,13 @@ class Wedstrijdreeks extends CI_Controller
       $wedstrijdreeks->einduur = $this->input->post('reeksEinduur');
       $wedstrijdreeks->afstandId = $this->input->post('afstand');
       $wedstrijdreeks->slagId = $this->input->post('slag');
-      $wedstrijdreeks->wedstrijdId = $this->input->post('id');
-
+      $wedstrijdId = $this->input->post('id');
+      $wedstrijdreeks->wedstrijdId = $wedstrijdId;
       $this->load->model('wedstrijdreeks_model');
       $wedstrijdreeks = $this->wedstrijdreeks_model->insert($wedstrijdreeks);
       $data['id'] = $wedstrijdreeks;
 
-      redirect('trainer/Wedstrijd/beheren');
+      redirect('trainer/Wedstrijd/aanpassen/'. $wedstrijdId .'');
     }
 
     public function aanpassen($id)
@@ -121,14 +121,15 @@ class Wedstrijdreeks extends CI_Controller
       $this->load->model('wedstrijdreeks_model');
       $this->wedstrijdreeks_model->update($wedstrijdreeks);
 
-      redirect('trainer/Wedstrijd/beheren');
+      redirect('trainer/Wedstrijd/aanpassen/'. $wedstrijdreeks->wedstrijdId .'');
     }
 
 
-    public function verwijder($id)
+    public function verwijder($id, $wedstrijdId)
     {
       $this->load->model('wedstrijdreeks_model');
       $this->wedstrijdreeks_model->delete($id);
-      redirect('trainer/Wedstrijd/beheren');
+
+      redirect('trainer/Wedstrijd/aanpassen/'. $wedstrijdId .'');
     }
 }
