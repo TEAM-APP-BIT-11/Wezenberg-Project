@@ -97,7 +97,7 @@ $.ajax({type: "GET",
 
     echo '</br>';
     echo form_labelpro('Locatie', 'locatie');
-    echo form_dropdown('locatie', $locatieOpties, '', 'id="locaties"');
+    echo form_dropdown('locatie', $locatieOpties, $wedstrijd->locatieId, 'id="locaties"');
 
     echo '<div id="locatieKnop">
         <button type="button" data-toggle="modal" data-target="#locatieModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>

@@ -46,10 +46,10 @@
 
   	echo '</br>';
   	echo form_labelpro('Afstand', 'afstand');
-  	echo form_dropdown('afstand', $afstandOpties);
+  	echo form_dropdown('afstand', $afstandOpties, $wedstrijdreeks->afstandId);
   	echo '</br>';
   	echo form_labelpro('Slag', 'slag');
-  	echo form_dropdown('slag', $slagOpties);
+  	echo form_dropdown('slag', $slagOpties, $wedstrijdreeks->slagId);
   	echo '</br>';
 
   echo form_hidden('id', $wedstrijdreeks->id);
