@@ -110,6 +110,7 @@ class Wedstrijd extends CI_Controller
         $wedstrijd->naam = $this->input->post('naam');
         $wedstrijd->locatieId = $this->input->post('locatie');
         $wedstrijd->begindatum = $this->input->post('begindatum');
+        $datum = $this->input->post('begindatum');
         $wedstrijd->einddatum = $this->input->post('einddatum');
         $wedstrijd->extraInfo = $this->input->post('extraInfo');
 
@@ -120,8 +121,9 @@ class Wedstrijd extends CI_Controller
         $this->load->model('persoon_model');
         $this->melding->genereerMeldingen($this->persoon_model->getZwemmers(), 'Er is een nieuwe wedstrijd ' . $wedstrijd->naam . ' toegevoegd', 'Nieuwe Wedstrijd');
 
-        return $this->beheren();
-        // var_dump($wedstrijd);
+        $date = new DateTime($datum);
+        // return $this->beheren();
+        var_dump($date->getTimestamp());
     }
 
     public function pasAan()
@@ -161,7 +163,7 @@ class Wedstrijd extends CI_Controller
     public function resultaten()
     {
         $data['titel'] = 'Wedstrijdresultaten beheren';
-        $data['eindverantwoordelijke'] = "Stef Schoeters";
+        $data['eindverantwoordelijke'] = "";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');

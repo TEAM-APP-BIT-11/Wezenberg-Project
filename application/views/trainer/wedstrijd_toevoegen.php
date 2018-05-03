@@ -114,7 +114,7 @@ $.ajax({type: "GET",
     echo form_close();
 
   	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
-    echo '</div>';    
+    echo '</div>';
   	?>
 
 	<div id="locatieModal" class="modal fade" role="dialog">
