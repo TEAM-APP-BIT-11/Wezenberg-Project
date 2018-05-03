@@ -143,11 +143,12 @@ $.ajax({type: "GET",
 
     echo '</br>';
     echo form_hidden('id', $wedstrijd->id);
+    echo '<div>';
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
+    echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+    echo '</div>';
     ?>
-    <?php echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-
     <div id="locatieModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

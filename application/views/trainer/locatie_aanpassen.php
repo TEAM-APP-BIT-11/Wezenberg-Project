@@ -75,9 +75,12 @@
         'required' => 'required',));
 
     echo form_hidden('id', $locatie->id);
+		echo '<div>';
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
-    ?>
-<?php echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
+
+		echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+    echo '</div>';
+		?>
 </form>
 </div>

@@ -65,9 +65,11 @@
 						'class' => 'form-control',
 		        'required' => 'required',));
 
+				echo '<div>';
 		    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
 		    echo form_close();
 
 				echo anchor('trainer/Locatie/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+				echo '</div>';
 				?>
 </div>

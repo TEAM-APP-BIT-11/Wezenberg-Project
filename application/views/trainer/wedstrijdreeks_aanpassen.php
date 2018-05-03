@@ -54,9 +54,11 @@
 
   echo form_hidden('id', $wedstrijdreeks->id);
   echo form_hidden('wedstrijdId', $wedstrijdreeks->wedstrijdId);
+	echo '<div>';
   echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
   echo form_close();
 
 	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+	echo '</div>';
 	?>
 </div>
