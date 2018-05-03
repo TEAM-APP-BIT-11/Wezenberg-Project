@@ -143,6 +143,8 @@ $.ajax({type: "GET",
 
     echo '</br>';
     echo form_hidden('id', $wedstrijd->id);
+
+    echo '</br>';
     echo '<div>';
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();

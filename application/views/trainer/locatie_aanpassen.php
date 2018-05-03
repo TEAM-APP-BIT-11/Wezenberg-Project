@@ -76,6 +76,7 @@
 
     echo form_hidden('id', $locatie->id);
 		echo '<div>';
+		echo '</br>';
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
 

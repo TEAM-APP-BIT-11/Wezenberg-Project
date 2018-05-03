@@ -52,13 +52,15 @@
   	echo form_dropdown('slag', $slagOpties, $wedstrijdreeks->slagId);
   	echo '</br>';
 
-  echo form_hidden('id', $wedstrijdreeks->id);
-  echo form_hidden('wedstrijdId', $wedstrijdreeks->wedstrijdId);
-	echo '<div>';
-  echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
-  echo form_close();
+	  echo form_hidden('id', $wedstrijdreeks->id);
+	  echo form_hidden('wedstrijdId', $wedstrijdreeks->wedstrijdId);
 
-	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
-	echo '</div>';
-	?>
+		echo '</br>';
+		echo '<div>';
+	  echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
+	  echo form_close();
+
+		echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+		echo '</div>';
+		?>
 </div>

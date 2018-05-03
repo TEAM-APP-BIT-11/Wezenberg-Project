@@ -109,12 +109,13 @@ $.ajax({type: "GET",
         'required' => 'required',));
 
 	  echo '</br>';
+    echo '<div>';
+    echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
+    echo form_close();
 
-  echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');
-  echo form_close();
-
-	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
-	?>
+  	echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+    echo '</div>';    
+  	?>
 
 	<div id="locatieModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
