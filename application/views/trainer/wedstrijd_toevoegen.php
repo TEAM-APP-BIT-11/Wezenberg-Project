@@ -54,6 +54,13 @@ $.ajax({type: "GET",
 
 		<?php
 
+    if($error != ""){
+      echo '<div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      '. $error .'
+    </div>';
+    }
+
     foreach ($afstanden as $afstand ) {
         $afstandOpties[$afstand->id] = $afstand->afstand;
     }
@@ -90,7 +97,6 @@ $.ajax({type: "GET",
     echo form_input(array('name' => 'einddatum',
         'id' => 'einddatum',
         'class' => 'form-control',
-        'required' => 'required',
         'type' => 'date',));
 
     echo '</br>';
@@ -105,8 +111,7 @@ $.ajax({type: "GET",
     echo form_labelpro('Extra informatie', 'extra informatie');
     echo form_input(array('name' => 'extraInfo',
         'id' => 'extraInfo',
-        'class' => 'form-control',
-        'required' => 'required',));
+        'class' => 'form-control',));
 
 	  echo '</br>';
     echo '<div>';

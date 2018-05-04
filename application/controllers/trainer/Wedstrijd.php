@@ -82,11 +82,17 @@ class Wedstrijd extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function toevoegen()
+    public function toevoegen($error)
     {
         $data['titel'] = 'Wedstrijd toevoegen';
         $data['eindverantwoordelijke'] = "Stef Schoeters";
         $data['persoon'] = $this->authex->getPersoonInfo();
+
+        if($error == "nieuw"){
+          $data['error'] = "";
+        }else{
+        $data['error'] = $error;
+        }
 
         $this->load->model('locatie_model');
         $data['locaties'] = $this->locatie_model->getAll();
@@ -109,21 +115,52 @@ class Wedstrijd extends CI_Controller
 
         $wedstrijd->naam = $this->input->post('naam');
         $wedstrijd->locatieId = $this->input->post('locatie');
-        $wedstrijd->begindatum = $this->input->post('begindatum');
-        $datum = $this->input->post('begindatum');
-        $wedstrijd->einddatum = $this->input->post('einddatum');
+
+        $beginDatum = $this->input->post('begindatum');
+        $wedstrijd->begindatum = $beginDatum;
+
+        $eindDatum = $this->input->post('einddatum');
+        $wedstrijd->einddatum = $eindDatum;
+
         $wedstrijd->extraInfo = $this->input->post('extraInfo');
 
-        $this->load->model('wedstrijd_model');
-        $wedstrijdId = $this->wedstrijd_model->insert($wedstrijd);
-        $data['id'] = $wedstrijdId;
+        if($beginDatum != ""){
+          $NieuweBeginDatum = new DateTime($beginDatum);
+          $NieuweBeginDatumTime = $NieuweBeginDatum->getTimestamp();
+        }else{
+          $NieuweBeginDatumTime = 0;
+        }
 
-        $this->load->model('persoon_model');
-        $this->melding->genereerMeldingen($this->persoon_model->getZwemmers(), 'Er is een nieuwe wedstrijd ' . $wedstrijd->naam . ' toegevoegd', 'Nieuwe Wedstrijd');
+        if($eindDatum != ""){
+          $NieuweEindDatum = new DateTime($eindDatum);
+          $NieuweEindDatumTime = $NieuweEindDatum->getTimestamp();
+        }else{
+          $NieuweEindDatumTime = 0;
+        }
 
-        $date = new DateTime($datum);
-        // return $this->beheren();
-        var_dump($date->getTimestamp());
+        if($NieuweBeginDatumTime != 0 & $NieuweEindDatumTime != 0){
+          if($NieuweBeginDatumTime <= $NieuweEindDatumTime){
+            $this->load->model('wedstrijd_model');
+            $wedstrijdId = $this->wedstrijd_model->insert($wedstrijd);
+            $data['id'] = $wedstrijdId;
+
+            $this->load->model('persoon_model');
+            $this->melding->genereerMeldingen($this->persoon_model->getZwemmers(), 'Er is een nieuwe wedstrijd ' . $wedstrijd->naam . ' toegevoegd', 'Nieuwe Wedstrijd');
+            return $this->beheren();
+          }else{
+            $error = "Toevoegen mislukt! De einddatum valt voor de begindatum";
+            return $this->toevoegen($error);
+          }
+        }else{
+          $this->load->model('wedstrijd_model');
+          $wedstrijdId = $this->wedstrijd_model->insert($wedstrijd);
+          $data['id'] = $wedstrijdId;
+
+          $this->load->model('persoon_model');
+          $this->melding->genereerMeldingen($this->persoon_model->getZwemmers(), 'Er is een nieuwe wedstrijd ' . $wedstrijd->naam . ' toegevoegd', 'Nieuwe Wedstrijd');
+          return $this->beheren();
+        }
+
     }
 
     public function pasAan()

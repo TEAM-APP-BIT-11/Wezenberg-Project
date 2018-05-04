@@ -41,7 +41,6 @@
   			'id' => 'reeksEinduur',
         'value' => $wedstrijdreeks->einduur,
   			'class' => 'form-control',
-  			'required' => 'required',
 				'type' => 'time',));
 
   	echo '</br>';

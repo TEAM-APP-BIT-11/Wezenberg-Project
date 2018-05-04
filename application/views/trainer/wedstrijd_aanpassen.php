@@ -92,7 +92,6 @@ $.ajax({type: "GET",
         'id' => 'einddatum',
         'value' => $wedstrijd->einddatum,
         'class' => 'form-control',
-        'required' => 'required',
         'type' => 'date',));
 
     echo '</br>';

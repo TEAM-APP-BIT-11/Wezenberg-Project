@@ -37,7 +37,6 @@
   	echo form_input(array('name' => 'reeksEinduur',
   			'id' => 'reeksEinduur',
   			'class' => 'form-control',
-  			'required' => 'required',
 				'type' => 'time',));
 
   	echo '</br>';
@@ -49,7 +48,7 @@
   	echo '</br>';
 
 	  echo form_hidden('id', $wedstrijd->id);
-		
+
 		echo '</br>';
 		echo '<div>';
 	  echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');

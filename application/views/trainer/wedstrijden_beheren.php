@@ -44,4 +44,4 @@ if ($error != null) {
     ?>
 
 </table>
-<?php echo anchor('trainer/wedstrijd/toevoegen/', 'Voeg een nieuwe wedstrijd toe', 'class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Met deze actie kan je een nieuwe wedstrijd toevoegen"'); ?>
+<?php echo anchor('trainer/wedstrijd/toevoegen/nieuw', 'Voeg een nieuwe wedstrijd toe', 'class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Met deze actie kan je een nieuwe wedstrijd toevoegen"'); ?>
