@@ -19,6 +19,21 @@
             url: site_url + "/zwemmer/Agenda/haalAjaxOp_Innames",
             data: {datum: datum},
             success: function (result) {
+                $("#resultaatLocatie").html(result);
+                $('#mijnLocatieschermscherm').modal('show');
+            },
+            error: function (xhr, status, error) {
+                alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+            }
+        });
+    }
+
+    function haalLocatieOp(id) {
+        $.ajax({
+            type: "GET",
+            url: site_url + "/zwemmer/Agenda/haalLocatieOp",
+            data: {id: id},
+            success: function (result) {
                 $("#resultaat").html(result);
                 $('#mijnDialoogscherm').modal('show');
             },
@@ -71,7 +86,7 @@
                     var eind = moment(calEvent.end.toString());
                     $('#eind').html(eind.utcOffset(0).format("DD/MM/YYYY HH:mm"));
                     $('#titel').html(calEvent.title);
-                    $('#locatie').html(calEvent.locatie);
+                    $('#locatie').html(calEvent.locatie).attr("data-id", calEvent.locatieId);
                     $('#extra').html(calEvent.description);
                     $('#mijnDetailscherm').modal('show');
                 }
@@ -86,6 +101,13 @@
                 $("#datum").html(DateCreated.format("MM-DD-YYYY"));
 
             })
+        );
+
+        $("body").on('click', '#locatie', (function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                haalLocatieOp(id);
+            })
         )
         ;
     })
@@ -93,7 +115,7 @@
 
 </script>
 
-<h1>Agenda - <?php echo ucfirst($zwemmer->voornaam) . " " . ucwords($zwemmer->familienaam)?></h1>
+<h1>Agenda - <?php echo ucfirst($zwemmer->voornaam) . " " . ucwords($zwemmer->familienaam) ?></h1>
 
 <div id="calendar">
 </div>
@@ -109,6 +131,27 @@
             <div class="modal-body">
                 <p>
                 <div id="resultaat"></div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class=" modal fade" id="mijnLocatiescherm" role="dialog">
+    <div class="modal-dialog">
+        <!-- Inhoud dialoogvenster-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="locatietitel"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div id="resultaatLocatie"></div>
                 </p>
             </div>
             <div class="modal-footer">
@@ -144,10 +187,8 @@
                     </tr>
                     <tr>
                         <td>Locatie</td>
-                        <td><span id="locatie"></span></td>
+                        <td><a id="locatie"></a></td>
                     </tr>
-
-
                 </table>
                 </p>
             </div>

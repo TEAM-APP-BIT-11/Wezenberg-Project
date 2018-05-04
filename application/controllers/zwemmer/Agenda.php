@@ -131,6 +131,7 @@ class Agenda extends CI_Controller
                 "end" => $wedstrijddeelname->wedstrijd->einddatum . ' ' . "23:59:00",
                 "start" => $wedstrijddeelname->wedstrijd->begindatum . ' ' . "00:00:00",
                 "locatie" => $wedstrijddeelname->wedstrijd->locatie->naam,
+                "locatieId" => $wedstrijddeelname->wedstrijd->locatieId,
                 "color" => "green"
             );
         }
@@ -153,6 +154,7 @@ class Agenda extends CI_Controller
                 "end" => $evenementdeelname->evenement->einddatum . ' ' . $evenementdeelname->evenement->einduur,
                 "start" => $evenementdeelname->evenement->begindatum . ' ' . $evenementdeelname->evenement->beginuur,
                 "locatie" => $evenementdeelname->evenement->locatie->naam,
+                "locatieId" => $evenementdeelname->evenement->locatieId,
                 "color" => $kleuren[($evenementdeelname->evenement->evenementTypeId - 1)]
             );
         }
