@@ -160,6 +160,15 @@ class Agenda extends CI_Controller
         return json_encode($data_events);
     }
     
+    /**
+     * @param locatieId De id van de locatie waarvan de gegevens moeten opgehaald worden.
+     * Geeft de gegevens van een locatie weer.
+     * @return locatiegegevens van die locatie.
+     * @see ajax_locatie.php
+     * @see locatie_model::get()
+     * @author Dieter Verboven
+     */
+    
     public function haalLocatieOp($locatieId)
     {
         $this->load->model("locatie_model");
