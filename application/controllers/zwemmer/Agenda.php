@@ -70,9 +70,9 @@ class Agenda extends CI_Controller
         $data['innames'] = json_encode($innamesarray);
 
         $data['datums'] = $this->agendaItems($id);
-        
+
         $this->load->model('persoon_model');
-        
+
         $data['zwemmer'] = $this->persoon_model->get($id);
 
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
@@ -152,7 +152,7 @@ class Agenda extends CI_Controller
                 "description" => $evenementdeelname->evenement->naam,
                 "end" => $evenementdeelname->evenement->einddatum . ' ' . $evenementdeelname->evenement->einduur,
                 "start" => $evenementdeelname->evenement->begindatum . ' ' . $evenementdeelname->evenement->beginuur,
-                "locatie" => $evenementdeelname->evenement->locatieId,
+                "locatie" => $evenementdeelname->evenement->locatie->naam,
                 "color" => $kleuren[($evenementdeelname->evenement->evenementTypeId - 1)]
             );
         }

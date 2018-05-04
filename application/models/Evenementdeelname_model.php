@@ -120,9 +120,11 @@ class Evenementdeelname_model extends CI_Model
         $evenementdeelnames = $query->result();
 
         $this->load->model('evenement_model');
+        $this->load->model('locatie_model');
 
         foreach ($evenementdeelnames as $evenementdeelname) {
             $evenementdeelname->evenement = $this->evenement_model->get($evenementdeelname->evenementId);
+            $evenementdeelname->evenement->locatie = $this->locatie_model->get($evenementdeelname->evenement->locatieId);
         }
 
         return $evenementdeelnames;

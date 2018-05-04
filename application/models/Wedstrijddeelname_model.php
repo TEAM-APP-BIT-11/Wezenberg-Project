@@ -227,8 +227,8 @@ class Wedstrijddeelname_model extends CI_Model
             foreach ($wedstrijdreeksen as $wedstrijdreeks) {
                 if ($wedstrijdreeks->id == $wedstrijddeelname->wedstrijdReeksId) {
                     $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
-                    if(!empty($wedstrijddeelname->resultaatId)){
-                      $wedstrijddeelname->resultaat = $this->resultaat_model->getWithRondetypeById($wedstrijddeelname->resultaatId);
+                    if (!empty($wedstrijddeelname->resultaatId)) {
+                        $wedstrijddeelname->resultaat = $this->resultaat_model->getWithRondetypeById($wedstrijddeelname->resultaatId);
                     }
                 }
             }
@@ -276,7 +276,6 @@ class Wedstrijddeelname_model extends CI_Model
             if ($deelname->resultaatId != NULL) {
                 $deelname->resultaat = $this->resultaat_model->getWithRondetypeById($deelname->resultaatId);
             }
-
         }
         return $wedstrijddeelnamens;
     }
@@ -303,8 +302,8 @@ class Wedstrijddeelname_model extends CI_Model
         }
 
     }
-    
-    
+
+
     public function getDeelnemers($id)
     {
         $this->db->where('resultaatId', $id);
@@ -315,11 +314,11 @@ class Wedstrijddeelname_model extends CI_Model
 
         foreach ($deelnemers as $deelnemer) {
             $deelnemer->persoon = $this->persoon_model->get($deelnemer->persoonId);
-       }
+        }
 
         return $deelnemers;
     }
-    
+
     public function getZwemmers()
     {
         $query = $this->db->get('wedstrijddeelname');
@@ -329,7 +328,7 @@ class Wedstrijddeelname_model extends CI_Model
 
         foreach ($deelnemers as $deelnemer) {
             $deelnemer->persoon = $this->persoon_model->getZwemmers();
-       }
+        }
 
         return $deelnemers;
     }
