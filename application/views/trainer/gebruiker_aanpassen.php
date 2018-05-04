@@ -97,15 +97,15 @@
         'value' => $persoon->gebruikersnaam,
         'class' => 'form-control',
         'required' => 'required'));
-
-    echo '</br>';
-
     echo form_hidden('id', $persoon->id);
-    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
-    echo form_close();
-    ?>
-    <?php echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
+    echo '<div>';
+				echo '</br>';
+		    echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
+		    echo form_close();
+
+				echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"'));
+				echo '</div></br>';
+                                
+				?>
 
 </div>

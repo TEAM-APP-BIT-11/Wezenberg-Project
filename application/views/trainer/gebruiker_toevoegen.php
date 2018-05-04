@@ -88,13 +88,13 @@
         'class' => 'form-control',
         'required' => 'required'));
 
-    echo '</br>';
+    echo '<div>';
+				echo '</br>';
+		    echo form_submit('knop', 'Voeg toe', 'class="btn btn-primary"');
+		    echo form_close();
 
-    echo form_submit('knop', 'Voeg toe', 'class="btn btn-primary"');
-    echo form_close();
-    ?>
-    <?php echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
+				echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"'));
+				echo '</div></br>';
+				?>
 
 </div>

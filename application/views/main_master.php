@@ -113,8 +113,8 @@
         } else {
 
             echo activeAnchor('zwemmer/Home', 'Home', '');
-            echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven Wedstrijd', '');
-            echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda Raadplegen', '');
+            echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven wedstrijd', '');
+            echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda raadplegen', '');
             echo activeAnchor('zwemmer/Wedstrijdresultaten/bekijken', 'Resultaten bekijken', '');
             echo activeAnchor('Welcome/wijzig/' . $persoon->id, 'Mijn informatie beheren', '');
         }
