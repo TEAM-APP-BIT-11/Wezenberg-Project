@@ -159,4 +159,14 @@ class Agenda extends CI_Controller
 
         return json_encode($data_events);
     }
+    
+    public function haalLocatieOp($locatieId)
+    {
+        $this->load->model("locatie_model");
+
+        $persoon = $this->authex->getPersoonInfo();
+        $data["locatie"] = $this->locatie_model->get($locatieId);
+
+        $this->load->view('zwemmer/ajax_locatie', $data);
+    }
 }
