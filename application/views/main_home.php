@@ -17,22 +17,26 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <!--Bootstrap datetimepicker script & style-->
-    <link rel="stylesheet"
-          href="<?php echo base_url(); ?>resources/css/bootstrap-datetimepicker.min.css"/>
-
-    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
-    <script type="text/javascript"
-            src="http://localhost:8080/Wezenberg-Project/resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript"
-            src="http://localhost:8080/Wezenberg-Project/resources/js/bootstrap-datetimepicker.min.js"></script>
-
     <title> <?php echo $titel; ?> </title>
 
     <script type="text/javascript">
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
+    
+    <base href="<?php echo base_url();?>" />
+
+    <!--Bootstrap datetimepicker script & style-->
+    <link rel="stylesheet" href="resources/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="resources/css/stijl.css"/>
+    <script src="resources/js/moment-with-locales.js"></script>
+    <script src="resources/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!--Agenda js en css-->
+    <link rel="stylesheet" href="resources/css/fullcalendar.min.css"/>
+    <script src="resources/js/moment.min.js"></script>
+    <script src="resources/js/fullcalendar.min.js"></script>
+    <script src="resources/js/gcal.js"></script>
 
 </head>
 <body>
