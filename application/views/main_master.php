@@ -102,7 +102,7 @@
         echo '<ul class="nav nav-pills nav-stacked" > ';
         if ($persoon->typePersoon->typePersoon == "trainer") {
 
-            echo activeAnchor('trainer/Home', 'Home');
+            echo activeAnchor('trainer/Home/index', 'Home');
             echo activeAnchor('trainer/Evenement/beheren', 'Evenementen beheren', '');
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
             echo activeAnchor('trainer/Locatie/beheren', 'Locatie beheren', '');
@@ -112,8 +112,8 @@
             echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
             echo activeAnchor('trainer/Startpagina/beheren', 'Startpagina beheren', '');
+            echo activeAnchor('trainer/Home/agenda', 'Agenda zwemmers bekijken', '');
         } else {
-
             echo activeAnchor('zwemmer/Home', 'Home', '');
             echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven wedstrijd', '');
             echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda raadplegen', '');

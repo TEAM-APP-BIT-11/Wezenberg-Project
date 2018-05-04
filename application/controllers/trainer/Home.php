@@ -57,7 +57,7 @@ class Home extends CI_Controller
     public function index()
     {
         $data['titel'] = 'Home van de Trainer';
-        $data['eindverantwoordelijke'] = "Iemand";
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
         $persoon = $this->authex->getPersoonInfo();
 
         // moet variabele worden uit de sessie na het inloggen.
@@ -67,6 +67,22 @@ class Home extends CI_Controller
 
         $partials = array(
             'inhoud' => 'trainer/home',
+            'footer' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+
+    public function agenda()
+    {
+        $data['titel'] = 'Home van de Trainer';
+        $data['eindverantwoordelijke'] = "Neil Van den Broeck";
+
+        $this->load->model("persoon_model");
+
+        $data["zwemmers"] = $this->persoon_model->getZwemmers();
+
+        $partials = array(
+            'inhoud' => 'trainer/agenda',
             'footer' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);

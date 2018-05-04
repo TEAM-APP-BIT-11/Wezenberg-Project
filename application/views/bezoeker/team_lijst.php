@@ -18,6 +18,7 @@
         }
     }
     ?>
+
 </div>
 <a href="javascript:history.go(-1);">
     <button type="button" class="btn btn-secundary">Terug</button>
