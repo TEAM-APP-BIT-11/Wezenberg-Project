@@ -156,7 +156,7 @@ class Welcome extends CI_Controller
         $persoon->foto = $fotonaam;
 
         $config['upload_path'] = './resources/img/personen/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'jpg';
         $config['max_size'] = 2000;
         $config['file_name'] = $fotonaam;
         $config['overwrite'] = TRUE;
