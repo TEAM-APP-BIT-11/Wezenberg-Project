@@ -32,9 +32,9 @@
 
     <!--Agenda js en css-->
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/fullcalendar.min.css"/>
-    <script src="<?php echo base_url() ?>resources/js/moment.min.js"></script>
-    <script src="<?php echo base_url() ?>resources/js/fullcalendar.min.js"></script>
-    <script src="<?php echo base_url() ?>resources/js/gcal.js"></script>
+    <script src="<?php echo base_url(); ?>resources/js/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>resources/js/fullcalendar.min.js"></script>
+    <script src="<?php echo base_url(); ?>resources/js/gcal.js"></script>
 
 </head>
 <body>
