@@ -29,8 +29,8 @@
     <!--Bootstrap datetimepicker script & style-->
     <link rel="stylesheet" href="resources/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="resources/css/stijl.css"/>
-    <script type="text/javascript" src="resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="resources/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="resources/js/moment-with-locales.js"></script>
+    <script src="resources/js/bootstrap-datetimepicker.min.js"></script>
 
     <!--Agenda js en css-->
     <link rel="stylesheet" href="resources/css/fullcalendar.min.css"/>
