@@ -93,7 +93,7 @@
 
 </script>
 
-<h1>Agenda</h1>
+<h1>Agenda - <?php echo ucfirst($zwemmer->voornaam) . " " . ucwords($zwemmer->familienaam)?></h1>
 
 <div id="calendar">
 </div>
