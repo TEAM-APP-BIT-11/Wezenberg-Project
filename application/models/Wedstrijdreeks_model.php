@@ -161,6 +161,13 @@ class Wedstrijdreeks_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    /**
+     * Haalt alle wedstrijdreeksen, de slagen en de afstanden hiervan, op waarbij de wedstrijdId = $id
+     * @author Dieter Verboven
+     * @param $id
+     * @return mixed
+     *
+     */
 
     public function getAllWithWedstrijdSlagAfstandById($wedstrijdId)
     {
@@ -252,6 +259,14 @@ class Wedstrijdreeks_model extends CI_Model
 
         return $wedstrijdreeks;
     }
+    
+    /**
+     * Haalt wedstrijdreeks, slag en afstand op waar id=$id uit de tabellen wedstrijdreeks, slag en afstand
+     * @author Dieter Verboven
+     * @param $id
+     * @return slag, afstand en info van de wedstrijdreeks van de meegegeven id
+     *
+     */
 
     public function getWithWedstrijdAndSlagAndAfstand($id)
     {

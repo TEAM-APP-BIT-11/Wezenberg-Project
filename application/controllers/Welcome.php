@@ -152,7 +152,7 @@ class Welcome extends CI_Controller
         $persoon->woonplaats = $this->input->post('gemeente');
         $persoon->postcode = $this->input->post('postcode');
         $persoon->biografie = $this->input->post('biografie');
-        $fotonaam = $persoon->voornaam . $persoon->familienaam . '.jpg';
+        $fotonaam = str_replace(' ','',$persoon->voornaam . $persoon->familienaam . '.jpg');
         $persoon->foto = $fotonaam;
 
         $config['upload_path'] = './resources/img/personen/';

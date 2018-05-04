@@ -140,24 +140,6 @@ class Wedstrijddeelname_model extends CI_Model
         }
     }
 
-    public function getAllByPersoonAndWedstrijdenWhereResultaatIsNotNull($persoonId)
-    {
-        $this->db->where('resultaatId IS NOT NULL');
-        $this->db->where('persoonId', $persoonId);
-        $query = $this->db->get('wedstrijddeelname');
-        $deelnamens = $query->result();
-
-        $this->load->model('wedstrijdreeks_model');
-        $this->load->model('wedstrijd');
-
-
-        $wedstrijden = $this->wedstrijdreeks_model->getAllWithWedstrijdenAndSlagAndAfstand();
-
-        foreach ($deelnamens as $deelname) {
-            $deelname->wedstrijd = $wedstrijd;
-        }
-    }
-
     public function getAllByDeelname($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
