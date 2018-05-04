@@ -70,6 +70,10 @@ class Agenda extends CI_Controller
         $data['innames'] = json_encode($innamesarray);
 
         $data['datums'] = $this->agendaItems($id);
+        
+        $this->load->model('persoon_model');
+        
+        $data['zwemmer'] = $this->persoon_model->get($id);
 
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
 
