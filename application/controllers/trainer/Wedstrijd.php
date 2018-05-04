@@ -113,16 +113,16 @@ class Wedstrijd extends CI_Controller
     {
         $wedstrijd = new stdClass();
 
-        $wedstrijd->naam = $this->input->post('naam');
-        $wedstrijd->locatieId = $this->input->post('locatie');
+        $wedstrijd->naam = html_escape($this->input->post('naam'));
+        $wedstrijd->locatieId = html_escape($this->input->post('locatie'));
 
-        $beginDatum = $this->input->post('begindatum');
+        $beginDatum = html_escape($this->input->post('begindatum'));
         $wedstrijd->begindatum = $beginDatum;
 
-        $eindDatum = $this->input->post('einddatum');
+        $eindDatum = html_escape($this->input->post('einddatum'));
         $wedstrijd->einddatum = $eindDatum;
 
-        $wedstrijd->extraInfo = $this->input->post('extraInfo');
+        $wedstrijd->extraInfo = html_escape($this->input->post('extraInfo'));
 
         if($beginDatum != ""){
           $NieuweBeginDatum = new DateTime($beginDatum);
@@ -167,12 +167,12 @@ class Wedstrijd extends CI_Controller
     {
         $wedstrijd = new stdClass();
 
-        $wedstrijd->naam = $this->input->post('naam');
-        $wedstrijd->locatieId = $this->input->post('locatie');
-        $wedstrijd->begindatum = $this->input->post('begindatum');
-        $wedstrijd->einddatum = $this->input->post('einddatum');
-        $wedstrijd->extraInfo = $this->input->post('extraInfo');
-        $wedstrijd->id = $this->input->post('id');
+        $wedstrijd->naam = html_escape($this->input->post('naam'));
+        $wedstrijd->locatieId = html_escape($this->input->post('locatie'));
+        $wedstrijd->begindatum = html_escape($this->input->post('begindatum')-;
+        $wedstrijd->einddatum = html_escape($this->input->post('einddatum'));
+        $wedstrijd->extraInfo = html_escape($this->input->post('extraInfo'));
+        $wedstrijd->id = html_escape($this->input->post('id'));
 
         $this->load->model('wedstrijd_model');
         $this->wedstrijd_model->update($wedstrijd);

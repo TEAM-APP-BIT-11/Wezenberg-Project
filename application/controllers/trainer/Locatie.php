@@ -83,15 +83,15 @@ class Locatie extends CI_Controller
     {
         $locatie = new stdClass();
 
-        $locatie->naam = $this->input->post('naam');
-        $locatie->straat = $this->input->post('straat');
-        $locatie->nr = $this->input->post('nr');
-        $locatie->postcode = $this->input->post('postcode');
-        $locatie->gemeente = $this->input->post('gemeente');
-        $locatie->zaal = $this->input->post('zaal');
-        $locatie->land = $this->input->post('land');
-        $locatie->extraInfo = $this->input->post('extraInfo');
-        $locatie->id = $this->input->post('id');
+        $locatie->naam = html_escape($this->input->post('naam'));
+        $locatie->straat = html_escape($this->input->post('straat'));
+        $locatie->nr = html_escape($this->input->post('nr'));
+        $locatie->postcode = html_escape($this->input->post('postcode'));
+        $locatie->gemeente = html_escape($this->input->post('gemeente'));
+        $locatie->zaal = html_escape($this->input->post('zaal'));
+        $locatie->land = html_escape($this->input->post('land'));
+        $locatie->extraInfo = html_escape($this->input->post('extraInfo'));
+        $locatie->id = html_escape($this->input->post('id'));
 
         $this->load->model('locatie_model');
         $this->locatie_model->update($locatie);
@@ -118,15 +118,15 @@ class Locatie extends CI_Controller
     {
       $locatie = new stdClass();
 
-      $locatie->naam = $this->input->post('naam');
-      $locatie->straat = $this->input->post('straat');
-      $locatie->nr = $this->input->post('nr');
-      $locatie->postcode = $this->input->post('postcode');
-      $locatie->gemeente = $this->input->post('gemeente');
-      $locatie->zaal = $this->input->post('zaal');
-      $locatie->land = $this->input->post('land');
-      $locatie->extraInfo = $this->input->post('extraInfo');
-      $locatie->id = $this->input->post('id');
+      $locatie->naam = html_escape($this->input->post('naam'));
+      $locatie->straat = html_escape($this->input->post('straat'));
+      $locatie->nr = html_escape($this->input->post('nr'));
+      $locatie->postcode = html_escape($this->input->post('postcode'));
+      $locatie->gemeente = html_escape($this->input->post('gemeente'));
+      $locatie->zaal = html_escape($this->input->post('zaal'));
+      $locatie->land = html_escape($this->input->post('land'));
+      $locatie->extraInfo = html_escape($this->input->post('extraInfo'));
+      $locatie->id = html_escape($this->input->post('id'));
 
       $this->load->model('locatie_model');
       $this->locatie_model->insert($locatie);

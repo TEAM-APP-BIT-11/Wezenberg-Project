@@ -71,12 +71,12 @@ class Wedstrijdreeks extends CI_Controller
     {
       $wedstrijdreeks = new stdClass();
 
-      $wedstrijdreeks->datum = $this->input->post('reeksDatum');
-      $wedstrijdreeks->beginuur = $this->input->post('reeksBeginuur');
-      $wedstrijdreeks->einduur = $this->input->post('reeksEinduur');
-      $wedstrijdreeks->afstandId = $this->input->post('afstand');
-      $wedstrijdreeks->slagId = $this->input->post('slag');
-      $wedstrijdId = $this->input->post('id');
+      $wedstrijdreeks->datum = html_escape($this->input->post('reeksDatum'));
+      $wedstrijdreeks->beginuur = html_escape($this->input->post('reeksBeginuur'));
+      $wedstrijdreeks->einduur = html_escape($this->input->post('reeksEinduur'));
+      $wedstrijdreeks->afstandId = html_escape($this->input->post('afstand'));
+      $wedstrijdreeks->slagId = html_escape($this->input->post('slag'));
+      $wedstrijdId = html_escape($this->input->post('id'));
       $wedstrijdreeks->wedstrijdId = $wedstrijdId;
       $this->load->model('wedstrijdreeks_model');
       $wedstrijdreeks = $this->wedstrijdreeks_model->insert($wedstrijdreeks);
@@ -110,13 +110,13 @@ class Wedstrijdreeks extends CI_Controller
     {
       $wedstrijdreeks = new stdClass();
 
-      $wedstrijdreeks->datum = $this->input->post('reeksDatum');
-      $wedstrijdreeks->beginuur = $this->input->post('reeksBeginuur');
-      $wedstrijdreeks->einduur = $this->input->post('reeksEinduur');
-      $wedstrijdreeks->afstandId = $this->input->post('afstand');
-      $wedstrijdreeks->slagId = $this->input->post('slag');
-      $wedstrijdreeks->id = $this->input->post('id');
-      $wedstrijdreeks->wedstrijdId = $this->input->post('wedstrijdId');
+      $wedstrijdreeks->datum = html_escape($this->input->post('reeksDatum'));
+      $wedstrijdreeks->beginuur = html_escape($this->input->post('reeksBeginuur'));
+      $wedstrijdreeks->einduur = html_escape($this->input->post('reeksEinduur'));
+      $wedstrijdreeks->afstandId = html_escape($this->input->post('afstand'));
+      $wedstrijdreeks->slagId = html_escape($this->input->post('slag'));
+      $wedstrijdreeks->id = html_escape($this->input->post('id'));
+      $wedstrijdreeks->wedstrijdId = html_escape($this->input->post('wedstrijdId'));
 
       $this->load->model('wedstrijdreeks_model');
       $this->wedstrijdreeks_model->update($wedstrijdreeks);
