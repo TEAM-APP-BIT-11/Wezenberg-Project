@@ -36,11 +36,6 @@ class Agenda extends CI_Controller
 
         if (!$this->authex->isAangemeld()) {
             redirect('Welcome/logIn');
-        } else {
-            $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->typePersoon->typePersoon != "zwemmer") {
-                redirect('Welcome/logIn');
-            }
         }
         $this->load->helper('form');
         $this->load->helper('notation');
@@ -54,15 +49,19 @@ class Agenda extends CI_Controller
      * @see Inname_model::getAllFromPersoon()
      * @author Neil Van den Broeck
      */
-    public function raadplegen()
+    public function raadplegen($id = -1)
     {
+        //id gelijk stellen aan ingelogd persoon indien het geen trainer is die zwemmers agenda bekijkt.
+        if ($id == -1) {
+            $persoon = $this->authex->getPersoonInfo();
+            $id = $persoon->id;
+        }
         $data['titel'] = 'Agenda raadplegen';
         $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
-        $persoon = $this->authex->getPersoonInfo();
         $this->load->model('inname_model');
 
-        $innames = $this->inname_model->getAllFromPersoon($persoon->id);
+        $innames = $this->inname_model->getAllFromPersoon($id);
 
         $innamesarray = array();
         foreach ($innames as $inname) {
@@ -70,7 +69,7 @@ class Agenda extends CI_Controller
         }
         $data['innames'] = json_encode($innamesarray);
 
-        $data['datums'] = $this->agendaItems($persoon->id);
+        $data['datums'] = $this->agendaItems($id);
 
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
 

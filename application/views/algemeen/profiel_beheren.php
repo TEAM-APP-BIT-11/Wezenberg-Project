@@ -1,6 +1,6 @@
 <?php
 $attributen = array('name' => 'mijnFormulier');
-echo form_open('welcome/registreer', $attributen);
+echo form_open_multipart('welcome/registreer', $attributen);
 echo form_hidden('id', $persoon->id);
 ?>
 <h1>Profiel beheren</h1>
@@ -39,6 +39,10 @@ echo form_hidden('id', $persoon->id);
         <td><?php echo form_textarea('biografie', $persoon->biografie, 'size=50', array("style" => "height:50px")); ?></td>
     </tr>
     <tr>
+        <td><?php echo form_label('Foto:', 'foto'); ?></td>
+        <td><?php echo form_upload('foto', 'foto', 'size=50', array("style" => "height:50px")); ?></td>
+    </tr>
+    <tr>
         <td></td>
         <td><?php echo form_submit('knop', 'Wijzig'); ?></td>
     </tr>
@@ -46,13 +50,13 @@ echo form_hidden('id', $persoon->id);
 
 <?php echo form_close(); ?>
 
-<p><?php 
+<p><?php
 
-echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>"; 
+    echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>";
 
-echo "<p>" . anchor('welcome/controleerAanmelden', "Terug") . "</p>"; 
+    echo "<p>" . anchor('welcome/controleerAanmelden', "Terug") . "</p>";
 
-?></p>
+    ?></p>
 
 
 

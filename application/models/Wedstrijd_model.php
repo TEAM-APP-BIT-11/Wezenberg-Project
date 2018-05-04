@@ -66,6 +66,12 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->result();
     }
+    
+    /**
+     * Haalt wedstrijden op en hun locatie
+     * @author Dieter Verboven
+     * @return Alle wedstrijden en hun locatie
+     */
 
     public function getAllWithLocatie()
     {

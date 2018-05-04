@@ -79,6 +79,13 @@
     echo form_input(array('name' => 'gsmnummer',
         'id' => 'gsmnummer',
         'class' => 'form-control'));
+    
+    echo '</br>';
+    
+    echo form_labelpro('Biografie', 'gebruikersnaam');
+    echo form_textarea(array('name' => 'biografie',
+        'id' => 'biografie',
+        'class' => 'form-control'));
 
     echo '</br>';
     
@@ -88,13 +95,13 @@
         'class' => 'form-control',
         'required' => 'required'));
 
+    echo '<div>';
     echo '</br>';
-
     echo form_submit('knop', 'Voeg toe', 'class="btn btn-primary"');
     echo form_close();
+
+    echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"'));
+    echo '</div></br>';
     ?>
-    <?php echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
 
 </div>

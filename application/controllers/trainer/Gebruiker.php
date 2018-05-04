@@ -109,6 +109,7 @@ class Gebruiker extends CI_Controller
         $persoon->gsmnummer = $this->input->post('gsmnummer');
         $persoon->woonplaats = $this->input->post('woonplaats');
         $persoon->postcode = $this->input->post('postcode');
+        $persoon->biografie = $this->input->post('biografie');
         $persoon->gebruikersnaam = $this->input->post('gebruikersnaam');
 
         $this->load->model('persoon_model');
@@ -141,6 +142,7 @@ class Gebruiker extends CI_Controller
         $persoon->gsmnummer = $this->input->post('gsmnummer');
         $persoon->woonplaats = $this->input->post('woonplaats');
         $persoon->postcode = $this->input->post('postcode');
+        $persoon->biografie = $this->input->post('biografie');
         $persoon->gebruikersnaam = $this->input->post('gebruikersnaam');
         if ($type == 1)
         {

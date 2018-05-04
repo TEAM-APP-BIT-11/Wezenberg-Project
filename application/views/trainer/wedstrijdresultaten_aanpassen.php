@@ -90,7 +90,8 @@
     <div class="col-md-8 coll-md-offset-2 ">
         <p><?php 
 
-        echo anchor('/trainer/Wedstrijdresultaat/resultaten', 'Annuleren', 'class="btn btn-primary"'); 
+        echo anchor('/trainer/Wedstrijdresultaat/resultaten', 'Annuleren', 'class="btn btn-primary"');
+        
 
                 ?>
             
@@ -98,4 +99,5 @@
         
         </p>
     </div>
+    
 </div>

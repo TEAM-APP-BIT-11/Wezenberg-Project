@@ -62,7 +62,7 @@ class Welcome extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_home', $partials, $data);
     }
-    
+
     /**
      * @param $id De id van de persoon die aangemeld is waarvan de gegevens moeten opgehaald worden.
      * Geeft een formulier weer waar de gebruiker zijn gegevens kan aanpassen.
@@ -74,35 +74,30 @@ class Welcome extends CI_Controller
     public function wijzig($id)
     {
         $persoon = $this->authex->getPersoonInfo();
-        
-        
-        $data['eindverantwoordelijke'] = "Dieter Verboven";
-        
-        
 
-        if($persoon->id == $id)
-        {
+        $data['eindverantwoordelijke'] = "Dieter Verboven";
+
+        if ($persoon->id == $id) {
             $data['titel'] = "Profiel wijzigen";
             $this->load->model('persoon_model');
             $data['persoon'] = $this->persoon_model->get($id);
             $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'algemeen/profiel_beheren',
-            'footer' => 'main_footer');
+                'inhoud' => 'algemeen/profiel_beheren',
+                'footer' => 'main_footer');
 
-        
-        }
-        else
-        {
+
+        } else {
             $data["titel"] = "Fout!";
             $data['error'] = "Er is iets fout gelopen! U kan dit niet aanpassen!";
-                
+
             $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'algemeen/fout_wijzigen',
-            'footer' => 'main_footer');
+                'inhoud' => 'algemeen/fout_wijzigen',
+                'footer' => 'main_footer');
         }
-        $this->template->load('main_master', $partials, $data); 
-       
+        $this->template->load('main_master', $partials, $data);
+
     }
+
     /**
      * @param $id De id van de persoon die aangemeld is.
      * Geeft een formulier weer waar de gebruiker zijn wachtwoord kan aanpassen.
@@ -112,33 +107,31 @@ class Welcome extends CI_Controller
      * @author Dieter Verboven
      */
     function wachtwoord($id)
-    {                
+    {
         $persoon = $this->authex->getPersoonInfo();
 
         $data['eindverantwoordelijke'] = "Dieter Verboven";
-        
-        if($persoon->id == $id)
-        {
+
+        if ($persoon->id == $id) {
             $data['titel'] = "Wachtwoord wijzigen";
 
-        $this->load->model('persoon_model');
-        $data['persoon'] = $this->persoon_model->get($id);
+            $this->load->model('persoon_model');
+            $data['persoon'] = $this->persoon_model->get($id);
 
-        $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'algemeen/reset_wachtwoord',
-            'footer' => 'main_footer');
-        }
-        else
-        {
+            $partials = array('hoofding' => 'main_header',
+                'inhoud' => 'algemeen/reset_wachtwoord',
+                'footer' => 'main_footer');
+        } else {
             $data["titel"] = "Fout!";
             $data['error'] = "Er is iets fout gelopen! U kan dit niet aanpassen!";
-                
+
             $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'algemeen/fout_wijzigen',
-            'footer' => 'main_footer');
+                'inhoud' => 'algemeen/fout_wijzigen',
+                'footer' => 'main_footer');
         }
         $this->template->load('main_master', $partials, $data);
     }
+
     /**
      * Haalt de gegevens uit het formulier op en past de gegevens van de ingelogde persoon aan in de database
      * @see algemeen/profiel_beheren.php
@@ -159,6 +152,22 @@ class Welcome extends CI_Controller
         $persoon->woonplaats = $this->input->post('gemeente');
         $persoon->postcode = $this->input->post('postcode');
         $persoon->biografie = $this->input->post('biografie');
+        $fotonaam = str_replace(' ','',$persoon->voornaam . $persoon->familienaam . '.jpg');
+        $persoon->foto = $fotonaam;
+
+        $config['upload_path'] = './resources/img/personen/';
+        $config['allowed_types'] = 'jpg';
+        $config['max_size'] = 2000;
+        $config['file_name'] = $fotonaam;
+        $config['overwrite'] = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('foto')) {
+            $error = array('error' => $this->upload->display_errors());
+
+            var_dump($error);
+        }
 
         $this->load->model('persoon_model');
 

@@ -88,6 +88,14 @@
         'id' => 'gsmnummer',
         'value' => $persoon->gsmnummer,
         'class' => 'form-control'));
+    
+    echo '</br>';
+    
+    echo form_labelpro('Biografie', 'biografie');
+    echo form_textarea(array('name' => 'biografie',
+        'id' => 'biografie',
+        'class' => 'form-control',
+        'value' => $persoon->biografie));
 
     echo '</br>';
     
@@ -97,15 +105,14 @@
         'value' => $persoon->gebruikersnaam,
         'class' => 'form-control',
         'required' => 'required'));
-
-    echo '</br>';
-
     echo form_hidden('id', $persoon->id);
+    echo '<div>';
+    echo '</br>';
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
+    echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"'));
+    echo '</div></br>';
+    
     ?>
-    <?php echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;?>
-    <footer>
-    </footer>
 
 </div>
