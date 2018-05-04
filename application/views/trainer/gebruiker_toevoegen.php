@@ -89,12 +89,12 @@
         'required' => 'required'));
 
     echo '<div>';
-				echo '</br>';
-		    echo form_submit('knop', 'Voeg toe', 'class="btn btn-primary"');
-		    echo form_close();
+    echo '</br>';
+    echo form_submit('knop', 'Voeg toe', 'class="btn btn-primary"');
+    echo form_close();
 
-				echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"'));
-				echo '</div></br>';
-				?>
+    echo anchor('trainer/gebruiker/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"'));
+    echo '</div></br>';
+    ?>
 
 </div>
