@@ -23,18 +23,20 @@
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
+    
+    <base href="<?php echo base_url();?>" />
 
     <!--Bootstrap datetimepicker script & style-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/bootstrap-datetimepicker.min.css"/>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/stijl.css"/>
-    <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/moment-with-locales.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="resources/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="resources/css/stijl.css"/>
+    <script type="text/javascript" src="resources/js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="resources/js/bootstrap-datetimepicker.min.js"></script>
 
     <!--Agenda js en css-->
-    <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/fullcalendar.min.css"/>
-    <script src="<?php echo base_url(); ?>resources/js/moment.min.js"></script>
-    <script src="<?php echo base_url(); ?>resources/js/fullcalendar.min.js"></script>
-    <script src="<?php echo base_url(); ?>resources/js/gcal.js"></script>
+    <link rel="stylesheet" href="resources/css/fullcalendar.min.css"/>
+    <script src="resources/js/moment.min.js"></script>
+    <script src="resources/js/fullcalendar.min.js"></script>
+    <script src="resources/js/gcal.js"></script>
 
 </head>
 <body>
