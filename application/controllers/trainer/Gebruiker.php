@@ -98,19 +98,19 @@ class Gebruiker extends CI_Controller
     {
         $persoon = new stdClass();
 
-        $persoon->id = $this->input->post('id');
-        $persoon->typePersoonId = $this->input->post('type');
-        $persoon->voornaam = $this->input->post('voornaam');
-        $persoon->familienaam = $this->input->post('familienaam');
-        $persoon->geboortedatum = $this->input->post('geboortedatum');
-        $persoon->straat = $this->input->post('straat');
-        $persoon->nummer = $this->input->post('nummer');
-        $persoon->mailadres = $this->input->post('mailadres');
-        $persoon->gsmnummer = $this->input->post('gsmnummer');
-        $persoon->woonplaats = $this->input->post('woonplaats');
-        $persoon->postcode = $this->input->post('postcode');
-        $persoon->biografie = $this->input->post('biografie');
-        $persoon->gebruikersnaam = $this->input->post('gebruikersnaam');
+        $persoon->id = html_escape($this->input->post('id'));
+        $persoon->typePersoonId = html_escape($this->input->post('type'));
+        $persoon->voornaam = html_escape($this->input->post('voornaam'));
+        $persoon->familienaam = html_escape($this->input->post('familienaam'));
+        $persoon->geboortedatum = html_escape($this->input->post('geboortedatum'));
+        $persoon->straat = html_escape($this->input->post('straat'));
+        $persoon->nummer = html_escape($this->input->post('nummer'));
+        $persoon->mailadres = html_escape($this->input->post('mailadres'));
+        $persoon->gsmnummer = html_escape($this->input->post('gsmnummer'));
+        $persoon->woonplaats = html_escape($this->input->post('woonplaats'));
+        $persoon->postcode = html_escape($this->input->post('postcode'));
+        $persoon->biografie = html_escape($this->input->post('biografie'));
+        $persoon->gebruikersnaam = html_escape($this->input->post('gebruikersnaam'));
 
         $this->load->model('persoon_model');
 
@@ -130,27 +130,27 @@ class Gebruiker extends CI_Controller
     {
         $persoon = new stdClass();
         
-        $type = $this->input->post('type');
+        $type = html_escape($this->input->post('type'));
 
         $persoon->typePersoonId = $type;
-        $persoon->voornaam = $this->input->post('voornaam');
-        $persoon->familienaam = $this->input->post('familienaam');
-        $persoon->geboortedatum = $this->input->post('geboortedatum');
-        $persoon->straat = $this->input->post('straat');
-        $persoon->nummer = $this->input->post('nummer');
-        $persoon->mailadres = $this->input->post('mailadres');
-        $persoon->gsmnummer = $this->input->post('gsmnummer');
-        $persoon->woonplaats = $this->input->post('woonplaats');
-        $persoon->postcode = $this->input->post('postcode');
-        $persoon->biografie = $this->input->post('biografie');
-        $persoon->gebruikersnaam = $this->input->post('gebruikersnaam');
+        $persoon->voornaam = html_escape($this->input->post('voornaam'));
+        $persoon->familienaam = html_escape($this->input->post('familienaam'));
+        $persoon->geboortedatum = html_escape($this->input->post('geboortedatum'));
+        $persoon->straat = html_escape($this->input->post('straat'));
+        $persoon->nummer = html_escape($this->input->post('nummer'));
+        $persoon->mailadres = html_escape($this->input->post('mailadres'));
+        $persoon->gsmnummer = html_escape($this->input->post('gsmnummer'));
+        $persoon->woonplaats = html_escape($this->input->post('woonplaats'));
+        $persoon->postcode = html_escape($this->input->post('postcode'));
+        $persoon->biografie = html_escape($this->input->post('biografie'));
+        $persoon->gebruikersnaam = html_escape($this->input->post('gebruikersnaam'));
         if ($type == 1)
         {
-            $persoon->wachtwoord = password_hash('trainer123', PASSWORD_DEFAULT) ;
+            $persoon->wachtwoord = html_escape(password_hash('trainer123', PASSWORD_DEFAULT)) ;
         }
         else
         {
-            $persoon->wachtwoord = password_hash('zwemmer123', PASSWORD_DEFAULT);
+            $persoon->wachtwoord = html_escape(password_hash('zwemmer123', PASSWORD_DEFAULT));
         }
         $persoon->actief = '1';
 

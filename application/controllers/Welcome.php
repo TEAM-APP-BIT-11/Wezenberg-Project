@@ -143,16 +143,16 @@ class Welcome extends CI_Controller
         $persoon = new stdClass();
 
         $persoon->id = $this->input->post('id');
-        $persoon->voornaam = $this->input->post('voornaam');
-        $persoon->familienaam = $this->input->post('familienaam');
-        $persoon->straat = $this->input->post('straat');
-        $persoon->nummer = $this->input->post('nummer');
-        $persoon->mailadres = $this->input->post('mailadres');
-        $persoon->gsmnummer = $this->input->post('gsmnummer');
-        $persoon->woonplaats = $this->input->post('gemeente');
-        $persoon->postcode = $this->input->post('postcode');
-        $persoon->biografie = $this->input->post('biografie');
-        $fotonaam = str_replace(' ','',$persoon->voornaam . $persoon->familienaam . '.jpg');
+        $persoon->voornaam = html_escape($this->input->post('voornaam'));
+        $persoon->familienaam = html_escape($this->input->post('familienaam'));
+        $persoon->straat = html_escape($this->input->post('straat'));
+        $persoon->nummer = html_escape($this->input->post('nummer'));
+        $persoon->mailadres = html_escape($this->input->post('mailadres'));
+        $persoon->gsmnummer = html_escape($this->input->post('gsmnummer'));
+        $persoon->woonplaats = html_escape($this->input->post('gemeente'));
+        $persoon->postcode = html_escape($this->input->post('postcode'));
+        $persoon->biografie = html_escape($this->input->post('biografie'));
+        $fotonaam = html_escape(str_replace(' ','',$persoon->voornaam . $persoon->familienaam . '.jpg'));
         $persoon->foto = $fotonaam;
 
         $config['upload_path'] = './resources/img/personen/';

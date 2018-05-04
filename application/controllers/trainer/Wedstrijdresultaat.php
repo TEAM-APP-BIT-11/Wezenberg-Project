@@ -78,15 +78,15 @@ class Wedstrijdresultaat extends CI_Controller
     public function aanmaken()
     {
         $resultaat = new stdClass();
-        $resultaat->tijd = $this->input->post('tijd');
-        $resultaat->rondeTypeId = $this->input->post('rondetype');
-        $resultaat->ranking = $this->input->post('ranking');
+        $resultaat->tijd = html_escape($this->input->post('tijd'));
+        $resultaat->rondeTypeId = html_escape($this->input->post('rondetype'));
+        $resultaat->ranking = html_escape($this->input->post('ranking'));
         $this->load->model('resultaat_model');
         $resultaatId = $this->resultaat_model->insert($resultaat);
         $wedstrijddeelname = new stdClass();
-        $wedstrijddeelname->persoonId = $this->input->post('zwemmer');
+        $wedstrijddeelname->persoonId = html_escape($this->input->post('zwemmer'));
         $wedstrijddeelname->resultaatId = $resultaatId;
-        $wedstrijddeelname->wedstrijdReeksId = $this->input->post('reeksId');
+        $wedstrijddeelname->wedstrijdReeksId = html_escape($this->input->post('reeksId'));
         $wedstrijddeelname->statusId = '2';
         
         $this->load->model('wedstrijddeelname_model');
@@ -193,17 +193,17 @@ class Wedstrijdresultaat extends CI_Controller
     public function pasAan()
     {
         $resultaat = new stdClass();
-        $resultaat->tijd = $this->input->post('tijd');
-        $resultaat->rondeTypeId = $this->input->post('rondetype');
-        $resultaat->ranking = $this->input->post('ranking');
-        $resultaat->id = $this->input->post('id');
+        $resultaat->tijd = html_escape($this->input->post('tijd'));
+        $resultaat->rondeTypeId = html_escape($this->input->post('rondetype'));
+        $resultaat->ranking = html_escape($this->input->post('ranking'));
+        $resultaat->id = html_escape($this->input->post('id'));
         $this->load->model('resultaat_model');
         $this->resultaat_model->update($resultaat);
         
         $wedstrijddeelname = new stdClass();
-        $wedstrijddeelname->persoonId = $this->input->post('zwemmer');
-        $wedstrijddeelname->resultaatId = $this->input->post('id');
-        $wedstrijddeelname->id = $this->input->post('wedstrijddeelnameId');
+        $wedstrijddeelname->persoonId = html_escape($this->input->post('zwemmer'));
+        $wedstrijddeelname->resultaatId = html_escape($this->input->post('id'));
+        $wedstrijddeelname->id = html_escape($this->input->post('wedstrijddeelnameId'));
         
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->update($wedstrijddeelname);
