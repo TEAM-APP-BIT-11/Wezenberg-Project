@@ -169,7 +169,7 @@ class Wedstrijd extends CI_Controller
 
         $wedstrijd->naam = html_escape($this->input->post('naam'));
         $wedstrijd->locatieId = html_escape($this->input->post('locatie'));
-        $wedstrijd->begindatum = html_escape($this->input->post('begindatum')-;
+        $wedstrijd->begindatum = html_escape($this->input->post('begindatum'));
         $wedstrijd->einddatum = html_escape($this->input->post('einddatum'));
         $wedstrijd->extraInfo = html_escape($this->input->post('extraInfo'));
         $wedstrijd->id = html_escape($this->input->post('id'));
