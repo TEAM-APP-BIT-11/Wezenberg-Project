@@ -79,6 +79,13 @@
     echo form_input(array('name' => 'gsmnummer',
         'id' => 'gsmnummer',
         'class' => 'form-control'));
+    
+    echo '</br>';
+    
+    echo form_labelpro('Biografie', 'gebruikersnaam');
+    echo form_textarea(array('name' => 'biografie',
+        'id' => 'biografie',
+        'class' => 'form-control'));
 
     echo '</br>';
     

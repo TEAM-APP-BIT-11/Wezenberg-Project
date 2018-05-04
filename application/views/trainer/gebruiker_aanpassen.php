@@ -88,6 +88,14 @@
         'id' => 'gsmnummer',
         'value' => $persoon->gsmnummer,
         'class' => 'form-control'));
+    
+    echo '</br>';
+    
+    echo form_labelpro('Biografie', 'biografie');
+    echo form_textarea(array('name' => 'biografie',
+        'id' => 'biografie',
+        'class' => 'form-control',
+        'value' => $persoon->biografie));
 
     echo '</br>';
     
