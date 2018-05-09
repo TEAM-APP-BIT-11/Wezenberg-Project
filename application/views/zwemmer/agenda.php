@@ -20,7 +20,7 @@
             data: {datum: datum},
             success: function (result) {
                 $("#resultaatLocatie").html(result);
-                $('#mijnLocatieschermscherm').modal('show');
+                //  $('#mijnLocatieschermscherm').modal('show');
             },
             error: function (xhr, status, error) {
                 alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
@@ -139,9 +139,10 @@
         </div>
 
     </div>
-</div>
+</div id="mijnLocatiescherm"></div>
 
-<div class=" modal fade" id="mijnLocatiescherm" role="dialog">
+
+<div class=" modal fade" id="" role="dialog">
     <div class="modal-dialog">
         <!-- Inhoud dialoogvenster-->
         <div class="modal-content">

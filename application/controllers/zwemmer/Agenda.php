@@ -161,7 +161,7 @@ class Agenda extends CI_Controller
 
         return json_encode($data_events);
     }
-    
+
     /**
      * @param locatieId De id van de locatie waarvan de gegevens moeten opgehaald worden.
      * Geeft de gegevens van een locatie weer.
@@ -170,13 +170,14 @@ class Agenda extends CI_Controller
      * @see locatie_model::get()
      * @author Dieter Verboven
      */
-    
-    public function haalLocatieOp($locatieId)
+
+    public function haalLocatieOp()
     {
+        $id = $this->input->get('id');
+
         $this->load->model("locatie_model");
 
-        $persoon = $this->authex->getPersoonInfo();
-        $data["locatie"] = $this->locatie_model->get($locatieId);
+        $data["locatie"] = $this->locatie_model->get($id);
 
         $this->load->view('zwemmer/ajax_locatie', $data);
     }
