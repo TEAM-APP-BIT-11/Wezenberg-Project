@@ -133,103 +133,92 @@ class Evenement extends CI_Controller
     {
         // Nieuwe lege klassen
         $evenementReeks = new stdClass();
+        $evenement = new stdClass();
         
         // Attributen
-        $naam = $this->input->post('naam');
-        $locatieId = $this->input->post('locatie');
-        $begindatum = zetOmNaarYYYYMMDD($this->input->post('begindatum'));
+        $evenement->naam = $evenementReeks->naam = $this->input->post('naam');
+        $evenement->locatieId = $this->input->post('locatie');
+        $evenement->begindatum = zetOmNaarYYYYMMDD($this->input->post('begindatum'));
         if($this->input->post('einddatum') != ''){
-            $einddatum = zetOmNaarYYYYMMDD($this->input->post('einddatum'));
-        } else{$einddatum = null;}
-        $beginuur = $this->input->post('beginuur');
+            $evenement->einddatum = zetOmNaarYYYYMMDD($this->input->post('einddatum'));
+        } else{$evenement->einddatum = null;}
+        $evenement->beginuur = $this->input->post('beginuur');
         if ($this->input->post('einduur') != '') {
-            $einduur = $this->input->post('einduur');
-        } else{$einduur = null;}
+            $evenement->einduur = $this->input->post('einduur');
+        } else{$evenement->einduur = null;}
         if ($this->input->post('beschrijving') != '') {
-            $extraInfo = $this->input->post('beschrijving');
-        } else{$extraInfo = null;}
-        $evenementTypeId = $this->input->post('type');
-        $evenementReeksId = null;
+            $evenement->extraInfo = $this->input->post('beschrijving');
+        } else{$evenement->extraInfo = null;}
+        $evenement->evenementTypeId = $this->input->post('type');
+        $evenement->evenementReeksId = null;
+        
         $zwemmerIds = $this->input->post('zwemmers');
         $nieuw = $this->input->post('nieuw');
+        $hoeveelheid = $this->input->post('hoeveelheid');
 
         $this->load->model('evenementreeks_model');
-        if ($this->input->post('hoeveelheid') == 'meerdere') {
+        
+        if(strcmp($nieuw, 'false') == 0 && ($evenement->evenementTypeId == 1 || $evenement->evenementTypeId == 4)){
+            $evenement->evenementReeksId = $evenementReeks->id = $this->input->post('evenementreeksId');
+            if($hoeveelheid == 'meerdere'){
+                $this->evenementreeks_model->update($evenementReeks);
+            }
+        } else if(($evenement->evenementTypeId == 1 || $evenement->evenementTypeId == 4) && $hoeveelheid == 'meerdere'){
+            $evenement->evenementReeksId = $this->evenementreeks_model->insert($evenementReeks);
+        }
+        
+        if ($hoeveelheid == 'meerdere') {
             $checklist = array($this->input->post('check_list[]'));
             $days = [];
             for ($i = 0; $i < count($checklist); $i++) {
                 $days = $checklist[$i];
             }
-            $evenementReeks->naam = $naam;
-            $evenementReeksId = 0;
-            
-            //reeksen genereren
-            //$this->genereerReeks($this->input->post('begindatum'), $this->input->post('einddatum'), $days, $nieuw, );
-            
             if(strcmp($nieuw, 'false') == 0){
                 $evenementIds = array_filter(explode(',', $this->input->post('ids')));
-                $evenementReeksId = $this->input->post('evenementreeksId');
-                $evenementReeks->id = $evenementReeksId;
-                $this->evenementreeks_model->update($evenementReeks);
+                $this->genereerReeks($zwemmerIds, $evenement, $days, false, $evenementIds);
             } else{
-                $evenementReeksId = $this->evenementreeks_model->insert($evenementReeks);
+                $this->genereerReeks($zwemmerIds, $evenement, $days, true);
             }
-            $count = 0;
-            for ($date = date_create_from_format("d/m/Y", $this->input->post('begindatum')); $date <= date_create_from_format("d/m/Y", $this->input->post('einddatum')); date_add($date, date_interval_create_from_date_string('1 days'))) {
-                $dayOfDate = $date->format("N");
-                if (in_array($dayOfDate, $days)) {
-                    if(strcmp($nieuw,'false') == 0){
-                        $this->maakEvenement($naam, $locatieId, $date->format("Y-m-d"), $einddatum, $beginuur, null, $extraInfo, $evenementTypeId, $evenementReeksId, $evenementIds[$count]);
-                    } else{
-                        $evenementId = $this->maakEvenement($naam, $locatieId, $date->format("Y-m-d"), null, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId);
-                        $this->maakEvenementDeelname($zwemmerIds, $evenementId);
-                    } 
-                    $count++;
-                }
-            }
-            $this->genereerMeldingen($zwemmerIds, $evenementTypeId, $naam, true);
         } else {
-            if($evenementTypeId == 1 || $evenementTypeId == 4){
-                $evenementReeks->naam = $naam;
-                if(strcmp($nieuw,'false') == 0){
-                    $evenementReeksId = $this->input->post('evenementreeksId');
-                    $evenementReeks->id = $evenementReeksId;
-                    $this->evenementreeks_model->update($evenementReeks);
-                } else{
-                     $evenementReeksId = $this->evenementreeks_model->insert($evenementReeks);
-                }
-            }
             if(strcmp($nieuw,'false') == 0){
-                $this->maakEvenement($naam, $locatieId, $begindatum, $einddatum, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId, $this->input->post('id'));
+                $this->maakEvenement($evenement, $this->input->post('id'));
             } else{
-                $evenementId = $this->maakEvenement($naam, $locatieId, $begindatum, $einddatum, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId);
-                $this->genereerMeldingen($zwemmerIds, $evenementTypeId, $naam, false);
+                $evenementId = $this->maakEvenement($evenement);
+                $this->genereerMeldingen($zwemmerIds, $evenement, false);
                 $this->maakEvenementDeelname($zwemmerIds, $evenementId);
             } 
         }
         Redirect('/trainer/Evenement/beheren');
     }
     
-    private function maakEvenement($naam, $locatieId, $begindatum, $einddatum, $beginuur, $einduur, $extraInfo, $evenementTypeId, $evenementReeksId, $evenementBestaat = 'false'){
-        $evenement = new stdClass();
+    private function genereerReeks($zwemmerIds, $evenement, $days, $nieuw, $evenementIds = []){
+        if(!$nieuw && !empty($evenementIds)){
+            foreach($evenementIds as $evenementId){
+                $this->verwijderEvenement($evenementId);
+            }
+        }
+        $einddatum = date_create_from_format('Y-m-d', $evenement->einddatum);
+        $evenement->einddatum = null;
+        for ($date = date_create_from_format('Y-m-d', $evenement->begindatum); $date <= $einddatum; date_add($date, date_interval_create_from_date_string('1 days'))) {
+            $dayOfDate = $date->format("N");
+            if (in_array($dayOfDate, $days)) {
+                $evenement->begindatum = $date->format("Y-m-d");
+                $evenementId = $this->maakEvenement($evenement);
+                $this->maakEvenementDeelname($zwemmerIds, $evenementId); 
+            }
+        }
         
-        $evenement->naam = $naam;
-        $evenement->locatieId = $locatieId;
-        $evenement->begindatum = $begindatum;
-        $evenement->einddatum = $einddatum;
-        $evenement->beginuur = $beginuur;
-        $evenement->einduur = $einduur;
-        $evenement->extraInfo = $extraInfo;
-        $evenement->evenementTypeId = $evenementTypeId;
-        $evenement->evenementReeksId = $evenementReeksId;
-        
+        $this->genereerMeldingen($zwemmerIds, $evenement, true);
+    }
+    
+    private function maakEvenement($evenement, $nieuw = 'false'){       
         $this->load->model('evenement_model');
         
-        if(strcmp($evenementBestaat, 'false') == 0){
+        if(strcmp($nieuw, 'false') == 0){
             $evenementId = $this->evenement_model->insert($evenement);
             return $evenementId;
         } else{
-            $evenement->id = $evenementBestaat;
+            $evenement->id = $nieuw;
             $this->evenement_model->update($evenement);
         }
     }
@@ -240,49 +229,58 @@ class Evenement extends CI_Controller
         $evenementDeelname->evenementId = $evenementId;
         
         $this->load->model('evenementdeelname_model');
-        foreach($zwemmerIds as $zwemmerId){
+        $ids = array_filter(explode(',', $zwemmerIds));
+        foreach($ids as $zwemmerId){
             $evenementDeelname->persoonId = $zwemmerId;
             $this->evenementdeelname_model->insert($evenementDeelname);
         }
     }
 
-    private function genereerMeldingen($zwemmerIds, $evenementType, $evenementNaam, $isReeks){
+    private function genereerMeldingen($zwemmerIds, $evenement, $isReeks){
         $boodschap = $titel = '';
         $this->load->model('evenementtype_model');
-        $type = $this->evenementtype_model->get($evenementType)->type;
+        $type = $this->evenementtype_model->get($evenement->evenementTypeId)->type;
         if (!$isReeks) {
-            if ($evenementType == 'overige') {
+            if ($type == 'overige') {
                 $titel = 'Nieuw evenement';
-                $boodschap = 'Er is een nieuw evenement aan je schema toegevoegd: ' . $evenementNaam . '.';
+                $boodschap = 'Er is een nieuw evenement aan je schema toegevoegd: ' . $evenement->naam . '.';
             } else {
                 $titel = 'Nieuwe ' . $type;
-                $boodschap = 'Er is een nieuwe ' . $type . ' aan je schema toegevoegd: ' . $evenementNaam . '.';
+                $boodschap = 'Er is een nieuwe ' . $type . ' aan je schema toegevoegd: ' . $evenement->naam . '.';
             }
         } else {
-            if ($evenementType == 'overige') {
+            if ($type == 'overige') {
                 $titel = 'Nieuwe evenementen';
-                $boodschap = 'Er is een nieuwe reeks evenementen aan je schema toegevoegd: ' . $evenementNaam . '.';
+                $boodschap = 'Er is een nieuwe reeks evenementen aan je schema toegevoegd: ' . $evenement->naam . '.';
             } else {
                 $titel = 'Nieuwe trainingen';
-                $boodschap = 'Er is een nieuwe reeks trainingen aan je schema toegevoegd: ' . $evenementNaam . '.';
+                $boodschap = 'Er is een nieuwe reeks trainingen aan je schema toegevoegd: ' . $evenement->naam . '.';
             }
         }
         $this->melding->genereerMeldingen($zwemmerIds, $boodschap, $titel);
     }
     
-    public function verwijderEvenement(){
-        $evenemenId = $this->input->post('evenementId');
+    public function verwijderEvenement($evenementId = 0){
+        $internCommando = false;
+        if($evenementId == 0){
+            $evenementId = $this->input->post('evenementId');
+        } else{
+            $internCommando = true;
+        }
         
         $this->load->model('evenementdeelname_model');
-        $deelnames = $this->evenementdeelname_model->getByEventId($evenemenId);
+        $deelnames = $this->evenementdeelname_model->getByEventId($evenementId);
         
         foreach($deelnames as $deelname){
             $this->evenementdeelname_model->delete($deelname->id);
         }
         
         $this->load->model('evenement_model');
-        $this->evenement_model->delete($evenemenId);
-        Redirect('/trainer/Evenement/beheren');
+        $this->evenement_model->delete($evenementId);
+        
+        if(!$internCommando){
+            Redirect('/trainer/Evenement/beheren');
+        }
     }
     
     public function verwijderReeks(){

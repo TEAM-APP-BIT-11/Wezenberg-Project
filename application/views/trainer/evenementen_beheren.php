@@ -148,6 +148,7 @@ foreach($evenementen as $evenement){
         <hr>
         <form id="trainingenForm" method="POST">
             <input name="reeksSoort" value="trainingReeks" hidden>
+            <input name="typeId" value="1" hidden>
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label for="trainingsreeksen">Trainingreeksen</label>
@@ -262,6 +263,7 @@ foreach($evenementen as $evenement){
         <hr>
         <form id="overigeForm" method="POST">
             <input name="reeksSoort" value="overigeReeks" hidden>
+            <input name="typeId" value="3" hidden>
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label for="overigereeksen">Overige reeksen</label>
