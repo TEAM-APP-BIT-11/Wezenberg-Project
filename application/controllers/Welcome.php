@@ -27,6 +27,7 @@ class Welcome extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('notation');
         $this->load->helper('url');
+		 $this->load->helper('html');
     }
 
     public function index()
@@ -35,6 +36,8 @@ class Welcome extends CI_Controller
         $data['titel'] = 'Welkom';
         $this->load->model('nieuwsitem_model');
         $this->load->model('wedstrijd_model');
+		$this->load->model('homepagina_model');
+		 $data['homepagina'] = $this->homepagina_model->get(1); 
          $data['nieuwsitems']= $this->nieuwsitem_model->getNieuws();
         $data['kalender']= $this->wedstrijd_model->getAllAfterTodayWithLocatie();
         $partials = array(
