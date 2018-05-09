@@ -95,6 +95,14 @@
         'class' => 'form-control',
         'required' => 'required'));
 
+    ?>
+    </br>
+    <div class="password">
+        <p>Paswoord trainer: trainer123</p>
+        <p>Paswoord zwemmer: zwemmer123</p>
+    </div>
+    
+    <?php
     echo '<div>';
     echo '</br>';
     echo form_submit('knop', 'Voeg toe', 'class="btn btn-primary"');

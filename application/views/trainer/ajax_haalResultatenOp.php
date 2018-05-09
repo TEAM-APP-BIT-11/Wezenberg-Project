@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-
+<div class="table-responsive">
 <table class="table">
             <tr class="active">
                 <td><label for="type">Ronde</label></td>
@@ -27,3 +27,4 @@
     }
 ?>
 </table>
+</div>
