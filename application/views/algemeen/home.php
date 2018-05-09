@@ -7,25 +7,26 @@
       <?php echo anchor('bezoeker/Contact/trainers', 'Contacteer Wezenberg', 'class="btn btn-primary"'); ?>
     </div>
 
-    <div class="row">
-      <div class="col-lg-4">
-        <h3>Wij doen mee aan het Belgisch kampioenschap!</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum architecto blanditiis rerum minima sint sapiente. Amet et, iste dolores nulla minima maiores beatae cumque non vel atque explicabo in corporis?</p>
-      </div>
-      <div class="col-lg-4">
-        <h3>We hebben gewonnen!</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis dolore commodi blanditiis autem adipisci aspernatur soluta amet quia nisi numquam porro magni temporibus accusamus dolores assumenda officiis, ab, placeat reiciendis!</p>
-     </div>
-      <div class="col-lg-4">
-        <h3>Kom een kijkje nemen op onze trainingsdag!</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit fugit vero, error aperiam accusantium itaque perferendis incidunt doloribus enim. Iure sequi quos esse ab facilis ullam quibusdam explicabo voluptate, nostrum.</p>
-      </div>
-    </div>
+      
+      <?php
+         echo  '<div class="row">';
+      foreach($nieuwsitems as $nieuws)
+      {
+          echo '<div class="col-lg-4"><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
+                  . toonAfbeelding('nieuwsitems/' . $nieuws->foto . ' ', 'width="250px" height="250px"').'</div>';
+      }
+      echo '</div>';
+      
+      ?>
+    
   </div>
 
+  
+  
   <div class="row">
     <h2 class="text-center">Kalender</h2>
     <div class="col-lg-8 col-lg-push-2">
+        
       <table class="table table-hover">
         <thead>
           <tr>
@@ -35,23 +36,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Wedstrijd in Geel</td>
-            <td>01/01/2018</td>
-            <td>Zwembad Geel</td>
-          </tr>
-          <tr>
-            <td>Wedstrijd in Leuven</td>
-            <td>01/02/2018</td>
-            <td>Zwembad Leuven</td>
-          </tr>
-          <tr>
-            <td>Wedstrijd in Gent</td>
-            <td>01/03/2018</td>
-            <td>Zwembad Gent</td>
-          </tr>
+            <?php
+        
+            foreach($kalender as $wedstrijd){
+                echo '<tr><td>'.$wedstrijd->naam.'</td><td>'. $wedstrijd->begindatum . '</td><td>'. $wedstrijd->locatie->naam.'</td>.</tr>';
+            }
+            ?>
+          
         </tbody>
       </table>
+        
     </div>
   </div>
 </div>

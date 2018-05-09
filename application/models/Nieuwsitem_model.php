@@ -74,7 +74,14 @@ class Nieuwsitem_model extends CI_Model {
 		$this->db->insert('nieuwsitem', $nieuwsitem);
 		return $this->db->insert_id();
 	}
-
+	 function getNieuws()
+	{
+		$this->db->where('actief', 1);
+		$query = $this->db->get('nieuwsitem');
+		$nieuws = $query->result();
+                
+                return $nieuws ;
+	}	
 }
 
 ?>
