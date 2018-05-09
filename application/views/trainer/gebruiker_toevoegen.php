@@ -1,3 +1,31 @@
+<script>
+
+    $(document).ready(function () {
+        
+        $(".btnToevoegen").hide();
+        $("#success").hide();
+        
+        $('#type').change(function() {
+                     
+            var e = document.getElementById("type");
+            var type = e.options[e.selectedIndex].text;
+    
+            if (type === "trainer")
+            {
+                $('.text').html("Automatisch paswoord: trainer123")
+                $(".password").show();
+            }
+            else if (type === "zwemmer")
+            {
+                $('.text').html("Automatisch paswoord: zwemmer123")
+                $(".password").show();
+            }
+        });
+        
+    });
+
+</script>
+
 <div class="col-md-10 content">
 
     <h1 class="">Gebruiker toevoegen</h1>
@@ -12,7 +40,7 @@
     echo form_open('trainer/gebruiker/voegToe', $attributes);
 
     echo form_labelpro('Type gebruiker:', 'type');
-    echo form_dropdown('type', $typeOpties);
+    echo form_dropdown('type', $typeOpties,'', 'id="type"');
 
     echo '</br>';
     
@@ -98,8 +126,7 @@
     ?>
     </br>
     <div class="password">
-        <p>Paswoord trainer: trainer123</p>
-        <p>Paswoord zwemmer: zwemmer123</p>
+        <p class="text">Automatisch paswoord: trainer123</p>
     </div>
     
     <?php
