@@ -1,62 +1,146 @@
-<?php
-$attributen = array('name' => 'mijnFormulier');
-echo form_open_multipart('welcome/registreer', $attributen);
-echo form_hidden('id', $persoon->id);
-?>
-<h1>Profiel beheren</h1>
-<?php echo "<h3>" . $persoon->voornaam . " " . $persoon->familienaam . "</h3>" ?>
-<table>
-    <tr>
-        <td><?php echo form_label('Voornaam:', 'voornaam'); ?></td>
-        <td><?php echo form_input('voornaam', $persoon->voornaam, 'size=50'); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Familienaam:', 'familienaam'); ?></td>
-        <td><?php echo form_input('familienaam', $persoon->familienaam, 'size=50'); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Straat:', 'straat'); ?></td>
-        <td><?php echo form_input('straat', $persoon->straat, 'size=50'); ?></td>
-        <td><?php echo form_label('Nummer:', 'nummer'); ?></td>
-        <td><?php echo form_input('nummer', $persoon->nummer, 'size=10'); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('E-mailadres:', 'mailadres'); ?></td>
-        <td><?php echo form_input('mailadres', $persoon->mailadres, 'size=50'); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Telefoonnummer:', 'gsmnummer'); ?></td>
-        <td><?php echo form_input('gsmnummer', $persoon->gsmnummer, 'size=50'); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Gemeente:', 'gemeente'); ?></td>
-        <td><?php echo form_input('gemeente', $persoon->woonplaats, 'size=50'); ?></td>
-        <td><?php echo form_label('Postcode:', 'postcode'); ?></td>
-        <td><?php echo form_input('postcode', $persoon->postcode, 'size=10'); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Biografie:', 'biografie'); ?></td>
-        <td><?php echo form_textarea('biografie', $persoon->biografie, 'size=50', array("style" => "height:50px")); ?></td>
-    </tr>
-    <tr>
-        <td><?php echo form_label('Foto:', 'foto'); ?></td>
-        <td><?php echo form_upload('foto', 'foto', 'size=50', array("style" => "height:50px")); ?></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><?php echo form_submit('knop', 'Wijzig'); ?></td>
-    </tr>
-</table>
+<div class="col-md-10 content">
 
-<?php echo form_close(); ?>
 
-<p><?php
+    <?php
+    $attributen = array('name' => 'mijnFormulier', 'data-toggle' => 'validator', 'role' => 'form');
+    echo form_open('welcome/registreer', $attributen);
+    echo form_hidden('id', $persoon->id);
+    ?>
+    <h1>Profiel beheren</h1>
+    <?php echo "<h3>" . ucwords($persoon->voornaam . " " . $persoon->familienaam) . "</h3>" ;
 
-    echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>";
+    ?>
+        <div class="form-group">
+    <?php
 
-    echo "<p>" . anchor('welcome/controleerAanmelden', "Terug") . "</p>";
+    echo form_labelpro('Voornaam:', 'voornaam');
+    echo form_input(array('name' => 'voornaam',
+        'id' => 'voornaam',
+        'value' => $persoon->voornaam,
+        'class' => 'form-control',
+        'required' => 'required'));
 
-    ?></p>
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
 
+    echo form_labelpro('Familienaam:', 'familienaam');
+    echo form_input(array('name' => 'familienaam',
+        'id' => 'familienaam',
+        'value' => $persoon->familienaam,
+        'class' => 'form-control',
+        'required' => 'required'));
+
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Straat:', 'straat');
+    echo form_input(array('name' => 'straat',
+        'id' => 'straat',
+        'value' => $persoon->straat,
+        'class' => 'form-control'));
+
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Nummer:', 'nummer');
+    echo form_input(array('name' => 'nummer',
+        'id' => 'nummer',
+        'value' => $persoon->nummer,
+        'type' => 'number',
+        'data-error' => 'Dit is geen nummer.',
+        'class' => 'form-control'));
+
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('E-mailadres:', 'mailadres');
+    echo form_input(array('name' => 'mailadres',
+        'id' => 'mailadres',
+        'value' => $persoon->mailadres,
+        'type' => 'email',
+        'class' => 'form-control',
+        'data-error' => 'Dit is geen email.',
+        'required' => 'required'));
+
+     ?>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Telefoonnummer:', 'gsmnummer');
+    echo form_input(array('name' => 'gsmnummer',
+        'id' => 'gsmnummer',
+        'value' => $persoon->gsmnummer,
+        'class' => 'form-control'));
+
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Gemeente:', 'gemeente');
+    echo form_input(array('name' => 'gemeente',
+        'id' => 'gemeente',
+        'value' => $persoon->woonplaats,
+        'class' => 'form-control'));
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Postcode:', 'postcode');
+    echo form_input(array('name' => 'postcode',
+        'id' => 'postcode',
+        'value' => $persoon->postcode,
+        'type' => 'number',
+        'data-error' => 'Dit is geen postcode.',
+        'class' => 'form-control'));
+
+    ?>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Biografie:', 'biografie');
+    echo form_textarea(array('name' => 'biografie',
+        'id' => 'biografie',
+        'class' => 'form-control',
+        'value' => $persoon->biografie));
+
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_labelpro('Foto:', 'foto');
+    echo form_upload('foto', 'foto', 'size=50', array("style" => "height:50px"));
+
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+
+    echo form_submit('knop', 'Wijzig');
+
+    echo form_close(); ?>
+
+    <p><?php
+
+        echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>";
+
+        echo "<p>" . anchor('welcome/controleerAanmelden', "Terug") . "</p>";
+
+        ?></p>
+</div>
 
 
