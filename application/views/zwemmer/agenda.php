@@ -19,8 +19,8 @@
             url: site_url + "/zwemmer/Agenda/haalAjaxOp_Innames",
             data: {datum: datum},
             success: function (result) {
-                $("#resultaatLocatie").html(result);
-                //  $('#mijnLocatieschermscherm').modal('show');
+                $("#resultaat").html(result);
+                $('#mijnDialoogscherm').modal('show');
             },
             error: function (xhr, status, error) {
                 alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
@@ -34,8 +34,9 @@
             url: site_url + "/zwemmer/Agenda/haalLocatieOp",
             data: {id: id},
             success: function (result) {
-                $("#resultaat").html(result);
-                $('#mijnDialoogscherm').modal('show');
+                console.log(result);
+                $('#resultaatLocatie').html(result);
+                $('#mijnLocatieScherm').modal('show');
             },
             error: function (xhr, status, error) {
                 alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
@@ -139,29 +140,8 @@
         </div>
 
     </div>
-</div id="mijnLocatiescherm"></div>
-
-
-<div class=" modal fade" id="" role="dialog">
-    <div class="modal-dialog">
-        <!-- Inhoud dialoogvenster-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span id="locatietitel"></span></h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                <div id="resultaatLocatie"></div>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
-            </div>
-        </div>
-
-    </div>
 </div>
+
 
 <div class=" modal fade" id="mijnDetailscherm" role="dialog">
     <div class="modal-dialog">
@@ -191,6 +171,27 @@
                         <td><a id="locatie"></a></td>
                     </tr>
                 </table>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class=" modal fade" id="mijnLocatieScherm" role="dialog">
+    <div class="modal-dialog">
+        <!-- Inhoud dialoogvenster-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="locatietitel"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                <div id="resultaatLocatie"></div>
                 </p>
             </div>
             <div class="modal-footer">
