@@ -58,16 +58,11 @@
                 firstDay: 1,
                 columnHeaderHtml: function (mom) {
                     var weergeven = "";
-                    mom = mom.locale('nl-be');
-                    moment.locale('nl');
-                    console.log(moment.locale());
-                    console.log(mom);
                     var innames = <?php echo $innames; ?>;
                     if ($.inArray(mom.format('YYYY-MM-DD').toString(), innames) != -1) {
                         weergeven += '<a href="#" class="supplementen btn btn-primary" data-datum=' + mom.format('YYYY-MM-DD') + '">Suppl.</a><br>';
                     }
-                    return weergeven + mom.locale('nl-be').format("ddd DD / MM");
-
+                    return weergeven + mom.locale('nl-be').format("ddd DD MMM");
                 },
                 header:
                     {
@@ -100,8 +95,8 @@
                 e.preventDefault();
                 var datum = $(this).data('datum');
                 haalSupplementenOp(datum);
-                var DateCreated = moment(Date.parse(datum));
-                $("#datum").html(DateCreated.format("MM-DD-YYYY"));
+                var DateCreated = moment(datum, "YYYY-MM-DD");
+                $("#datum").html(DateCreated.format("DD/MM/YYYY"));
 
             })
         );
@@ -140,7 +135,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Supplementen: <span id="datum"></span></h4>
+                <h4 class="modal-title">Supplement(en) voor <span id="datum"></span></h4>
             </div>
             <div class="modal-body">
                 <p>

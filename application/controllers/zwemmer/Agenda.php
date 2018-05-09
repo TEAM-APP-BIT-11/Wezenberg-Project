@@ -127,7 +127,7 @@ class Agenda extends CI_Controller
             $data_events[] = array(
                 "id" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->id,
                 "title" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->naam,
-                "description" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->naam . ', u bent ingeschreven voor de reeks ' . $wedstrijddeelname->wedstrijdreeks->slag->naam . ' ' . $wedstrijddeelname->wedstrijdreeks->afstand->afstand . ' om ' . zetOmNaarHHMM($wedstrijddeelname->wedstrijdreeks->beginuur),
+                "description" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->naam . ', u bent ingeschreven voor de reeks ' . $wedstrijddeelname->wedstrijdreeks->afstand->afstand . 'm ' . $wedstrijddeelname->wedstrijdreeks->slag->naam . ' om ' . zetOmNaarHHMM($wedstrijddeelname->wedstrijdreeks->beginuur),
                 "end" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->einddatum . ' ' . "23:59:00",
                 "start" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->begindatum . ' ' . "00:00:00",
                 "locatie" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->locatie->naam,

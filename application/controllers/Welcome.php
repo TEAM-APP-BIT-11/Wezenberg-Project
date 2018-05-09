@@ -27,7 +27,7 @@ class Welcome extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('notation');
         $this->load->helper('url');
-		 $this->load->helper('html');
+        $this->load->helper('html');
     }
 
     public function index()
@@ -36,10 +36,10 @@ class Welcome extends CI_Controller
         $data['titel'] = 'Welkom';
         $this->load->model('nieuwsitem_model');
         $this->load->model('wedstrijd_model');
-		$this->load->model('homepagina_model');
-		 $data['homepagina'] = $this->homepagina_model->get(1); 
-         $data['nieuwsitems']= $this->nieuwsitem_model->getNieuws();
-        $data['kalender']= $this->wedstrijd_model->getAllAfterTodayWithLocatie();
+        $this->load->model('homepagina_model');
+        $data['homepagina'] = $this->homepagina_model->get(1);
+        $data['nieuwsitems'] = $this->nieuwsitem_model->getNieuws();
+        $data['kalender'] = $this->wedstrijd_model->getAllAfterTodayWithLocatie();
         $partials = array(
             'inhoud' => 'algemeen/home',
             'footer' => 'main_footer');
@@ -158,7 +158,7 @@ class Welcome extends CI_Controller
         $persoon->woonplaats = html_escape($this->input->post('gemeente'));
         $persoon->postcode = html_escape($this->input->post('postcode'));
         $persoon->biografie = html_escape($this->input->post('biografie'));
-        $fotonaam = html_escape(str_replace(' ','',$persoon->voornaam . $persoon->familienaam . '.jpg'));
+        $fotonaam = html_escape(str_replace(' ', '', $persoon->voornaam . $persoon->familienaam . '.jpg'));
         $persoon->foto = $fotonaam;
 
         $config['upload_path'] = './resources/img/personen/';
@@ -171,8 +171,6 @@ class Welcome extends CI_Controller
 
         if (!$this->upload->do_upload('foto')) {
             $error = array('error' => $this->upload->display_errors());
-
-            var_dump($error);
         }
 
         $this->load->model('persoon_model');
