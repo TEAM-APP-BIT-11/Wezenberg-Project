@@ -36,8 +36,10 @@ class startpagina extends CI_Controller {
         $data['title'] = 'Startpagina beheren';
         
         $this->load->model('nieuwsitem_model');
-       
+       $this->load->model('homepagina_model');
+        
         $data['nieuwsitems']= $this->nieuwsitem_model->getAll();
+        $data['homepaginaitem']= $this->homepagina_model->get(1);
       
         
         $partials = array(
@@ -128,6 +130,16 @@ class startpagina extends CI_Controller {
         
         $this->load->model('nieuwsitem_model');
         $this->nieuwsitem_model->update($item);
+        redirect('/trainer/startpagina/beheren');
+    }
+	 public function homepaginaOpslaan(){
+        $item = new stdClass();
+        
+        $item->id = 1;
+        $item->groepsfoto = $this->input->post('groepsfoto');
+        $item->informatie = $this->input->post('infoblok');
+        $this->load->model('homepagina_model');
+        $this->homepagina_model->update($item);
         redirect('/trainer/startpagina/beheren');
     }
 }

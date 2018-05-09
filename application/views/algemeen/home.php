@@ -4,6 +4,7 @@
     <div class="jumbotron">
       <h1>Trainingscentrum Wezenberg</h1>
       <p class="lead">Welkom op de webapplicatie van het trainingscentrum in Wezenberg. Deze applicatie is ter illustratie!</p>
+      <p> <?php echo $homepagina->informatie;?></p>
       <?php echo anchor('bezoeker/Contact/trainers', 'Contacteer Wezenberg', 'class="btn btn-primary"'); ?>
     </div>
 
@@ -12,8 +13,17 @@
          echo  '<div class="row">';
       foreach($nieuwsitems as $nieuws)
       {
-          echo '<div class="col-lg-4"><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
+          if($nieuws->foto != NULL)
+          {
+              echo '<div class="col-lg-4"><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
                   . toonAfbeelding('nieuwsitems/' . $nieuws->foto . ' ', 'width="250px" height="250px"').'</div>';
+          }
+          else
+          {
+              echo '<div class="col-lg-4"><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
+                  .'</div>';
+          }
+         
       }
       echo '</div>';
       
