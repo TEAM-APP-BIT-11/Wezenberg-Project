@@ -8,13 +8,19 @@
         $typeOpties[$type->id] = $type->typePersoon;
     }
     
-    $attributes = array('name' => 'gebruikerAanpassenFormulier');
+    $attributes = array('name' => 'wedstrijdResultaatAanpassenFormulier', 'data-toggle' => 'validator', 'role' => 'form');
     echo form_open('trainer/gebruiker/pasAan', $attributes);
 
     echo form_labelpro('Type gebruiker:', 'type');
     echo form_dropdown('type', $typeOpties);
 
     echo '</br>';
+    
+    ?>
+    
+    <div class="form-group">
+
+    <?php
     
     echo form_labelpro('Voornaam', 'voornaam');
     echo form_input(array('name' => 'voornaam',
@@ -23,7 +29,11 @@
         'class' => 'form-control',
         'required' => 'required'));
 
-    echo '</br>';
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Familienaam', 'familienaam');
     echo form_input(array('name' => 'familienaam',
@@ -32,7 +42,12 @@
         'class' => 'form-control',
         'required' => 'required'));
 
-    echo '</br>';
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
+    
     echo form_labelpro('Geboortedatum', 'geboortedatum');
     echo form_input(array('name' => 'geboortedatum',
         'id' => 'geboortedatum',
@@ -41,30 +56,53 @@
         'required' => 'required',
         'type' => 'date'));
 
-
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
+    
     echo form_labelpro('Straat', 'straat');
     echo form_input(array('name' => 'straat',
         'id' => 'straat',
         'value' => $persoon->straat,
         'class' => 'form-control'));
 
-    echo '</br>';
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Huisnummer', 'nummer');
     echo form_input(array('name' => 'nummer',
         'id' => 'nummer',
         'value' => $persoon->nummer,
+        'type' => 'number',
+        'data-error' => 'Dit is geen nummer.',
         'class' => 'form-control'));
 
-    echo '</br>';
+     ?>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Postcode', 'postcode');
     echo form_input(array('name' => 'postcode',
         'id' => 'postcode',
         'value' => $persoon->postcode,
+        'type' => 'number',
+        'data-error' => 'Dit is geen postcode.',
         'class' => 'form-control'));
 
-    echo '</br>';
+     ?>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Woonplaats', 'woonplaats');
     echo form_input(array('name' => 'woonplaats',
@@ -72,16 +110,27 @@
         'value' => $persoon->woonplaats,
         'class' => 'form-control'));
 
-    echo '</br>';
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('E-mailadres', 'mailadres');
     echo form_input(array('name' => 'mailadres',
         'id' => 'mailadres',
         'value' => $persoon->mailadres,
+        'type' => 'email',
         'class' => 'form-control',
+        'data-error' => 'Dit is geen email.',
         'required' => 'required'));
 
-    echo '</br>';
+     ?>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Gsmnummer', 'gsmnummer');
     echo form_input(array('name' => 'gsmnummer',
@@ -89,7 +138,11 @@
         'value' => $persoon->gsmnummer,
         'class' => 'form-control'));
     
-    echo '</br>';
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Biografie', 'biografie');
     echo form_textarea(array('name' => 'biografie',
@@ -97,7 +150,11 @@
         'class' => 'form-control',
         'value' => $persoon->biografie));
 
-    echo '</br>';
+     ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
     
     echo form_labelpro('Gebruikersnaam', 'gebruikersnaam');
     echo form_input(array('name' => 'gebruikersnaam',
@@ -105,6 +162,11 @@
         'value' => $persoon->gebruikersnaam,
         'class' => 'form-control',
         'required' => 'required'));
+    
+     ?>
+        </div>
+    <?php
+   
     echo form_hidden('id', $persoon->id);
     echo '<div>';
     echo '</br>';

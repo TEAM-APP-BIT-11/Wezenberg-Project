@@ -97,7 +97,6 @@ class Gebruiker extends CI_Controller
     public function pasAan()
     {
         $persoon = new stdClass();
-
         $persoon->id = html_escape($this->input->post('id'));
         $persoon->typePersoonId = html_escape($this->input->post('type'));
         $persoon->voornaam = html_escape($this->input->post('voornaam'));
@@ -115,7 +114,6 @@ class Gebruiker extends CI_Controller
         $this->load->model('persoon_model');
 
         $this->persoon_model->update($persoon);
-        
 
         $this->beheren();
     }

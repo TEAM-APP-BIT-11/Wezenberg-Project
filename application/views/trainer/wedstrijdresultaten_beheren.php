@@ -3,7 +3,7 @@
 <h1 class="">Wedstrijdresultaten beheren</h1>
 <hr>
 <h3>Afgelopen wedstrijden</h3>
-
+<div class="table-responsive">
 <table class="table">
     <tr>
         <th>Naam</th>
@@ -34,3 +34,4 @@
     ?>
 
 </table>
+</div>

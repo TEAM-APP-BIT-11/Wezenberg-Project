@@ -1,8 +1,8 @@
 <h1 class="">Gebruikers beheren</h1>
 <hr>
 <h3>Zwemmers</h3>
-
-<table class="table">
+<div class="table-responsive">
+    <table class="table">
         <?php 
         foreach ($zwemmers as $zwemmer) {
 
@@ -24,8 +24,10 @@
         ?>
     
 </table>
+</div>
 
-<table class="table">
+<div class="table-responsive">
+    <table class="table">
     <?php
         echo "<h3>Trainers</h3>";
         foreach ($trainers as $trainer) 
@@ -46,6 +48,8 @@
         }
         ?>
 </table>
+</div>
+
 
 <?php
     echo anchor('trainer/gebruiker/toevoegen', 'Gebruiker toevoegen', 'class="btn btn-primary"');
