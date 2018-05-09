@@ -80,10 +80,29 @@ class Wedstrijdaanvraag extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
         $this->load->model('wedstrijdreeks_model');
         
+        $this->load->model('wedstrijddeelname_model');
+
+        $this->load->model('wedstrijdreeks_model');
+
+        $data['deelname'] = $this->wedstrijddeelname_model->getEnkelPersoonWithDeelnamens($id);
+      
+        
         $partials = array(
             'inhoud' => 'trainer/Wedstrijdaanvraag_aanpassen',
             'footer' => 'main_footer');
          
         $this->template->load('main_master', $partials, $data);
+    }
+    public function aanpassen(){
+        $data['eindverantwoordelijke'] = "Ruben Tuytens";
+        
+        $slag = $this->input->post('afstand');
+        
+        $nieuw = new stdClass();
+        $nieuw->id = $this->input->post('afstand');
+        
+        $this->load->model('afstand_model');
+        
+        $this->afstand_model->update($slag);
     }
 }
