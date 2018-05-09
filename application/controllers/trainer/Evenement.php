@@ -4,7 +4,7 @@
  * @class Evenement
  * @brief Controller-klasse voor evenementen
  * 
- * Controller-klasse met alle methodes die gebruikt worden in vervand met evenementen
+ * Controller-klasse met alle methodes die gebruikt worden in verband met evenementen
  */
 
 class Evenement extends CI_Controller
@@ -69,7 +69,7 @@ class Evenement extends CI_Controller
     {
         $evenement = new stdClass();
         
-        $data['titel'] = "Evenementen Beheren";
+        $data['titel'] = "Evenementen Toevoegen";
         $data['eindverantwoordelijke'] = "Senne Cools";
         
         $this->load->model('persoon_model');
@@ -89,26 +89,13 @@ class Evenement extends CI_Controller
             $this->load->model('evenement_model');
             $this->load->model('evenementdeelname_model');
             if($isReeks){
-                $evenementen = $this->evenement_model->getEvenementenByEvenementReeksId($id);
-                $dagen = [];
-                $ids = '';
-                $count = 0;
-                foreach($evenementen as $reeksEvenement){
-                    $ids .= strval($reeksEvenement->id) . ",";
-                    if($count == 0){
-                        $evenementDeelnames = $this->evenementdeelname_model->getByEventId($reeksEvenement->id);
-                    }
-                    $sqldag = date_create_from_format("Y-m-d", $reeksEvenement->begindatum);
-                    $dag = $sqldag->format("N");
-                    if(!in_array($dag, $dagen)){
-                        array_push($dagen, $dag);
-                    }
-                    $count++;
-                }
-                $data['days'] = $dagen;
-                $data['ids'] = $ids;
-                $evenement = $evenementen[0];
-                $laatsteEvent = $evenementen[count($evenementen) - 1];
+                $evenementenInReeks = $this->evenement_model->getEvenementenByEvenementReeksId($id);
+                $gegevens = $this->haalDagenVanReeksOp($evenementenInReeks);
+                $data['days'] = $gegevens[0];
+                $data['ids'] = $gegevens[1];
+                $evenementDeelnames = $gegevens[2];
+                $evenement = $evenementenInReeks[0];
+                $laatsteEvent = $evenementenInReeks[count($evenementenInReeks) - 1];
                 $evenement->einddatum = $laatsteEvent->begindatum;
 
             } else{
@@ -127,6 +114,27 @@ class Evenement extends CI_Controller
         
         $partials = array('inhoud' => 'trainer/evenementen_toevoegen', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
+    }
+    
+    private function haalDagenVanReeksOp($evenementenInReeks){
+        $ids = "";
+        $dagen = [];
+        $count = 0;
+        foreach($evenementenInReeks as $reeksEvenement){
+            $ids .= strval($reeksEvenement->id) . ",";
+            if($count == 0){
+                $evenementDeelnames = $this->evenementdeelname_model->getByEventId($reeksEvenement->id);
+            }
+            $sqldag = date_create_from_format("Y-m-d", $reeksEvenement->begindatum);
+            $dag = $sqldag->format("N");
+            if(!in_array($dag, $dagen)){
+                array_push($dagen, $dag);
+            }
+            $count++;
+        }
+        $gegevens = [];
+        array_push($gegevens, $dagen, $ids, $evenementDeelnames);
+        return $gegevens;
     }
 
     public function voegNieuweEvenementenToe()
@@ -241,7 +249,7 @@ class Evenement extends CI_Controller
         $this->load->model('evenementtype_model');
         $type = $this->evenementtype_model->get($evenement->evenementTypeId)->type;
         if (!$isReeks) {
-            if ($type == 'overige') {
+            if ($type == 'overig') {
                 $titel = 'Nieuw evenement';
                 $boodschap = 'Er is een nieuw evenement aan je schema toegevoegd: ' . $evenement->naam . '.';
             } else {
@@ -249,7 +257,7 @@ class Evenement extends CI_Controller
                 $boodschap = 'Er is een nieuwe ' . $type . ' aan je schema toegevoegd: ' . $evenement->naam . '.';
             }
         } else {
-            if ($type == 'overige') {
+            if ($type == 'overig') {
                 $titel = 'Nieuwe evenementen';
                 $boodschap = 'Er is een nieuwe reeks evenementen aan je schema toegevoegd: ' . $evenement->naam . '.';
             } else {
@@ -296,12 +304,7 @@ class Evenement extends CI_Controller
         $this->load->model('evenementdeelname_model');
         
         foreach($evenementen as $evenement){
-            $deelnames = $this->evenementdeelname_model->getByEventId($evenement->id);
-        
-            foreach($deelnames as $deelname){
-                $this->evenementdeelname_model->delete($deelname->id);
-            }
-            $this->evenement_model->delete($evenement->id);
+            $this->verwijderEvenement($evenement->id);
         }
         
         $this->load->model('evenementreeks_model');
@@ -326,25 +329,5 @@ class Evenement extends CI_Controller
         $typeId = $this->input->post('typeId');
         
         $this->laadEvenement($typeId, false, $id);
-    }
-
-    public function pasAan()
-    {
-        $evenement = new stdClass();
-
-        $evenement->id = $this->input->post('evenementId');
-        $evenement->naam = $this->input->post('naam');
-        $evenement->locatieId = $this->input->post('locatie');
-        $evenement->begindatum = $this->input->post('begindatum');
-        $evenement->beginuur = $this->input->post('beginuur');
-        $evenement->einduur = $this->input->post('einduur');
-        $evenement->extraInfo = $this->input->post('beschrijving');
-        $evenement->evenementTypeId = $this->input->post('evenementType');
-        $evenement->evenementReeksId = $this->input->post('evenementReeks');
-
-        $this->load->model('evenement_model');
-        $this->evenement_model->update($evenement);
-
-        $this->beheren();
     }
 }

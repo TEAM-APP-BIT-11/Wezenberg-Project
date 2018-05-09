@@ -64,57 +64,130 @@ foreach($evenementen as $evenement){
         });
         $('#trainingControls button').click(function(e){
             if($(e.target).text() === 'Training verwijderen'){
-                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                $.confirm({
+                    title: 'Training verwijderen',
+                    content: 'Bent u zeker dat u deze training wil verwijderen?',
+                    buttons: {
+                        Ja: function () {
+                            $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                            $('#trainingenForm').submit();
+                        },
+                        Nee: function () {
+                            $.alert('De training werd niet verwijderd.');
+                        }
+                    }
+                });
             }
             if($(e.target).text() === 'Training bewerken'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+                $('#trainingenForm').submit();
             }
-            $('#trainingenForm').submit();
+            
         });
         $('#trainingReeksControls button').click(function(e){
             if($(e.target).text() === 'Reeks verwijderen'){
-                $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
+                $.confirm({
+                    title: 'Trainingreeks verwijderen',
+                    content: 'Bent u zeker dat u deze reeks trainingen wil verwijderen?',
+                    buttons: {
+                        Ja: function () {
+                            $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
+                            $('#trainingenForm').submit();
+                        },
+                        Nee: function () {
+                            $.alert('De reeks werd niet verwijderd.');
+                        }
+                    }
+                });
             }
             if($(e.target).text() === 'Reeks bewerken'){
                 $('#trainingenForm').attr('action', site_url + '/trainer/Evenement/bewerkReeks');
+                $('#trainingenForm').submit();
             }
-            $('#trainingenForm').submit();
         });
         $('#overigeReeksControl button').click(function(e){
             if($(e.target).text() === 'Reeks verwijderen'){
-                $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
+                $.confirm({
+                    title: 'Overige reeks verwijderen',
+                    content: 'Bent u zeker dat u deze reeks evenementen wil verwijderen?',
+                    buttons: {
+                        Ja: function () {
+                            $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
+                            $('#trainingenForm').submit();
+                        },
+                        Nee: function () {
+                            $.alert('De reeks werd niet verwijderd.');
+                        }
+                    }
+                });
             }
             if($(e.target).text() === 'Reeks bewerken'){
                 $('#overigeForm').attr('action', site_url + '/trainer/Evenement/bewerkReeks');
+                $('#trainingenForm').submit();
             }
-            $('#overigeForm').submit();
         });
         $('#overigeControls button').click(function(e){
             if($(e.target).text() === 'Evenement verwijderen'){
-                $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                $.confirm({
+                    title: 'Evenement verwijderen',
+                    content: 'Bent u zeker dat u dit evenement wil verwijderen?',
+                    buttons: {
+                        Ja: function () {
+                            $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                            $('#trainingenForm').submit();
+                        },
+                        Nee: function () {
+                            $.alert('Het evenement werd niet verwijderd.');
+                        }
+                    }
+                });
             }
             if($(e.target).text() === 'Evenement bewerken'){
                 $('#overigeForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+                $('#trainingenForm').submit();
             }
-            $('#overigeForm').submit();
         });
         $('#medischeControls button').click(function(e){
             if($(e.target).text() === 'Medische test verwijderen'){
-                $('#medischForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                $.confirm({
+                    title: 'Medische test verwijderen',
+                    content: 'Bent u zeker dat u deze medische test wil verwijderen?',
+                    buttons: {
+                        Ja: function () {
+                            $('#medischForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                            $('#trainingenForm').submit();
+                        },
+                        Nee: function () {
+                            $.alert('De medische test werd niet verwijderd.');
+                        }
+                    }
+                });
             }
             if($(e.target).text() === 'Medische test bewerken'){
                 $('#medischForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+                $('#trainingenForm').submit();
             }
-            $('#medischForm').submit();
         });
         $('#stageControls button').click(function(e){
             if($(e.target).text() === 'Stage verwijderen'){
-                $('#stageForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                $.confirm({
+                    title: 'Stage verwijderen',
+                    content: 'Bent u zeker dat u deze stage wil verwijderen?',
+                    buttons: {
+                        Ja: function () {
+                            $('#stageForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
+                            $('#trainingenForm').submit();
+                        },
+                        Nee: function () {
+                            $.alert('De stage werd niet verwijderd.');
+                        }
+                    }
+                });
             }
             if($(e.target).text() === 'Stage bewerken'){
                 $('#stageForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
+                $('#trainingenForm').submit();
             }
-            $('#stageForm').submit();
         });
     });
 </script>

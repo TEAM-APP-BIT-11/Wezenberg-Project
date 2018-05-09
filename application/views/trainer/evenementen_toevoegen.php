@@ -24,6 +24,20 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             $("#type, #hoeveelheid, #einddatum").attr('disabled', false);
             $("#nieuweEvenementenForm").submit();
         });
+        $("#annuleren").click(function(){
+           $.confirm({
+                title: 'Evenement annuleren',
+                content: 'Bent u zeker dat u dit evenement wil annuleren?',
+                buttons: {
+                    Ja: function () {
+                        window.location.href = site_url + '/trainer/Evenement/beheren';
+                    },
+                    Nee: function () {
+                        $.alert('Het evenement werd niet geannuleerd.');
+                    }
+                }
+            }); 
+        });
         //Change Form
         $("#type, #hoeveelheid").on('change', function(){
             var type = $("#type option:selected").text();
@@ -101,8 +115,12 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
         });
         //Locatie toevoegen
         $("#locatieOpslaan button").click(function(){
-            schrijfLocatieWegEnHaalLocatiesOp();
-            $("#locatieModal").modal('toggle');
+            if($("input[name=locatieNaam]").val() !== ""){
+                schrijfLocatieWegEnHaalLocatiesOp();
+                $("#locatieModal").modal('toggle');
+            } else{
+                $("#locatieForm").submit();
+            }
         });
         function schrijfLocatieWegEnHaalLocatiesOp(){
         $.ajax({type: "GET",
@@ -175,7 +193,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
 
 <h1 id="titel"><?php echo ucfirst($evenementtype->type);?> toevoegen</h1>
 <hr>
-<form id="nieuweEvenementenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweEvenementenToe';?>" data-toggle="validator">
+<form role="form" id="nieuweEvenementenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweEvenementenToe';?>" data-toggle="validator">
     <input id="zwemmers" name="zwemmers" value="" hidden>
     <input id="nieuw" name="nieuw" value="<?php echo ($isNieuw)?'true':'false';?>" hidden>
     <?php
@@ -339,7 +357,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
     </div>
 </form>
 <div id="formControls" class="row">
-    <div class="col-md-3"><?php echo anchor($this->config->site_url() . '/trainer/Evenement/beheren', 'Annuleren', 'class="btn btn-primary btn-lg"');?></div>
+    <div class="col-md-3"><button id="annuleren" class="btn btn-primary btn-lg">Annuleren</button></div>
     <div class="col-md-2"></div>
     <div class="col-md-3"><button id="opslaan" class="btn btn-primary btn-lg">Opslaan</button></div>
 </div>
@@ -352,46 +370,48 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
                 <h4 class="modal-title">Locatie toevoegen</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label for="locatieNaam" id="naam">Naam</label>
-                        <input name="locatieNaam" class="form-control" type="text" value="">
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="locatieStraat" id="naam">Straat</label>
-                        <input name="locatieStraat" class="form-control" type="text" value="">
-                    </div>
-                    <div class="col-md-2 form-group">
-                        <label for="locatieHuisnummer" id="naam">Nummer</label>
-                        <input name="locatieHuisnummer" class="form-control" type="text" value="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="locatiePostcode" id="naam">Postcode</label>
-                            <input name="locatiePostcode" class="form-control" type="text" value="">
+                <form id="locatieForm" role="form" data-toggle="validator">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="locatieNaam" id="naam">Naam *</label>
+                            <input name="locatieNaam" class="form-control" type="text" value="" required>
                         </div>
-                        <div class="form-group">
-                            <label for="locatieLand" id="naam">Land</label>
-                            <input name="locatieLand" class="form-control" type="text" value="">
+                        <div class="col-md-4 form-group">
+                            <label for="locatieStraat" id="naam">Straat</label>
+                            <input name="locatieStraat" class="form-control" type="text" value="">
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label for="locatieHuisnummer" id="naam">Nummer</label>
+                            <input name="locatieHuisnummer" class="form-control" type="text" value="">
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="locatieGemeente" id="naam">Gemeente</label>
-                            <input name="locatieGemeente" class="form-control" type="text" value="">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="locatiePostcode" id="naam">Postcode</label>
+                                <input name="locatiePostcode" class="form-control" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="locatieLand" id="naam">Land</label>
+                                <input name="locatieLand" class="form-control" type="text" value="">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="locatieZaal" id="naam">Zaal</label>
-                            <input name="locatieZaal" class="form-control" type="text" value="">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="locatieGemeente" id="naam">Gemeente</label>
+                                <input name="locatieGemeente" class="form-control" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="locatieZaal" id="naam">Zaal</label>
+                                <input name="locatieZaal" class="form-control" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="locatieBeschrijving" id="naam">Beschrijving</label>
+                            <textarea name="locatieBeschrijving" class="form-control" rows="4"></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6 form-group">
-                        <label for="locatieBeschrijving" id="naam">Beschrijving</label>
-                        <textarea name="locatieBeschrijving" class="form-control" rows="4"></textarea>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <div class="row">
