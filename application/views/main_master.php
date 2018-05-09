@@ -113,7 +113,7 @@
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
             echo activeAnchor('trainer/Locatie/beheren', 'Locatie beheren', '');
             echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
-            echo activeAnchor('trainer/gebruiker/beheren', 'Gebruikers', '');
+            echo activeAnchor('trainer/gebruiker/beheren', 'Gebruikers beheren', '');
             echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
             echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');
