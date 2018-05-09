@@ -107,12 +107,12 @@ $.ajax({type: "GET",
     echo form_input(array('name' => 'extraInfo',
         'id' => 'extraInfo',
         'value' => $wedstrijd->extraInfo,
-        'class' => 'form-control',
-        'required' => 'required',));
+        'class' => 'form-control'));
 
     echo '<hr>';
     echo '<h4>Reeksen:</h4>';
 
+    echo '<div class="table-responsive">';
     echo '<table class="table">';
     echo '<tr>';
     echo '<th>Datum</th>';
@@ -126,7 +126,7 @@ $.ajax({type: "GET",
     foreach ($wedstrijdreeksen as $wedstrijdreeks) {
         echo
         "<tr>
-						<td>" . $wedstrijdreeks->datum . "</td>
+						<td>" . date('d-m-Y',strtotime($wedstrijdreeks->datum)) . "</td>
 						<td>" . $wedstrijdreeks->beginuur . "</td>
 						<td>" . $wedstrijdreeks->einduur . "</td>
             <td>" . $wedstrijdreeks->slag->naam . "</td>
@@ -136,6 +136,7 @@ $.ajax({type: "GET",
 					</tr>";
     }
     echo '</table>';
+    echo '</div>';
     echo '<div id="reeksKnop">
 				<button type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 		</div>';

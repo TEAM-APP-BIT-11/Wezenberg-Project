@@ -17,13 +17,15 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <link rel="icon" type="favicon" href="resources/img/favicon/zwemmer.png" />
+
     <title> <?php echo $titel; ?> </title>
 
     <script type="text/javascript">
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
-    
+
     <base href="<?php echo base_url();?>" />
 
     <!--Bootstrap datetimepicker script & style-->

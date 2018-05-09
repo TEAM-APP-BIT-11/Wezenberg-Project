@@ -113,16 +113,16 @@ class Wedstrijd extends CI_Controller
     {
         $wedstrijd = new stdClass();
 
-        $wedstrijd->naam = html_escape($this->input->post('naam'));
-        $wedstrijd->locatieId = html_escape($this->input->post('locatie'));
+        $wedstrijd->naam = $this->input->post('naam');
+        $wedstrijd->locatieId = $this->input->post('locatie');
 
-        $beginDatum = html_escape($this->input->post('begindatum'));
+        $beginDatum = $this->input->post('begindatum');
         $wedstrijd->begindatum = $beginDatum;
 
-        $eindDatum = html_escape($this->input->post('einddatum'));
+        $eindDatum = $this->input->post('einddatum');
         $wedstrijd->einddatum = $eindDatum;
 
-        $wedstrijd->extraInfo = html_escape($this->input->post('extraInfo'));
+        $wedstrijd->extraInfo = $this->input->post('extraInfo');
 
         if($beginDatum != ""){
           $NieuweBeginDatum = new DateTime($beginDatum);
@@ -167,12 +167,12 @@ class Wedstrijd extends CI_Controller
     {
         $wedstrijd = new stdClass();
 
-        $wedstrijd->naam = html_escape($this->input->post('naam'));
-        $wedstrijd->locatieId = html_escape($this->input->post('locatie'));
-        $wedstrijd->begindatum = html_escape($this->input->post('begindatum'));
-        $wedstrijd->einddatum = html_escape($this->input->post('einddatum'));
-        $wedstrijd->extraInfo = html_escape($this->input->post('extraInfo'));
-        $wedstrijd->id = html_escape($this->input->post('id'));
+        $wedstrijd->naam = $this->input->post('naam');
+        $wedstrijd->locatieId = $this->input->post('locatie');
+        $wedstrijd->begindatum = $this->input->post('begindatum');
+        $wedstrijd->einddatum = $this->input->post('einddatum');
+        $wedstrijd->extraInfo = $this->input->post('extraInfo');
+        $wedstrijd->id = $this->input->post('id');
 
         $this->load->model('wedstrijd_model');
         $this->wedstrijd_model->update($wedstrijd);
@@ -187,10 +187,10 @@ class Wedstrijd extends CI_Controller
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
+        $data['error'] = $this->wedstrijd_model->delete($id);
 
         $this->load->model('wedstrijd_model');
-        $data['error'] = $this->wedstrijd_model->delete($id);
+        $data['wedstrijden'] = $this->wedstrijd_model->getAllWithLocatie();
 
         $partials = array('inhoud' => 'trainer/wedstrijden_beheren',
             'footer' => 'main_footer');

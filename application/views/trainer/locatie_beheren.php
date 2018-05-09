@@ -11,21 +11,23 @@ if ($error != null) {
 }
 ?>
 
-<table class="table">
-    <tr>
-        <th>Locatie</th>
-        <th>Actie</th>
-    </tr>
+<div class="table-responsive">
+  <table class="table">
+      <tr>
+          <th>Locatie</th>
+          <th>Actie</th>
+      </tr>
 
-    <?php
-    foreach ($locaties as $locatie) {
-        echo
-        "<tr>
-          <td>". $locatie->naam . "</td>
-          <td>" . anchor('trainer/locatie/aanpassen/' . $locatie->id, 'Aanpassen') . ' '  . anchor('trainer/locatie/verwijder/' . $locatie->id, 'Verwijderen') . "</td>
-        </tr>";
-    }
-    ?>
-</table>
+      <?php
+      foreach ($locaties as $locatie) {
+          echo
+          "<tr>
+            <td>". $locatie->naam . "</td>
+            <td>" . anchor('trainer/locatie/aanpassen/' . $locatie->id, 'Aanpassen') . ' '  . anchor('trainer/locatie/verwijder/' . $locatie->id, 'Verwijderen') . "</td>
+          </tr>";
+      }
+      ?>
+  </table>
+</div>
 
 <?php echo anchor('trainer/locatie/toevoegen/', 'Voeg een nieuwe locatie toe', 'class="btn btn-primary"'); ?>

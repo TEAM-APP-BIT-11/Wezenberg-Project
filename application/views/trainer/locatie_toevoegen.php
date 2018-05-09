@@ -17,8 +17,7 @@
 		    echo form_labelpro('Straat', 'straat');
 		    echo form_input(array('name' => 'straat',
 		        'id' => 'straat',
-		        'class' => 'form-control',
-		        'required' => 'required'));
+		        'class' => 'form-control'));
 
 
 		    echo '</br>';
@@ -26,7 +25,6 @@
 		    echo form_input(array('name' => 'nr',
 		        'id' => 'nr',
 		        'class' => 'form-control',
-		        'required' => 'required',
 		        'type' => 'number',));
 
 		    echo '</br>';
@@ -34,36 +32,31 @@
 		    echo form_input(array('name' => 'postcode',
 		        'id' => 'postcode',
 		        'class' => 'form-control',
-		        'required' => 'required',
 		        'type' => 'number',));
 
 		    echo '</br>';
 		    echo form_labelpro('Gemeente', 'gemeente');
 		    echo form_input(array('name' => 'gemeente',
 		        'id' => 'gemeente',
-		        'class' => 'form-control',
-		        'required' => 'required',));
+		        'class' => 'form-control'));
 
 				echo '</br>';
 				echo form_labelpro('Zaal', 'zaal');
 				echo form_input(array('name' => 'zaal',
 						'id' => 'zaal',
-						'class' => 'form-control',
-		        'required' => 'required',));
+						'class' => 'form-control'));
 
 				echo '</br>';
 				echo form_labelpro('Land', 'land');
 				echo form_input(array('name' => 'land',
 						'id' => 'land',
-						'class' => 'form-control',
-		        'required' => 'required',));
+						'class' => 'form-control'));
 
 				echo '</br>';
 				echo form_labelpro('Extra informatie', 'extra informatie');
 				echo form_input(array('name' => 'extraInfo',
 						'id' => 'extraInfo',
-						'class' => 'form-control',
-		        'required' => 'required',));
+						'class' => 'form-control'));
 
 				echo '<div>';
 				echo '</br>';

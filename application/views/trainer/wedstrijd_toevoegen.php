@@ -89,7 +89,7 @@ $.ajax({type: "GET",
         'id' => 'begindatum',
         'class' => 'form-control',
         'required' => 'required',
-				'type' => 'date',));
+				'type' => 'date'));
 
 
     echo '</br>';
@@ -97,7 +97,7 @@ $.ajax({type: "GET",
     echo form_input(array('name' => 'einddatum',
         'id' => 'einddatum',
         'class' => 'form-control',
-        'type' => 'date',));
+        'type' => 'date'));
 
     echo '</br>';
 		echo form_labelpro('Locatie', 'locatie');
@@ -111,7 +111,7 @@ $.ajax({type: "GET",
     echo form_labelpro('Extra informatie', 'extra informatie');
     echo form_input(array('name' => 'extraInfo',
         'id' => 'extraInfo',
-        'class' => 'form-control',));
+        'class' => 'form-control'));
 
 	  echo '</br>';
     echo '<div>';
