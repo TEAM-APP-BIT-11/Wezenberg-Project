@@ -31,9 +31,12 @@ class Welcome extends CI_Controller
 
     public function index()
     {
-        $data['titel'] = "Welkom";
-        $data['eindverantwoordelijke'] = "Iemand";
-
+        $data['eindverantwoordelijke'] = "Ruben Tuytens";
+        $data['titel'] = 'Welkom';
+        $this->load->model('nieuwsitem_model');
+        $this->load->model('wedstrijd_model');
+         $data['nieuwsitems']= $this->nieuwsitem_model->getNieuws();
+        $data['kalender']= $this->wedstrijd_model->getAllAfterTodayWithLocatie();
         $partials = array(
             'inhoud' => 'algemeen/home',
             'footer' => 'main_footer');
