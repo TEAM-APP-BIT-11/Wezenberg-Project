@@ -32,7 +32,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
                 $("#titel").html('Stage toevoegen');
                 $("#hoeveelheid").val('enkel');
                 $("#hoeveelheid").prop('disabled', true);
-                $("#begindatum").html('Begindatum');
+                $("#begindatum").html('Begindatum *');
                 $("#einddatum").prop('disabled', false);
                 $("#dagen").hide();
             } else{
@@ -57,13 +57,17 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
                     $("#titel").html('Evenementen toevoegen');
                 }
                 if(hoeveelheid === 'enkel'){
-                    $("#begindatum").html('Datum');
-                    $("#einddatum").prop('disabled', true);
+                    $("#begindatum").html('Datum *');
+                    $("#einddatum label").html('Einddatum');
+                    $("#einddatum input").prop('disabled', true);
+                    $("#einddatum input").prop('required', false);
                     $("#dagen").hide();
                 } else{
                     $("#hoeveelheid").prop('disabled', false);
-                    $("#begindatum").html('Begindatum');
-                    $("#einddatum").prop('disabled', false);
+                    $("#begindatum").html('Begindatum *');
+                    $("#einddatum label").html('Einddatum *');
+                    $("#einddatum input").prop('disabled', false);
+                    $("#einddatum input").prop('required', true);
                     $("#dagen").show();
                 }
             }     
@@ -171,7 +175,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
 
 <h1 id="titel"><?php echo ucfirst($evenementtype->type);?> toevoegen</h1>
 <hr>
-<form id="nieuweEvenementenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweEvenementenToe';?>">
+<form id="nieuweEvenementenForm" method="post" action="<?php echo $this->config->site_url() . '/trainer/Evenement/voegNieuweEvenementenToe';?>" data-toggle="validator">
     <input id="zwemmers" name="zwemmers" value="" hidden>
     <input id="nieuw" name="nieuw" value="<?php echo ($isNieuw)?'true':'false';?>" hidden>
     <?php
@@ -187,8 +191,8 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
     ?>
     <div class="row">
         <div class="col-md-2 form-group">
-            <label for="type">Type Evenement</label>
-            <select name="type" id="type" class="form-control" <?php if(!$isNieuw){echo 'disabled';}?>>
+            <label for="type">Type Evenement *</label>
+            <select name="type" id="type" class="form-control" <?php if(!$isNieuw){echo 'disabled';}?> required>
                 <?php
                 echo '<option value="' . $evenementtype->id . '" selected>' . ucfirst($evenementtype->type) . '</option>';
                 foreach($types as $evenementType){
@@ -200,8 +204,8 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             </select>
         </div>
         <div id="hoeveelheidskolom" class="col-md-2 form-group">
-            <label for="hoeveelheid">Hoeveelheid</label>
-            <select name="hoeveelheid" id="hoeveelheid" class="form-control" <?php if($evenementtype->type == 'stage' || $evenementtype->type == 'medische test' || !$isNieuw){echo ' disabled';}?>>
+            <label for="hoeveelheid">Hoeveelheid *</label>
+            <select name="hoeveelheid" id="hoeveelheid" class="form-control" <?php if($evenementtype->type == 'stage' || $evenementtype->type == 'medische test' || !$isNieuw){echo ' disabled';}?> required>
                 <?php
                 if(!$isNieuw && $isReeks){
                     echo '<option value="meerdere" selected>Reeks</option>';
@@ -214,24 +218,24 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             </select>
         </div>
         <div class="col-md-4 form-group">
-            <label for="naam" id="naam">Evenementnaam</label>
-            <input name="naam" class="form-control" type="text" value="<?php if(!$isNieuw){echo $evenement->naam;}?>">
+            <label for="naam" id="naam">Evenementnaam *</label>
+            <input name="naam" class="form-control" type="text" value="<?php if(!$isNieuw){echo $evenement->naam;}?>" required>
         </div>
     </div>
     <div class="row">
         <div class="col-md-2 form-group">
-            <label for="begindatum" id="begindatum"><?php if(!$isNieuw && $isReeks){echo 'Begindatum';}else{echo 'Datum';}?></label>
+            <label for="begindatum" id="begindatum"><?php if(!$isNieuw && $isReeks){echo 'Begindatum';}else{echo 'Datum';}?> *</label>
             <div class='input-group date' id='datetimepickerBegindatum'>
-                <input name="begindatum" type='text' class="form-control" <?php if(!$isNieuw){echo 'value="' . zetOmNaarDDMMYYYY($evenement->begindatum) . '"';}?>/>
+                <input name="begindatum" type='text' class="form-control" <?php if(!$isNieuw){echo 'value="' . zetOmNaarDDMMYYYY($evenement->begindatum) . '"';}?> required/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
         </div>
-        <div class="col-md-2 form-group meerdere">
+        <div class="col-md-2 form-group meerdere" id="einddatum">
             <label for="einddatum">Einddatum</label>
             <div class='input-group date' id='datetimepickerEinddatum'>
-                <input name="einddatum" id="einddatum" type='text' class="form-control"
+                <input name="einddatum" type='text' class="form-control"
                     <?php
                     if(!$isNieuw && $evenement->einddatum != ""){
                         echo 'value="' . zetOmNaarDDMMYYYY($evenement->einddatum) . '"';
@@ -246,9 +250,9 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             </div>
         </div>
         <div class="col-md-2 form-group">
-            <label for="beginuur">Beginuur</label>
+            <label for="beginuur">Beginuur *</label>
             <div class='input-group date' id='datetimepickerBeginuur'>
-                <input name="beginuur" type='text' class="form-control" <?php if(!$isNieuw){echo 'value="' . $evenement->beginuur . '"';}?>/>
+                <input name="beginuur" type='text' class="form-control" <?php if(!$isNieuw){echo 'value="' . $evenement->beginuur . '"';}?> required/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
@@ -265,7 +269,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
         </div>
     </div>
     <div id="dagen" class="row form-group">
-        <label id="dagenLabel">Gaat door op</label>
+        <label id="dagenLabel">Gaat door op *</label>
         <div class="col-md-12">
             <?php
             for($i = 0; $i < count($nummerdagen); $i++){
@@ -284,8 +288,8 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
             <textarea name="beschrijving" class="form-control" rows="3"><?php if(!$isNieuw && $evenement->extraInfo != ""){echo $evenement->extraInfo;}?></textarea>
         </div>
         <div class="col-md-3 form-group">
-            <label for="locatie">Locatie</label>
-            <select id="locatie" name="locatie" class="form-control">
+            <label for="locatie">Locatie *</label>
+            <select id="locatie" name="locatie" class="form-control" required>
                 <?php
                 if($isNieuw){
                     echo '<option value="" disabled selected>Kies een locatie</option>';
