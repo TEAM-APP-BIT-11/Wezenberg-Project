@@ -36,86 +36,123 @@
         $typeOpties[$type->id] = $type->typePersoon;
     }
 
-    $attributes = array('name' => 'gebruikerAanpassenFormulier');
+    $attributes = array('name' => 'gebruikerAanpassenFormulier', 'data-toggle' => 'validator', 'role' => 'form');
     echo form_open('trainer/gebruiker/voegToe', $attributes);
 
     echo form_labelpro('Type gebruiker:', 'type');
     echo form_dropdown('type', $typeOpties,'', 'id="type"');
 
     echo '</br>';
+    ?>
     
+    <div class="form-group">
+
+    <?php
     echo form_labelpro('Voornaam', 'voornaam');
     echo form_input(array('name' => 'voornaam',
         'id' => 'voornaam',
         'class' => 'form-control',
         'required' => 'required'));
 
-    echo '</br>';
-    
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+   
     echo form_labelpro('Familienaam', 'familienaam');
     echo form_input(array('name' => 'familienaam',
         'id' => 'familienaam',
         'class' => 'form-control',
         'required' => 'required'));
-
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     echo form_labelpro('Geboortedatum', 'geboortedatum');
     echo form_input(array('name' => 'geboortedatum',
         'id' => 'geboortedatum',
         'class' => 'form-control',
-        'required' => 'required',
         'type' => 'date'));
 
-
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
+    
     echo form_labelpro('Straat', 'straat');
     echo form_input(array('name' => 'straat',
         'id' => 'straat',
         'class' => 'form-control'));
 
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('Huisnummer', 'nummer');
     echo form_input(array('name' => 'nummer',
         'id' => 'nummer',
+        'type' => 'number',
         'class' => 'form-control'));
 
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('Postcode', 'postcode');
     echo form_input(array('name' => 'postcode',
         'id' => 'postcode',
+        'type' => 'number',
         'class' => 'form-control'));
 
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('Woonplaats', 'woonplaats');
     echo form_input(array('name' => 'woonplaats',
         'id' => 'woonplaats',
         'class' => 'form-control'));
 
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('E-mailadres', 'mailadres');
     echo form_input(array('name' => 'mailadres',
         'id' => 'mailadres',
+        'type' => 'email',
         'class' => 'form-control',
+        'data-error' => 'Dit is geen email.',
         'required' => 'required'));
-
-    echo '</br>';
+    echo '<div class="help-block with-errors"></div>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('Gsmnummer', 'gsmnummer');
     echo form_input(array('name' => 'gsmnummer',
         'id' => 'gsmnummer',
         'class' => 'form-control'));
     
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('Biografie', 'gebruikersnaam');
     echo form_textarea(array('name' => 'biografie',
         'id' => 'biografie',
         'class' => 'form-control'));
 
-    echo '</br>';
+    ?>
+        </div>
+        <div class="form-group">
+    <?php
     
     echo form_labelpro('Gebruikersnaam', 'gebruikersnaam');
     echo form_input(array('name' => 'gebruikersnaam',
@@ -124,6 +161,7 @@
         'required' => 'required'));
 
     ?>
+        </div>
     </br>
     <div class="password">
         <p class="text">Automatisch paswoord: trainer123</p>
