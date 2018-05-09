@@ -120,18 +120,18 @@ class Agenda extends CI_Controller
         $data_events = array();
 
         foreach ($wedstrijddeelnames as $wedstrijddeelname) {
-            if ($wedstrijddeelname->wedstrijd->einddatum == null) {
-                $wedstrijddeelname->wedstrijd->einddatum = $wedstrijddeelname->wedstrijd->begindatum;
+            if ($wedstrijddeelname->wedstrijdreeks->wedstrijd->einddatum == null) {
+                $wedstrijddeelname->wedstrijdreeks->wedstrijd->einddatum = $wedstrijddeelname->wedstrijdreeks->wedstrijd->begindatum;
             }
 
             $data_events[] = array(
-                "id" => $wedstrijddeelname->wedstrijd->id,
-                "title" => $wedstrijddeelname->wedstrijd->naam,
-                "description" => $wedstrijddeelname->wedstrijd->naam,
-                "end" => $wedstrijddeelname->wedstrijd->einddatum . ' ' . "23:59:00",
-                "start" => $wedstrijddeelname->wedstrijd->begindatum . ' ' . "00:00:00",
-                "locatie" => $wedstrijddeelname->wedstrijd->locatie->naam,
-                "locatieId" => $wedstrijddeelname->wedstrijd->locatieId,
+                "id" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->id,
+                "title" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->naam,
+                "description" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->naam . ', u bent ingeschreven voor de reeks ' . $wedstrijddeelname->wedstrijdreeks->slag->naam . ' ' . $wedstrijddeelname->wedstrijdreeks->afstand->afstand . ' om ' . zetOmNaarHHMM($wedstrijddeelname->wedstrijdreeks->beginuur),
+                "end" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->einddatum . ' ' . "23:59:00",
+                "start" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->begindatum . ' ' . "00:00:00",
+                "locatie" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->locatie->naam,
+                "locatieId" => $wedstrijddeelname->wedstrijdreeks->wedstrijd->locatieId,
                 "color" => "green"
             );
         }

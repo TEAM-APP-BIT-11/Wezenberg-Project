@@ -44,9 +44,11 @@
         });
     }
 
+
     $(document).ready(function () {
         $('#calendar').fullCalendar(
             {
+                locale: "nl-be",
                 allDaySlot: false,
                 themeSystem: 'bootstrap3',
                 minTime: "6:00:00",
@@ -111,6 +113,17 @@
             })
         )
         ;
+
+        $("body").on('click', '.fc-month-button', function () {
+            console.log("maand");
+            $('.fc-day-header.fc-mon').html('Maandag');
+            $('.fc-day-header.fc-tue').html('Dinsdag');
+            $('.fc-day-header.fc-wed').html('Woensdag');
+            $('.fc-day-header.fc-thu').html('Donderdag');
+            $('.fc-day-header.fc-fri').html('Vrijdag');
+            $('.fc-day-header.fc-sat').html('Zaterdag');
+            $('.fc-day-header.fc-sun').html('Zondag');
+        })
     })
     ;
 

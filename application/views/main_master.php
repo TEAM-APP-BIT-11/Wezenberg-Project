@@ -25,8 +25,8 @@
         var site_url = '<?php echo site_url(); ?>';
         var base_url = '<?php echo base_url(); ?>';
     </script>
-    
-    <base href="<?php echo base_url();?>" />
+
+    <base href="<?php echo base_url(); ?>"/>
 
     <!--Bootstrap datetimepicker script & style-->
     <link rel="stylesheet" href="resources/css/bootstrap-datetimepicker.min.css"/>
@@ -39,6 +39,8 @@
     <script src="resources/js/moment.min.js"></script>
     <script src="resources/js/fullcalendar.min.js"></script>
     <script src="resources/js/gcal.js"></script>
+    <script src="resources/js/locale-all.js"></script>
+
 
 </head>
 <body>

@@ -112,8 +112,9 @@ class Wedstrijddeelname_model extends CI_Model
     }
 
     /**
+     * retourneerd een wedstrijddeelname met de reeks en daaraan gekoppeld de wedstrijd, slag en afstand.
      * @author Neil Van den Broeck
-     * @param $id
+     * @param $id De id van het wedstrijddeelname die opgevraagd wordt.
      */
     public function getWithReeksAndWedstrijdSlagAfstand($id)
     {
@@ -254,13 +255,11 @@ class Wedstrijddeelname_model extends CI_Model
         $wedstrijddeelnames = $query->result();
 
         $this->load->model('wedstrijdreeks_model');
-        $this->load->model('wedstrijd_model');
         $this->load->model('locatie_model');
 
         foreach ($wedstrijddeelnames as $wedstrijddeelname) {
-            $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($wedstrijddeelname->wedstrijdReeksId);
-            $wedstrijddeelname->wedstrijd = $this->wedstrijd_model->get($wedstrijddeelname->wedstrijdreeks->wedstrijdId);
-            $wedstrijddeelname->wedstrijd->locatie = $this->locatie_model->get($wedstrijddeelname->wedstrijd->locatieId);
+            $wedstrijddeelname->wedstrijdreeks = $this->wedstrijdreeks_model->getWithWedstrijdSlagAfstand($wedstrijddeelname->wedstrijdReeksId);
+            $wedstrijddeelname->wedstrijdreeks->wedstrijd->locatie = $this->locatie_model->get($wedstrijddeelname->wedstrijdreeks->wedstrijd->locatieId);
         }
         return $wedstrijddeelnames;
     }
