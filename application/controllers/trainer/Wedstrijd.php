@@ -1,29 +1,14 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ /**
+  * @class Wedstrijd
+  * @brief Controller-klasse voor Wedstrijden beheren van de trainer
+  * @author Stef Schoeters
+  *
+  * Controller-klasse met alle methoden die gebruikt worden in de Wedstrijden beheren pagina van de trainer
+  */
 
 class Wedstrijd extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
@@ -41,10 +26,13 @@ class Wedstrijd extends CI_Controller
         $this->load->helper('notation');
     }
 
-    public function index()
-    {
-        $this->load->view('welcome_message');
-    }
+    /**
+     * Haalt al de bestaande wedstrijden (en aangevuld met locatie) op via Wedstrijd_model en toont het resulterende object in de view trainer/wedstrijden_beheren.php
+     *
+     * @author Stef Schoeters
+     * @see Wedstrijd_model::getAllWithLocatie()
+     * @see trainer/wedstrijden_beheren.php
+     */
 
     public function beheren()
     {
@@ -60,6 +48,16 @@ class Wedstrijd extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
+     /**
+      * Haalt de wedstrijd met id=$id (en locaties, slag, afstand) op via Wedstrijd_model, Locatie_model, Wedstrijdreeks_model en toont het resulterende object in de view trainer/wedstrijd_aanpassen.php
+      *
+      * @param $id De id van de wedstrijd dat getoond wordt
+      * @see Wedstrijd_model::get()
+      * @see Locatie_model::getAll()
+      * @see Wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
+      * @see trainer/wedstrijd_aanpassen.php
+      */
 
     public function aanpassen($id)
     {
@@ -81,6 +79,19 @@ class Wedstrijd extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    /**
+     * Toont een formulier voor het toevoegen van een nieuwe wedstrijd
+     * en haalt de locaties, afstanden en slagen op op via Locatie_model, Slag_model en toont de resulterende objecten
+     * met al dan niet een error in de view trainer/wedstrijd_toevoegen.php
+     *
+     * @author Stef Schoeters
+     * @param $error De error die al dan niet getoond wordt
+     * @see Locatie_model::getAll()
+     * @see Afstand_model::getAll()
+     * @see Slag_model::getAll()
+     * @see trainer/wedstrijd_toevoegen.php
+     */
 
     public function toevoegen($error)
     {
@@ -108,6 +119,16 @@ class Wedstrijd extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    /**
+     * Maakt een nieuwe wedstrijd (en een melding voor de zwemmers dat er een nieuwe wedstrijd is) aan met de ingevulde gegevens uit het formulier
+     * via Wedstrijd_model ook wordt er gecontroleerd of de einddatum niet voor de begindatum valt
+     *
+     * @author Stef Schoeters
+     * @see Wedstrijd_model::insert()
+     * @see Persoon_model::genereerMeldingen()
+     * @see trainer/wedstrijd_toevoegen.php
+     */
 
     public function aanmaken()
     {
@@ -163,6 +184,14 @@ class Wedstrijd extends CI_Controller
 
     }
 
+    /**
+     * Past een bestaande wedstrijd aan met de aangepaste gegevens uit het formulier via Wedstrijd_model
+     *
+     * @author Stef Schoeters
+     * @see Wedstrijd_model::update()
+     * @see trainer/wedstrijd_aanpassen.php
+     */
+
     public function pasAan()
     {
         $wedstrijd = new stdClass();
@@ -179,6 +208,17 @@ class Wedstrijd extends CI_Controller
 
         return $this->beheren();
     }
+
+    /**
+     * Verwijderd de wedstrijd met id=$id via Wedstrijd_model
+     * met al dan niet een error in de view trainer/wedstrijd_beheren.php
+     *
+     * @author Stef Schoeters
+     * @param $id De id van de wedstrijd dat verwijderd wordt
+     * @see Wedstrijd_model::delete()
+     * @see Wedstrijd_model::getAllWithLocatie()
+     * @see trainer/wedstrijd_beheren.php
+     */
 
     public function verwijder($id)
     {
@@ -214,7 +254,7 @@ class Wedstrijd extends CI_Controller
     public function resultatenBeheren($id)
     {
         $data['titel'] = 'Wedstrijdresultaten beheren';
-        $data['eindverantwoordelijke'] = "Stef Schoeters";
+        $data['eindverantwoordelijke'] = "";
         $data['persoon'] = $this->authex->getPersoonInfo();
 
         $this->load->model('wedstrijdreeks_model');

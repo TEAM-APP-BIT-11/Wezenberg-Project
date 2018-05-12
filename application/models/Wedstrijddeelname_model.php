@@ -170,11 +170,17 @@ class Wedstrijddeelname_model extends CI_Model
 
     public function getAllByReeks($wedstrijdReeksId)
     {
-
         $controleren = array('wedstrijdreeksId' => $wedstrijdReeksId, 'statusId' => 1);
         $this->db->where($controleren);
         $this->db->order_by('persoonId', 'asc');
         $query = $this->db->get('wedstrijdDeelname');
+        return $query->result();
+    }
+
+    public function getAllWithReeks($wedstrijdReeksId)
+    {
+        $this->db->where('wedstrijdreeksId', $wedstrijdReeksId);
+        $query = $this->db->get('wedstrijddeelname');
         return $query->result();
     }
 
@@ -343,13 +349,13 @@ class Wedstrijddeelname_model extends CI_Model
         $this->load->model('wedstrijd_model');
 
 
-       
+
             $deelname->persoon =$this->persoon_model->get($deelname->persoonId);
             $deelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($deelname->wedstrijdReeksId);
             $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->wedstrijdreeks->wedstrijdId);
            $deelname->reeksen = $this->wedstrijdreeks_model->getReeksenSlag($deelname->wedstrijd->id);
-           
-        
+
+
 
         return $deelname;
     }

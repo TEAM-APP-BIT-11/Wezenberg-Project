@@ -1,29 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+  /**
+   * @class wedstrijdresultaat
+   * @brief Controller-klasse voor Resultaten bekijken van de zwemmer
+   * @author Stef Schoeters
+   *
+   * Controller-klasse met alle methoden die gebruikt worden in de Resultaten bekijken pagina van de zwemmer
+   */
 
-class wedstrijdresultaten extends CI_Controller
+class wedstrijdresultaat extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
@@ -41,10 +27,13 @@ class wedstrijdresultaten extends CI_Controller
         $this->load->helper('notation');
     }
 
-    public function index()
-    {
-        $this->load->view('welcome_message');
-    }
+    /**
+     * Haalt al de bestaande wedstrijden die resultaten hebben op via wedstrijddeelname_model en toont het resulterende object in de view zwemmer/persoonlijke_resultaten.php
+     *
+     * @author Stef Schoeters
+     * @see wedstrijddeelname_model::getAllWithWedstrijdByPersoon()
+     * @see zwemmer/persoonlijke_resultaten.php
+     */
 
     public function bekijken()
     {
@@ -62,6 +51,15 @@ class wedstrijdresultaten extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    /**
+     * Haalt al de resultaten van een bepaalde wedstrijd op via wedstrijdreeks_model, wedstrijddeelname_model en toont het resulterende object in de view zwemmer/ajax_haalResultatenOp.php
+     *
+     * @author Stef Schoeters
+     * @see wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
+     * @see wedstrijddeelname_model::getAllWithWedstrijdAndResultaatByPersoon()
+     * @see zwemmer/ajax_haalResultatenOp.php
+     */
 
     public function haalAjaxOp_Resultaten()
     {

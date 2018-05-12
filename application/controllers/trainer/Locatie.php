@@ -1,29 +1,14 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+  /**
+   * @class Locatie
+   * @brief Controller-klasse voor Locaties beheren van de trainer
+   * @author Stef Schoeters
+   *
+   * Controller-klasse met alle methoden die gebruikt worden in de Locaties beheren pagina van de trainer
+   */
 
 class Locatie extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
@@ -41,10 +26,13 @@ class Locatie extends CI_Controller
         $this->load->helper('notation');
     }
 
-    public function index()
-    {
-        $this->template->load('main_master', $partials, $data);
-    }
+    /**
+     * Haalt al de bestaande locaties op via Locatie_model en toont het resulterende object in de view trainer/locaties_beheren.php
+     *
+     * @author Stef Schoeters
+     * @see Locatie_model::getAll()
+     * @see trainer/locatie_beheren.php
+     */
 
     public function beheren()
     {
@@ -63,6 +51,14 @@ class Locatie extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Haalt de locatie met id=$id op via Locatie_model en toont het resulterende object in de view trainer/locatie_aanpassen.php
+     *
+     * @param $id De id van de locatie dat getoond wordt
+     * @see Locatie_model::get()
+     * @see trainer/locatie_aanpassen.php
+     */
+
     public function aanpassen($id)
     {
         $data['titel'] = 'Locatie beheren';
@@ -78,6 +74,14 @@ class Locatie extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
+
+    /**
+     * Past een bestaande locatie aan met de aangepaste gegevens uit het formulier via Locatie_model
+     *
+     * @author Stef Schoeters
+     * @see Locatie_model::update()
+     */
 
     public function pasAan()
     {
@@ -99,6 +103,13 @@ class Locatie extends CI_Controller
         return $this->beheren();
     }
 
+    /**
+     * Toont een formulier voor het toevoegen van een nieuwe locatie
+     *
+     * @author Stef Schoeters
+     * @see trainer/locatie_toevoegen
+     */
+
     public function toevoegen()
     {
         $data['titel'] = 'Locatie beheren';
@@ -114,25 +125,43 @@ class Locatie extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Maakt een nieuwe locatie aan met de ingevulde gegevens uit het formulier via Locatie_model
+     *
+     * @author Stef Schoeters
+     * @see Locatie::insert()
+     */
+
     public function voegToe()
     {
-      $locatie = new stdClass();
+        $locatie = new stdClass();
 
-      $locatie->naam = html_escape($this->input->post('naam'));
-      $locatie->straat = html_escape($this->input->post('straat'));
-      $locatie->nr = html_escape($this->input->post('nr'));
-      $locatie->postcode = html_escape($this->input->post('postcode'));
-      $locatie->gemeente = html_escape($this->input->post('gemeente'));
-      $locatie->zaal = html_escape($this->input->post('zaal'));
-      $locatie->land = html_escape($this->input->post('land'));
-      $locatie->extraInfo = html_escape($this->input->post('extraInfo'));
-      $locatie->id = html_escape($this->input->post('id'));
+        $locatie->naam = html_escape($this->input->post('naam'));
+        $locatie->straat = html_escape($this->input->post('straat'));
+        $locatie->nr = html_escape($this->input->post('nr'));
+        $locatie->postcode = html_escape($this->input->post('postcode'));
+        $locatie->gemeente = html_escape($this->input->post('gemeente'));
+        $locatie->zaal = html_escape($this->input->post('zaal'));
+        $locatie->land = html_escape($this->input->post('land'));
+        $locatie->extraInfo = html_escape($this->input->post('extraInfo'));
+        $locatie->id = html_escape($this->input->post('id'));
 
-      $this->load->model('locatie_model');
-      $this->locatie_model->insert($locatie);
+        $this->load->model('locatie_model');
+        $this->locatie_model->insert($locatie);
 
-      return $this->beheren();
+        return $this->beheren();
     }
+
+    /**
+     * Verwijderd de locatie met id=$id via Locatie_model
+     * met al dan niet een error in de view trainer/locatie_beheren.php
+     *
+     * @author Stef Schoeters
+     * @param $id De id van de locatie dat verwijderd wordt
+     * @see Locatie_model::delete()
+     * @see Locatie_model::getAll()
+     * @see trainer/locatie_beheren.php
+     */
 
     public function verwijder($id)
     {
@@ -152,7 +181,8 @@ class Locatie extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
-    public function haalJsonOp_Locaties() {
+    public function haalJsonOp_Locaties()
+    {
         $locatie = new stdClass();
 
         $locatie->naam = $this->input->get('naam');

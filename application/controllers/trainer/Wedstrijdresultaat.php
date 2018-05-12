@@ -51,7 +51,7 @@ class Wedstrijdresultaat extends CI_Controller
      * @see trainer/wedstrijdresultaat_toevoegen.php
      */
     public function toevoegen($reeksId)
-    { 
+    {
         $data['titel'] = 'Resultaat toevoegen';
         $data['eindverantwoordelijke'] = "Dieter Verboven";
         $data['persoon'] = $this->authex->getPersoonInfo();
@@ -59,14 +59,14 @@ class Wedstrijdresultaat extends CI_Controller
         $data["rondetypes"] = $this->rondetype_model->getAll();
         $this->load->model('persoon_model');
         $data['zwemmers'] = $this->persoon_model->getZwemmers();
-        
+
         $this->load->model('wedstrijdreeks_model');
         $data['reeks'] = $this->wedstrijdreeks_model->getWithWedstrijdSlagAfstand($reeksId);
         $partials = array('inhoud' => 'trainer/wedstrijdresultaat_toevoegen',
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     /**
      * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan.
      * Geeft alle ingegeven gegevens uit het formulier door via een post en voegt daarna het resultaat en de wedstrijddeelname toe aan de database.
@@ -88,12 +88,12 @@ class Wedstrijdresultaat extends CI_Controller
         $wedstrijddeelname->resultaatId = $resultaatId;
         $wedstrijddeelname->wedstrijdReeksId = html_escape($this->input->post('reeksId'));
         $wedstrijddeelname->statusId = '2';
-        
+
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->insert($wedstrijddeelname);
         return $this->resultaten();
     }
-    
+
     /**
      * Haalt alle wedstrijden  en de bijhorende locaties op
      * Stuurt deze door naar de view
@@ -146,14 +146,14 @@ class Wedstrijdresultaat extends CI_Controller
         $reeksId = $this->input->get('reeksId');
         $this->load->model('wedstrijddeelname_model');
         $data['wedstrijddeelnames'] = $this->wedstrijddeelname_model->getAllWithPersoonResultaatById($reeksId);
-        
+
         $this->load->model('rondetype_model');
         $data["rondetypes"] = $this->rondetype_model->getAll();
-        
+
         $data['persoon'] = $this->authex->getPersoonInfo();
         $this->load->view("trainer/ajax_haalResultatenOp", $data);
     }
-    
+
     /**
      * @param id De id van het resultaat waarvan de gegevens moeten opgehaald worden.
      * Haalt alle bijhorende gegegevens van het resultaat door, tijd, ronde, ranking, zwemmer ...op. Geeft een in te vullen formulier weer waar het gekozen resultaat kan aangepast worden.
@@ -172,13 +172,13 @@ class Wedstrijdresultaat extends CI_Controller
         $this->load->model('rondetype_model');
         $data["rondetypes"] = $this->rondetype_model->getAll();
         $this->load->model('wedstrijddeelname_model');
-        $data['zwemmers'] = $this->wedstrijddeelname_model->getDeelnemers($id);   
+        $data['zwemmers'] = $this->wedstrijddeelname_model->getDeelnemers($id);
         $data['wedstrijddeelname'] = $this->wedstrijddeelname_model->getByResultaatId($id);
-        
+
         $this->load->model('resultaat_model');
         $data['resultaat'] = $this->resultaat_model->get($id);
-        
-        
+
+
         $partials = array('inhoud' => 'trainer/wedstrijdresultaat_aanpassen',
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
@@ -199,16 +199,16 @@ class Wedstrijdresultaat extends CI_Controller
         $resultaat->id = html_escape($this->input->post('id'));
         $this->load->model('resultaat_model');
         $this->resultaat_model->update($resultaat);
-        
+
         $wedstrijddeelname = new stdClass();
         $wedstrijddeelname->persoonId = html_escape($this->input->post('zwemmer'));
         $wedstrijddeelname->resultaatId = html_escape($this->input->post('id'));
         $wedstrijddeelname->id = html_escape($this->input->post('wedstrijddeelnameId'));
-        
+
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->update($wedstrijddeelname);
         return $this->resultaten();
     }
-    
-    
+
+
 }

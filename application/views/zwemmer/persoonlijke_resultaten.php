@@ -29,15 +29,17 @@
 $deelnameCount = 0;
 $wedstrijdNamen = [];
 $wedstrijden = [];
-if(!empty($wedstrijddeelnames)){
-  foreach ($wedstrijddeelnames as $wedstrijddeelname) {
-    if(count(array_keys($wedstrijdNamen, $wedstrijddeelname->wedstrijd->naam)) < 1){
-      $wedstrijdNamen[$deelnameCount] = $wedstrijddeelname->wedstrijd->naam;
-      $wedstrijden[$deelnameCount]['naam'] = $wedstrijddeelname->wedstrijd->naam;
-      $wedstrijden[$deelnameCount]['id'] = $wedstrijddeelname->wedstrijd->id;
-      $deelnameCount++;
+if (!empty($wedstrijddeelnames)) {
+    foreach ($wedstrijddeelnames as $wedstrijddeelname) {
+        if (count(array_keys($wedstrijdNamen, $wedstrijddeelname->wedstrijd->naam)) < 1) {
+            if ($wedstrijddeelname->resultaatId != null) {
+                $wedstrijdNamen[$deelnameCount] = $wedstrijddeelname->wedstrijd->naam;
+                $wedstrijden[$deelnameCount]['naam'] = $wedstrijddeelname->wedstrijd->naam;
+                $wedstrijden[$deelnameCount]['id'] = $wedstrijddeelname->wedstrijd->id;
+                $deelnameCount++;
+            }
+        }
     }
-  }
 }
 ?>
 
@@ -53,15 +55,15 @@ if(!empty($wedstrijddeelnames)){
 
     <?php
     $wedstrijdenCount = 0;
-    if(!empty($wedstrijden)){
-      foreach ($wedstrijden as $wedstrijd) {
-          echo
+    if (!empty($wedstrijden)) {
+        foreach ($wedstrijden as $wedstrijd) {
+            echo
           "<tr>
             <td>" . $wedstrijden[$wedstrijdenCount]['naam'] . "</td>
             <td>" .  divAnchor('', 'Bekijken', array('class' => 'resultaat', 'data-id' => $wedstrijden[$wedstrijdenCount]['id'])) ."</td>
           </tr>";
-          $wedstrijdenCount++;
-      }
+            $wedstrijdenCount++;
+        }
     }
     ?>
 </table>

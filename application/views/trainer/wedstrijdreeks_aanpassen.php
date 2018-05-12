@@ -24,7 +24,7 @@
         'value' => $wedstrijdreeks->datum,
   			'class' => 'form-control',
   			'required' => 'required',
-        'type' => 'date',));
+        'type' => 'date'));
 
   	echo '</br>';
   	echo form_labelpro('Beginuur', 'beginuur');
@@ -33,7 +33,7 @@
         'value' => $wedstrijdreeks->beginuur,
   			'class' => 'form-control',
   			'required' => 'required',
-				'type' => 'time',));
+				'type' => 'time'));
 
   	echo '</br>';
   	echo form_labelpro('Einduur', 'einduur');
@@ -41,7 +41,7 @@
   			'id' => 'reeksEinduur',
         'value' => $wedstrijdreeks->einduur,
   			'class' => 'form-control',
-				'type' => 'time',));
+				'type' => 'time'));
 
   	echo '</br>';
   	echo form_labelpro('Afstand', 'afstand');
@@ -59,7 +59,7 @@
 	  echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
 	  echo form_close();
 
-		echo anchor('trainer/Wedstrijd/beheren', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
+		echo anchor('trainer/Wedstrijd/aanpassen/' . $wedstrijdreeks->wedstrijdId .'', form_button('back', 'Annuleren', 'class="btn btn-warning"')) ;
 		echo '</div>';
 		?>
 </div>
