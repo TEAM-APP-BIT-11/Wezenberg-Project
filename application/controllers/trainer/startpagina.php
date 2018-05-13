@@ -102,43 +102,103 @@ class startpagina extends CI_Controller {
         
     }
     public function toevoegenOpslaan(){
-        $item = new stdClass();
         
-        $item->id = $this->input->post('id');
+       
+       
+             $config['upload_path'] = './resources/img/nieuwsitems/';
+        $config['allowed_types'] = 'gif|jpg|png';
+       
+        $config['file_name'] = $_FILES['userfile']['name'];
+        $config['overwrite'] = TRUE;
+        
+         $this->load->library('upload', $config);
+        $item = new stdClass();
+       $item->id = $this->input->post('id');
         $item->tekst = $this->input->post('tekst');
-        $item->foto = $this->input->post('foto');
-        $item->titel = $this->input->post('titel');
+          $item->titel = $this->input->post('titel');
         $item->actief = 1;
         $item->datum = date('Y-m-d');
         $item->homepaginaId = 1;
         
         $this->load->model('nieuwsitem_model');
+      
+        if( $this->upload->do_upload('userfile')){
+        
+          
+        
+        $item->foto = $_FILES['userfile']['name'];
+      
+        
+        } else{
+       
+        $item->foto = '';
+        
+        }
         $this->nieuwsitem_model->insert($item);
         redirect('/trainer/startpagina/beheren');
+  
     }
     
     public function wijzigingOpslaan(){
-        $item = new stdClass();
+       
+         $config['upload_path'] = './resources/img/nieuwsitems/';
+        $config['allowed_types'] = 'gif|jpg|png';
+       $config['overwrite'] = TRUE;
+        $config['file_name'] = $_FILES['userfile']['name'];
+       
         
-        $item->id = $this->input->post('id');
+         $this->load->library('upload', $config);
+         
+         $item = new stdClass();
+       $item->id = $this->input->post('id');
         $item->tekst = $this->input->post('tekst');
-        $item->foto = $this->input->post('foto');
-        $item->titel = $this->input->post('titel');
+         $item->titel = $this->input->post('titel');
         $item->actief = 1;
         $item->datum = date('Y-m-d');
         $item->homepaginaId = 1;
         
         $this->load->model('nieuwsitem_model');
-        $this->nieuwsitem_model->update($item);
-        redirect('/trainer/startpagina/beheren');
+        
+        if( $this->upload->do_upload('userfile')){
+      $item->foto = $_FILES['userfile']['name'];
+       
+
+        }else{
+       
+        $item->foto =  $this->input->post('foto');
+        
+        
+        
+       
+        
+        }
+         $this->nieuwsitem_model->update($item);
+         redirect('/trainer/startpagina/beheren');
+        
+        
+        
     }
 	 public function homepaginaOpslaan(){
+            $config['upload_path'] = './resources/img/nieuwsitems/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['overwrite'] = TRUE;
+            $config['file_name'] = $_FILES['userfile']['name'];
+            $this->load->library('upload', $config);
+            
         $item = new stdClass();
         
         $item->id = 1;
-        $item->groepsfoto = $this->input->post('groepsfoto');
+      
         $item->informatie = $this->input->post('infoblok');
         $this->load->model('homepagina_model');
+      
+        
+        if( $this->upload->do_upload('userfile')){
+         $item->groepsfoto = $_FILES['userfile']['name'];
+        }else{
+       
+        $item->groepsfoto =  $this->input->post('groepsfoto');
+        }
         $this->homepagina_model->update($item);
         redirect('/trainer/startpagina/beheren');
     }

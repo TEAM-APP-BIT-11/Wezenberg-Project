@@ -1,17 +1,24 @@
 <?php
 echo '<h2>'.$title.'</h2>';?>
-<form action="<?php echo site_url() ;?>/trainer/startpagina/toevoegenOpslaan" method="post">
+
 
 <?php
+
+echo form_open_multipart('/trainer/startpagina/toevoegenOpslaan');
 echo '<div>';
     echo form_hidden('id', 0);
     echo form_label('Titel:', 'titel');
-    echo form_input('titel');
+    echo form_input('titel', '', 'class="form-control" required');
     echo '</div> <div>';
     echo form_label('Tekst:', 'tekst');
-    echo form_input('tekst');
-    echo form_label('Foto:', 'foto');
-    echo form_input('foto');
+    ?>
+     <textarea class="form-control"  id="tekst" name="tekst" required></textarea>  
+    
+
+    <input type="file" name="userfile" size="20" id="userfile"  />
+    <?php
+   
+    
     
     echo '</div>';
    ?>
