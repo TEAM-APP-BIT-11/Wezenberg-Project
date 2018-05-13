@@ -94,7 +94,8 @@ class startpagina extends CI_Controller {
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
         $data['title'] = 'Nieuwsitem toevoegen';
         
-        
+        $data['tekst'] ='';
+         $data['titel'] = '';
         
          $partials = array(
             'inhoud' => 'trainer/nieuwsitem_toevoegen', 'footer' => 'main_footer');
@@ -103,8 +104,24 @@ class startpagina extends CI_Controller {
     }
     public function toevoegenOpslaan(){
         
-       
-       
+       $this->load->library('form_validation');
+         $data['tekst'] ='';
+         $data['titel'] = '';
+        $this->form_validation->set_rules('titel', 'titel', 'required', array('required' => 'Je moet een %s ingeven.'));
+        $this->form_validation->set_rules('tekst', 'tekst', 'required', array('required' => 'Je moet een %s ingeven.'));
+         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+       if($this->form_validation->run() == FALSE)
+         {
+             $data['title'] = 'Nieuwsitem toevoegen';
+             $data['tekst'] = $this->input->post('tekst');
+             $data['titel'] = $this->input->post('titel');
+            $partials = array(
+                'inhoud' => 'trainer/nieuwsitem_toevoegen',
+                'footer' => 'main_footer');
+            $this->template->load('main_master', $partials, $data);
+         }
+         else
+         {
              $config['upload_path'] = './resources/img/nieuwsitems/';
         $config['allowed_types'] = 'gif|jpg|png';
        
@@ -136,7 +153,7 @@ class startpagina extends CI_Controller {
         }
         $this->nieuwsitem_model->insert($item);
         redirect('/trainer/startpagina/beheren');
-  
+         }
     }
     
     public function wijzigingOpslaan(){
