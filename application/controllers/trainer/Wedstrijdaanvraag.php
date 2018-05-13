@@ -94,15 +94,34 @@ class Wedstrijdaanvraag extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
     public function aanpassen(){
-        $data['eindverantwoordelijke'] = "Ruben Tuytens";
+       
+   
+       
+        $wedstrijdId= $this->input->post('wedstrijdId');
+        $afstandId = $this->input->post('afstand');
+        $slagId = $this->input->post('slag');
         
-        $slag = $this->input->post('afstand');
+        $this->load->model('wedstrijdreeks_model');
         
-        $nieuw = new stdClass();
-        $nieuw->id = $this->input->post('afstand');
+        $wedstrijdreeks = $this->wedstrijdreeks_model->getWedstrijdreeks($wedstrijdId, $afstandId, $slagId);
         
-        $this->load->model('afstand_model');
+        $wedstrijdDeelname = new stdClass();
+        $wedstrijdDeelname->id = $this->input->post('deelnameId');
+        $wedstrijdDeelname->persoonId = $this->input->post('persoonId');
+        $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdreeks->id;
         
-        $this->afstand_model->update($slag);
+        $this->load->model('wedstrijddeelname_model');
+        $this->wedstrijddeelname_model->update($wedstrijdDeelname);
+        redirect('trainer/wedstrijdaanvraag/beheren');
+    }
+    
+    public function haalSlagenAfstand()
+    {
+        $slagId = $this->input->get('slagId');
+        $wedstrijdId = $this->input->get('wedstrijdId');
+        $this->load->model('wedstrijdreeks_model');
+        $afstanden = $this->wedstrijdreeks_model->getAllAfstandenForSlag($slagId, $wedstrijdId);
+
+        echo json_encode($afstanden);
     }
 }

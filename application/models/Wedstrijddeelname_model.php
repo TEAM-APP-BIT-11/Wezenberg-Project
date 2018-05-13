@@ -170,7 +170,7 @@ class Wedstrijddeelname_model extends CI_Model
 
     public function getAllByReeks($wedstrijdReeksId)
     {
-        $controleren = array('wedstrijdreeksId' => $wedstrijdReeksId, 'statusId' => 1);
+        $controleren = array('wedstrijdreeksId' => $wedstrijdReeksId, 'statusId !=' => 3);
         $this->db->where($controleren);
         $this->db->order_by('persoonId', 'asc');
         $query = $this->db->get('wedstrijdDeelname');

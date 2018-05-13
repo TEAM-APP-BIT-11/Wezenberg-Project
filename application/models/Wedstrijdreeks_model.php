@@ -400,4 +400,31 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
+	public function getAllAfstandenForSlag($slagId,$wedstrijdId)
+    {
+        $this->db->where('wedstrijdId', $wedstrijdId);
+        $this->db->where('slagId', $slagId);
+        $query = $this->db->get('wedstrijdreeks');
+        
+        $afstanden = $query->result();
+        
+        $this->load->model('afstand_model');
+        
+        foreach($afstanden as $afstand)
+        {
+            $afstand->afstand = $this->afstand_model->get($afstand->afstandId);
+        }
+        
+        return $afstanden;
+        
+    }
+	 public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
+    {
+        $this->db->where('wedstrijdId', $wedstrijdId);
+        $this->db->where('slagId', $slagId);
+        $this->db->where('afstandId', $afstandId);
+        $query = $this->db->get('wedstrijdreeks');
+        return $query->row();
+      
+    }
 }
