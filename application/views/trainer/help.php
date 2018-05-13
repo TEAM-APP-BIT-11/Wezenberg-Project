@@ -25,7 +25,7 @@ $(document).ready(function(){
 <h1>Zoeken</h1>
 <div class="row">
   <div class="col-lg-4">
-  <p>Typ hier de functionaliteit die je wilt zoeken zoals bv. "Wedstrijd beheren".</p>
+  <p>Typ hier de functionaliteit die je wilt zoeken zoals bv. "Wedstrijden beheren".</p>
   <p>De pagina zal automatisch alles weergeven dat voldoet aan uw zoekopdracht.</p>
   <?php
   echo form_input(array('name' => 'zoek',
