@@ -33,7 +33,7 @@ class Supplement extends CI_Controller
     public function beheren()
     {
         $data['title'] = 'supplementen beheren';
-
+		$data['eindverantwoordelijke'] = "Ruben Tuytens";
         $this->load->model('supplementdoelstelling_model');
         $this->load->model('voedingssupplement_model');
         $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
@@ -46,6 +46,7 @@ class Supplement extends CI_Controller
 
     public function wijzigen()
     {
+		$data['eindverantwoordelijke'] = "Ruben Tuytens";
         $supplement = $this->input->post('doelstelling');
         $this->load->model('supplementdoelstelling_model');
         $uitvoeren = $this->input->post('doelstellingen');
@@ -116,6 +117,7 @@ class Supplement extends CI_Controller
 
     public function supplementVerandering()
     {
+		 $data['eindverantwoordelijke'] = "Ruben Tuytens";
         $supplement = $this->input->post('supplementen');
 
         $this->load->model('supplementdoelstelling_model');
