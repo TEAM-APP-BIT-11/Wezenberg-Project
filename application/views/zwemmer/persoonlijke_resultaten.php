@@ -3,7 +3,7 @@
     function haalResultaatOp(id)
     {
         $.ajax({type: "GET",
-            url: site_url + "/zwemmer/wedstrijdresultaten/haalAjaxOp_Resultaten",
+            url: site_url + "/zwemmer/wedstrijdresultaat/haalAjaxOp_Resultaten",
             data: {id: id},
             success: function (result) {
                 $("#resultaat").html(result);
