@@ -126,52 +126,21 @@ class Wedstrijddeelname_model extends CI_Model
         return $wedstrijddeelname;
     }
 
-    public function getAllAndWedstrijdenWhereResultaatIsNotNull()
-    {
-        $this->db->where('resultaatId IS NOT NULL');
-        $query = $this->db->get('wedstrijddeelname');
-        return $query->result();
+   /**
+     * Geeft alle wedstrijddeelnames terug waar de wedstrijdReeksId = $wedstrijdReeksId en de statusId niet gelijk aan 3 is
+     * @author Ruben Tuytens
+     * @param $wedstrijdReeksId De id van de wedstrijdreeks waar de wedstrijddeelnamens van worden gevraagd
+     * @return wedstrijddeelnamens van de gevraagde wedstrijdReeksId waar de statusId niet gelijk is aan 3
+    
+     */ 
 
-        $this->load->model('wedstrijdreeks_model');
-
-        $wedstrijden = $this->wedstrijdreeks_model->getAllWithWedstrijdenAndSlagAndAfstand();
-
-        foreach ($wedstrijden as $wedstrijd) {
-            $wedstrijddeelname->wedstrijd = $wedstrijd;
-        }
-    }
-
-    public function getAllByDeelname($persoonId)
-    {
-        $this->db->where('persoonId', $persoonId);
-        $this->db->order_by('id', 'asc');
-        $query = $this->db->get('wedstrijddeelname');
-        return $query->result();
-    }
-
-    public function getDeelnamesPersoonReeks()
-    {
-        $this->db->order_by('persoonId', 'asc');
-        $query = $this->db->get('WedstrijdDeelname');
-        $deelnames = $query->result();
-
-        $this->load->model('persoon_model');
-        $this->load->model('wedstrijdreeks_model');
-        $this->load->model('wedstrijd_model');
-
-        foreach ($deelnames as $deelname) {
-            $deelname->persoon = $this->persoon_model->get($deelname->persoonId);
-            $deelname->reeks = $this->wedstrijdreeks_model->get($deelname->wedstrijdReeksId);
-            $deelname->naam = $this->wedstrijd_model->get($deelname->reeks->wedstrijdId);
-        }
-
-        return $deelnames;
-    }
+    
 
     public function getAllByReeks($wedstrijdReeksId)
     {
         $controleren = array('wedstrijdreeksId' => $wedstrijdReeksId, 'statusId !=' => 3);
         $this->db->where($controleren);
+        
         $this->db->order_by('persoonId', 'asc');
         $query = $this->db->get('wedstrijdDeelname');
         return $query->result();
@@ -269,7 +238,12 @@ class Wedstrijddeelname_model extends CI_Model
         }
         return $wedstrijddeelnames;
     }
-
+/**
+     * Geeft alle wedstrijddeelnamens terug. Als het resultaatId niet NULL is dan geeft het ook samenhorend resultaat terug.
+     * @return Wedstrijddeelnamens met samenhorend resultaat als niet NULL is
+     * @author Ruben Tuytens
+     * @see Resultaat_model::getWithRondetypeById()
+     */
     public function getDeelnamensResultaten()
     {
         $query = $this->db->get('wedstrijddeelname');
@@ -337,11 +311,21 @@ class Wedstrijddeelname_model extends CI_Model
 
         return $deelnemers;
     }
+    /**
+     * Geeft een wedstrijddeelname terug met id = $id met het bijhorende persoon, wedstrijdreeks en wedstrijd record uit de tabel wedstrijddeelname.
+     * Aan de wedstrijddeelname zijn ook al de mogelijke reeksen met de slagen en afstanden voor die bepaalde wedstrijd verbonden
+     * @return Wedstrijddeelnamens met persoon wedstrijdreeks en wedstrijd en al de bijhorende reeksen met slagen en afstanden
+     * @author Ruben Tuytens
+     * @see Persoon_model::get()
+     * @see Wedstrijdreeks_model::get()
+     * @see Wedstrijd_model::get()
+     * @see Wedstrijdreeks_model::getReeksenSlag()
+     */
 	function getEnkelPersoonWithDeelnamens($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('wedstrijddeelname');
-        $testen;
+      
         $deelname = $query->row();
 
         $this->load->model('persoon_model');
