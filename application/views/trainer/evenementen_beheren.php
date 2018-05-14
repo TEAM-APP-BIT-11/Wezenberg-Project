@@ -1,4 +1,14 @@
 <?php
+/*
+ * @file evenementen_beheren.php
+ * @author Senne Cools
+ * 
+ * View waarin de gebruiker een overzicht krijgt van de bestaande evenementen en waaruit hij nieuwe evenementen kan aanmaken
+ * - krijgt de variabelen $evenementen, $titel, $eindverantwoordelijke, en $evenementreeksen binnen
+ * - gebruikt confirmation JavaScript plugin
+ * - gebruikt Bootstrap tab-panes
+ */
+
 $trainingReeksen = $overigeReeksen = $medischeTesten = $stages = [];
 foreach($evenementen as $evenement){
     if($evenement->type->type == 'training'){

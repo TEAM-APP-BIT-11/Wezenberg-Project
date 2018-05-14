@@ -156,7 +156,7 @@ class Evenement extends CI_Controller
      * @see <maakEvenement>
      * @see <genereerMeldingen>
      * @see <maakEvenementDeelname>
-     * @see evenementen_toevoegen.php
+     * @see evenementen_beheren.php
      */
     
     public function voegNieuweEvenementenToe()
@@ -193,7 +193,7 @@ class Evenement extends CI_Controller
             if($hoeveelheid == 'meerdere'){
                 $this->evenementreeks_model->update($evenementReeks);
             }
-        } else if(($evenement->evenementTypeId == 1 || $evenement->evenementTypeId == 4) && $hoeveelheid == 'meerdere'){
+        } else if($evenement->evenementTypeId == 1 || $evenement->evenementTypeId == 4){
             $evenement->evenementReeksId = $this->evenementreeks_model->insert($evenementReeks);
         }
         

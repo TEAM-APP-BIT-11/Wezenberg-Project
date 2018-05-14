@@ -1,4 +1,17 @@
-<?php 
+<?php
+/*
+ * @file evenementen_toevoegen.php
+ * @author Senne Cools
+ * 
+ * View waarin de gebruiker nieuwe evenementen kan toevoegen of bestaande evenementen kan aanpassen
+ * - krijgt de variabelen $evenement, $titel, $eindverantwoordelijke, $zwemmers, $locaties, $evenementtype, $types, $isNieuw en $isReeks binnen
+ * - als de gebruiker een bestaand evenement bewerkt krijgt het ook de variabelen $days, $ids of $id en $deelnemendeZwemmers binnen
+ * - gebruikt Bootstrap validator plugin
+ * - gebruikt confirmation JavaScript plugin
+ * - gebruikt Bootstrap datetimepicker plugin
+ * - gebruikt Bootstrap modal
+ */
+
 $dagen = array('Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag');
 $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
 ?>
