@@ -113,7 +113,7 @@ foreach($evenementen as $evenement){
                     buttons: {
                         Ja: function () {
                             $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderReeks');
-                            $('#trainingenForm').submit();
+                            $('#overigeForm').submit();
                         },
                         Nee: function () {
                             $.alert('De reeks werd niet verwijderd.');
@@ -127,14 +127,14 @@ foreach($evenementen as $evenement){
             }
         });
         $('#overigeControls button').click(function(e){
-            if($(e.target).text() === 'Evenement verwijderen'){
+            if($(e.target).text() === 'Overige verwijderen'){
                 $.confirm({
                     title: 'Evenement verwijderen',
                     content: 'Bent u zeker dat u dit evenement wil verwijderen?',
                     buttons: {
                         Ja: function () {
                             $('#overigeForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
-                            $('#trainingenForm').submit();
+                            $('#overigeForm').submit();
                         },
                         Nee: function () {
                             $.alert('Het evenement werd niet verwijderd.');
@@ -142,9 +142,9 @@ foreach($evenementen as $evenement){
                     }
                 });
             }
-            if($(e.target).text() === 'Evenement bewerken'){
+            if($(e.target).text() === 'Overige bewerken'){
                 $('#overigeForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
-                $('#trainingenForm').submit();
+                $('#overigeForm').submit();
             }
         });
         $('#medischeControls button').click(function(e){
@@ -155,7 +155,7 @@ foreach($evenementen as $evenement){
                     buttons: {
                         Ja: function () {
                             $('#medischForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
-                            $('#trainingenForm').submit();
+                            $('#medischForm').submit();
                         },
                         Nee: function () {
                             $.alert('De medische test werd niet verwijderd.');
@@ -165,7 +165,7 @@ foreach($evenementen as $evenement){
             }
             if($(e.target).text() === 'Medische test bewerken'){
                 $('#medischForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
-                $('#trainingenForm').submit();
+                $('#medischForm').submit();
             }
         });
         $('#stageControls button').click(function(e){
@@ -176,7 +176,7 @@ foreach($evenementen as $evenement){
                     buttons: {
                         Ja: function () {
                             $('#stageForm').attr('action', site_url + '/trainer/Evenement/verwijderEvenement');
-                            $('#trainingenForm').submit();
+                            $('#stageForm').submit();
                         },
                         Nee: function () {
                             $.alert('De stage werd niet verwijderd.');
@@ -186,7 +186,7 @@ foreach($evenementen as $evenement){
             }
             if($(e.target).text() === 'Stage bewerken'){
                 $('#stageForm').attr('action', site_url + '/trainer/Evenement/bewerkEvenement');
-                $('#trainingenForm').submit();
+                $('#stageForm').submit();
             }
         });
     });
@@ -356,8 +356,8 @@ foreach($evenementen as $evenement){
                     <label for="evenementId">Specifieke evenementen</label>
                     <select name="evenementId" class="form-control" id="overigeLijst" multiple></select>
                     <div id="overigeControls" class="controls">
-                        <button class="btn btn-primary" type="button">Evenement verwijderen</button>
-                        <button class="btn btn-primary" type="button">Evenement bewerken</button>
+                        <button class="btn btn-primary" type="button">Overige verwijderen</button>
+                        <button class="btn btn-primary" type="button">Overige bewerken</button>
                     </div>
                 </div>
             </div>

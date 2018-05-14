@@ -13,6 +13,7 @@ class Evenement extends CI_Controller
     /*
      * Constructor
      */
+    
     public function __construct()
     {
         parent::__construct();
@@ -31,11 +32,14 @@ class Evenement extends CI_Controller
     }
 
     /*
-     * Haalt alle evenement-records op via Evenement_model en toont de lijst in de view evenementen_beheren.php
+     * Haalt alle evenement-records inclusief type op via Evenement_model, alle evenementreeksen via Evenementreeks_model en toont de view evenementen_beheren.php die deze data gebruikt.
      * 
-     * @see Evenement_mode::getAll()
+     * @author Senne Cools
+     * @see Evenement_model::getAllWithType()
+     * @see Evenementreeks_model::getAll()
      * @see evenementen_beheren.php
      */
+    
     public function beheren()
     {
         $data['titel'] = "Evenementen Beheren";
@@ -49,6 +53,15 @@ class Evenement extends CI_Controller
         $partials = array('inhoud' => 'trainer/evenementen_beheren', 'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+    
+    /*
+     * Haalt alle evenement-records op via Evenement_model die bij de gegeven evenementReeksId=$evenementReeksId horen en stuurt die via json terug naar de view evenementen_beheren.php.
+     * 
+     * @author Senne Cools
+     * @param evenementReeksId De id van de evenementreeks van de opgevraagde evenementen.
+     * @see Evenement_model::getEvenementenByEvenementReeksId()
+     * @see evenementen_beheren.php
+     */
     
     public function haalJsonOp_Evenementen() {
         $evenementReeksId = $this->input->get('evenementReeksId'); 
@@ -65,6 +78,23 @@ class Evenement extends CI_Controller
         echo json_encode($trainingen);
     }
 
+    /*
+     * Laadt afhankelijk van de waarde van de meegegeven waarden een leeg evenement of een bestaand evenement. Dit evenement wordt samen met het bijhorend type, deelnemers en locaties doorgestuurd naar de view evenementen_toevoegen.php.
+     * 
+     * @author Senne Cools
+     * @param typeId De id die aangeeft van welk type het evenement dat geladen wordt is.
+     * @param $isNieuw De waarde van deze boolean bepaalt of er een nieuw of een bestaand evenement geladen moet worden.
+     * @param $id Als $isNieuw false is geeft deze id aan welk evenement geladen moet worden. 
+     * @param $isReeks De waarde van deze boolean bepaalt of er een enkel evenement of een reeks geladen moet worden.
+     * @see Persoon_model::getZwemmers()
+     * @see Locatie_model::getAll()
+     * @see Evenementtype_model::get()
+     * @see Evenementtype_model::getAll()
+     * @see Evenement_model::getEvenementenByEvenementReeksId()
+     * @see Evenementdeelname_model::getByEventId()
+     * @see evenementen_toevoegen.php
+     */
+    
     public function laadEvenement($typeId, $isNieuw, $id = null, $isReeks = false)
     {
         $evenement = new stdClass();
@@ -116,27 +146,19 @@ class Evenement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
     
-    private function haalDagenVanReeksOp($evenementenInReeks){
-        $ids = "";
-        $dagen = [];
-        $count = 0;
-        foreach($evenementenInReeks as $reeksEvenement){
-            $ids .= strval($reeksEvenement->id) . ",";
-            if($count == 0){
-                $evenementDeelnames = $this->evenementdeelname_model->getByEventId($reeksEvenement->id);
-            }
-            $sqldag = date_create_from_format("Y-m-d", $reeksEvenement->begindatum);
-            $dag = $sqldag->format("N");
-            if(!in_array($dag, $dagen)){
-                array_push($dagen, $dag);
-            }
-            $count++;
-        }
-        $gegevens = [];
-        array_push($gegevens, $dagen, $ids, $evenementDeelnames);
-        return $gegevens;
-    }
-
+    /*
+     * Voegt nieuwe evenementen toe aan de database via Evenement_model.php. Alle vereiste waarden worden door de gebruiker in de view evenementen_toevoegen.php ingevoerd. Afhankelijk van de ingevoerde waarden wordt een enkel evenement of een reeks evenementen toegevoegd.
+     * 
+     * @author Senne Cools
+     * @see Evenementreeks_model::update()
+     * @see Evenementreeks_model::insert()
+     * @see <genereerReeks>
+     * @see <maakEvenement>
+     * @see <genereerMeldingen>
+     * @see <maakEvenementDeelname>
+     * @see evenementen_toevoegen.php
+     */
+    
     public function voegNieuweEvenementenToe()
     {
         // Nieuwe lege klassen
@@ -199,6 +221,50 @@ class Evenement extends CI_Controller
         Redirect('/trainer/Evenement/beheren');
     }
     
+    /*
+     * Haalt de dagen op waarop een evenementreeks doorgaat die nodig zijn om de evenementreeks te laden.
+     * 
+     * @author Senne Cools
+     * @param $evenementenInReeks Een array die de evenementen van de evenementreeks bevat.
+     * @see Evenementdeelname_model::getByEventId()
+     */
+    
+    private function haalDagenVanReeksOp($evenementenInReeks){
+        $ids = "";
+        $dagen = [];
+        $count = 0;
+        foreach($evenementenInReeks as $reeksEvenement){
+            $ids .= strval($reeksEvenement->id) . ",";
+            if($count == 0){
+                $evenementDeelnames = $this->evenementdeelname_model->getByEventId($reeksEvenement->id);
+            }
+            $sqldag = date_create_from_format("Y-m-d", $reeksEvenement->begindatum);
+            $dag = $sqldag->format("N");
+            if(!in_array($dag, $dagen)){
+                array_push($dagen, $dag);
+            }
+            $count++;
+        }
+        $gegevens = [];
+        array_push($gegevens, $dagen, $ids, $evenementDeelnames);
+        return $gegevens;
+    }
+    
+    /*
+     * Genereert een reeks met bijhorende evenementen, deelnames en meldingen op basis van de opgegeven waarden.
+     * 
+     * @author Senne Cools
+     * @param $zwemmerIds Een array die de evenementen van de evenementreeks bevat.
+     * @param $evenement Het evenement waarop de reeks gebaseerd zal worden.
+     * @param $days De dagen waarom de reeks doorgaat.
+     * @param $nieuw Afhankelijk van deze waarde van deze boolean gaat het systeem een overeenkomstige bestaande reeks zoeken verwijderen of niet.
+     * @param $evenementIds De ids van de evenementen in de reeks, als de reeks al bestaat.
+     * @see <verwijderEvenement>
+     * @see <maakEvenement>
+     * @see <maakEvenementDeelname>
+     * @see <genereerMeldingen>
+     */
+    
     private function genereerReeks($zwemmerIds, $evenement, $days, $nieuw, $evenementIds = []){
         if(!$nieuw && !empty($evenementIds)){
             foreach($evenementIds as $evenementId){
@@ -219,6 +285,16 @@ class Evenement extends CI_Controller
         $this->genereerMeldingen($zwemmerIds, $evenement, true);
     }
     
+    /*
+     * Voegt een evenement toe of update een evenement afhankelijk van de waarde van de variabele nieuw=$nieuw.
+     * 
+     * @author Senne Cools
+     * @param $evenement Het evenement dat toegevoegd op geüpdate moet worden.
+     * @param $nieuw De waarde van deze boolean bepaalt of het evenement toegevoegd of geüpdate moet worden.
+     * @see Evenement_model::insert()
+     * @see Evenement_model::update()
+     */
+    
     private function maakEvenement($evenement, $nieuw = 'false'){       
         $this->load->model('evenement_model');
         
@@ -230,6 +306,15 @@ class Evenement extends CI_Controller
             $this->evenement_model->update($evenement);
         }
     }
+    
+    /*
+     * Voegt voor elke zwemmer die bij de meegegeven zwemmerIds=$zwemmerIds hoort een deelname toe in de database voor het evenement dat bij de meegegeven evenementId=$evenementId hoort.
+     * 
+     * @author Senne Cools
+     * @param $zwemmerIds De ids's van de zwemmers waarvoor een melding toegevoegd moet worden.
+     * @param $evenementId De id van het evenement waarvoor meldingen gemaakt moeten worden.
+     * @see Evenementdeelname_model::insert()
+     */
     
     private function maakEvenementDeelname($zwemmerIds, $evenementId){
         $evenementDeelname = new stdClass();
@@ -243,6 +328,17 @@ class Evenement extends CI_Controller
             $this->evenementdeelname_model->insert($evenementDeelname);
         }
     }
+    
+    /*
+     * Genereert voor de zwemmers die bij de meegegeven zwemmerIds=$zwemmerIds de juiste boodschap voor een melding voor het aangemaakte evenement=$evenement
+     * 
+     * @author Senne Cools
+     * @param $zwemmerIds De ids's van de zwemmers waarvoor een melding toegevoegd moet worden.
+     * @param $evenement Het evenement waarvoor een melding toegevoegd moet worden.
+     * @param $isReeks Deze parameter geeft aan of de boodschap voor een reeks is of niet.
+     * @see Evenementtype_model::get()
+     * @see Melding::genereerMeldingen()
+     */
 
     private function genereerMeldingen($zwemmerIds, $evenement, $isReeks){
         $boodschap = $titel = '';
@@ -268,6 +364,16 @@ class Evenement extends CI_Controller
         $this->melding->genereerMeldingen($zwemmerIds, $boodschap, $titel);
     }
     
+    /*
+     * Verwijdert het evenement met bijhorende deelnames dat bij de opgegeven evementId=$evenementId hoort.
+     * 
+     * @author Senne Cools
+     * @param $evenementId De id van het evenement dat verwijderd moet worden
+     * @see Evenementdeelname_model::getByEventId()
+     * @see Evenementdeelname_model::delete()
+     * @see Evenement_model::delete()
+     */
+    
     public function verwijderEvenement($evenementId = 0){
         $internCommando = false;
         if($evenementId == 0){
@@ -291,6 +397,16 @@ class Evenement extends CI_Controller
         }
     }
     
+    /*
+     * Verwijdert de evenementreeks met bijhorende evenementen dat bij de opgegeven evenementReeksId=$evenementReeksId hoort.
+     * 
+     * @author Senne Cools
+     * @param $evenementReeksId De id van de evenementreeks die verwijderd moet worden
+     * @see Evenement_model::getEvenementenByEvenementReeksId()
+     * @see <verwijderEvenement>
+     * @see Evenementreeks_model::delete()
+     */
+    
     public function verwijderReeks(){
         if($this->input->post('reeksSoort') == 'trainingReeks'){
             $evenementReeksId = $this->input->post('trainingsreeksen');
@@ -301,8 +417,6 @@ class Evenement extends CI_Controller
         $this->load->model('evenement_model');
         $evenementen = $this->evenement_model->getEvenementenByEvenementReeksId($evenementReeksId);
         
-        $this->load->model('evenementdeelname_model');
-        
         foreach($evenementen as $evenement){
             $this->verwijderEvenement($evenement->id);
         }
@@ -311,6 +425,13 @@ class Evenement extends CI_Controller
         $this->evenementreeks_model->delete($evenementReeksId);
         Redirect('/trainer/Evenement/beheren');
     } 
+    
+    /*
+     * Laadt een reeks om te bewerken, en differentieert bij het laden tussen een trainingreeks en een overige reeks.
+     * 
+     * @author Senne Cools
+     * @see <laadEvenement>
+     */
     
     public function bewerkReeks(){
         if($this->input->post('reeksSoort') == 'trainingReeks'){
@@ -323,6 +444,13 @@ class Evenement extends CI_Controller
         
         $this->laadEvenement($typeId, false, $evenementReeksId, true);
     }
+    
+    /*
+     * Laadt een evenement om te bewerken.
+     * 
+     * @author Senne Cools
+     * @see <laadEvenement>
+     */
     
     public function bewerkEvenement(){ 
         $id = $this->input->post('evenementId');
