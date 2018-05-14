@@ -13,8 +13,23 @@ echo '<div>';
      <textarea class="form-control" id="tekst" name="tekst"><?php echo $nieuwsitem->tekst; ?></textarea>    
     <?php
    
-    echo form_label('Foto:', 'foto');
-    echo form_input('foto', $nieuwsitem->foto, 'class="form-control"');
+
+    
+    foreach($fotos as $foto)
+        {
+        if($foto->foto !== '' || NULL)
+        {
+              $options[$foto->foto] = $foto->foto;
+        }
+      
+   
+  
+    }
+
+echo form_label('Foto:', 'foto');
+
+echo form_dropdown('foto', $options, $nieuwsitem->id ,'class="form-control"');
+  
      
     echo '</div>';
    ?>
@@ -23,4 +38,4 @@ echo '<div>';
      </div>
     <button type="submit" value="submit" name="opslaan" class="btn btn-primary">Opslaan</button>
     <?php
-    echo anchor('trainer/startpagina/beheren/' ,form_button('annuleren', 'annuleren', 'class="btn btn-primary"')) ;
+    echo anchor('trainer/startpagina/beheren/' ,form_button('annuleren', 'Annuleren', 'class="btn btn-primary"')) ;

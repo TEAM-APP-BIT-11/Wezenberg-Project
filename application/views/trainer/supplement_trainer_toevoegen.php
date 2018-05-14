@@ -18,10 +18,16 @@ function removeDate(index) {
 // Adds a date if we don't have it yet, else remove it
 function addOrRemoveDate(date) {
     var index = jQuery.inArray(date, dates);
-    if (index >= 0) 
+    
+        if (index >= 0) 
         removeDate(index);
     else 
-        addDate(date);
+       
+           addDate(date);  
+        
+            
+   
+       
 }
 
 // Takes a 1-digit number and inserts a zero before it
@@ -34,16 +40,29 @@ function padNumber(number) {
 
 jQuery(function () {
     jQuery("#datepicker").datepicker({
+      
+       minDate:0,
         onSelect: function (dateText, inst) {
-            addOrRemoveDate(dateText);
+        
+         
+               addOrRemoveDate(dateText);
+
+
+             
+              
+                
             $("#datums").empty();
             $.each(dates, function(val, text){
                 $('#datums').append($('<option></option>').val(text).html(text));
             })
             $('#datums option').prop('selected', true);
+      
+            
                 
         },
         beforeShowDay: function (date) {
+            
+          
             var year = date.getFullYear();
             // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
             var month = padNumber(date.getMonth() + 1);
@@ -58,9 +77,11 @@ jQuery(function () {
             }
             // Dates not in the array are left enabled, but with no extra style
             return [true, ""];
+            
         }
     });
 });
+
   </script>
   <style>
       td {
@@ -74,7 +95,11 @@ jQuery(function () {
       
   </style>
   
-  <form action="<?php echo site_url() ;?>/trainer/supplementschema/opslaan" method="post">
+  
+   <?php $attributes = array('name' => 'supplementTrainerToevoegen', 'data-toggle' => 'validator', 'role' => 'form');
+    echo form_open('trainer/supplementschema/opslaan', $attributes);
+    ?>
+  
       <?php
 
 echo "<h2>".$title."</h2>";
@@ -91,7 +116,7 @@ foreach($personen as $persoon)
 echo "<tr> <td>";
 echo form_label('Zwemmer:', 'personen');
 echo "</td> <td>";
-echo form_dropdown('personen', $options);
+echo form_dropdown('personen', $options, '' ,'required="required"');
 echo "</td></tr>";
 
 
@@ -102,29 +127,42 @@ foreach($innames as $inname)
 echo "<tr> <td>";
 echo form_label('Supplementen:', 'supplementen');
 echo "</td> <td>";
-echo form_multiselect('supplementen', $dropdown);
+ echo '<div class="form-group">';
+echo form_multiselect('supplementen', $dropdown, '','class="form-control" data-error="Supplement selecteren" required');
+ echo '<div class="help-block with-errors"></div>';
+    echo '</div>';
 echo '</td><td >';
 ?>
 
       <label name="datepicker">Kies je datums:</label>  
-        <input id="datepicker" name="datepicker" />
-
+        <input id="datepicker" name="datepicker"  required  />
+  
         <label name="datums">Geselecteerde datums:</label>
-      <select multiple id="datums" name="datums[]"  >
+      <select multiple id="datums" name="datums[]"   >
           
       </select>
+            
+
+
   <?php
   
   
 echo "</td> </tr><tr> <td>";
+
 echo form_label('Aantal:', 'aantal');
 echo "</td> <td>";
-echo form_input('aantal');
+
+
+    echo '<div class="form-group">';
+    echo form_input('aantal', '', 'class="form-control" data-error="Geef een aantal" required');
+    echo '<div class="help-block with-errors"></div>';
+    echo '</div>';
+
 echo "</td><td></td></tr>";
 echo "</table>";
 
 ?>
-
+         </div>
       <button type="submit"name="toevoegen" id="toevoegen" class="btn btn-primary">Toevoegen</button>
 
 <?php echo anchor('trainer/supplementschema/beheren', form_button('back', 'annuleren', 'class="btn btn-primary"')) ;?>

@@ -34,9 +34,9 @@
     }
    
     $(document).ready(function () {
-        
+        $('[name="afstand"').hide();
         $('[name="slag"]').change(function () {
-            
+            $('[name="afstand"').show();
             afstandenHalen($('[name="slag"]').val(), $('[name="wedstrijdId"]').val());
         });
 
@@ -48,7 +48,8 @@
 <?php
 echo '<h2>'.$title.'</h2>';
 echo '<h3>Wedstrijd: '.$deelname->wedstrijd->naam .'</h3>';
-echo '<h4>Zwemmer: '.$deelname->persoon->voornaam.'</h4>';?>
+echo '<h4>Zwemmer: '.$deelname->persoon->voornaam.'</h4>';
+echo '<h4>Huide wedstrijdaanvraag '.$huidigeSlagAfstand->slag->naam . ' '. $huidigeSlagAfstand->afstand->afstand .'m</h4>';?>
 <form action="<?php echo site_url() ;?>/trainer/wedstrijdaanvraag/aanpassen" method="post">
 <?php
 echo form_hidden('wedstrijdId', $deelname->wedstrijd->id);
@@ -69,7 +70,7 @@ echo form_hidden('reeksId');
 echo "<tr> <td>";
 echo form_label('Slag:', 'slag');
 echo "</td> <td>";
-echo form_dropdown('slag', $options);
+echo form_dropdown('slag', $options, '' ,'class="form-control"');
 echo "</td></tr>";
 
 $opties[0]= '-- Select --';
@@ -83,7 +84,7 @@ foreach($deelname->reeksen as $reeks)
 echo "<tr> <td>";
 echo form_label('Afstand:', 'afstand');
 echo "</td> <td>";
-echo form_dropdown('afstand');
+echo form_dropdown('afstand', '', '' ,'class="form-control"');
 echo "</td></tr></br>";
 
 
@@ -91,4 +92,4 @@ echo "</td></tr></br>";
 ?>
     
 <button name ="aanpassen" type="submit" value="submit" class="btn btn-primary">Aanpassen</button>
-<?php echo anchor('trainer/supplement/beheren', form_button('back', 'annuleren', 'class="btn btn-primary"')) ;?>
+<?php echo anchor('trainer/wedstrijdaanvraag/beheren', form_button('back', 'Annuleren', 'class="btn btn-primary"')) ;?>

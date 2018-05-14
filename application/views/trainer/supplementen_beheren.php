@@ -36,7 +36,10 @@
     $(document).ready(function () {
         
         $('#doelstelling').change(function () {
+           
+            $('#doelstellingwaarde').val($('#doelstelling').val());
             supplementenHalen($('#doelstelling').val());
+            
         });
 
     })
@@ -62,27 +65,30 @@ $attributes = array('name' => 'formulier');
     echo form_open('trainer/supplement/wijzigen', $attributes);
 echo "<h2>".$title."</h2>";
 echo "<div>";
-echo "<h3> Doelstelling Supplement:</h3>";
+echo "<h3> Doelstelling supplement:</h3>";
 echo form_dropdownpro("doelstelling", $doelstellingen, "id", "doelstelling", 0, 'id="doelstelling" class="form-control"'); 
 echo "</div>";
 
 
 ?>
     <div>
- <button class="btn btn-primary" name ="doelstellingen" type="submit" value="toevoegen" >toevoegen</button>   
+ <button class="btn btn-primary" name ="doelstellingen" type="submit" value="toevoegen" >Toevoegen</button>   
 <button class="btn btn-primary" name ="doelstellingen" type="submit" value="aanpassen">Aanpassen</button>
-<button class="btn btn-primary" name ="doelstellingen" type="submit" value="verwijderen">verwijderen</button>  
+<button class="btn btn-primary" name ="doelstellingen" type="submit" value="verwijderen">Verwijderen</button>  
     </div>
 </form>
+
 <form action="<?php echo site_url(); ?>/trainer/supplement/supplementVerandering" method="post">
     <div>
         <h3>Supplementen:</h3>
 <select multiple id="supplementen" name="supplementen" class="form-control" >
     
 </select>
-        <button class="btn btn-primary" name ="supplement" type="submit" value="toevoegen" >toevoegen</button>   
+ 
+        <input id="doelstellingwaarde" name="doelstellingwaarde" type="hidden"></input>
+        <button class="btn btn-primary" name ="supplement" type="submit" value="toevoegen" >Toevoegen</button>   
 <button class="btn btn-primary" name ="supplement" type="submit" value="aanpassen">Aanpassen</button>
-<button class="btn btn-primary" name ="supplement" type="submit" value="verwijderen">verwijderen</button>  
+<button class="btn btn-primary" name ="supplement" type="submit" value="verwijderen">Verwijderen</button>  
     </div>  
 
 </form> 

@@ -79,7 +79,7 @@ foreach($nieuwsitems as $nieuws)
      
     <?php
       echo '</div>';
-      echo '<div>';
+      echo '<div></br>';
     echo toonAfbeelding('nieuwsitems/' . $nieuws->foto . ' ', 'width="250px" height="250px"');
     
     echo '</div>';
@@ -101,7 +101,8 @@ echo '</div>';
      <button id="gedeactiveerde" class="btn btn-primary">Gedeactiveerde nieuwsitems</button>
      </div>
      <?php
-echo '<div name="deactief" id="deactief">';
+echo '<div class="col-md-12" name="deactief" id="deactief">';
+
 echo '<h3>Gedeactiveerde nieuwsblokken</h3>';
 foreach($nieuwsitems as $passief)
 {
@@ -116,7 +117,7 @@ foreach($nieuwsitems as $passief)
     ?>
      <textarea  class="form-control" id="infoblok" disabled><?php echo $passief->tekst; ?></textarea>    
     <?php
-    echo toonAfbeelding('nieuwsitems/' . $passief->foto . ' ', 'width="250px" height="250px"');
+    echo '</br>'. toonAfbeelding('nieuwsitems/' . $passief->foto . ' ', 'width="250px" height="250px"');
     
     echo '</div>';
     echo anchor('trainer/startpagina/activeren/' .$passief->id, form_button('activeren', 'Activeren', 'class="btn btn-primary"')) ;

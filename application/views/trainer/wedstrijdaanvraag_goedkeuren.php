@@ -38,14 +38,14 @@ foreach($personen as $persoon)
             echo "<td>".$deel->afstand->afstand . "</td>";
             if($deelname->statusId ==1)
             {
-                echo "<td>".anchor(('trainer/wedstrijdaanvraag/goedkeuren/'.$deelname->id),'goedkeuren'). "</td>";
-             echo "<td>".anchor(('trainer/wedstrijdaanvraag/afwijzen/'.$deelname->id),'afwijzen'). "</td>";
-              echo "<td>".anchor(('trainer/wedstrijdaanvraag/wijzigen/'.$deelname->id),'wijzigen'). "</td> </tr>";
+                echo "<td>".anchor(('trainer/wedstrijdaanvraag/goedkeuren/'.$deelname->id),form_button('goedkeuren', 'Goedkeuren', 'class="btn btn-success"')). "</td>";
+             echo "<td>".anchor(('trainer/wedstrijdaanvraag/afwijzen/'.$deelname->id),form_button('afwijzen', 'Afwijzen', 'class="btn btn-danger"')). "</td>";
+              echo "<td>".anchor(('trainer/wedstrijdaanvraag/wijzigen/'.$deelname->id),form_button('wijzigen', 'Wijzigen', 'class="btn btn-warning"')). "</td> </tr>";
             }
            elseif($deelname->statusId ==2)
            {
-             echo "<td></td><td>".anchor(('trainer/wedstrijdaanvraag/afwijzen/'.$deelname->id),'afwijzen'). "</td>"; 
-             echo "<td>".anchor(('trainer/wedstrijdaanvraag/wijzigen/'.$deelname->id),'wijzigen'). "</td> </tr>";
+             echo "<td>Is goedkgekeurd</td><td>".anchor(('trainer/wedstrijdaanvraag/afwijzen/'.$deelname->id),form_button('afwijzen', 'Afwijzen', 'class="btn btn-danger"')). "</td>"; 
+             echo "<td>".anchor(('trainer/wedstrijdaanvraag/wijzigen/'.$deelname->id),form_button('wijzigen', 'Wijzigen', 'class="btn btn-warning"')). "</td> </tr>";
             }
            
             $vorigepersoon = $persoon->voornaam;

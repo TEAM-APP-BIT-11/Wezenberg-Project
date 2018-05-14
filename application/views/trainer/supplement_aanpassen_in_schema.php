@@ -19,8 +19,10 @@ function padNumber(number) {
     return ret;
 }
 
+
 jQuery(function () {
     jQuery("#datepicker").datepicker({
+         minDate:0,
         onSelect: function (dateText, inst) {
             dates =[];
             addDate(dateText);
@@ -121,4 +123,4 @@ echo "</table>";
 
       <button type="submit"name="aanpassen" id="aanpassen" class="btn btn-primary">Aanpassen</button>
 
-<?php echo anchor('trainer/supplementschema/beheren', form_button('back', 'annuleren', 'class="btn btn-primary"')) ;?>
+<?php echo anchor('trainer/supplementschema/beheren', form_button('back', 'Annuleren', 'class="btn btn-primary"')) ;?>
