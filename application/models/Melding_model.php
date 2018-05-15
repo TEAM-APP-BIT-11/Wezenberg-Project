@@ -54,6 +54,7 @@ class Melding_model extends CI_Model
     {
         $this->db->where('gelezen', 0);
         $this->db->where('persoonId', $persoonId);
+        $this->db->order_by('momentVerzonden', 'DESC');
         $query = $this->db->get('melding');
         return $query->result();
     }
