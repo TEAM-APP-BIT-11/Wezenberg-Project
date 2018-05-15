@@ -28,7 +28,8 @@ class Agenda extends CI_Controller
 
     /**
      * Agenda constructor.
-     * Indien de persoon die is aangemeld geen zwemmer is wordt deze geredirect naar de inlogpagina.
+     * Indien de persoon niet is aangemeld wordt deze naar de loginpagina gestuurd.
+     * Agenda kan zowel als trainer en zwemmer worden opgeroepen.
      */
     public function __construct()
     {
@@ -44,35 +45,37 @@ class Agenda extends CI_Controller
     /**
      * Haalt de aangemelde persoon uit de Authex-library.
      * Haalt de innames voor de aangemelde persoon binnen en zet de datums in een array.
-     * Haalt agendaitems op en stuurt deze door naar de view
+     * Haalt agendaitems op voor ene persoon en stuurt deze als json door naar de view
      * @see zwemmer/agenda.php
      * @see Inname_model::getAllFromPersoon()
+     * @see \Authex::getPersoonInfo()
+     * @see \Agenda::agendaItems()
      * @author Neil Van den Broeck
      */
     public function raadplegen($id = -1)
     {
-        //id gelijk stellen aan ingelogd persoon indien het geen trainer is die zwemmers agenda bekijkt.
-        if ($id == -1) {
-            $persoon = $this->authex->getPersoonInfo();
+        //zwemmers kunnen enkel hun eigen agenda bekijken. Dus als het een zwemmer is (type == 2) dan wordt $id de id van de ingelogde persoon.
+        $persoon = $this->authex->getPersoonInfo();
+        if ($persoon->typePersoonId == 2) {
             $id = $persoon->id;
         }
         $data['titel'] = 'Agenda raadplegen';
         $data['eindverantwoordelijke'] = "Neil Van den Broeck";
 
         $this->load->model('inname_model');
-
         $innames = $this->inname_model->getAllFromPersoon($id);
 
+        //Datums van de innames in een array plaatsen.
         $innamesarray = array();
         foreach ($innames as $inname) {
             array_push($innamesarray, $inname->datum);
         }
         $data['innames'] = json_encode($innamesarray);
 
+        //agendaitems ophalen
         $data['datums'] = $this->agendaItems($id);
 
         $this->load->model('persoon_model');
-
         $data['zwemmer'] = $this->persoon_model->get($id);
 
         $partials = array('inhoud' => 'zwemmer/agenda', 'footer' => 'main_footer');
@@ -81,20 +84,24 @@ class Agenda extends CI_Controller
     }
 
     /**
-     * Haalt de aangemelde persoon uit de Authex-library.
+     *
      * Krijgt van de functie de datum mee waarvoor de voedingssuplementen moeten worden ingenomen.
+     * Alsook de persoonId waarvoor de innames moeten worden opgehaald.
      * Geeft de in te nemen innames van voedingssupplementen weer in een tabel.
+     * en stuurt deze door naar de view.
      * @author Neil Van den Broeck
      * @see \Inname_model::getAllByPersoonAndDate()
+     * @see \Authex::getPersoonInfo()
      * @see zwemmer/ajax_innames
      */
     public function haalAjaxOp_Innames()
     {
         $this->load->model("inname_model");
 
-        $persoon = $this->authex->getPersoonInfo();
         $datum = $this->input->get('datum');
-        $data["innames"] = $this->inname_model->getAllByPersoonAndDateWithVoedingssupplement($datum, $persoon->id);
+        $persoonId = $this->input->get('persoonId');
+
+        $data["innames"] = $this->inname_model->getAllByPersoonAndDateWithVoedingssupplement($datum, $persoonId);
 
         $this->load->view('zwemmer/ajax_innames', $data);
     }

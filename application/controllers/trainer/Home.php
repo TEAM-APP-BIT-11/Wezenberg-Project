@@ -32,6 +32,12 @@ class Home extends CI_Controller
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+
+    /**
+     * Home constructor.
+     * Indien de persoon die via deze controller gaat niet ingelogd is wordt deze doorgestuurd naar de log-in pagina.
+     * Als de ingelogde persoon geen trainer is wordt deze doorgestuurd naar de login-pagina
+     */
     public function __construct()
     {
         parent::__construct();
@@ -72,6 +78,11 @@ class Home extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**Geeft een pagina weer waarop de zwemmers staan. Hierop kan geklikt worden op hun agenda te openen.
+     * Geeft een lijst van objecten persoon door naar de view.
+     * @author Neil Van den Broeck
+     * @see trainer/agenda.php
+     */
     public function agenda()
     {
         $data['titel'] = 'Home van de Trainer';

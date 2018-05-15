@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @class Contact
  * @brief Controller-klasse
@@ -10,7 +11,7 @@ class Contact extends CI_Controller
     /*
      * Constructor
      */
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -112,6 +113,7 @@ class Contact extends CI_Controller
         $emailzwemmer = $this->input->post('emailzwemmer');
         $bericht = $this->input->post('bericht');
 
+        //configuratie die gebruikt wordt bij het versturen van de mail via de gmail-server.
         $config = array(
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.gmail.com',
@@ -149,6 +151,7 @@ class Contact extends CI_Controller
      *
      * @param $naarPagina link naar de pagina waar de bezoeker naartoe wordt gestuurd nadat hij op de knop in de view klikt
      * @param $succesvol Boolean, afhankelijk van het succesvol(true) verzenden van het bericht of false indien er een fout optrad.
+     * @author Neil Van den Broeck
      */
 
     public function mailResultaat($naarPagina, $succesvol)

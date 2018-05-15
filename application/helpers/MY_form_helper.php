@@ -1,7 +1,8 @@
 <?php
 
-function form_dropdownpro($name = '', $objects = [], $valuefield, $textfield, $selected = [], $extra = '') {
-    $options[0] = '-- Select --';
+function form_dropdownpro($name = '', $objects = [], $valuefield, $textfield, $selected = [], $extra = '')
+{
+    $options[0] = '-- Selecteer --';
     foreach ($objects as $object) {
         $options[$object->{$valuefield}] = $object->{$textfield};
     }
@@ -9,7 +10,8 @@ function form_dropdownpro($name = '', $objects = [], $valuefield, $textfield, $s
     return form_dropdown($name, $options, $selected, $extra);
 }
 
-function form_radiogroup($name = '', $objects = [], $valuefield, $textfield) {
+function form_radiogroup($name = '', $objects = [], $valuefield, $textfield)
+{
     $result = '';
 
     $i = 0;
@@ -25,14 +27,16 @@ function form_radiogroup($name = '', $objects = [], $valuefield, $textfield) {
     return $result;
 }
 
-function form_labelpro($label_text, $id) {
+function form_labelpro($label_text, $id)
+{
     $attributes = array('class' => 'control-label');
     return form_label($label_text, $id, $attributes) . "\n";
 }
 
-function form_listboxpro($name = '', $objects = [], $valuefield, $textfield, $selected = [], $extra = []) {
+function form_listboxpro($name = '', $objects = [], $valuefield, $textfield, $selected = [], $extra = [])
+{
     $options = [];
-	foreach ($objects as $object) {
+    foreach ($objects as $object) {
         $options[$object->{$valuefield}] = $object->{$textfield};
     }
 

@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Neil
- * Date: 30/03/2018
- * Time: 14:25
+ * Wordt opgeropen via ajax. Geeft de supplementen weer voor een bepaalde zwemmer met hun doelstelling.
  */
 
 $lijst = '<table class="table"><tr><th>Supplement</th><th>Aantal</th><th>Doelstelling</th></tr>';
