@@ -59,7 +59,7 @@ foreach($personen as $persoon)
             }
            echo "<tr>";
 
-           $date = DateTime::createFromFormat("Y-m-d", $inname->datum);
+          
 
            echo '<td width="33%">'.date("l d/m/Y",strtotime($inname->datum)) ."</td>"; 
            echo '<td width="25%">'.$inname->voedingssupplement->naam."</td>";

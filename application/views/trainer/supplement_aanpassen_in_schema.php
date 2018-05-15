@@ -33,7 +33,24 @@ function padNumber(number) {
     return ret;
 }
 
-
+$.datepicker.regional['nl'] = {clearText: 'Effacer', clearStatus: '',
+    closeText: 'sluiten', closeStatus: 'Onveranderd sluiten ',
+    prevText: '<vorige', prevStatus: 'Zie de vorige maand',
+    nextText: 'volgende>', nextStatus: 'Zie de volgende maand',
+    currentText: 'Huidige', currentStatus: 'Bekijk de huidige maand',
+    monthNames: ['januari','februari','maart','april','mei','juni',
+    'juli','augustus','september','oktober','november','december'],
+    monthNamesShort: ['jan','feb','mrt','apr','mei','jun',
+    'jul','aug','sep','okt','nov','dec'],
+    monthStatus: 'Bekijk een andere maand', yearStatus: 'Bekijk nog een jaar',
+    weekHeader: 'Sm', weekStatus: '',
+    dayNames: ['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'],
+    dayNamesShort: ['zo', 'ma','di','wo','do','vr','za'],
+    dayNamesMin: ['zo', 'ma','di','wo','do','vr','za'],
+    dayStatus: 'Gebruik DD als de eerste dag van de week', dateStatus: 'Kies DD, MM d',
+    
+    initStatus: 'Kies een datum', isRTL: false};
+$.datepicker.setDefaults($.datepicker.regional['nl']);
 jQuery(function () {
     jQuery("#datepicker").datepicker({
          minDate:0,
@@ -53,7 +70,7 @@ jQuery(function () {
             var month = padNumber(date.getMonth() + 1);
             var day = padNumber(date.getDate());
             // This depends on the datepicker's date format
-            var dateString = month + "/" + day + "/" + year;
+            var dateString = day + "/" + month + "/" + year;
 
             var gotDate = jQuery.inArray(dateString, dates);
             if (gotDate >= 0) {
@@ -69,6 +86,7 @@ $(document).ready(function(){
     var datum = '<?php echo $inname->datum; ?>'.split('-');
     var test = datum[1] + "/"+ datum[2] + "/"+ datum[0]
     addDate(test);
+     
    $.each(dates, function(val, text){
                 $('#datums').append($('<option></option>').val(text).html(text));
             })
@@ -89,8 +107,10 @@ $(document).ready(function(){
       }
       
   </style>
-  <form action="<?php echo site_url() ;?>/trainer/supplementschema/aangepast" method="post">
+  
       <?php
+      $attributes = array('name' => 'supplementTrainerAanpassen', 'data-toggle' => 'validator', 'role' => 'form');
+    echo form_open('trainer/supplementschema/aangepast', $attributes);
 echo '<h2>'.$titel.'</h2>';
 echo "<table>";
 echo form_hidden('id', $inname->id);
@@ -123,13 +143,22 @@ echo "</td><td>";
       <select multiple id="datums" name="datums[]"  >
           
       </select>
+      
+      
   <?php
   
   
 echo "</td> </tr><tr> <td>";
-echo form_label('Aantal:', 'aantal');
+
+echo form_label('Aantal 00x00 (aantal keren x aantal supp):', 'aantal');
 echo "</td> <td>";
-echo form_input('aantal', $inname->aantal);
+
+
+    echo '<div class="form-group">';
+    echo form_input('aantal', $inname->aantal, 'class="form-control" data-error="Geef een aantal in de juiste vorm (bv. 000x000)" required pattern="[0-9]*[xX][0-9]*"');
+    echo '<div class="help-block with-errors"></div>';
+    echo '</div>';
+
 echo "</td><td></td></tr>";
 echo "</table>";
 

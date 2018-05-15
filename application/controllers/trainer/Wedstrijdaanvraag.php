@@ -43,9 +43,9 @@ class Wedstrijdaanvraag extends CI_Controller
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
 
         $this->load->model('persoon_model');
-
+        $this->load->model('wedstrijddeelname_model');
         $this->load->model('wedstrijdreeks_model');
-
+       
         $data['personen'] = $this->persoon_model->getAll();
         $data['alles'] = $this->wedstrijdreeks_model->getAlles();
         $partials = array(
@@ -156,17 +156,30 @@ class Wedstrijdaanvraag extends CI_Controller
         redirect('trainer/wedstrijdaanvraag/beheren');
     }
     /** 
-     *  Geeft alle afstanden terug voor een slagId via Wedstrijdreeks_model
+     *  Geeft alle afstanden terug van wedstrijdreeksen waar de persoon zich nog niet voor heeft ingeschreven via Wedstrijdreeks_model
      *  Geeft de overeenkomstige afstanden via JSON terug.
      * @author Ruben Tuytens
      * @see Wedstrijdreeks_model::getAllAfstandenForSlag()
+     * @see Wedstrijddeelname_model::getAllByPersoon()
      */
     public function haalSlagenAfstand()
     {
         $slagId = $this->input->get('slagId');
         $wedstrijdId = $this->input->get('wedstrijdId');
+        
+        $persoonId = $this->input->get('persoonId');
+        $reeksen = array();
+        $this->load->model('wedstrijddeelname_model');
         $this->load->model('wedstrijdreeks_model');
-        $afstanden = $this->wedstrijdreeks_model->getAllAfstandenForSlag($slagId, $wedstrijdId);
+        
+        $deelnamens = $this->wedstrijddeelname_model->getAllByPersoon($persoonId);
+        $teller = 0;
+        foreach($deelnamens as $deelname)
+        {
+            $reeksen[$teller] = $deelname->wedstrijdReeksId;
+            $teller++;
+        }
+        $afstanden = $this->wedstrijdreeks_model->getAllAfstandenForSlag($slagId, $wedstrijdId, $reeksen);
 
         echo json_encode($afstanden);
     }

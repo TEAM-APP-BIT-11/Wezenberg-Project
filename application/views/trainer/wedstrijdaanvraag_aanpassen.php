@@ -9,24 +9,34 @@
  * - haalt afstanden op met ajax
  */
 ?>
-<script type="text/javascript">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script>
     
-    function afstandenHalen(slagId, wedstrijdId) {
+    
+    function afstandenHalen(slagId, wedstrijdId, wedstrijdReeksId, persoonId) {
         $.ajax({
             type: "GET",
             url: site_url + "/trainer/wedstrijdaanvraag/haalSlagenAfstand",
-            data: {slagId: slagId, wedstrijdId: wedstrijdId},
+            data: {slagId: slagId, wedstrijdId: wedstrijdId, wedstrijdReeksId: wedstrijdReeksId, persoonId: persoonId},
             success: function (result) {
                 try {
-                    var lijst = new Array()
+                    var lijst = new Array();
                     var afstanden = jQuery.parseJSON(result);
-                    
+                  //  var slag = $('[name="slag"]').val();
                     for (var i = 0; i < afstanden.length; i++) {
-                        lijst.push("<option value=" + afstanden[i].afstand.id + ">"+ afstanden[i].afstand.afstand +"</option>");
-                                
-
                         
-                    }
+                  
+                        lijst.push("<option value=" + afstanden[i].afstand.id + ">"+ afstanden[i].afstand.afstand +"</option>");    
+                     
+                        
+                            
+                        
+                                
+    
+                        
+                    }  
                         $('[name="afstand"]').html(lijst);
                         $('[name="reeksId"]').val(lijst);
                        
@@ -45,10 +55,14 @@
     }
    
     $(document).ready(function () {
+          
         $('[name="afstand"').hide();
+        
         $('[name="slag"]').change(function () {
             $('[name="afstand"').show();
-            afstandenHalen($('[name="slag"]').val(), $('[name="wedstrijdId"]').val());
+          
+          
+            afstandenHalen($('[name="slag"]').val(), $('[name="wedstrijdId"]').val(), <?php echo $huidigeSlagAfstand->id;?>, <?php echo $deelname->persoon->id;?> );
         });
 
     })
@@ -58,7 +72,7 @@
 
 <?php
 echo '<h2>'.$titel.'</h2>';
-echo '<h3>Wedstrijd: '.$deelname->wedstrijd->naam .'</h3>';
+echo '<h3>Wedstrijd: '.$deelname->wedstrijd->naam . $deelname->id.'</h3>';
 echo '<h4>Zwemmer: '.$deelname->persoon->voornaam.'</h4>';
 echo '<h4>Huide wedstrijdaanvraag '.$huidigeSlagAfstand->slag->naam . ' '. $huidigeSlagAfstand->afstand->afstand .'m</h4>';?>
 <form action="<?php echo site_url() ;?>/trainer/wedstrijdaanvraag/aanpassen" method="post">
@@ -70,7 +84,7 @@ echo form_hidden('statusId', $deelname->statusId);
 echo form_label('Verschillende slagen', 'slagen');
 
 echo '</br>';
-$options[0]= '-- Select --';
+$options[0]= '-- Selecteer --';
 foreach($deelname->reeksen as $reeks)
 {
     

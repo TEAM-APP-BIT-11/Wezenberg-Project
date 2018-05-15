@@ -83,7 +83,7 @@ class Resultaat_model extends CI_Model
 
     public function getWithRondetypeById($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('id', $id);      
         $query = $this->db->get('resultaat');
         $resultaat = $query->row();
 

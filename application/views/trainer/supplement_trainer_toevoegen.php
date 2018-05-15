@@ -15,13 +15,20 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/jquery.ui.datepicker-nl.js"></script>
 <script>
-  var dates = new Array();
-
+      
     
 
+  var dates = new Array();
+
 function addDate(date) {
+    
+    
+   
+    
     if (jQuery.inArray(date, dates) < 0) 
+     
         dates.push(date);
 }
 
@@ -36,7 +43,7 @@ function addOrRemoveDate(date) {
         if (index >= 0) 
         removeDate(index);
     else 
-       
+ 
            addDate(date);  
         
             
@@ -52,9 +59,30 @@ function padNumber(number) {
     return ret;
 }
 
+$.datepicker.regional['nl'] = {clearText: 'Effacer', clearStatus: '',
+    closeText: 'sluiten', closeStatus: 'Onveranderd sluiten ',
+    prevText: '<vorige', prevStatus: 'Zie de vorige maand',
+    nextText: 'volgende>', nextStatus: 'Zie de volgende maand',
+    currentText: 'Huidige', currentStatus: 'Bekijk de huidige maand',
+    monthNames: ['januari','februari','maart','april','mei','juni',
+    'juli','augustus','september','oktober','november','december'],
+    monthNamesShort: ['jan','feb','mrt','apr','mei','jun',
+    'jul','aug','sep','okt','nov','dec'],
+    monthStatus: 'Bekijk een andere maand', yearStatus: 'Bekijk nog een jaar',
+    weekHeader: 'Sm', weekStatus: '',
+    dayNames: ['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'],
+    dayNamesShort: ['zo', 'ma','di','wo','do','vr','za'],
+    dayNamesMin: ['zo', 'ma','di','wo','do','vr','za'],
+    dayStatus: 'Gebruik DD als de eerste dag van de week', dateStatus: 'Kies DD, MM d',
+  
+    initStatus: 'Kies een datum', isRTL: false};
+$.datepicker.setDefaults($.datepicker.regional['nl']);
+
 jQuery(function () {
+    
     jQuery("#datepicker").datepicker({
-       
+        
+       language: 'nl',
        minDate:0,
         onSelect: function (dateText, inst) {
         
@@ -118,7 +146,7 @@ jQuery(function () {
 
 echo "<h2>".$titel."</h2>";
 echo "<table>";
-$options[0]= '-- Select --';
+$options[0]= '-- Selecteer --';
 foreach($personen as $persoon)
 {
     if($persoon->typePersoonId == 2)
@@ -163,12 +191,12 @@ echo '</td><td >';
   
 echo "</td> </tr><tr> <td>";
 
-echo form_label('Aantal:', 'aantal');
+echo form_label('Aantal 00x00 (aantal keren x aantal supp):', 'aantal');
 echo "</td> <td>";
 
 
     echo '<div class="form-group">';
-    echo form_input('aantal', '', 'class="form-control" data-error="Geef een aantal" required');
+    echo form_input('aantal', '', 'class="form-control" data-error="Geef een aantal in de juiste vorm (bv. 000x000)" required pattern="[0-9]*[xX][0-9]*"');
     echo '<div class="help-block with-errors"></div>';
     echo '</div>';
 

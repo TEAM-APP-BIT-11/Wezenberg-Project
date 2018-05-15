@@ -248,7 +248,7 @@ class Supplement extends CI_Controller
     {
         $this->load->library('form_validation');
         
-        $this->form_validation->set_rules('supplement', 'supplement', 'required', array('required' => 'Je moet een %s ingeven.'));
+        $this->form_validation->set_rules('suppla', 'supplement', 'required', array('required' => 'Je moet een %s ingeven.'));
         
              $this->form_validation->set_rules('doelstelling', 'doelstelling', 'required|callback_select_validate');
         $abcd = $this->input->post('doelstelling');

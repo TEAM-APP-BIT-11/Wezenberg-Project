@@ -30,10 +30,13 @@ foreach($slagen as $slag)
     
     foreach($deelnamens as $deelname)
     {
+        
         if($slag->id == $deelname->wedstrijdReeksId)
         {
-           echo '<h3>'.$deelname->resultaat->rondetype->type.'</h3>';
-        foreach($personen as $persoon)
+            if(isset($deelname->resultaat))
+            {
+               echo '<h3>'.$deelname->resultaat->rondetype->type.'</h3>'; 
+               foreach($personen as $persoon)
         {
             if($persoon->id == $deelname->persoonId)
             {
@@ -43,12 +46,14 @@ foreach($slagen as $slag)
                 echo '<td>' . $deelname->resultaat->tijd.'</td>';
                 echo '<td>' . $deelname->resultaat->ranking.'de</td>';
                 echo '</tr></table>';
+                
             }
         } 
+            }
+          
+        
         }
         
     }
 }
-
-
-
+echo anchor('/bezoeker/home/resultaten', form_button('back', 'Terug', 'class="btn btn-primary"')) ;

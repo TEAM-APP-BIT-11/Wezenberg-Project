@@ -23,7 +23,11 @@
       })
   })
 </script>
-
+<style>
+    div{
+       padding:2px;
+    }
+    </style>
 <?php
 echo '<h2>'. $titel.'</h2>';
 
@@ -70,7 +74,7 @@ echo form_label('Infoblok:', 'infoblok');
 $teller =1;
 
 echo '<div class="col-md-12" name="actief" id="actief">';
-echo '<h3>actieve nieuwsblokken</h3>';
+echo '<h3>Actieve nieuwsblokken</h3>';
 
 echo '<div>';
 echo anchor('trainer/startpagina/toevoegen/', form_button('toevoegen', 'Toevoegen', 'class="btn btn-primary"')) ;
@@ -81,8 +85,8 @@ foreach($nieuwsitems as $nieuws)
     if($nieuws->actief ==1)
     {
         echo '<hr></hr>';
-     echo '<div>';
-      echo '<div  >';
+     echo '<div class="form-group">';
+      echo '<div class="form-group" >';
     echo form_label('Titel:', 'titel');
     echo form_input('titel', $nieuws->titel, 'class="form-control" disabled');
     echo '</div> <div>';
@@ -96,7 +100,7 @@ foreach($nieuwsitems as $nieuws)
     echo toonAfbeelding('nieuwsitems/' . $nieuws->foto . ' ', 'width="250px" height="250px"');
     
     echo '</div>';
-    echo '</div>';
+    echo '</div class="form-group">';
     echo anchor('trainer/startpagina/verwijderen/' .$nieuws->id, form_button('verwijderen', 'Verwijderen', 'class="btn btn-primary"')) ;
     echo anchor('trainer/startpagina/wijzigen/' .$nieuws->id, form_button('wijzigen', 'Wijzigen', 'class="btn btn-primary"')) ;
    
@@ -111,11 +115,11 @@ echo '</div>';
 ?>
      
      <div class="col-md-12">
-     <button id="gedeactiveerde" class="btn btn-primary">Gedeactiveerde nieuwsitems</button>
+     <button id="gedeactiveerde" class="btn btn-primary ">Gedeactiveerde nieuwsitems</button>
      </div>
      <?php
 echo '<div class="col-md-12" name="deactief" id="deactief">';
-
+echo '<hr></hr>';
 echo '<h3>Gedeactiveerde nieuwsblokken</h3>';
 foreach($nieuwsitems as $passief)
 {

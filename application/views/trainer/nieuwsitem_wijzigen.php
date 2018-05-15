@@ -38,7 +38,7 @@ echo '<div>';
 
 echo form_label('Foto:', 'foto');
 
-echo form_dropdown('foto', $options, $nieuwsitem->id ,'class="form-control"');
+echo form_dropdown('foto', $options, $nieuwsitem->foto ,'class="form-control"');
   
      
     echo '</div>';

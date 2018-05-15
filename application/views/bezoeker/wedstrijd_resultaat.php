@@ -24,6 +24,6 @@ foreach ($wedstrijden as $wedstrijd)
               
 }
 echo '</table>';
-echo anchor('/bezoeker/home', form_button('back', 'terug', 'class="btn btn-primary"')) 
+echo anchor('/bezoeker/home', form_button('back', 'Terug', 'class="btn btn-primary"')) 
 ?>
 </table>

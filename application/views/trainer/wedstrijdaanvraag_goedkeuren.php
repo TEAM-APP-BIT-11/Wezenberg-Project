@@ -40,9 +40,9 @@ foreach($personen as $persoon)
             echo "<h2>" . $persoon->voornaam . "</h2>";
             echo '<table class="table">';
             echo '<th >wedstrijd</th><th>slag</th><th colspan=4>afstand</th>';
-            
+        
         }
-            echo "<tr><td>".$deel->wedstrijd->naam . "</td>";
+            echo "<tr><td>".$deel->wedstrijd->naam . ' '.date("d/m/Y",strtotime($deel->wedstrijd->begindatum))."</td>";
             echo "<td>".$deel->slag->naam. "</td>" ;
             echo "<td>".$deel->afstand->afstand . "</td>";
             if($deelname->statusId ==1)

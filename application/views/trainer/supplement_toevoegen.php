@@ -21,9 +21,9 @@ if(validation_errors()){?>
 echo "<h2>" . $titel ."</h2>";
 echo '<div class="form-group">';
 echo form_label('Naam supplement:', 'supplement');
-echo form_input('supplement', set_value('supplement'), 'class="form-control"');
+echo form_input('suppla', set_value('suppla'), 'class="form-control"');
 echo "</div>";
-$options[0] = '-- select --';
+$options[0] = '-- selecteer --';
 
 foreach($doelstellingen as $doelstelling)
 {

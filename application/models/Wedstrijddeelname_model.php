@@ -188,6 +188,20 @@ class Wedstrijddeelname_model extends CI_Model
         }
         return $wedstrijddeelnames;
     }
+   /**
+     * Geeft alle wedstrijddeelnames terug voor persoonId = $persoonId
+     * @author Ruben Tuytens
+     * @param $persoonId De id van de persoon waar de wedstrijddeelnamens van worden gevraagd
+     * @return wedstrijddeelnamens van de gevraagde persoon 
+    
+     */ 
+    public function getAllByPersoon($persoonId)
+    {
+        $this->db->where('persoonId', $persoonId);
+        $query = $this->db->get('wedstrijddeelname');
+        $wedstrijddeelnames = $query->result();
+        return $wedstrijddeelnames;
+    }
 
     public function getAllWithWedstrijdAndResultaatByPersoon($persoonId, $wedstrijdreeksen)
     {
