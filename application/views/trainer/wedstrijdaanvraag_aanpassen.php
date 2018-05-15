@@ -72,7 +72,7 @@
 
 <?php
 echo '<h2>'.$titel.'</h2>';
-echo '<h3>Wedstrijd: '.$deelname->wedstrijd->naam . $deelname->id.'</h3>';
+echo '<h3>Wedstrijd: '.$deelname->wedstrijd->naam .'</h3>';
 echo '<h4>Zwemmer: '.$deelname->persoon->voornaam.'</h4>';
 echo '<h4>Huide wedstrijdaanvraag '.$huidigeSlagAfstand->slag->naam . ' '. $huidigeSlagAfstand->afstand->afstand .'m</h4>';?>
 <form action="<?php echo site_url() ;?>/trainer/wedstrijdaanvraag/aanpassen" method="post">
