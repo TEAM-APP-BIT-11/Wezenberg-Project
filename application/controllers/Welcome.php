@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+  * @class Welcome
+  * @brief Controller-klasse voor Welcome te beheren 
+  * @author Ruben Tuytens, Dieter Verboven, Neil Van den Broeck
+  *
+  * Controller-klasse met alle methoden die gebruikt worden om de startpagina te beheren pagina van de trainer
+  */
 class Welcome extends CI_Controller
 {
 
@@ -29,7 +35,17 @@ class Welcome extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('html');
     }
-
+/**
+     * Haalt al de actieve nieuwsitem records op met Nieuwsitem_model
+     * Haalt de homepagina record op met Homepagina_model
+     * Haalt al de wedstrijden op die nog moeten gebeuren met locatie uit Wedstrijd_model
+     * Stuurt deze allemaal door naar de view algemeen/home.php
+     * @author Ruben Tuytens
+     * @see Wedstrijd_model::getAllAfterTodayWithLocatie()
+     * @see Nieuwsitem_model::getNieuws()
+     * @see Homepagina_model::get()
+     * @see algemeen/home.php
+     */    
     public function index()
     {
         $data['eindverantwoordelijke'] = "Ruben Tuytens";

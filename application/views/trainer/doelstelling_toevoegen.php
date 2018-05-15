@@ -1,4 +1,16 @@
-<?php if(validation_errors()){?>
+<?php
+/**
+ * @file doelstelling_toevoegen.php
+ * @author Ruben Tuytens
+ *
+ * View waar een supplementdoelstelling kan worden toegevoegd aan de hand van een formulier
+ * - gebruikt codeigniter form_validation
+ * - gebruikt Bootstrap-alerts
+ */
+
+
+
+if(validation_errors()){?>
 <div class="alert alert-warning">
 <?php echo validation_errors(); ?>
 </div>
@@ -6,7 +18,7 @@
 <form  action="<?php echo site_url() ;?>/trainer/supplement/toevoegen"  method="post">
 
     <?php
-echo "<h2>" . $title ."</h2>";
+echo "<h2>" . $titel ."</h2>";
 echo '<div class="form-group">';
 
 echo form_label('Doelstelling supplement:', 'doelstelling'); 

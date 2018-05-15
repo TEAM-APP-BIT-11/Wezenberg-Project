@@ -76,17 +76,5 @@ class Supplementdoelstelling_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function getAllDoelstellingenEnsSupplementen()
-    {
-        $this->db->order_by('id', 'asc');
-        $query = $this->db->get('supplementdoelstelling');
-        $doelstellingen = $query->result();
-
-        $this->load->model('voedingssupplement_model');
-
-        foreach ($doelstellingen as $doelstelling) {
-            $doelstelling->voeding = $this->voedingssupplement_model->getAllByDoelstelling($doelstelling->id);
-        }
-        return $doelstellingen;
-    }
+    
 }

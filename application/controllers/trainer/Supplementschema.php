@@ -36,7 +36,7 @@ class Supplementschema extends CI_Controller {
      * @see trainer/supplementen_schema_beheren.php
      */
     public function beheren(){
-        $data['title'] = 'Schema van de supplementen';
+        $data['titel'] = 'Schema van de supplementen';
         $data['persoon'] = $this->authex->getPersoonInfo();
          $data['eindverantwoordelijke'] = "Ruben Tuytens";
 
@@ -61,7 +61,7 @@ class Supplementschema extends CI_Controller {
      * @see trainer/supplement_trainer_toevoegen.php
      */
     public function toevoegen(){
-        $data['title'] = 'Supplement toevoegen aan een zwemmer';
+        $data['titel'] = 'Supplement toevoegen aan een zwemmer';
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
         $this->load->model('persoon_model');
 
@@ -119,7 +119,7 @@ class Supplementschema extends CI_Controller {
      */
     public function aanpassen($id){
 
-           $data['title'] = 'Supplement aanpassen';
+           $data['titel'] = 'Supplement aanpassen';
           $data['eindverantwoordelijke'] = "Ruben Tuytens";
           $this->load->model('inname_model');
           $this->load->model('persoon_model');

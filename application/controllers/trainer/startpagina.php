@@ -40,7 +40,7 @@ class startpagina extends CI_Controller {
      */    
     public function beheren(){
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
-        $data['title'] = 'Startpagina beheren';
+        $data['titel'] = 'Startpagina beheren';
         
         $this->load->model('nieuwsitem_model');
        $this->load->model('homepagina_model');
@@ -112,7 +112,7 @@ class startpagina extends CI_Controller {
     public function wijzigen($id)
     {
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
-        $data['title'] = 'Nieuwsitem wijzigen';
+        $data['titel'] = 'Nieuwsitem wijzigen';
         $this->load->model('nieuwsitem_model');
         
         $data['nieuwsitem'] = $this->nieuwsitem_model->get($id);
@@ -133,10 +133,9 @@ class startpagina extends CI_Controller {
     public function toevoegen()
     {
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
-        $data['title'] = 'Nieuwsitem toevoegen';
+        $data['titel'] = 'Nieuwsitem toevoegen';
         
-        $data['tekst'] ='';
-         $data['titel'] = '';
+        
          $this->load->model('nieuwsitem_model');
         $data['fotos'] = $this->nieuwsitem_model->getAll();
          $partials = array(
@@ -160,8 +159,10 @@ class startpagina extends CI_Controller {
          $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
        if($this->form_validation->run() == FALSE)
          {
-             $data['title'] = 'Nieuwsitem toevoegen';
+             $data['titel'] = 'Nieuwsitem toevoegen';
              $data['eindverantwoordelijke'] = "Ruben Tuytens";
+             $this->load->model('nieuwsitem_model');
+        $data['fotos'] = $this->nieuwsitem_model->getAll();
             $partials = array(
                 'inhoud' => 'trainer/nieuwsitem_toevoegen',
                 'footer' => 'main_footer');

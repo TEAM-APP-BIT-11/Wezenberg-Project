@@ -33,12 +33,12 @@ class Wedstrijdaanvraag extends CI_Controller
      * @author Ruben Tuytens
      
      * @see Wedstrijdreeks_model::getAlles()
-     * @see Persoon_model::getPersoonWithDeelnamens()
+     
      * @see trainer/Wedstrijdaanvraag_goedkeuren.php
      */
     public function beheren()
     {
-        $data['title'] = 'Wedstrijdaanvragen beheren';
+        $data['titel'] = 'Wedstrijdaanvragen beheren';
         $data['persoon'] = $this->authex->getPersoonInfo();
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
 
@@ -105,7 +105,7 @@ class Wedstrijdaanvraag extends CI_Controller
      */    
 	public function wijzigen($id){
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
-        $data['title'] = 'Wedstrijdaanvraag wijzigen';
+        $data['titel'] = 'Wedstrijdaanvraag wijzigen';
         
         $data['persoon'] = $this->authex->getPersoonInfo();
         $this->load->model('wedstrijdreeks_model');
@@ -138,7 +138,7 @@ class Wedstrijdaanvraag extends CI_Controller
         $wedstrijdId= $this->input->post('wedstrijdId');
         $afstandId = $this->input->post('afstand');
         $slagId = $this->input->post('slag');
-        
+        $statusId = $this->input->post('statusId');
         $this->load->model('wedstrijdreeks_model');
         
         $wedstrijdreeks = $this->wedstrijdreeks_model->getWedstrijdreeks($wedstrijdId, $afstandId, $slagId);
@@ -147,7 +147,10 @@ class Wedstrijdaanvraag extends CI_Controller
         $wedstrijdDeelname->id = $this->input->post('deelnameId');
         $wedstrijdDeelname->persoonId = $this->input->post('persoonId');
         $wedstrijdDeelname->wedstrijdReeksId = $wedstrijdreeks->id;
-        
+        if($statusId == 2)
+        {
+            $wedstrijdDeelname->statusId = 1;
+        }
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->update($wedstrijdDeelname);
         redirect('trainer/wedstrijdaanvraag/beheren');

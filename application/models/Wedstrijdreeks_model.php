@@ -200,34 +200,7 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
-    public function getAllWithWedstrijdSlagAfstandResultaatRankingById($persoonId, $wedstrijdId)
-    {
-        $this->db->where('wedstrijdId', $wedstrijdId);
-        $query = $this->db->get('wedstrijdreeks');
-        $wedstrijdreeksen = $query->result();
-
-        $this->load->model('slag_model');
-        $this->load->model('afstand_model');
-        $this->load->model('wedstrijd_model');
-        $this->load->model('wedstrijddeelname_model');
-        $this->load->model('resultaat_model');
-
-        $deelnamens = $this->wedstrijddeelname_model->getAll();
-
-
-        foreach ($wedstrijdreeksen as $wedstrijdreeks) {
-            $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
-            $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
-            $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
-            foreach ($deelnamens as $deelname) {
-                if ($wedstrijdreeks->id == $deelname->wedstrijdReeksId && $deelname->persoonId == $persoonId) {
-                    // $wedstrijdreeksen->resultaat = $this->resultaat_model->get($deelname->resultaatId);
-                    $wedstrijdreeks->ranking = $deelname->ranking;
-                }
-            }
-        }
-        return $wedstrijdreeksen;
-    }
+    
 
     /*
     * Retourneert alle records uit de tabel wedstrijdreeks, wedstrijd, slag en afstand
@@ -321,7 +294,17 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-
+/**
+   
+     * Geeft alle wedstrijdreeksen met de overeenkomstige slag, afstand en wedstrijd. uit de tabel wedstrijdreeks Ook de overeenkomstige wedstrijddeelnamens worden gegeven uit de tabel wedstrijddeelname.
+ 
+     * @return geeft de wedstrijdreeksen met slag, afstand, wedstrijd en wedstrijddeelnamens terug.
+     * @author Ruben Tuytens
+     * @see Wedstrijddeelname_model::getAllByReeks()
+     * @see Slag_model::get()
+     * @see Afstand_model::get()
+     * @see Wedstrijd_model::get()
+     */
     public function getAlles()
     {
         $query = $this->db->get('wedstrijdreeks');
@@ -343,7 +326,15 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-
+/**
+     * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId en ook de bijhorende slag en afstand uit de tabel wedstrijdreeks
+     * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
+     * @return wedstrijdreeksen met slag en afstand
+     * @author Ruben Tuytens
+     * @see Slag_model::get()
+     * @see Afstand_model::get()
+    
+     */
 
     public function getReeksenSlag($wedstrijdId)
     {
@@ -360,47 +351,17 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-    public function getAllesBezoeker($wedstrijdId)
-    {
-        $this->db->where('wedstrijdId', $wedstrijdId);
-        $query = $this->db->get('wedstrijdreeks');
-        $wedstrijdreeksen = $query->result();
-
-        $this->load->model('slag_model');
-        $this->load->model('afstand_model');
-        $this->load->model('wedstrijd_model');
-        $this->load->model('wedstrijddeelname_model');
-        $this->load->model('resultaat_model');
-        $this->load->model('rondetype_model');
-
-        foreach ($wedstrijdreeksen as $wedstrijdreeks) {
-            $wedstrijdreeks->deelnames = $this->wedstrijddeelname_model->getAllByReeksNoStatus($wedstrijdreeks->id);
-            $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
-            $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
-        }
-        return $wedstrijdreeksen;
-    }
-    public function getAllesPersoon($id)
-    {
-        $query = $this->db->get('wedstrijdreeks');
-        $wedstrijdreeksen = $query->result();
-
-        $this->load->model('slag_model');
-        $this->load->model('afstand_model');
-        $this->load->model('wedstrijd_model');
-        $this->load->model('wedstrijddeelname_model');
-
-        foreach ($wedstrijdreeksen as $wedstrijdreeks) {
-            $wedstrijdreeks->deelnames = $this->wedstrijddeelname_model->getAllByReeksForPersoon($wedstrijdreeks->id, $id);
-
-
-            $wedstrijdreeks->slag = $this->slag_model->get($wedstrijdreeks->slagId);
-            $wedstrijdreeks->afstand = $this->afstand_model->get($wedstrijdreeks->afstandId);
-            $wedstrijdreeks->wedstrijd = $this->wedstrijd_model->get($wedstrijdreeks->wedstrijdId);
-        }
-        return $wedstrijdreeksen;
-    }
-	public function getAllAfstandenForSlag($slagId,$wedstrijdId)
+   
+ /**
+     * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de bijhorende afstand records
+     * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
+     * @param $slagId id van de slag waar er wedstrijdreeksen van moeten opgehaald worden
+     * @return wedstrijdreeksen met afstand gefilterd op wedstrijd en slag 
+     * @author Ruben Tuytens
+     * @see Afstand_model::get()
+    
+     */   
+	public function getAllAfstandenForSlag($slagId, $wedstrijdId)
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
         $this->db->where('slagId', $slagId);
@@ -418,6 +379,16 @@ class Wedstrijdreeks_model extends CI_Model
         return $afstanden;
         
     }
+    
+/**
+     * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
+     * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
+     * @param $afstandId id van de afstand waar er een wedstrijdreeks van moeten opgehaald worden
+     * @param $slagId id van de slag waar er een wedstrijdreeks van moeten opgehaald worden
+     * @return opgevraagde wedstrijdreeks record
+     * @author Ruben Tuytens
+    
+     */    
 	 public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
     {
         $this->db->where('wedstrijdId', $wedstrijdId);

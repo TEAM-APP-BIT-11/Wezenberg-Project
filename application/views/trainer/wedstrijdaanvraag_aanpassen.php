@@ -1,3 +1,14 @@
+<?php
+/**
+ * @file wedstrijdaanvraag_aanpassen.php
+ * @author Ruben Tuytens
+ *
+ * View waar een wedstrijddeelname wordt weergegeven van een persoon en kan aangepast worden.
+ * - krijgt een $deelname-object binnen
+ * - krijgt een $huidigeSlagAFstand-object binnen
+ * - haalt afstanden op met ajax
+ */
+?>
 <script type="text/javascript">
     
     function afstandenHalen(slagId, wedstrijdId) {
@@ -46,7 +57,7 @@
 </script>
 
 <?php
-echo '<h2>'.$title.'</h2>';
+echo '<h2>'.$titel.'</h2>';
 echo '<h3>Wedstrijd: '.$deelname->wedstrijd->naam .'</h3>';
 echo '<h4>Zwemmer: '.$deelname->persoon->voornaam.'</h4>';
 echo '<h4>Huide wedstrijdaanvraag '.$huidigeSlagAfstand->slag->naam . ' '. $huidigeSlagAfstand->afstand->afstand .'m</h4>';?>
@@ -55,6 +66,7 @@ echo '<h4>Huide wedstrijdaanvraag '.$huidigeSlagAfstand->slag->naam . ' '. $huid
 echo form_hidden('wedstrijdId', $deelname->wedstrijd->id);
 echo form_hidden('persoonId', $deelname->persoon->id);
 echo form_hidden('deelnameId', $deelname->id);
+echo form_hidden('statusId', $deelname->statusId);
 echo form_label('Verschillende slagen', 'slagen');
 
 echo '</br>';
@@ -73,14 +85,7 @@ echo "</td> <td>";
 echo form_dropdown('slag', $options, '' ,'class="form-control"');
 echo "</td></tr>";
 
-$opties[0]= '-- Select --';
-foreach($deelname->reeksen as $reeks)
-{
-    
-        $opties[$reeks->afstandId] = $reeks->afstand->afstand;
-    
-  
-}
+
 echo "<tr> <td>";
 echo form_label('Afstand:', 'afstand');
 echo "</td> <td>";

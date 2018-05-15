@@ -99,7 +99,13 @@ class Inname_model extends CI_Model
         $this->db->insert('inname', $inname);
         return $this->db->insert_id();
     }
-
+/**
+     * Geeft alle innames met hun persoon terug en voedingssupplement gesorteerd op datum uit de tabel inname
+     * @author Ruben Tuytens
+     * @return Innamespersonen en voedingssupplement terug.
+     * @see \Persoon_model::get()
+     * @see \Voedingssupplement_model::get()
+     */
     function getInnamesPersonen()
     {
         $query = $this->db->get('inname');
@@ -118,7 +124,11 @@ class Inname_model extends CI_Model
 
         return $innamespersonen;
     }
-
+/**
+     * Geeft alle innames terug voor de persoon met id = $persoonId
+     * @author Ruben Tuytens
+     * @return de opgevraagde records
+     */
     function getAllByInname($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
@@ -127,12 +137,7 @@ class Inname_model extends CI_Model
         return $query->result();
     }
 
-    function getWithPersoon($id)
-    {
-        $this->db->where('id', $id);
-        $query = $this->db->get('inname');
-        return $query->row();
-    }
+    
 
     function getAllFromPersoon($persoonId)
     {

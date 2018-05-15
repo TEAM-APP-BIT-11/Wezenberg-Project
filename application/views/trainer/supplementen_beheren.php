@@ -1,3 +1,17 @@
+<?php
+/**
+ * @file supplementen_beheren.php
+ * @author Ruben Tuytens
+ *
+ * View waar de supplementdoelstellingen worden gegeven en aan de hand van geselecteerde supplementdoelstelling de overeenkomstige voedingssupplementen worden weergegeven.
+ * - krijgt een $doelstellingen-object binnen
+ * - haalt voedingssupplementen op met ajax
+ * - gebruikt jquery datepicker
+ */
+
+?>
+
+
 <script type="text/javascript">
     
     function supplementenHalen(doelstellingId) {
@@ -63,7 +77,7 @@
 <?php
 $attributes = array('name' => 'formulier');
     echo form_open('trainer/supplement/wijzigen', $attributes);
-echo "<h2>".$title."</h2>";
+echo "<h2>".$titel."</h2>";
 echo "<div>";
 echo "<h3> Doelstelling supplement:</h3>";
 echo form_dropdownpro("doelstelling", $doelstellingen, "id", "doelstelling", 0, 'id="doelstelling" class="form-control"'); 

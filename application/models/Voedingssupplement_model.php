@@ -50,19 +50,7 @@ class Voedingssupplement_model extends CI_Model
         return $voedingssupplement;
     }
 
-    function getAllWithDoelstelling()
-    {
-        $query = $this->db->get('voedingssupplement');
-        $voedingssupplementen = $query->result();
-
-        $this->load->model('supplementdoelstelling_model');
-
-        foreach ($voedingssupplementen as $voedingssupplement) {
-            $voedingssupplement->doelstelling = $this->supplementdoelstelling_model->get($voedingssupplement->doelstellingId);
-        }
-
-        return $voedingssupplementen;
-    }
+   
 
     /*
     * Retourneert alle records uit de tabel voedingssupplement
@@ -109,7 +97,12 @@ class Voedingssupplement_model extends CI_Model
         $this->db->insert('voedingssupplement', $voedingssupplement);
         return $this->db->insert_id();
     }
-
+/**
+     * Geeft alle voedingssupplementen terug waar de doelstellingId = $doelstellingId
+     * @author Ruben Tuytens
+     * @param $doelstellingId id van de doelstellingen waar de voedingssupplementen van worden opgevraagd
+     * @return alle voedingssupplementen met doelstellingId = $doelstellingId
+     */
     function getAllByDoelstelling($doelstellingId)
     {
 
@@ -120,15 +113,16 @@ class Voedingssupplement_model extends CI_Model
         return $query->result();
     }
 
+    /*
+    
     function verwijderAlleSupplementen($doelstellingId)
     {
-        $supplementen = $this->db->get('voedingssupplement');
+        $this->db->where_in('doelstellingId', $doelstellingId);
+        $this->db->delete('voedingssupplement');
 
-        foreach ($supplementen as $supplement) {
-            $this->db->where('doelstellingId', $doelstellingId);
-            $this->db->delete('voedingssupplement');
-        }
+        
     }
+  */ 
 }
 
 ?>

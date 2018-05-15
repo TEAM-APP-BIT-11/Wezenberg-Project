@@ -74,6 +74,11 @@ class Nieuwsitem_model extends CI_Model {
 		$this->db->insert('nieuwsitem', $nieuwsitem);
 		return $this->db->insert_id();
 	}
+        /**
+     * Geeft alle nieuwsitems terug waar actief = 1
+     * @author Ruben Tuytens
+     * @return de opgevraagde records die actief zijn
+     */
 	 function getNieuws()
 	{
 		$this->db->where('actief', 1);

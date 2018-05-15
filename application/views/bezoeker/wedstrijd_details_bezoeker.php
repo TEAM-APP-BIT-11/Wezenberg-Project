@@ -1,4 +1,14 @@
-
+<?php
+/**
+ * @file wedstrijd_details_bezoeker.php
+ * @author Ruben Tuytens
+ *
+ * View waar de resultaten van een wedstrijd worden weergegeven
+ * - krijgt een $wedstrijdnaam-object binnen
+ * - krijgt een $slagen-object binnen
+ * - krijgt een $deelnamens-object binnen
+ */
+?>
 
 
 <h1>Wedstrijdresultaten bekijken</h1>

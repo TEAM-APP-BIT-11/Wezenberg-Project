@@ -1,7 +1,16 @@
 
+<?php
+/**
+ * @file wedstrijdaanvraag_goedkeuren.php
+ * @author Ruben Tuytens
+ *
+ * View waar alle wedstrijddeelnamens worden weergegeven van de zwemmers die nog niet/wel zijn goedgekeurd
+ * - krijgt een $personen-object binnen
+ * - krijgt een $alles-object binnen
+ */
+?>
 
-
-<h1>Wedstrijdaanvragen beheren</h1>
+<h1><?php echo $titel ;?></h1>
 <style>
     th{
         width: 300px;

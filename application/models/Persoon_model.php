@@ -137,23 +137,13 @@ class Persoon_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    function getPersoonWithDeelnamens()
-    {
-        $this->db->order_by('voornaam', 'asc');
-        $query = $this->db->get('persoon');
-        $personen = $query->result();
-
-        $this->load->model('wedstrijddeelname_model');
-
-
-        foreach ($personen as $persoon) {
-            $persoon->deelname = $this->wedstrijddeelname_model->getAllByDeelname($persoon->id);
-
-        }
-
-        return $personen;
-    }
-
+/**
+     * Geeft alle personen met hun innames terug uit de tabel persoon
+     * @author Ruben Tuytens
+     * @return Personen met al hun innames.
+  
+     * @see Inname_model::getAllByInname()
+     */
     function getPersoonWithInnames()
     {
         $this->db->order_by('voornaam', 'asc');

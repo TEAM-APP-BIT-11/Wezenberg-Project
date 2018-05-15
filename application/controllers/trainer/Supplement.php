@@ -37,7 +37,7 @@ class Supplement extends CI_Controller
      * @see Supplementdoelstelling_model::getAll()
      * @see trainer/supplementen_beheren.php
      */
-        $data['title'] = 'supplementen beheren';
+        $data['titel'] = 'supplementen beheren';
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
         $this->load->model('supplementdoelstelling_model');
         
@@ -72,14 +72,14 @@ class Supplement extends CI_Controller
             if ($supplement == 0) {
                 redirect('/trainer/supplement/beheren');
             } else {
-                $data['title'] = 'Doelstelling wijzigen';
+                $data['titel'] = 'Doelstelling wijzigen';
                 $data['supplement'] = $this->supplementdoelstelling_model->get($supplement);
             }
             $partials = array(
                 'inhoud' => 'trainer/doelstelling_aanpassen',
                 'footer' => 'main_footer');
         } elseif ($uitvoeren == 'toevoegen') {
-            $data['title'] = 'Doelstelling toevoegen';
+            $data['titel'] = 'Doelstelling toevoegen';
             
             $partials = array(
                 'inhoud' => 'trainer/doelstelling_toevoegen',
@@ -144,7 +144,7 @@ class Supplement extends CI_Controller
          
          if($this->form_validation->run() == FALSE)
          {
-             $data['title'] = 'Doelstelling toevoegen';
+             $data['titel'] = 'Doelstelling toevoegen';
             
             $partials = array(
                 'inhoud' => 'trainer/doelstelling_toevoegen',
@@ -192,7 +192,7 @@ class Supplement extends CI_Controller
             if ($supplement == 0) {
                 redirect('/trainer/supplement/beheren');
             } else {
-                $data['title'] = 'Supplement wijzigen';
+                $data['titel'] = 'Supplement wijzigen';
                 $data['supplement'] = $this->voedingssupplement_model->getWithDoelstelling($supplement);
                 
             }
@@ -202,9 +202,9 @@ class Supplement extends CI_Controller
                 'inhoud' => 'trainer/supplement_aanpassen',
                 'footer' => 'main_footer');
         } elseif ($uitvoeren == 'toevoegen') {
-            $data['title'] = 'Supplement toevoegen';
+            $data['titel'] = 'Supplement toevoegen';
     
-             $data['doelstellinga'] = $this->input->post('doelstellingwaarde');
+             $data['doelstellinghuidig'] = $this->input->post('doelstellingwaarde');
             $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
           
             $partials = array(
@@ -259,8 +259,8 @@ class Supplement extends CI_Controller
          {
              $this->load->model('supplementdoelstelling_model');
     
-             $data['title'] = 'Supplement toevoegen';
-            $data['doelstellinga']= $this->input->post('doelstelling');
+             $data['titel'] = 'Supplement toevoegen';
+            $data['doelstellinghuidig']= $this->input->post('doelstelling');
      
             $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
             

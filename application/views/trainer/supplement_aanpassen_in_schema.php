@@ -1,3 +1,17 @@
+<?php
+/**
+ * @file supplement_trainer_toevoegen.php
+ * @author Ruben Tuytens
+ *
+ * View waar een inname van een zwemmer wordt weergegeven en kan worden aangepast
+ * - krijgt een $persoon-object binnen
+ * - krijgt een $innames-object binnen
+ * - krijgt een $inname-object binnen
+ * - gebruikt jquery-datepicker
+ */
+?>
+
+
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -77,7 +91,7 @@ $(document).ready(function(){
   </style>
   <form action="<?php echo site_url() ;?>/trainer/supplementschema/aangepast" method="post">
       <?php
-echo '<h2>'.$title.'</h2>';
+echo '<h2>'.$titel.'</h2>';
 echo "<table>";
 echo form_hidden('id', $inname->id);
 echo form_hidden('innameReeksId', $inname->innameReeksId);

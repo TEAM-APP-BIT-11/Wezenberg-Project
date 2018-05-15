@@ -1,7 +1,18 @@
 
+<?php
+/**
+ * @file supplement_aanpassen.php
+ * @author Ruben Tuytens
+ *
+ * View waar een voedingssupplement wordt weergegeven en kan worden aangepast 
+ * - krijgt een $supplement-object binnen
+ */
+?>
+
+
 <form action="<?php echo site_url() ;?>/trainer/supplement/voedingOpslaan" method="post">
 <?php
-echo "<h2>" . $title ."</h2>";
+echo "<h2>" . $titel ."</h2>";
 echo "<div>";
 echo form_label('Doelstelling supplement:', 'doelstelling'); 
 echo form_input('doelstelling', $supplement->doelstelling->doelstelling, 'class="form-control" disabled');

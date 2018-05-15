@@ -1,11 +1,24 @@
 
-<?php if(validation_errors()){?>
+<?php 
+/**
+ * @file nieuwsitem_toevoegen.php
+ * @author Ruben Tuytens
+ *
+ * View waar een nieuw nieuwsitem kan worden aangemaakt aan de hand van een formulier
+ * - krijgt een $fotos-object binnen
+ * - gebruikt codeigniter form_validation
+ * - gebruikt Bootstrap-alerts
+ */
+
+
+
+if(validation_errors()){?>
 <div class="alert alert-warning">
 <?php echo validation_errors(); ?>
 </div>
 <?php }?>
 <?php
-echo '<h2>'.$title.'</h2>';?>
+echo '<h2>'.$titel.'</h2>';?>
 
 
 <?php

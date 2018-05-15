@@ -1,7 +1,17 @@
 
 
 <?php
-echo '<h2>'.$title.'</h2>';
+/**
+ * @file nieuwsitem_wijzigen.php
+ * @author Ruben Tuytens
+ *
+ *  View waar een nieuwsitem wordt weergegeven en kan worden aangepast
+ * - krijgt een $nieuwsitem-object binnen
+ * - krijgt een $fotos-object binnen
+ */
+
+
+echo '<h2>'.$titel.'</h2>';
 echo form_open_multipart('/trainer/startpagina/wijzigingOpslaan');
 echo '<div>';
     echo form_hidden('id', $nieuwsitem->id);

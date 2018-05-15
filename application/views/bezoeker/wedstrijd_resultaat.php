@@ -4,6 +4,14 @@
     
 
 <?php
+/**
+ * @file wedstrijd_resultaat.php
+ * @author Ruben Tuytens
+ *
+ * View waar alle wedstrijden worden weergegeven 
+ * - krijgt een $wedstrijden-object binnen
+ */
+
 echo "<h2>" . $titel . "</h2>";
 echo '<table class="table">';
 foreach ($wedstrijden as $wedstrijd)

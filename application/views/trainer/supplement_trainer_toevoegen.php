@@ -1,3 +1,17 @@
+<?php
+/**
+ * @file supplement_trainer_toevoegen.php
+ * @author Ruben Tuytens
+ *
+ * View waar een nieuwe inname kan worden toegevoegd voor een zwemmer
+ * - krijgt een $personen-object binnen
+ * - krijgt een $innames-object binnen
+ * - gebruikt jquery-datepicker
+ */
+
+?>
+
+
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -40,7 +54,7 @@ function padNumber(number) {
 
 jQuery(function () {
     jQuery("#datepicker").datepicker({
-      
+       
        minDate:0,
         onSelect: function (dateText, inst) {
         
@@ -102,7 +116,7 @@ jQuery(function () {
   
       <?php
 
-echo "<h2>".$title."</h2>";
+echo "<h2>".$titel."</h2>";
 echo "<table>";
 $options[0]= '-- Select --';
 foreach($personen as $persoon)

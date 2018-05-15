@@ -140,6 +140,13 @@ class Wedstrijd_model extends CI_Model
         $this->db->insert('wedstrijd', $wedstrijd);
         return $this->db->insert_id();
     }
+     /**
+     * Geeft alle wedstrijden met hun locatie terug waar de einddatum verder ligt dan de huidige datum
+     * @author Ruben Tuytens
+
+     * @return Wedstrijden met locatie na de huidige datum
+     * @see Locatie_model::get()
+     */
 	public function getAllAfterTodayWithLocatie(){
         $this->db->where('einddatum >=', date('Y-m-d'));
         $query = $this->db->get('wedstrijd');

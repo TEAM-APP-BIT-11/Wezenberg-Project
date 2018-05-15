@@ -1,3 +1,16 @@
+<?php
+/**
+ * @file homepagina.php
+ * @author Ruben Tuytens
+ *
+ * View waar alle nieuwsitems en homepagina item worden weergegeven. Homepagina item kan worden aangepast.
+ * - krijgt een $supplement-object binnen
+ */
+
+?>
+
+
+
 <script type="text/javascript">
   $(document).ready(function(){
       $('#actief').hide();
@@ -12,7 +25,7 @@
 </script>
 
 <?php
-echo '<h2>'. $title.'</h2>';
+echo '<h2>'. $titel.'</h2>';
 
 ?>
     
