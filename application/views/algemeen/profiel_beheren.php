@@ -137,8 +137,15 @@
     <p><?php
 
         echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>";
-
-        echo "<p>" . anchor('welcome/controleerAanmelden', "Terug") . "</p>";
+        
+        if($persoon->typePersoonId == 1)
+        {
+            echo "<p>" . anchor('trainer/home', "Terug") . "</p>";
+        }
+        else
+        {
+            echo "<p>" . anchor('zwemmer/home', "Terug") . "</p>";
+        }
 
         ?></p>
 </div>

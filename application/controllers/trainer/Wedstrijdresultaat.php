@@ -91,7 +91,7 @@ class Wedstrijdresultaat extends CI_Controller
 
         $this->load->model('wedstrijddeelname_model');
         $this->wedstrijddeelname_model->insert($wedstrijddeelname);
-        return $this->resultaten();
+        return $this->resultatenbeheren(html_escape($this->input->post('wedstrijdId')));
     }
 
     /**

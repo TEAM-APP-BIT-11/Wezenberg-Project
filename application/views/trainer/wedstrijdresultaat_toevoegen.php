@@ -56,7 +56,7 @@
     
     <?php
     echo form_hidden('reeksId', $reeks->id);
-   
+    echo form_hidden('wedstrijdId', $reeks->wedstrijdId);
     echo '<div>';
     echo '</br>';
     echo form_submit('knop', 'Toevoegen', 'class="btn btn-primary"');

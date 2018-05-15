@@ -196,7 +196,14 @@ class Welcome extends CI_Controller
         } else {
             $this->persoon_model->update($persoon);
         }
-        $this->index();
+        if ($persoon->typePersoonId == 1)
+        {
+            redirect('trainer/home');
+        }
+        else
+        {
+            redirect('zwemmer/home');
+        }
     }
 
     /**
