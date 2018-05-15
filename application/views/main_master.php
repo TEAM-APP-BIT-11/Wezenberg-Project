@@ -18,11 +18,6 @@
             crossorigin="anonymous"></script>
     <!--Bootstrap 3 form validator-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
-    <!--Alert en confirmation script en css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
-    <link rel="icon" type="favicon" href="resources/img/favicon/zwemmer.png" />
 
     <title> <?php echo $titel; ?> </title>
 
@@ -116,7 +111,7 @@
             echo activeAnchor('trainer/Wedstrijd/beheren', 'Wedstrijden beheren', '');
             echo activeAnchor('trainer/Locatie/beheren', 'Locaties beheren', '');
             echo activeAnchor('trainer/Wedstrijd/resultaten', 'Resultaten beheren', '');
-            echo activeAnchor('trainer/gebruiker/beheren', 'Gebruikers beheren', '');
+            echo activeAnchor('trainer/gebruiker/beheren', 'Gebruikers', '');
             echo activeAnchor('trainer/supplementschema/beheren', 'Schema supplementen', '');
             echo activeAnchor('trainer/Supplement/beheren', 'Supplementen beheren', '');
             echo activeAnchor('trainer/Wedstrijdaanvraag/beheren', 'Wedstrijdaanvragen', '');

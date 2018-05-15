@@ -15,7 +15,6 @@
         <td>Land</td>
         <td><span id="land"><?php echo $locatie->land ?></span></td>
     </tr>
-
     <tr>
         <td>Zaal</td>
         <td><span id="zaal"><?php echo $locatie->zaal ?></span></td>
