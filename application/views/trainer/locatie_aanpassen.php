@@ -1,3 +1,11 @@
+/**
+ * @file locatie_aanpassen.php
+ *
+ * @author Stef Schoeters
+ * View waarin je een locatie kan aanpassen
+ * - krijgt $locaties-object binnen
+ */
+
 <div class="col-md-10 content">
 
 		<h1 class="">Locaties aanpassen</h1>

@@ -1,3 +1,15 @@
+/**
+ * @file wedstrijd_toevoegen.php
+ *
+ * @author Stef Schoeters
+ * View waarin je een wedstrijd kan toevoegen
+ * - krijgt $afstanden-object binnen
+ * - krijgt $slagen-object binnen
+ * - krijgt $locaties-object binnen
+ * - gebruikt Bootstrap-alerts
+ * - gebruikt Bootstrap-modal
+ */
+
 <script>
 $(document).ready(function () {
   $("#locatieOpslaan").click(function(){

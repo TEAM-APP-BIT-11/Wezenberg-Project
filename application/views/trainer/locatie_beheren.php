@@ -1,3 +1,12 @@
+/**
+ * @file locatie_beheren.php
+ *
+ * @author Stef Schoeters
+ * View waarin je de bestaande locaties kan beheren (toevoegen, aanpassen en verwijderen)
+ * - krijgt $locaties-object binnen
+ * - gebruikt Bootstrap-alerts
+ */
+
 <h1 class="">Locaties beheren</h1>
 <hr>
 <h3>Locaties</h3>

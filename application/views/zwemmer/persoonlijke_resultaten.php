@@ -1,3 +1,13 @@
+/**
+ * @file persoonlijke_resultaten.php
+ *
+ * @author Stef Schoeters
+ * View waarin je je persoonlijke resultaten kan bekijken
+ * - krijgt $wedstrijden-object binnen
+ * - krijgt $wedstrijddeelnames-object binnen
+ * - gebruikt Bootstrap-modal
+ */
+
 <script>
 
     function haalResultaatOp(id)

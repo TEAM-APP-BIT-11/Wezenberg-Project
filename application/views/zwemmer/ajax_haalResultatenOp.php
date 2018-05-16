@@ -1,3 +1,12 @@
+/**
+ * @file ajax_haalResultatenOp.php
+ *
+ * @author Stef Schoeters
+ * View waarin je je persoonlijke resultaat kan bekijken
+ * - krijgt $wedstrijdreeksen-object binnen
+ * - krijgt $wedstrijddeelnames-object binnen
+ */
+
 <div class="table-responsive">
   <table class="table">
               <tr class="active">

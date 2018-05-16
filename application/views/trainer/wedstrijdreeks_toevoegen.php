@@ -1,3 +1,11 @@
+/**
+ * @file wedstrijdreeks_toevoegen.php
+ *
+ * @author Stef Schoeters
+ * View waarin je een wedstrijdreeks kan toevoegen
+ * - krijgt $wedstrijdreeks-object binnen
+ */
+ 
 <div class="col-md-10 content">
 
 		<h1 class="">Wedstrijden reeks toevoegen</h1>

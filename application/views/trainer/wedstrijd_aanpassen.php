@@ -1,3 +1,13 @@
+/**
+ * @file locatie_aanpassen.php
+ *
+ * @author Stef Schoeters
+ * View waarin je een wedstrijd kan aanpassen en wedstrijdreeksen kan verwijderen
+ * - krijgt $wedstrijd-object binnen
+ * - krijgt $locaties-object binnen
+ * - krijgt $wedstrijdreeksen-object binnen
+ */
+
 <script>
 $(document).ready(function () {
   $("#locatieOpslaan").click(function(){

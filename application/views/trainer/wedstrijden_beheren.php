@@ -1,3 +1,12 @@
+/**
+ * @file wedstrijden_beheren.php
+ *
+ * @author Stef Schoeters
+ * View waarin je de bestaande wedstrijds kan beheren (toevoegen, aanpassen en verwijderen)
+ * - krijgt $wedstrijden-object binnen
+ * - gebruikt Bootstrap-alerts
+ */
+
 <script type="text/javascript">
   $(document).ready(function(){
 
