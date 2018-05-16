@@ -64,8 +64,8 @@ class Wedstrijdresultaat extends CI_Controller
      * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan.
      * Geeft alle ingegeven gegevens uit het formulier door via een post en voegt daarna het resultaat en de wedstrijddeelname toe aan de database.
      * @author Dieter Verboven
-     * @see \resultaat_model::insert()
-     * @see \wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
+     * @see resultaat_model::insert()
+     * @see wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
      * @see trainer/wedstrijdresultaat_toevoegen.php
      */
     public function aanmaken()
@@ -91,7 +91,7 @@ class Wedstrijdresultaat extends CI_Controller
      * Haalt alle wedstrijden  en de bijhorende locaties op
      * Stuurt deze door naar de view
      * @author Dieter Verboven
-     * @see \wedstrijd_model::getAllWithLocatie()
+     * @see Wedstrijd_model::getAllWithLocatie()
      * @see trainer/wedstrijdresultaten_beheren.php
      */
     public function resultaten()
