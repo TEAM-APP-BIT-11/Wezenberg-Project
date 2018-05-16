@@ -1,3 +1,14 @@
+<?php
+/**
+ * @file teamlidsinfo_bekijken.php
+ *
+ * @author Stef Schoeters
+ * View waarin je het teamlid zijn info kunt bekijken
+ * - krijgt $zwemmer-object binnen
+ * - gebruikt Bootstrap-well
+ */
+ ?>
+
 <h1 class="text-center">Mijn informatie</h1>
 <div class="container-fluid well text-center">
     <div class="row-fluid">

@@ -1,3 +1,13 @@
+<?php
+/**
+ * @file help.php
+ *
+ * @author Stef Schoeters & Senne Cools
+ * View waarin je help informatie kunt bekijken
+ * - gebruikt Bootstrap-panel
+ */
+ ?>
+
 <script>
 $(document).ready(function(){
  $("#zoek").on("keyup", function() {

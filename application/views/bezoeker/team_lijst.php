@@ -1,3 +1,14 @@
+<?php
+/**
+ * @file team_lijst.php
+ *
+ * @author Stef Schoeters
+ * View waarin je de teamleden kunt bekijken
+ * - krijgt $zwemmers-object binnen
+ * - gebruikt Bootstrap-thumbnail
+ */
+ ?>
+
 <div class="row text-center">
     <h2 class="text-center">Zwemmers</h2>
     <?php

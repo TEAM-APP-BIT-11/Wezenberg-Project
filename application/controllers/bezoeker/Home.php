@@ -1,29 +1,18 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @class Locatie
+ * @brief Controller-klasse voor home van de bezoeker
+ * @author Stef Schoeters & Ruben Tuytens
+ *
+ * Controller-klasse met alle methoden die gebruikt worden in de home van de bezoeker
  */
 
 class Home extends CI_Controller
 {
+  /**
+  * Contructor
+  */
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function __construct()
     {
         parent::__construct();
@@ -32,6 +21,12 @@ class Home extends CI_Controller
         $this->load->helper('html');
         $this->load->helper('notation');
     }
+
+    /**
+     * Toont de view algemeen/home.php
+     *
+     * @see algemeen/home.php
+     */
 
     public function index()
     {
@@ -42,6 +37,14 @@ class Home extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    /**
+     * Haalt al de zwemmers op via Persoon_model en toont het resulterende object in de view bezoeker/team_lijst.php
+     *
+     * @author Stef Schoeters
+     * @see Persoon_model::getZwemmers()
+     * @see bezoeker/team_lijst.php
+     */
 
     public function team()
     {
@@ -59,6 +62,14 @@ class Home extends CI_Controller
 
         $this->template->load('main_home', $partials, $data);
     }
+
+    /**
+     * Haalt de zwemmer met id=$id op via Persoon_model en toont het resulterende object in de view bezoeker/teamlindsinfo_bekijken.php
+     *
+     * @author Stef Schoeters
+     * @see Persoon_model::get()
+     * @see bezoeker/teamlidsinfo_bekijken.php
+     */
 
     public function zwemmer($id)
     {
