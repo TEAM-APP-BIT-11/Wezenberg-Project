@@ -13,7 +13,7 @@
     function wachtwoordCorrect(nieuwWW)
     {
         $.ajax({type : "POST",
-                url : site_url + "/welcome/wijzigWachtwoord/" ,
+                url : site_url + "/algemeen/wijzigWachtwoord/" ,
                 data : {nieuwWW : nieuwWW},
                 success : function(){
                     $("#success").show();
@@ -71,7 +71,7 @@ echo form_hidden('id', $persoon->id);
     
     <p><?php 
 
-    echo anchor('welcome/wijzig/' . $persoon->id, "Terug"); 
+    echo anchor('algemeen/wijzig/' . $persoon->id, "Terug"); 
 
     ?></p>
 </div>
@@ -82,7 +82,7 @@ echo form_hidden('id', $persoon->id);
     
     <div class="alert alert-success" id="success">
         <strong>OK! </strong><p>Het wachtwoord is veranderd.</p>
-        <?php echo anchor('welcome/wijzig/' . $persoon->id, "Terug"); ?>        
+        <?php echo anchor('algemeen/wijzig/' . $persoon->id, "Terug"); ?>        
     </div>
 
 

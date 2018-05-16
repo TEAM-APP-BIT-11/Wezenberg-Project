@@ -19,7 +19,7 @@ class wedstrijdresultaat extends CI_Controller
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "zwemmer") {
@@ -35,7 +35,7 @@ class wedstrijdresultaat extends CI_Controller
      * Haalt al de bestaande wedstrijden die resultaten hebben op via wedstrijddeelname_model en toont het resulterende object in de view zwemmer/persoonlijke_resultaten.php
      *
      * @author Stef Schoeters
-     * @see wedstrijddeelname_model::getAllWithWedstrijdByPersoon()
+     * @see Wedstrijddeelname_model::getAllWithWedstrijdByPersoon()
      * @see zwemmer/persoonlijke_resultaten.php
      */
 
@@ -60,8 +60,8 @@ class wedstrijdresultaat extends CI_Controller
      * Haalt al de resultaten van een bepaalde wedstrijd op via wedstrijdreeks_model, wedstrijddeelname_model en toont het resulterende object in de view zwemmer/ajax_haalResultatenOp.php
      *
      * @author Stef Schoeters
-     * @see wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
-     * @see wedstrijddeelname_model::getAllWithWedstrijdAndResultaatByPersoon()
+     * @see Wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
+     * @see Wedstrijddeelname_model::getAllWithWedstrijdAndResultaatByPersoon()
      * @see zwemmer/ajax_haalResultatenOp.php
      */
 

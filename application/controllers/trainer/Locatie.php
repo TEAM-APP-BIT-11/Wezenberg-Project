@@ -18,7 +18,7 @@ class Locatie extends CI_Controller
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "trainer") {
@@ -184,6 +184,14 @@ class Locatie extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+    
+    /**
+     * Krijgt een locatie binnen en schrijft die weg, haalt dan alle locaties op om deze via json terug te sturen naar de view
+     *
+     * @author Senne Cools
+     * @see Locatie_model::insert()
+     * @see Locatie_model::getAll()
+     */
 
     public function haalJsonOp_Locaties()
     {

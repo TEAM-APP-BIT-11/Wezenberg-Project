@@ -19,7 +19,7 @@ class Evenement extends CI_Controller
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "trainer") {
@@ -227,6 +227,7 @@ class Evenement extends CI_Controller
      * @author Senne Cools
      * @param $evenementenInReeks Een array die de evenementen van de evenementreeks bevat.
      * @see Evenementdeelname_model::getByEventId()
+     * @return array
      */
     
     private function haalDagenVanReeksOp($evenementenInReeks){

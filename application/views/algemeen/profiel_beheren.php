@@ -12,7 +12,7 @@
 
     <?php
     $attributen = array('name' => 'mijnFormulier', 'data-toggle' => 'validator', 'role' => 'form');
-    echo form_open('welcome/registreer', $attributen);
+    echo form_open('algemeen/registreer', $attributen);
     echo form_hidden('id', $persoon->id);
     ?>
     <h1>Profiel beheren</h1>
@@ -145,7 +145,7 @@
 
     <p><?php
 
-        echo "<p>" . anchor('welcome/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>";
+        echo "<p>" . anchor('algemeen/wachtwoord/' . $persoon->id, "Wachtwoord wijzigen") . "</p>";
         
         if($persoon->typePersoonId == 1)
         {

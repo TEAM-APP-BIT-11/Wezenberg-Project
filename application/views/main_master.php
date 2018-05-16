@@ -63,7 +63,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php echo anchor('Welcome/index', 'Wezenberg', 'class="navbar-brand"'); ?>
+            <?php echo anchor('Algemeen/index', 'Wezenberg', 'class="navbar-brand"'); ?>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -90,16 +90,16 @@
                     }
                     echo '</li> ';
                     echo '<li> ';
-                    echo anchor('Welcome/wijzig/' . $persoon->id, 'Wijzig profiel');
+                    echo anchor('Algemeen/wijzig/' . $persoon->id, 'Wijzig profiel');
                     echo '</li > ';
                     echo '<li> ';
-                    echo anchor('Welcome/meldAf', 'Afmelden');
+                    echo anchor('Algemeen/meldAf', 'Afmelden');
                     echo '</li > ';
                     echo '</ul > ';
                     echo '</li > ';
                 } else {
                     echo '<li > ';
-                    echo anchor('Welcome/logIn', 'Login');
+                    echo anchor('Algemeen/logIn', 'Login');
                     echo ' </li > ';
                 }
                 ?>
@@ -131,7 +131,7 @@
             echo activeAnchor('zwemmer/Wedstrijd/inschrijven', 'Inschrijven wedstrijd', '');
             echo activeAnchor('zwemmer/Agenda/raadplegen', 'Agenda raadplegen', '');
             echo activeAnchor('zwemmer/Wedstrijdresultaat/bekijken', 'Resultaten bekijken', '');
-            echo activeAnchor('Welcome/wijzig/' . $persoon->id, 'Mijn informatie beheren', '');
+            echo activeAnchor('Algemeen/wijzig/' . $persoon->id, 'Mijn informatie beheren', '');
         }
         echo '</ul > ';
         echo '</div > ';

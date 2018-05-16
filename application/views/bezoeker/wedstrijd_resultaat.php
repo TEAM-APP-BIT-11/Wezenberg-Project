@@ -1,8 +1,4 @@
 
-
-
-    
-
 <?php
 /**
  * @file wedstrijd_resultaat.php
@@ -24,6 +20,10 @@ foreach ($wedstrijden as $wedstrijd)
               
 }
 echo '</table>';
-echo anchor('/bezoeker/home', form_button('back', 'Terug', 'class="btn btn-primary"')) 
+
 ?>
+<a href="javascript:history.go(-1);">
+    <button type="button" class="btn btn-primary">Terug</button>
+</a>
+
 </table>

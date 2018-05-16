@@ -18,11 +18,11 @@ class Home extends CI_Controller
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "zwemmer") {
-                redirect('Welcome/logIn');
+                redirect('Algemeen/logIn');
             }
         }
 
@@ -33,7 +33,7 @@ class Home extends CI_Controller
     /**Geeft de homepagina van de zwemmer weer met de ongelezen meldingen via Melding_model in de view zwemmer/home.php
      * Geeft een lijst van objecten melding door naar de view.
      * @author Neil Van den Broeck
-     * @see \Melding_model::getAllFromPersoonAndNietGelezen()
+     * @see Melding_model::getAllFromPersoonAndNietGelezen()
      * @see zwemmer/home.php
      */
     public function index()

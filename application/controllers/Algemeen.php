@@ -2,30 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @class Welcome
- * @brief Controller-klasse voor Welcome te beheren
+ * @class Algemeen
+ * @brief Controller-klasse voor Algemeen te beheren
  * @author Ruben Tuytens, Dieter Verboven, Neil Van den Broeck
  *
  * Controller-klasse met alle methoden die gebruikt worden om de startpagina te beheren pagina van de trainer
  */
-class Welcome extends CI_Controller
+class Algemeen extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
 
     public function __construct()
     {
@@ -69,8 +53,8 @@ class Welcome extends CI_Controller
      * Indien de gebruikers reeds is ingelogd zal deze naar de juiste home-pagina worden gestuurd.
      * @author Neil Van den Broeck
      * @see inloggen
-     * @see \Authex::isAangemeld()
-     * @see \Authex::getPersoonInfo()
+     * @see Authex::isAangemeld()
+     * @see Authex::getPersoonInfo()
      */
 
     public function logIn()
@@ -101,7 +85,7 @@ class Welcome extends CI_Controller
      * Geeft een formulier weer waar de gebruiker zijn gegevens kan aanpassen.
      * @see algemeen/profiel_beheren.php
      * @see algemeen/fout_wijzigen.php
-     * @see persoon_model::get()
+     * @see Persoon_model::get()
      * @author Dieter Verboven
      */
     public function wijzig($id)
@@ -134,7 +118,7 @@ class Welcome extends CI_Controller
      * Geeft een formulier weer waar de gebruiker zijn wachtwoord kan aanpassen.
      * @see algemeen/reset_wachtwoord.php
      * @see algemeen/fout_wijzigen.php
-     * @see persoon_model::get()
+     * @see Persoon_model::get()
      * @author Dieter Verboven
      */
     function wachtwoord($id)
@@ -165,7 +149,7 @@ class Welcome extends CI_Controller
     /**
      * Haalt de gegevens uit het formulier op en past de gegevens van de ingelogde persoon aan in de database
      * @see algemeen/profiel_beheren.php
-     * @see persoon_model::update()
+     * @see Persoon_model::update()
      * @author Dieter Verboven
      */
     function registreer()
@@ -214,7 +198,7 @@ class Welcome extends CI_Controller
     /**
      * Haalt het nieuwe wachtwoord uit het formulier op en past deze van de ingelogde persoon aan in de database
      * @see algemeen/reset_wachtwoord.php
-     * @see persoon_model::update()
+     * @see Persoon_model::update()
      * @author Dieter Verboven
      */
     function wijzigWachtwoord()
@@ -240,7 +224,7 @@ class Welcome extends CI_Controller
     /**
      * Foutmelding voor inloggen
      * @author Neil Van den Broeck
-     * @see ::fout_inloggen
+     * @see algemeen/fout_inloggen.php
      */
     public function fout()
     {
@@ -259,7 +243,7 @@ class Welcome extends CI_Controller
      * controleert de gebruikersnaam en het wachtwoord adhv de Authex Library.
      * De gebruiker wordt doorgestuurd afhankelijk van het resultaat van het inloggen. (zwemmer -> zwemmer/Home) (trainer -> trainer/Home) geen succesvolle inlogpoging -> fout
      * @author Neil Van den Broeck
-     * @see ::fout
+     * @see algemeen/fout.php
      *
      */
     public function controleerAanmelden()
@@ -276,7 +260,7 @@ class Welcome extends CI_Controller
             }
         } else {
             //fout
-            redirect('Welcome/fout');
+            redirect('Algemeen/fout');
         }
     }
 
@@ -302,13 +286,13 @@ class Welcome extends CI_Controller
      * Stuurt de gebruiker terug naar de startpagina na het afmelden
      * 
      * @author Neil Van den Broeck
-     * @see Welcome::index()
+     * @see Algemeen::index()
      */
 
     public function meldAf()
     {
         $this->authex->meldAf();
-        redirect('Welcome/index');
+        redirect('Algemeen/index');
     }
 
 }

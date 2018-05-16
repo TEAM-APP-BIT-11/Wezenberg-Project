@@ -11,7 +11,7 @@ class Wedstrijdresultaat extends CI_Controller
     {
         parent::__construct();
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon !== "trainer") {
@@ -25,7 +25,7 @@ class Wedstrijdresultaat extends CI_Controller
     /**
      * Redirect de user naar de functie resultaten()
      * @author Dieter Verboven
-     * @see trainer/wedstrijdresultaat/resultaten.php
+     * @see trainer/Wedstrijdresultaat/resultaten.php
      */
 
     public function index()
@@ -38,10 +38,10 @@ class Wedstrijdresultaat extends CI_Controller
      * Krijgt van de functie elke ronde, elke persoon en aan welke reeks, slag en afstand van deze reeks, een resultaat moet toegevoegd worden.
      * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan .
      * @author Dieter Verboven
-     * @see \rondetype_model::getAll()
-     * @see \persoon_model::getZwemmers()
-     * @see \wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
-     * @see trainer/wedstrijdresultaat_toevoegen.php
+     * @see Rondetype_model::getAll()
+     * @see Persoon_model::getZwemmers()
+     * @see Wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
+     * @see trainer/Wedstrijdresultaat_toevoegen.php
      */
     public function toevoegen($reeksId)
     {
@@ -64,8 +64,8 @@ class Wedstrijdresultaat extends CI_Controller
      * Geeft een in te vullen formulier weer waar men een nieuw resultaat kan.
      * Geeft alle ingegeven gegevens uit het formulier door via een post en voegt daarna het resultaat en de wedstrijddeelname toe aan de database.
      * @author Dieter Verboven
-     * @see \resultaat_model::insert()
-     * @see \wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
+     * @see Resultaat_model::insert()
+     * @see Wedstrijdreeks_model::getWithWedstrijdSlagAfstand()
      * @see trainer/wedstrijdresultaat_toevoegen.php
      */
     public function aanmaken()
@@ -91,7 +91,7 @@ class Wedstrijdresultaat extends CI_Controller
      * Haalt alle wedstrijden  en de bijhorende locaties op
      * Stuurt deze door naar de view
      * @author Dieter Verboven
-     * @see \wedstrijd_model::getAllWithLocatie()
+     * @see Wedstrijd_model::getAllWithLocatie()
      * @see trainer/wedstrijdresultaten_beheren.php
      */
     public function resultaten()
@@ -110,8 +110,8 @@ class Wedstrijdresultaat extends CI_Controller
      * @param id De id van de wedstrijd waarvan de gegevens moeten opgehaald worden.
      * Geeft alle reeksen, slagen en afstanden bij de reeksen van de meegegeven wedstrijd.
      * @see trainer/resultaten_aanpassen.php
-     * @see wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
-     * @see wedstrijd_model::get()
+     * @see Wedstrijdreeks_model::getAllWithWedstrijdSlagAfstandById()
+     * @see Wedstrijd_model::get()
      * @author Dieter Verboven
      */
     public function resultatenBeheren($id)
@@ -131,9 +131,9 @@ class Wedstrijdresultaat extends CI_Controller
     /**
      * @param reeksId De id van de reeks waarvan de gegevens moeten opgehaald worden in wedstrijdresultaten_aanpassen.
      * Geeft alle resultaten, personen en rondes bij de reeks die is meegegeven.
-     * @see trainer/ajax_haalResultatenOp.php
-     * @see wedstrijddeelname_model::getAllWithPersoonResultaatById()
-     * @see rondetype_model::getAll()
+     * @see ajax_haalResultatenOp
+     * @see Wedstrijddeelname_model::getAllWithPersoonResultaatById()
+     * @see Rondetype_model::getAll()
      * @author Dieter Verboven
      */
     public function resultatenOphalen()
@@ -152,11 +152,11 @@ class Wedstrijdresultaat extends CI_Controller
     /**
      * @param id De id van het resultaat waarvan de gegevens moeten opgehaald worden.
      * Haalt alle bijhorende gegegevens van het resultaat door, tijd, ronde, ranking, zwemmer ...op. Geeft een in te vullen formulier weer waar het gekozen resultaat kan aangepast worden.
-     * @see trainer/wedstrijdresultaat_aanpassen.php
-     * @see wedstrijddeelname_model::getDeelnemers()
-     * @see wedstrijddeelname_model::getByResultaatId()
-     * @see rondetype_model::getAll()
-     * @see resultaat_model::get()
+     * @see wedstrijdresultaat_aanpassen.php
+     * @see Wedstrijddeelname_model::getDeelnemers()
+     * @see Wedstrijddeelname_model::getByResultaatId()
+     * @see Rondetype_model::getAll()
+     * @see Resultaat_model::get()
      * @author Dieter Verboven
      */
     public function resultatenAanpassen($id)
@@ -183,8 +183,8 @@ class Wedstrijdresultaat extends CI_Controller
      * Past het resultaat aan indien nodig
      * keert hierna terug naar de resultaten van een wedstrijd (wedstrijdresultaten_aanpassen.php)
      * @author Dieter Verboven
-     * @see \wedstrijddeelname_model::update()
-     * @see trainer/wedstrijdresultaten_aanpassen.php
+     * @see Wedstrijddeelname_model::update()
+     * @see wedstrijdresultaten_aanpassen.php
      */
     public function pasAan()
     {

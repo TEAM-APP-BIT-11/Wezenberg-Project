@@ -16,11 +16,11 @@ class Wedstrijd extends CI_Controller
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon != "zwemmer") {
-                redirect('Welcome/logIn');
+                redirect('Algemeen/logIn');
             }
         }
 
@@ -44,9 +44,9 @@ class Wedstrijd extends CI_Controller
      * Genereert een nieuwe deelname aan een wedstrijd voor een zwemmer met een standaard ingestelde status van 1 (= in afwachting)
      * Er wordt een melding gegenereerd voor de trainers dat er een nieuwe inschrijving is.
      * @param $wedstrijdReeksId WedstrijdreeksID waar de zwemmer voor wil inschrijven
-     * @see \Wedstrijddeelname_model::insert()
-     * @see \Wedstrijddeelname_model::exists()
-     * @see \Wedstrijddeelname_model::getWithWedstrijdSlagAfstand()
+     * @see Wedstrijddeelname_model::insert()
+     * @see Wedstrijddeelname_model::exists()
+     * @see Wedstrijddeelname_model::getWithWedstrijdSlagAfstand()
      * @author Neil Van den Broeck
      */
     public function schrijfIn($wedstrijdReeksId)
@@ -83,7 +83,7 @@ class Wedstrijd extends CI_Controller
      * Verwijdert een deelname voor een zwemmer voor een wedstrijdreeks waar hij niet langer aan wil deelnemen.
      * @author Neil Van den Broeck
      * @param $wedstrijdDeelnameId Wedstrijddeelname die uit de database moet gehaald worden.
-     * @see \Wedstrijddeelname_model::delete()
+     * @see Wedstrijddeelname_model::delete()
      */
     public function schrijfUit($wedstrijdDeelnameId)
     {
@@ -112,7 +112,7 @@ class Wedstrijd extends CI_Controller
      * @author Neil Van den Broeck
      * @param int $wedstrijdId Optionele parameter om meteen de reeksen weer te geven voor een wedstrijd
      * @see wedstrijd_aanvragen.php
-     * @see \Wedstrijd_model::getAllAfterToday()
+     * @see Wedstrijd_model::getAllAfterToday()
      */
     public function inschrijven($wedstrijdId = 0)
     {
@@ -135,7 +135,7 @@ class Wedstrijd extends CI_Controller
      *  De datum word omgezet naar een leesbare standaard.
      *  Geeft de wedstrijdreeksen via JSON terug.
      * @author Neil Van den Broeck
-     * @see \Wedstrijdreeks_model::getAllFromWedstrijdSlagAfstandAndDeelnamePersoon()
+     * @see Wedstrijdreeks_model::getAllFromWedstrijdSlagAfstandAndDeelnamePersoon()
      */
     public function haalJsonOp_WedstrijdReeksen()
     {

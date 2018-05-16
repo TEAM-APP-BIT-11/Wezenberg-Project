@@ -15,7 +15,7 @@
     function verwijderMelding(meldingId) {
         $.ajax({
             type: "POST",
-            url: site_url + "/Welcome/MeldingGelezen",
+            url: site_url + "/Algemeen/MeldingGelezen",
             data: {meldingId: meldingId},
             success: function (result) {
                 try {

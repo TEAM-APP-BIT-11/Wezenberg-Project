@@ -19,7 +19,7 @@ class Agenda extends CI_Controller
         parent::__construct();
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         }
         $this->load->helper('form');
         $this->load->helper('notation');
@@ -31,8 +31,8 @@ class Agenda extends CI_Controller
      * Haalt agendaitems op voor ene persoon en stuurt deze als json door naar de view
      * @see zwemmer/agenda.php
      * @see Inname_model::getAllFromPersoon()
-     * @see \Authex::getPersoonInfo()
-     * @see \Agenda::agendaItems()
+     * @see Authex::getPersoonInfo()
+     * @see Agenda::agendaItems()
      * @author Neil Van den Broeck
      */
     public function raadplegen($id = -1)
@@ -73,8 +73,8 @@ class Agenda extends CI_Controller
      * Geeft de in te nemen innames van voedingssupplementen weer in een tabel.
      * en stuurt deze door naar de view.
      * @author Neil Van den Broeck
-     * @see \Inname_model::getAllByPersoonAndDate()
-     * @see \Authex::getPersoonInfo()
+     * @see Inname_model::getAllByPersoonAndDate()
+     * @see Authex::getPersoonInfo()
      * @see zwemmer/ajax_innames
      */
     public function haalAjaxOp_Innames()
@@ -157,7 +157,7 @@ class Agenda extends CI_Controller
      * Geeft de gegevens van een locatie weer.
      * @return locatiegegevens van die locatie.
      * @see ajax_locatie.php
-     * @see locatie_model::get()
+     * @see Locatie_model::get()
      * @author Dieter Verboven
      */
 

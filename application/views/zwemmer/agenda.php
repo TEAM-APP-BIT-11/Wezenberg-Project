@@ -1,7 +1,7 @@
 <?php
 /**
  * @file agenda.php
- * @author Neil Van den Broeck
+ *
  *
  * View waarin de agenda van de zwemmer wordt weergegeven.
  * - krijgt $innames-array binnen met datums waarop er een inname is.
@@ -9,6 +9,7 @@
  * - toont via FullCalendar.JS de agenda van de zwemmer
  * - haalt via Ajax supplementen binnen (toont deze in modal)
  * - haalt via Ajax locaties binnen (toont deze in modal)
+ * @author Neil Van den Broeck
  */
 ?>
 
