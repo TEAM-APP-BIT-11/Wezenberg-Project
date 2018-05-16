@@ -199,7 +199,7 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-    
+
 
     /**
      * Retourneert alle records uit de tabel wedstrijdreeks, wedstrijd, slag en afstand
@@ -293,12 +293,8 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-<<<<<<< HEAD
-/**
-=======
 
     /**
->>>>>>> Fix Doxy /* -> /**
      * Geeft alle wedstrijdreeksen met de overeenkomstige slag, afstand en wedstrijd. uit de tabel wedstrijdreeks Ook de overeenkomstige wedstrijddeelnamens worden gegeven uit de tabel wedstrijddeelname.
      * @return geeft de wedstrijdreeksen met slag, afstand, wedstrijd en wedstrijddeelnamens terug.
      * @author Ruben Tuytens
@@ -354,11 +350,8 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
-<<<<<<< HEAD
- /**
-=======
+
     /**
->>>>>>> Fix Doxy /* -> /**
      * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId waar ook id != $wedstrijdReeksen en de bijhorende afstand records
      * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
      * @param $slagId id van de slag waar er wedstrijdreeksen van moeten opgehaald worden
@@ -367,41 +360,25 @@ class Wedstrijdreeks_model extends CI_Model
      * @author Ruben Tuytens
      * @see Afstand_model::get()
      */
-<<<<<<< HEAD
-	public function getAllAfstandenForSlag($slagId, $wedstrijdId, $wedstrijdReeksen)
-    {
 
-        foreach($wedstrijdReeksen as $test)
-        {
-          $this->db->where('id !=', $test);
-=======
     public function getAllAfstandenForSlag($slagId, $wedstrijdId, $wedstrijdReeksen)
     {
 
         foreach ($wedstrijdReeksen as $test) {
             $this->db->where('id !=', $test);
->>>>>>> Fix Doxy /* -> /**
+
         }
 
         $this->db->where('wedstrijdId', $wedstrijdId);
         $this->db->where('slagId', $slagId);
-
-<<<<<<< HEAD
-=======
-
->>>>>>> Fix Doxy /* -> /**
         $query = $this->db->get('wedstrijdreeks');
 
         $afstanden = $query->result();
 
         $this->load->model('afstand_model');
 
-<<<<<<< HEAD
-        foreach($afstanden as $afstand)
-        {
-=======
+
         foreach ($afstanden as $afstand) {
->>>>>>> Fix Doxy /* -> /**
             $afstand->afstand = $this->afstand_model->get($afstand->afstandId);
         }
 
@@ -409,11 +386,8 @@ class Wedstrijdreeks_model extends CI_Model
 
     }
 
-<<<<<<< HEAD
-/**
-=======
+
     /**
->>>>>>> Fix Doxy /* -> /**
      * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
      * @param $afstandId id van de afstand waar er een wedstrijdreeks van moeten opgehaald worden
@@ -421,11 +395,7 @@ class Wedstrijdreeks_model extends CI_Model
      * @return opgevraagde wedstrijdreeks record
      * @author Ruben Tuytens
      */
-<<<<<<< HEAD
-	 public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
-=======
     public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
->>>>>>> Fix Doxy /* -> /**
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
         $this->db->where('slagId', $slagId);
