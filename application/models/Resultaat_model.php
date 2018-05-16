@@ -80,6 +80,11 @@ class Resultaat_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    
+    /*
+    * Retourneert het record uit de tabel resultaat met het bijhorende rondetype
+    * @return resultaat record
+    */
 
     public function getWithRondetypeById($id)
     {
