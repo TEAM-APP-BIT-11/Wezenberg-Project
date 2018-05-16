@@ -13,13 +13,6 @@ class Help extends CI_Controller
   * Contructor
   */
 
-<<<<<<< HEAD
-=======
-    /**
-     * Help constructor.
-     *
-     */
->>>>>>> 0735830249a52fe9f3cefae0ed08e0c365918774
     public function __construct()
     {
         parent::__construct();
