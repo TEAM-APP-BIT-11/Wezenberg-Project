@@ -1,3 +1,4 @@
+<?php
 /**
  * @file ajax_haalResultatenOp.php
  *
@@ -6,6 +7,7 @@
  * - krijgt $wedstrijdreeksen-object binnen
  * - krijgt $wedstrijddeelnames-object binnen
  */
+ ?>
 
 <div class="table-responsive">
   <table class="table">

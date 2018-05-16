@@ -1,3 +1,4 @@
+<?php
 /**
  * @file wedstrijd_toevoegen.php
  *
@@ -9,6 +10,7 @@
  * - gebruikt Bootstrap-alerts
  * - gebruikt Bootstrap-modal
  */
+ ?>
 
 <script>
 $(document).ready(function () {

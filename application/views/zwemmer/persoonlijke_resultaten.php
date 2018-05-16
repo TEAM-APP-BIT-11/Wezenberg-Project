@@ -1,3 +1,4 @@
+<?php
 /**
  * @file persoonlijke_resultaten.php
  *
@@ -7,6 +8,7 @@
  * - krijgt $wedstrijddeelnames-object binnen
  * - gebruikt Bootstrap-modal
  */
+ ?>
 
 <script>
 

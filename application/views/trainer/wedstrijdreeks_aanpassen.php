@@ -1,3 +1,4 @@
+<?php
 /**
  * @file wedstrijdreeks_aanpassen.php
  *
@@ -5,6 +6,7 @@
  * View waarin je een wedstrijdreeks kan aanpassen
  * - krijgt $wedstrijdreeks-object binnen
  */
+?>
  
 <div class="col-md-10 content">
 

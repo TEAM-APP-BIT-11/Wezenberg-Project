@@ -1,9 +1,11 @@
+<?php
 /**
  * @file locatie_toevoegen.php
  *
  * @author Stef Schoeters
  * View waarin je een locatie kan toevoegen
  */
+?>
 
 <div class="col-md-10 content">
 

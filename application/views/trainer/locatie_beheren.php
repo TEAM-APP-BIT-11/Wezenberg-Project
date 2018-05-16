@@ -1,3 +1,4 @@
+<?php
 /**
  * @file locatie_beheren.php
  *
@@ -6,6 +7,7 @@
  * - krijgt $locaties-object binnen
  * - gebruikt Bootstrap-alerts
  */
+ ?>
 
 <h1 class="">Locaties beheren</h1>
 <hr>

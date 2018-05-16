@@ -1,3 +1,4 @@
+<?php
 /**
  * @file wedstrijden_beheren.php
  *
@@ -6,6 +7,7 @@
  * - krijgt $wedstrijden-object binnen
  * - gebruikt Bootstrap-alerts
  */
+?>
 
 <script type="text/javascript">
   $(document).ready(function(){

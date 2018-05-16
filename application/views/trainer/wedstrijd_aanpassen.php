@@ -1,3 +1,4 @@
+<?php
 /**
  * @file locatie_aanpassen.php
  *
@@ -7,6 +8,7 @@
  * - krijgt $locaties-object binnen
  * - krijgt $wedstrijdreeksen-object binnen
  */
+ ?>
 
 <script>
 $(document).ready(function () {
