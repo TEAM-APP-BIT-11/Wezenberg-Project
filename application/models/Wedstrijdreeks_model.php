@@ -302,10 +302,7 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 0676658da487fb582664695d054ffa487785832e
     /**
      * Geeft alle wedstrijdreeksen met de overeenkomstige slag, afstand en wedstrijd. uit de tabel wedstrijdreeks Ook de overeenkomstige wedstrijddeelnamens worden gegeven uit de tabel wedstrijddeelname.
      * @return geeft de wedstrijdreeksen met slag, afstand, wedstrijd en wedstrijddeelnamens terug.
@@ -362,10 +359,6 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0676658da487fb582664695d054ffa487785832e
     /**
      * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId waar ook id != $wedstrijdReeksen en de bijhorende afstand records
      * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
@@ -401,10 +394,7 @@ class Wedstrijdreeks_model extends CI_Model
 
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0676658da487fb582664695d054ffa487785832e
     /**
      * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
