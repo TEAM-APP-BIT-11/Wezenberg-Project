@@ -1,29 +1,19 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @class Wedstrijdreeks
+ * @brief Controller-klasse voor Wedstrijdreeks beheren van de trainer
+ * @author Stef Schoeters
+ *
+ * Controller-klasse met alle methoden die gebruikt worden in de Wedstrijdreeks beheren pagina van de trainer
  */
 
 class Wedstrijdreeks extends CI_Controller
 {
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
+  /**
+  * Contructor
+  */
+
     public function __construct()
     {
         parent::__construct();
@@ -41,10 +31,16 @@ class Wedstrijdreeks extends CI_Controller
         $this->load->helper('notation');
     }
 
-    public function index()
-    {
-        $this->load->view('welcome_message');
-    }
+    /**
+     * Toont een formulier voor het toevoegen van een nieuwe Wedstrijdreeks
+     * en haalt de slagen, afstanden en wedstrijd via id=$id op via Slag_model, Afstand_model en Wedstrijd_model en toont de resulterende objecten
+     *
+     * @author Stef Schoeters
+     * @see Slag_model::getAll()
+     * @see Afstand_model::getAll()
+     * @see Wedstrijd_model::get()
+     * @see trainer/wedstrijdreeks_toevoegen.php
+     */
 
     public function toevoegen($id)
     {
@@ -66,6 +62,14 @@ class Wedstrijdreeks extends CI_Controller
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    /**
+     * Maakt een wedstrijdreeks aan met de gegevens uit het formulier via Wedstrijdreeks_model
+     *
+     * @author Stef Schoeters
+     * @see Wedstrijdreeks_model::insert()
+     * @see trainer/wedstrijdreeks_toevoegen.php
+     */
 
     public function aanmaken()
     {
@@ -106,6 +110,15 @@ class Wedstrijdreeks extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
 
+    /**
+     * Past een bestaande wedstrijdreeks aan met de aangepaste gegevens uit het formulier via Wedstrijdreeks_model
+     *
+     * @author Stef Schoeters
+     * @param $id De id van de wedstrijd waar de wedstrijdreek van wordt aangepast
+     * @see Wedstrijdreeks_model::update()
+     * @see trainer/wedstrijdreeks_aanpassen.php
+     */
+
     public function pasAan()
     {
       $wedstrijdreeks = new stdClass();
@@ -124,6 +137,13 @@ class Wedstrijdreeks extends CI_Controller
       redirect('trainer/Wedstrijd/aanpassen/'. $wedstrijdreeks->wedstrijdId .'');
     }
 
+    /**
+     * Verwijderd de wedstrijdreeks met id=$id via Wedstrijdreeks_model
+     *
+     * @author Stef Schoeters
+     * @param $id De id van de wedstrijdreeks dat verwijderd wordt
+     * @see Wedstrijdreeks_model::delete()
+     */
 
     public function verwijder($id, $wedstrijdId)
     {
