@@ -131,7 +131,7 @@ class Wedstrijdresultaat extends CI_Controller
     /**
      * @param reeksId De id van de reeks waarvan de gegevens moeten opgehaald worden in wedstrijdresultaten_aanpassen.
      * Geeft alle resultaten, personen en rondes bij de reeks die is meegegeven.
-     * @see trainer/ajax_haalResultatenOp.php
+     * @see ajax_haalResultatenOp
      * @see Wedstrijddeelname_model::getAllWithPersoonResultaatById()
      * @see Rondetype_model::getAll()
      * @author Dieter Verboven
@@ -152,7 +152,7 @@ class Wedstrijdresultaat extends CI_Controller
     /**
      * @param id De id van het resultaat waarvan de gegevens moeten opgehaald worden.
      * Haalt alle bijhorende gegegevens van het resultaat door, tijd, ronde, ranking, zwemmer ...op. Geeft een in te vullen formulier weer waar het gekozen resultaat kan aangepast worden.
-     * @see trainer/wedstrijdresultaat_aanpassen.php
+     * @see wedstrijdresultaat_aanpassen.php
      * @see Wedstrijddeelname_model::getDeelnemers()
      * @see Wedstrijddeelname_model::getByResultaatId()
      * @see Rondetype_model::getAll()
