@@ -1,3 +1,13 @@
+<?php
+/**
+ * @file gebruiker_aanpassen.php
+ *
+ * View waarin de admin een nieuwe gebruiker kan toevoegen
+ * - toont een leeg formulier
+ * - systeem toont een foutmelding als de invoercontrole niet correct is.
+ */
+?>
+
 <div class="col-md-10 content">
 
     <h1 class="">Gebruiker aanpassen</h1>

@@ -29,3 +29,9 @@ echo form_reset('knop', 'Reset', 'class="btn btn-default"');
 echo form_close();
 
 ?>
+
+<a href="javascript:history.go(-1);">
+    <button type="button" class="btn btn-primary">Terug</button>
+</a>
+
+

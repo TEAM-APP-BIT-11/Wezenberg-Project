@@ -1,4 +1,11 @@
-
+<?php
+/**
+ * @file wedstrijdresultaten_beheren.php
+ *
+ * View waarin de afgelopen wedstrijden worden getoond.
+ * - krijgt $wedstrijd-objecten binnen.
+ */
+?>
 
 <h1 class="">Wedstrijdresultaten beheren</h1>
 <hr>

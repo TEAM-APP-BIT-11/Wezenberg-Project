@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file profiel_beheren.php
+ *
+ * View waarin de gebruiker zijn/haar gegevens kan aanpassen.
+ * - krijgt $persoon binnen van de ingelogde persoon.
+ */
+?>
+
 <div class="col-md-10 content">
 
 

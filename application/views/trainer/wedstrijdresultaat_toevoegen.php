@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file wedstrijdresultaat_toevoegen.php
+ *
+ * View waarin de gebruiker een resultaat kan toevoegen a.d.h.v. een formulier
+ * - toont foutmelding als de invoercontrole een fout geeft.
+ */
+?>
+
 <div class="col-md-10 content">
 
     <h1 class="">Wedstrijdresultaat toevoegen - <?php echo $reeks->wedstrijd->naam . " - " . $reeks->afstand->afstand . " meter " . $reeks->slag->naam ?></h1>

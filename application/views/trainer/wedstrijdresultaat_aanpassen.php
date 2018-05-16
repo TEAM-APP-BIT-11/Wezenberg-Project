@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file wedstrijdresultaat_aanpassen.php
+ *
+ * View waarin de gebruiker de gegevens van een resultaat kan aanpassen.
+ * - toont een $resultaat-object in een formulier.
+ */
+?>
+
 <div class="col-md-10 content">
 
     <h1 class="">Wedstrijdresultaat aanpassen</h1>
