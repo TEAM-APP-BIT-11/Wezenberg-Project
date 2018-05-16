@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * @class Evenement
  * @brief Controller-klasse voor evenementen
  * 
@@ -10,7 +10,7 @@
 class Evenement extends CI_Controller
 {
 
-    /*
+    /**
      * Constructor
      */
     
@@ -31,7 +31,7 @@ class Evenement extends CI_Controller
         $this->load->helper('notation');
     }
 
-    /*
+    /**
      * Haalt alle evenement-records inclusief type op via Evenement_model, alle evenementreeksen via Evenementreeks_model en toont de view evenementen_beheren.php die deze data gebruikt.
      * 
      * @author Senne Cools
@@ -54,7 +54,7 @@ class Evenement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
     
-    /*
+    /**
      * Haalt alle evenement-records op via Evenement_model die bij de gegeven evenementReeksId=$evenementReeksId horen en stuurt die via json terug naar de view evenementen_beheren.php.
      * 
      * @author Senne Cools
@@ -78,7 +78,7 @@ class Evenement extends CI_Controller
         echo json_encode($trainingen);
     }
 
-    /*
+    /**
      * Laadt afhankelijk van de waarde van de meegegeven waarden een leeg evenement of een bestaand evenement. Dit evenement wordt samen met het bijhorend type, deelnemers en locaties doorgestuurd naar de view evenementen_toevoegen.php.
      * 
      * @author Senne Cools
@@ -146,7 +146,7 @@ class Evenement extends CI_Controller
         $this->template->load('main_master', $partials, $data);
     }
     
-    /*
+    /**
      * Voegt nieuwe evenementen toe aan de database via Evenement_model.php. Alle vereiste waarden worden door de gebruiker in de view evenementen_toevoegen.php ingevoerd. Afhankelijk van de ingevoerde waarden wordt een enkel evenement of een reeks evenementen toegevoegd.
      * 
      * @author Senne Cools
@@ -221,7 +221,7 @@ class Evenement extends CI_Controller
         Redirect('/trainer/Evenement/beheren');
     }
     
-    /*
+    /**
      * Haalt de dagen op waarop een evenementreeks doorgaat die nodig zijn om de evenementreeks te laden.
      * 
      * @author Senne Cools
@@ -250,7 +250,7 @@ class Evenement extends CI_Controller
         return $gegevens;
     }
     
-    /*
+    /**
      * Genereert een reeks met bijhorende evenementen, deelnames en meldingen op basis van de opgegeven waarden.
      * 
      * @author Senne Cools
@@ -285,7 +285,7 @@ class Evenement extends CI_Controller
         $this->genereerMeldingen($zwemmerIds, $evenement, true);
     }
     
-    /*
+    /**
      * Voegt een evenement toe of update een evenement afhankelijk van de waarde van de variabele nieuw=$nieuw.
      * 
      * @author Senne Cools
@@ -307,7 +307,7 @@ class Evenement extends CI_Controller
         }
     }
     
-    /*
+    /**
      * Voegt voor elke zwemmer die bij de meegegeven zwemmerIds=$zwemmerIds hoort een deelname toe in de database voor het evenement dat bij de meegegeven evenementId=$evenementId hoort.
      * 
      * @author Senne Cools
@@ -329,7 +329,7 @@ class Evenement extends CI_Controller
         }
     }
     
-    /*
+    /**
      * Genereert voor de zwemmers die bij de meegegeven zwemmerIds=$zwemmerIds de juiste boodschap voor een melding voor het aangemaakte evenement=$evenement
      * 
      * @author Senne Cools
@@ -364,7 +364,7 @@ class Evenement extends CI_Controller
         $this->melding->genereerMeldingen($zwemmerIds, $boodschap, $titel);
     }
     
-    /*
+    /**
      * Verwijdert het evenement met bijhorende deelnames dat bij de opgegeven evementId=$evenementId hoort.
      * 
      * @author Senne Cools
@@ -397,7 +397,7 @@ class Evenement extends CI_Controller
         }
     }
     
-    /*
+    /**
      * Verwijdert de evenementreeks met bijhorende evenementen dat bij de opgegeven evenementReeksId=$evenementReeksId hoort.
      * 
      * @author Senne Cools
@@ -426,7 +426,7 @@ class Evenement extends CI_Controller
         Redirect('/trainer/Evenement/beheren');
     } 
     
-    /*
+    /**
      * Laadt een reeks om te bewerken, en differentieert bij het laden tussen een trainingreeks en een overige reeks.
      * 
      * @author Senne Cools
@@ -445,7 +445,7 @@ class Evenement extends CI_Controller
         $this->laadEvenement($typeId, false, $evenementReeksId, true);
     }
     
-    /*
+    /**
      * Laadt een evenement om te bewerken.
      * 
      * @author Senne Cools

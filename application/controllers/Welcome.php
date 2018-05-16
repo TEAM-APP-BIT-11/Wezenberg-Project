@@ -282,15 +282,13 @@ class Welcome extends CI_Controller
 
         return 'ok';
     }
-
-    public function toon()
-    {
-        $data['titel'] = 'Formulier met dialoogvenster';
-
-        $partials = array(
-            'inhoud' => 'trainer/home');
-        $this->template->load('main_master', $partials, $data);
-    }
+    
+    /**
+     * Stuurt de gebruiker terug naar de startpagina na het afmelden
+     * 
+     * @author Neil Van den Broeck
+     * @see Welcome::index()
+     */
 
     public function meldAf()
     {
