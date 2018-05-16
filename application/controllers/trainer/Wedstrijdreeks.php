@@ -89,6 +89,16 @@ class Wedstrijdreeks extends CI_Controller
       redirect('trainer/Wedstrijd/aanpassen/'. $wedstrijdId .'');
     }
 
+    /**
+     * Haalt de wedstrijdreeks met id=$id (en slag, afstand) op via Wedstrijdreeks_model, Slag_model, Afstand_model en toont het resulterende object in de view trainer/wedstrijdreeks_aanpassen.php
+     *
+     * @param $id De id van de wedstrijd dat getoond wordt
+     * @see Wedstrijdreeks_model::getWithWedstrijd()
+     * @see slag_model::getAll()
+     * @see afstand_model::getAll()
+     * @see trainer/wedstrijdreeks_aanpassen.php
+     */
+
     public function aanpassen($id)
     {
         $data['titel'] = 'Wedstrijd aanpassen';
