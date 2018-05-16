@@ -204,12 +204,9 @@ class Welcome extends CI_Controller
         } else {
             $this->persoon_model->update($persoon);
         }
-        if ($persoon->typePersoonId == 1)
-        {
+        if ($persoon->typePersoonId == 1) {
             redirect('trainer/home');
-        }
-        else
-        {
+        } else {
             redirect('zwemmer/home');
         }
     }
@@ -240,6 +237,11 @@ class Welcome extends CI_Controller
 
     }
 
+    /**
+     * Foutmelding voor inloggen
+     * @author Neil Van den Broeck
+     * @see ::fout_inloggen
+     */
     public function fout()
     {
         $data['titel'] = "Fout";
@@ -253,6 +255,13 @@ class Welcome extends CI_Controller
         $this->template->load('main_home', $partials, $data);
     }
 
+    /**
+     * controleert de gebruikersnaam en het wachtwoord adhv de Authex Library.
+     * De gebruiker wordt doorgestuurd afhankelijk van het resultaat van het inloggen. (zwemmer -> zwemmer/Home) (trainer -> trainer/Home) geen succesvolle inlogpoging -> fout
+     * @author Neil Van den Broeck
+     * @see ::fout
+     *
+     */
     public function controleerAanmelden()
     {
         $gebruikersnaam = $this->input->post('gebruikersnaam');
@@ -270,6 +279,12 @@ class Welcome extends CI_Controller
             redirect('Welcome/fout');
         }
     }
+
+    /**
+     * Krijgt via ajax een meldingId binnen die de melding gaat updaten en de waarde van gelezen op 1 zet.
+     * @author Neil Van den Broeck
+     * @return string
+     */
 
     public function MeldingGelezen()
     {
