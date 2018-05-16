@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file main_footer.php
+ * 
+ * Die footer die onder elke view geplaatst wordt
+ * - krijgt de variabele $eindverantwoordelijke binnen
+ */
+?>
+
 <div class="footer">
   <div class="container text-center">
       <div class="row">
