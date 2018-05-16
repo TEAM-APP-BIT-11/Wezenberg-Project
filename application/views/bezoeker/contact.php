@@ -7,7 +7,7 @@
 $attributes = array('name' => 'contact');
 echo form_open('bezoeker/Contact/verwerk', $attributes);
 
-echo form_labelpro('E-mailadres', 'email');
+echo form_labelpro('E-mailadres:', 'email');
 echo form_input(array('name' => 'email',
     'id' => 'email',
     'type' => 'email',
