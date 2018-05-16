@@ -394,10 +394,6 @@ class Wedstrijdreeks_model extends CI_Model
 
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b4132685787d32e59b5a94645c514969cdc96634
     /**
      * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
