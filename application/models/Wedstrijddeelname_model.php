@@ -9,20 +9,20 @@
  */
 class Wedstrijddeelname_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel wedstrijddeelname
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel wedstrijddeelname
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     public function get($id)
     {
@@ -31,11 +31,11 @@ class Wedstrijddeelname_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert het record met resultaatId=$id uit de tabel wedstrijddeelname
-    * @param $id De resultaatId van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met resultaatId=$id uit de tabel wedstrijddeelname
+     * @param $id De resultaatId van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     public function getByResultaatId($id)
     {
@@ -44,10 +44,10 @@ class Wedstrijddeelname_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert alle records uit de tabel wedstrijddeelname
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel wedstrijddeelname
+     * @return Alle records
+     */
 
     public function getAll()
     {
@@ -55,7 +55,7 @@ class Wedstrijddeelname_model extends CI_Model
         return $query->result();
     }
 
-    /*
+    /**
      * Retourneert alle wedstrijddeelnames uit de tabel wedstrijddeelname voor de persoon met id=$persoonID, inclusief de bijhorende status
      * @param $persoonId De id van de persoon waarvoor de wedstrijddeelnames opgehaald worden
      * @return De opgevraagde wedstrijddeelnames met status
@@ -76,10 +76,10 @@ class Wedstrijddeelname_model extends CI_Model
         return $wedstrijddeelnames;
     }
 
-    /*
-    * Update het record in de tabel wedstrijddeelname met de id die uit $wedstrijddeelname gehaald wordt
-    * @param $wedstrijddeelname Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel wedstrijddeelname met de id die uit $wedstrijddeelname gehaald wordt
+     * @param $wedstrijddeelname Het record waarmee we een bestaand record willen vervangen
+     */
 
     public function update($wedstrijddeelname)
     {
@@ -87,10 +87,10 @@ class Wedstrijddeelname_model extends CI_Model
         $this->db->update('wedstrijddeelname', $wedstrijddeelname);
     }
 
-    /*
-    * Verwijdert het record in de tabel wedstrijddeelname', $wedstrijddeelname met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel wedstrijddeelname', $wedstrijddeelname met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     public function delete($id)
@@ -99,11 +99,11 @@ class Wedstrijddeelname_model extends CI_Model
         $this->db->delete('wedstrijddeelname');
     }
 
-    /*
-    * Voegt een nieuw record wedstrijddeelname=$wedstrijddeelname', $wedstrijddeelname toe in de tabel wedstrijddeelname', $wedstrijddeelname
-    * @param $wedstrijddeelname', $wedstrijddeelname Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record wedstrijddeelname=$wedstrijddeelname', $wedstrijddeelname toe in de tabel wedstrijddeelname', $wedstrijddeelname
+     * @param $wedstrijddeelname ', $wedstrijddeelname Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     public function insert($wedstrijdDeelname)
     {
@@ -126,21 +126,19 @@ class Wedstrijddeelname_model extends CI_Model
         return $wedstrijddeelname;
     }
 
-   /**
+    /**
      * Geeft alle wedstrijddeelnames terug waar de wedstrijdReeksId = $wedstrijdReeksId en de statusId niet gelijk aan 3 is
      * @author Ruben Tuytens
      * @param $wedstrijdReeksId De id van de wedstrijdreeks waar de wedstrijddeelnamens van worden gevraagd
      * @return wedstrijddeelnamens van de gevraagde wedstrijdReeksId waar de statusId niet gelijk is aan 3
-    
-     */ 
+     */
 
-    
 
     public function getAllByReeks($wedstrijdReeksId)
     {
         $controleren = array('wedstrijdreeksId' => $wedstrijdReeksId, 'statusId !=' => 3);
         $this->db->where($controleren);
-        
+
         $this->db->order_by('persoonId', 'asc');
         $query = $this->db->get('wedstrijdDeelname');
         return $query->result();
@@ -188,13 +186,13 @@ class Wedstrijddeelname_model extends CI_Model
         }
         return $wedstrijddeelnames;
     }
-   /**
+
+    /**
      * Geeft alle wedstrijddeelnames terug voor persoonId = $persoonId
      * @author Ruben Tuytens
      * @param $persoonId De id van de persoon waar de wedstrijddeelnamens van worden gevraagd
-     * @return wedstrijddeelnamens van de gevraagde persoon 
-    
-     */ 
+     * @return wedstrijddeelnamens van de gevraagde persoon
+     */
     public function getAllByPersoon($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
@@ -252,7 +250,8 @@ class Wedstrijddeelname_model extends CI_Model
         }
         return $wedstrijddeelnames;
     }
-/**
+
+    /**
      * Geeft alle wedstrijddeelnamens terug. Als het resultaatId niet NULL is dan geeft het ook samenhorend resultaat terug.
      * @return Wedstrijddeelnamens met samenhorend resultaat als niet NULL is
      * @author Ruben Tuytens
@@ -325,6 +324,7 @@ class Wedstrijddeelname_model extends CI_Model
 
         return $deelnemers;
     }
+
     /**
      * Geeft een wedstrijddeelname terug met id = $id met het bijhorende persoon, wedstrijdreeks en wedstrijd record uit de tabel wedstrijddeelname.
      * Aan de wedstrijddeelname zijn ook al de mogelijke reeksen met de slagen en afstanden voor die bepaalde wedstrijd verbonden
@@ -335,11 +335,11 @@ class Wedstrijddeelname_model extends CI_Model
      * @see Wedstrijd_model::get()
      * @see Wedstrijdreeks_model::getReeksenSlag()
      */
-	function getEnkelPersoonWithDeelnamens($id)
+    function getEnkelPersoonWithDeelnamens($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('wedstrijddeelname');
-      
+
         $deelname = $query->row();
 
         $this->load->model('persoon_model');
@@ -347,12 +347,10 @@ class Wedstrijddeelname_model extends CI_Model
         $this->load->model('wedstrijd_model');
 
 
-
-            $deelname->persoon =$this->persoon_model->get($deelname->persoonId);
-            $deelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($deelname->wedstrijdReeksId);
-            $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->wedstrijdreeks->wedstrijdId);
-           $deelname->reeksen = $this->wedstrijdreeks_model->getReeksenSlag($deelname->wedstrijd->id);
-
+        $deelname->persoon = $this->persoon_model->get($deelname->persoonId);
+        $deelname->wedstrijdreeks = $this->wedstrijdreeks_model->get($deelname->wedstrijdReeksId);
+        $deelname->wedstrijd = $this->wedstrijd_model->get($deelname->wedstrijdreeks->wedstrijdId);
+        $deelname->reeksen = $this->wedstrijdreeks_model->getReeksenSlag($deelname->wedstrijd->id);
 
 
         return $deelname;

@@ -9,20 +9,20 @@
  */
 class Voedingssupplement_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel voedingssupplement
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel voedingssupplement
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     function get($id)
     {
@@ -50,12 +50,11 @@ class Voedingssupplement_model extends CI_Model
         return $voedingssupplement;
     }
 
-   
 
-    /*
-    * Retourneert alle records uit de tabel voedingssupplement
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel voedingssupplement
+     * @return Alle records
+     */
 
     function getAll()
     {
@@ -63,10 +62,10 @@ class Voedingssupplement_model extends CI_Model
         return $query->result();
     }
 
-    /*
-    * Update het record in de tabel voedingssupplement met de id die uit $voedingssupplement gehaald wordt
-    * @param $voedingssupplement Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel voedingssupplement met de id die uit $voedingssupplement gehaald wordt
+     * @param $voedingssupplement Het record waarmee we een bestaand record willen vervangen
+     */
 
     function update($voedingssupplement)
     {
@@ -74,10 +73,10 @@ class Voedingssupplement_model extends CI_Model
         $this->db->update('voedingssupplement', $voedingssupplement);
     }
 
-    /*
-    * Verwijdert het record in de tabel voedingssupplement', $voedingssupplement met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel voedingssupplement', $voedingssupplement met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     function delete($id)
@@ -86,18 +85,19 @@ class Voedingssupplement_model extends CI_Model
         $this->db->delete('voedingssupplement');
     }
 
-    /*
-    * Voegt een nieuw record voedingssupplement=$voedingssupplement', $voedingssupplement toe in de tabel voedingssupplement', $voedingssupplement
-    * @param $voedingssupplement', $voedingssupplement Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record voedingssupplement=$voedingssupplement', $voedingssupplement toe in de tabel voedingssupplement', $voedingssupplement
+     * @param $voedingssupplement ', $voedingssupplement Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     function insert($voedingssupplement)
     {
         $this->db->insert('voedingssupplement', $voedingssupplement);
         return $this->db->insert_id();
     }
-/**
+
+    /**
      * Geeft alle voedingssupplementen terug waar de doelstellingId = $doelstellingId
      * @author Ruben Tuytens
      * @param $doelstellingId id van de doelstellingen waar de voedingssupplementen van worden opgevraagd
@@ -112,17 +112,6 @@ class Voedingssupplement_model extends CI_Model
 
         return $query->result();
     }
-
-    /*
-    
-    function verwijderAlleSupplementen($doelstellingId)
-    {
-        $this->db->where_in('doelstellingId', $doelstellingId);
-        $this->db->delete('voedingssupplement');
-
-        
-    }
-  */ 
 }
 
 ?>

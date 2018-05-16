@@ -9,20 +9,20 @@
  */
 class Persoon_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel persoon
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel persoon
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     function get($id)
     {
@@ -31,7 +31,7 @@ class Persoon_model extends CI_Model
         return $query->row();
     }
 
-    /*
+    /**
      * Retourneert de persoon uit de tabel persoon die bij de opgegeven gebruikersnaam=$gebruikersnaam en wachtwoord=$wachtwoord hoort
      * @param $gebruikersnaam De gebruikersnaam waarmee de persoon wilt inloggen
      * @param $wachtwoord Het wachtwoord dat bij de gebruikersnaam zou moeten horen
@@ -66,10 +66,10 @@ class Persoon_model extends CI_Model
     }
 
 
-    /*
-    * Retourneert alle records uit de tabel persoon
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel persoon
+     * @return Alle records
+     */
 
     function getAll()
     {
@@ -77,10 +77,10 @@ class Persoon_model extends CI_Model
         return $query->result();
     }
 
-    /*
-    * Retourneert alle records uit de tabel persoon die een zwemmer zijn
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel persoon die een zwemmer zijn
+     * @return Alle records
+     */
 
     function getZwemmers()
     {
@@ -89,10 +89,10 @@ class Persoon_model extends CI_Model
         return $query->result();
     }
 
-    /*
-* Retourneert alle records uit de tabel persoon die een trainer zijn ( typePersoonId = 1)
-* @return Alle records
-*/
+    /**
+     * Retourneert alle records uit de tabel persoon die een trainer zijn ( typePersoonId = 1)
+     * @return Alle records
+     */
 
     function getTrainers()
     {
@@ -101,10 +101,10 @@ class Persoon_model extends CI_Model
         return $query->result();
     }
 
-    /*
-    * Update het record in de tabel persoon met de id die uit $persoon gehaald wordt
-    * @param $persoon Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel persoon met de id die uit $persoon gehaald wordt
+     * @param $persoon Het record waarmee we een bestaand record willen vervangen
+     */
 
     function update($persoon)
     {
@@ -112,10 +112,10 @@ class Persoon_model extends CI_Model
         $this->db->update('persoon', $persoon);
     }
 
-    /*
-    * Verwijdert het record in de tabel persoon', $persoon met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel persoon', $persoon met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     function delete($id)
@@ -125,11 +125,11 @@ class Persoon_model extends CI_Model
         $this->db - delete('persoon', $persoon);
     }
 
-    /*
-    * Voegt een nieuw record persoon=$persoon', $persoon toe in de tabel persoon', $persoon
-    * @param $persoon', $persoon Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record persoon=$persoon', $persoon toe in de tabel persoon', $persoon
+     * @param $persoon ', $persoon Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     function insert($persoon)
     {
@@ -137,11 +137,10 @@ class Persoon_model extends CI_Model
         return $this->db->insert_id();
     }
 
-/**
+    /**
      * Geeft alle personen met hun innames terug uit de tabel persoon
      * @author Ruben Tuytens
      * @return Personen met al hun innames.
-  
      * @see Inname_model::getAllByInname()
      */
     function getPersoonWithInnames()

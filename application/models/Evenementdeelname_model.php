@@ -9,20 +9,20 @@
  */
 class Evenementdeelname_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel evenementdeelname
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel evenementdeelname
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     function get($id)
     {
@@ -31,11 +31,11 @@ class Evenementdeelname_model extends CI_Model
         return $query->row();
     }
 
-    /*
-* Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname
-* @param $evenementId De id van het record dat opgevraagd wordt
-* @return De opgevraagde records
-*/
+    /**
+     * Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname
+     * @param $evenementId De id van het record dat opgevraagd wordt
+     * @return De opgevraagde records
+     */
 
     function getByEventId($evenementId)
     {
@@ -46,11 +46,11 @@ class Evenementdeelname_model extends CI_Model
         return $evenementdeelnames;
     }
 
-    /*
-* Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname inclusief bijhorende persoon
-* @param $evenementId De id van het record dat opgevraagd wordt
-* @return De opgevraagde records
-*/
+    /**
+     * Retourneert de records met evenementId=$evenementId uit de tabel evenementdeelname inclusief bijhorende persoon
+     * @param $evenementId De id van het record dat opgevraagd wordt
+     * @return De opgevraagde records
+     */
 
     function getByEventIdWithPerson($evenementId)
     {
@@ -67,10 +67,10 @@ class Evenementdeelname_model extends CI_Model
         return $evenementdeelnames;
     }
 
-    /*
-    * Retourneert alle records uit de tabel evenementdeelname
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel evenementdeelname
+     * @return Alle records
+     */
 
     function getAll()
     {
@@ -78,10 +78,10 @@ class Evenementdeelname_model extends CI_Model
         return $query->result();
     }
 
-    /*
-    * Update het record in de tabel evenementdeelname met de id die uit $evenementdeelname gehaald wordt
-    * @param $evenementdeelname Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel evenementdeelname met de id die uit $evenementdeelname gehaald wordt
+     * @param $evenementdeelname Het record waarmee we een bestaand record willen vervangen
+     */
 
     function update($evenementdeelname)
     {
@@ -89,10 +89,10 @@ class Evenementdeelname_model extends CI_Model
         $this->db->update('evenementdeelname', $evenementdeelname);
     }
 
-    /*
-    * Verwijdert het record in de tabel evenementdeelname', $evenementdeelname met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel evenementdeelname', $evenementdeelname met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     function delete($id)
@@ -101,11 +101,11 @@ class Evenementdeelname_model extends CI_Model
         $this->db->delete('evenementdeelname');
     }
 
-    /*
-    * Voegt een nieuw record evementdeelname=$evenementdeelname', $evenementdeelname toe in de tabel evenementdeelname', $evenementdeelname
-    * @param $evenementdeelname', $evenementdeelname Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record evementdeelname=$evenementdeelname', $evenementdeelname toe in de tabel evenementdeelname', $evenementdeelname
+     * @param $evenementdeelname ', $evenementdeelname Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     function insert($evenementdeelname)
     {

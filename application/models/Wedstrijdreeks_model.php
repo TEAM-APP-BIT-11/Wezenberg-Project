@@ -9,20 +9,20 @@
  */
 class Wedstrijdreeks_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel wedstrijdreeks
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel wedstrijdreeks
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     public function get($id)
     {
@@ -56,10 +56,10 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeks;
     }
 
-    /*
-    * Retourneert alle records uit de tabel wedstrijdreeks
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel wedstrijdreeks
+     * @return Alle records
+     */
 
     public function getAll()
     {
@@ -67,7 +67,7 @@ class Wedstrijdreeks_model extends CI_Model
         return $query->result();
     }
 
-    /*
+    /**
      * Retourneert alle records uit de tabel wedstrijdreeks met bijhorende wedstrijd, slag en afstand
      * @return Alle records inclusief bijhorende wedstrijd, slag en afstand
      */
@@ -89,7 +89,7 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
-    /*
+    /**
      * Retourneert de records uit de tabel wedstrijdreeks met bijhorende slag en afstand voor de persoon met id=$persoonId die deelneemt aan de wedstrijd met id=$wedstrijdId
      * @param $persoonId De id van de persoon waarvoor records opgehaald worden
      * @param $wedstrijdId De id van de wedstrijd waaraan de persoon waarvoor records opgehaald worden deelneemt
@@ -126,10 +126,10 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
-    /*
-    * Update het record in de tabel wedstrijdreeks met de id die uit $wedstrijdreeks gehaald wordt
-    * @param $wedstrijdreeks Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel wedstrijdreeks met de id die uit $wedstrijdreeks gehaald wordt
+     * @param $wedstrijdreeks Het record waarmee we een bestaand record willen vervangen
+     */
 
     public function update($wedstrijdreeks)
     {
@@ -137,10 +137,10 @@ class Wedstrijdreeks_model extends CI_Model
         $this->db->update('wedstrijdreeks', $wedstrijdreeks);
     }
 
-    /*
-    * Verwijdert het record in de tabel wedstrijdreeks', $wedstrijdreeks met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel wedstrijdreeks', $wedstrijdreeks met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     public function delete($id)
@@ -148,24 +148,24 @@ class Wedstrijdreeks_model extends CI_Model
         $this->load->model('wedstrijddeelname_model');
         $deelnames = $this->wedstrijddeelname_model->getAllWithReeks($id);
 
-        if(!empty($deelnames)){
-          foreach($deelnames as $deelname){
-            var_dump($deelname);
-            $this->wedstrijddeelname_model->delete($deelname->id);
-          }
-          $this->db->where('id', $id);
-          $this->db->delete('wedstrijdreeks');
-        }else{
-          $this->db->where('id', $id);
-          $this->db->delete('wedstrijdreeks');
+        if (!empty($deelnames)) {
+            foreach ($deelnames as $deelname) {
+                var_dump($deelname);
+                $this->wedstrijddeelname_model->delete($deelname->id);
+            }
+            $this->db->where('id', $id);
+            $this->db->delete('wedstrijdreeks');
+        } else {
+            $this->db->where('id', $id);
+            $this->db->delete('wedstrijdreeks');
         }
     }
 
-    /*
-    * Voegt een nieuw record wedstrijdreeks=$wedstrijdreeks', $wedstrijdreeks toe in de tabel wedstrijdreeks', $wedstrijdreeks
-    * @param $wedstrijdreeks', $wedstrijdreeks Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record wedstrijdreeks=$wedstrijdreeks', $wedstrijdreeks toe in de tabel wedstrijdreeks', $wedstrijdreeks
+     * @param $wedstrijdreeks ', $wedstrijdreeks Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     public function insert($wedstrijdreeks)
     {
@@ -199,13 +199,12 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
+    
 
-
-
-    /*
-    * Retourneert alle records uit de tabel wedstrijdreeks, wedstrijd, slag en afstand
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel wedstrijdreeks, wedstrijd, slag en afstand
+     * @return Alle records
+     */
 
     public function getAllWithWedstrijdenAndSlagAndAfstand()
     {
@@ -294,7 +293,12 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
+<<<<<<< HEAD
 /**
+=======
+
+    /**
+>>>>>>> Fix Doxy /* -> /**
      * Geeft alle wedstrijdreeksen met de overeenkomstige slag, afstand en wedstrijd. uit de tabel wedstrijdreeks Ook de overeenkomstige wedstrijddeelnamens worden gegeven uit de tabel wedstrijddeelname.
      * @return geeft de wedstrijdreeksen met slag, afstand, wedstrijd en wedstrijddeelnamens terug.
      * @author Ruben Tuytens
@@ -324,7 +328,8 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-/**
+
+    /**
      * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId en ook de bijhorende slag en afstand uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
      * @return wedstrijdreeksen met slag en afstand
@@ -349,7 +354,11 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
+<<<<<<< HEAD
  /**
+=======
+    /**
+>>>>>>> Fix Doxy /* -> /**
      * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId waar ook id != $wedstrijdReeksen en de bijhorende afstand records
      * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
      * @param $slagId id van de slag waar er wedstrijdreeksen van moeten opgehaald worden
@@ -358,25 +367,41 @@ class Wedstrijdreeks_model extends CI_Model
      * @author Ruben Tuytens
      * @see Afstand_model::get()
      */
+<<<<<<< HEAD
 	public function getAllAfstandenForSlag($slagId, $wedstrijdId, $wedstrijdReeksen)
     {
 
         foreach($wedstrijdReeksen as $test)
         {
           $this->db->where('id !=', $test);
+=======
+    public function getAllAfstandenForSlag($slagId, $wedstrijdId, $wedstrijdReeksen)
+    {
+
+        foreach ($wedstrijdReeksen as $test) {
+            $this->db->where('id !=', $test);
+>>>>>>> Fix Doxy /* -> /**
         }
 
         $this->db->where('wedstrijdId', $wedstrijdId);
         $this->db->where('slagId', $slagId);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Fix Doxy /* -> /**
         $query = $this->db->get('wedstrijdreeks');
 
         $afstanden = $query->result();
 
         $this->load->model('afstand_model');
 
+<<<<<<< HEAD
         foreach($afstanden as $afstand)
         {
+=======
+        foreach ($afstanden as $afstand) {
+>>>>>>> Fix Doxy /* -> /**
             $afstand->afstand = $this->afstand_model->get($afstand->afstandId);
         }
 
@@ -384,7 +409,11 @@ class Wedstrijdreeks_model extends CI_Model
 
     }
 
+<<<<<<< HEAD
 /**
+=======
+    /**
+>>>>>>> Fix Doxy /* -> /**
      * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
      * @param $afstandId id van de afstand waar er een wedstrijdreeks van moeten opgehaald worden
@@ -392,7 +421,11 @@ class Wedstrijdreeks_model extends CI_Model
      * @return opgevraagde wedstrijdreeks record
      * @author Ruben Tuytens
      */
+<<<<<<< HEAD
 	 public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
+=======
+    public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
+>>>>>>> Fix Doxy /* -> /**
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
         $this->db->where('slagId', $slagId);

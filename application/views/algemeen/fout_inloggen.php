@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * @file fout_inloggen.php
+ * Geeft foutmelding bij inloggen weer.
+ * Geeft ook nieuwe poging voor inloggen.
+ */
+
+
 $attributes = array('name' => 'mijnFormulier', 'class' => 'form-signin');
 echo form_open('Welcome/controleerAanmelden', $attributes);
 ?>
