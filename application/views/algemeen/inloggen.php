@@ -5,7 +5,7 @@
  */
 
 $attributes = array('name' => 'mijnFormulier', 'class' => 'form-signin');
-echo form_open('Welcome/controleerAanmelden', $attributes);
+echo form_open('Algemeen/controleerAanmelden', $attributes);
 ?>
 <div class="wrapper">
     <h2 class="form-signin-heading">Inloggen</h2>

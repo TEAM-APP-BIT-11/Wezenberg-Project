@@ -20,11 +20,11 @@ class Help extends CI_Controller
         $this->load->helper('html');
 
         if (!$this->authex->isAangemeld()) {
-            redirect('Welcome/logIn');
+            redirect('Algemeen/logIn');
         } else {
             $persoon = $this->authex->getPersoonInfo();
             if ($persoon->typePersoon->typePersoon != "trainer") {
-                redirect('Welcome/logIn');
+                redirect('Algemeen/logIn');
             }
         }
 

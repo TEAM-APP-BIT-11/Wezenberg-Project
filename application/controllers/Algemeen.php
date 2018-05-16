@@ -2,30 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @class Welcome
- * @brief Controller-klasse voor Welcome te beheren
+ * @class Algemeen
+ * @brief Controller-klasse voor Algemeen te beheren
  * @author Ruben Tuytens, Dieter Verboven, Neil Van den Broeck
  *
  * Controller-klasse met alle methoden die gebruikt worden om de startpagina te beheren pagina van de trainer
  */
-class Welcome extends CI_Controller
+class Algemeen extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *        http://example.com/index.php/welcome
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
 
     public function __construct()
     {
@@ -276,7 +260,7 @@ class Welcome extends CI_Controller
             }
         } else {
             //fout
-            redirect('Welcome/fout');
+            redirect('Algemeen/fout');
         }
     }
 
@@ -302,13 +286,13 @@ class Welcome extends CI_Controller
      * Stuurt de gebruiker terug naar de startpagina na het afmelden
      * 
      * @author Neil Van den Broeck
-     * @see Welcome::index()
+     * @see Algemeen::index()
      */
 
     public function meldAf()
     {
         $this->authex->meldAf();
-        redirect('Welcome/index');
+        redirect('Algemeen/index');
     }
 
 }

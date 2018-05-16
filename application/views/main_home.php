@@ -61,7 +61,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php echo anchor('Welcome/index', 'Wezenberg', 'class="navbar-brand"'); ?>
+            <?php echo anchor('Algemeen/index', 'Wezenberg', 'class="navbar-brand"'); ?>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -85,16 +85,16 @@
                     }
                     echo '</li> ';
                     echo '<li> ';
-                    echo anchor('Welcome/wijzig/' . $persoon->id, 'Wijzig profiel');
+                    echo anchor('Algemeen/wijzig/' . $persoon->id, 'Wijzig profiel');
                     echo '</li > ';
                     echo '<li> ';
-                    echo anchor('Welcome/meldAf', 'Afmelden');
+                    echo anchor('Algemeen/meldAf', 'Afmelden');
                     echo '</li > ';
                     echo '</ul > ';
                     echo '</li > ';
                 } else {
                     echo '<li > ';
-                    echo anchor('Welcome/logIn', 'Login');
+                    echo anchor('Algemeen/logIn', 'Login');
                     echo ' </li > ';
                 }
                 ?>
