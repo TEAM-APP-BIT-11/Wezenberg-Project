@@ -1,6 +1,6 @@
 <?php
 /**
- * Wordt opgeropen via ajax. Geeft de supplementen weer voor een bepaalde zwemmer met hun doelstelling.
+ * Wordt opgeroepen via ajax. Geeft de supplementen weer voor een bepaalde zwemmer met hun doelstelling.
  */
 
 $lijst = '<table class="table"><tr><th>Supplement</th><th>Aantal</th><th>Doelstelling</th></tr>';
