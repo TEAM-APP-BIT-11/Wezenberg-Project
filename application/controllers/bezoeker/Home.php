@@ -88,7 +88,13 @@ class Home extends CI_Controller
 
         $this->template->load('main_home', $partials, $data);
     }
-
+/**
+     * Haalt al de wedstrijden op en toont deze  in de view bezoeker/wedstrijd_resultaat.php
+     *
+     * @author Ruben Tuytens
+     * @see Wedstrijd_model::getAll()
+     * @see bezoeker/wedstrijd_resultaat.php
+     */
     public function resultaten()
     {
         $this->load->model('wedstrijd_model');
@@ -102,7 +108,16 @@ class Home extends CI_Controller
 
         $this->template->load('main_home', $partials, $data);
     }
-
+/**
+     * Haalt al de resultaten voor een bepaalde wedstrijd op en toont deze  in de view bezoeker/wedstrijd_details_bezoeker.php
+     *
+     * @author Ruben Tuytens
+     * @see Wedstrijd_model::get()
+     * @see Persoon_model::get()
+     * @see Wedstrijdreeks_model::getReeksenSlag()
+     * @see Wedstrijddeelname_model::getDeelnamensResultaten()
+     * @see bezoeker/wedstrijd_details_bezoeker.php
+     */
     public function resultaatDetail($id)
     {
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
