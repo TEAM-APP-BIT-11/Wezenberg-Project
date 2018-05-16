@@ -9,6 +9,10 @@
 
 class Locatie extends CI_Controller
 {
+  /**
+  * Contructor
+  */
+  
     public function __construct()
     {
         parent::__construct();
