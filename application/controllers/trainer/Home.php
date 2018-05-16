@@ -36,7 +36,7 @@ class Home extends CI_Controller
     /**Geeft de homepagina van de trainer weer met de ongelezen meldingen via Melding_model in de view trainer/home.php
      * Geeft een lijst van objecten melding door naar de view.
      * @author Neil Van den Broeck
-     * @see \Melding_model::getAllFromPersoonAndNietGelezen()
+     * @see Melding_model::getAllFromPersoonAndNietGelezen()
      * @see trainer/home.php
      */
     public function index()

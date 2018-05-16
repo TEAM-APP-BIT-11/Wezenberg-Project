@@ -227,6 +227,7 @@ class Evenement extends CI_Controller
      * @author Senne Cools
      * @param $evenementenInReeks Een array die de evenementen van de evenementreeks bevat.
      * @see Evenementdeelname_model::getByEventId()
+     * @return array
      */
     
     private function haalDagenVanReeksOp($evenementenInReeks){

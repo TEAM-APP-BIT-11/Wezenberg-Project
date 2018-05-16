@@ -106,8 +106,7 @@ class Supplementschema extends CI_Controller {
         
            
     }
-/**
-
+    /**
      * Haalt het inname record met de id = $id van de geselecteerde inname op uit Inname_model met de overeenkomstige persoon uit Persoon_model en alle voedingssupplement records uit Voedingssupplement_model.
      * Toont het resultaat in de view trainer/supplement_aanpassen_in_schema
      * @param $id van de inname waarvan de gegevens moeten worden opgehaald
@@ -133,8 +132,7 @@ class Supplementschema extends CI_Controller {
             'inhoud' => 'trainer/supplement_aanpassen_in_schema' ,'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
-/**
-
+    /**
      * Past het innamme record aan met de aangepaste gegevens uit het formulier via Inname_model
      * @author Ruben Tuytens
      * @see Inname_model::update()
@@ -156,8 +154,7 @@ class Supplementschema extends CI_Controller {
         }
                redirect('trainer/supplementschema/beheren');
     }
-/**
-
+    /**
      * Verwijdert het inname record met id = $id via Inname_model
      * @param $id van de inname dat verwijdert moet worden
      * @author Ruben Tuytens

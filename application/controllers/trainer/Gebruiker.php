@@ -35,7 +35,7 @@ class Gebruiker extends CI_Controller
     /**
      * Redirect de user naar de functie beheren()
      * @author Dieter Verboven
-     * @see trainer/gebruiker/beheren.php
+     * @see <beheren>
      */
     public function index()
     {
@@ -46,8 +46,8 @@ class Gebruiker extends CI_Controller
      * Haalt alle zwemmers en trianers op
      * Stuurt deze door naar de view gebruikers_beheren.php waar men een actie kan kiezen
      * @author Dieter Verboven
-     * @see \persoon_model::getZwemmers()
-     * @see \persoon_model::getTrainers()
+     * @see Persoon_model::getZwemmers()
+     * @see Persoon_model::getTrainers()
      * @see trainer/gebruikers_beheren.php
      */
     public function beheren()
@@ -65,8 +65,8 @@ class Gebruiker extends CI_Controller
      * @param ^$id De id van de persoon waarvan de gegevens moeten opgehaald worden.
      * Geeft een formulier weer waar men de gegevens van de gekozen persoon kan aanpassen.
      * @see trainer/gebruiker_aanpassen.php
-     * @see persoon_model::get()
-     * @see typepersoon_model::getAll()
+     * @see Persoon_model::get()
+     * @see Typepersoon_model::getAll()
      * @author Dieter Verboven
      */
     public function aanpassen($id)
@@ -86,7 +86,7 @@ class Gebruiker extends CI_Controller
     /**
      * Geeft een in te vullen formulier weer waar men een nieuwe gebruiker kan toevoegen.
      * @author Dieter Verboven
-     * @see \typepersoon_model::getAll()
+     * @see Typepersoon_model::getAll()
      * @see trainer/gebruiker_toevoegen.php
      */
     public function toevoegen()
@@ -103,7 +103,7 @@ class Gebruiker extends CI_Controller
     /**
      * Past het aangepaste formulier toe op de betrokken persoon.
      * @author Dieter Verboven
-     * @see \persoon_model::update()
+     * @see Persoon_model::update()
      * @see trainer/gebruiker_aanpassen.php
      */
     public function pasAan()
@@ -133,7 +133,7 @@ class Gebruiker extends CI_Controller
     /**
      * Voegt de ingevulde gegevens uit het formulier toe aan de database als een nieuwe persoon.
      * @author Dieter Verboven
-     * @see \persoon_model::insert()
+     * @see Persoon_model::insert()
      * @see trainer/gebruiker_toevoegen.php
      */
     public function voegToe()
@@ -175,8 +175,8 @@ class Gebruiker extends CI_Controller
      * Past de activiteitsstatus aan van een gebruiker.
      * @param De id van de persoon waar actief moet aangepast worden.
      * @author Dieter Verboven
-     * @see \persoon_model::update()
-     * @see \persoon_model::get()
+     * @see Persoon_model::update()
+     * @see Persoon_model::get()
      * @see trainer/gebruikers_beheren.php
      */
      public function activiteitVeranderen($id)

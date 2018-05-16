@@ -53,8 +53,8 @@ class Algemeen extends CI_Controller
      * Indien de gebruikers reeds is ingelogd zal deze naar de juiste home-pagina worden gestuurd.
      * @author Neil Van den Broeck
      * @see inloggen
-     * @see \Authex::isAangemeld()
-     * @see \Authex::getPersoonInfo()
+     * @see Authex::isAangemeld()
+     * @see Authex::getPersoonInfo()
      */
 
     public function logIn()
@@ -85,7 +85,7 @@ class Algemeen extends CI_Controller
      * Geeft een formulier weer waar de gebruiker zijn gegevens kan aanpassen.
      * @see algemeen/profiel_beheren.php
      * @see algemeen/fout_wijzigen.php
-     * @see persoon_model::get()
+     * @see Persoon_model::get()
      * @author Dieter Verboven
      */
     public function wijzig($id)
@@ -118,7 +118,7 @@ class Algemeen extends CI_Controller
      * Geeft een formulier weer waar de gebruiker zijn wachtwoord kan aanpassen.
      * @see algemeen/reset_wachtwoord.php
      * @see algemeen/fout_wijzigen.php
-     * @see persoon_model::get()
+     * @see Persoon_model::get()
      * @author Dieter Verboven
      */
     function wachtwoord($id)
@@ -149,7 +149,7 @@ class Algemeen extends CI_Controller
     /**
      * Haalt de gegevens uit het formulier op en past de gegevens van de ingelogde persoon aan in de database
      * @see algemeen/profiel_beheren.php
-     * @see persoon_model::update()
+     * @see Persoon_model::update()
      * @author Dieter Verboven
      */
     function registreer()
@@ -198,7 +198,7 @@ class Algemeen extends CI_Controller
     /**
      * Haalt het nieuwe wachtwoord uit het formulier op en past deze van de ingelogde persoon aan in de database
      * @see algemeen/reset_wachtwoord.php
-     * @see persoon_model::update()
+     * @see Persoon_model::update()
      * @author Dieter Verboven
      */
     function wijzigWachtwoord()
@@ -224,7 +224,7 @@ class Algemeen extends CI_Controller
     /**
      * Foutmelding voor inloggen
      * @author Neil Van den Broeck
-     * @see ::fout_inloggen
+     * @see algemeen/fout_inloggen.php
      */
     public function fout()
     {
@@ -243,7 +243,7 @@ class Algemeen extends CI_Controller
      * controleert de gebruikersnaam en het wachtwoord adhv de Authex Library.
      * De gebruiker wordt doorgestuurd afhankelijk van het resultaat van het inloggen. (zwemmer -> zwemmer/Home) (trainer -> trainer/Home) geen succesvolle inlogpoging -> fout
      * @author Neil Van den Broeck
-     * @see ::fout
+     * @see algemeen/fout.php
      *
      */
     public function controleerAanmelden()
