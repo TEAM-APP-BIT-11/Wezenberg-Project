@@ -1,7 +1,7 @@
 <?php
 /**
  * @file gebruiker_aanpassen.php
- *
+ * @author Dieter Verboven
  * View waarin de admin een gebruiker kan aanpassen
  * - toont een $persoon-object in een formulier
  * - systeem toont een foutmelding als de invoercontrole niet correct is.

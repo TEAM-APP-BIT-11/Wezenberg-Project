@@ -40,12 +40,25 @@ foreach($slagen as $slag)
         {
             if($persoon->id == $deelname->persoonId)
             {
-                echo '<table class="table">';
+                if ($deelname->resultaat->tijd != "00:00:00")
+                {
+                    echo '<table class="table">';
                 echo '<tr><th>Zwemmer</th><th>Tijd</th><th>Ranking</th></tr><tr>';
                 echo '<td>' . $persoon->familienaam .' '.$persoon->voornaam.'</td>';
                 echo '<td>' . $deelname->resultaat->tijd.'</td>';
-                echo '<td>' . $deelname->resultaat->ranking.'de</td>';
+                
+                if ($deelname->resultaat->ranking == 1)
+                {
+                    echo '<td>' . $deelname->resultaat->ranking.'ste</td>';
+                }
+                else
+                {
+                    echo '<td>' . $deelname->resultaat->ranking.'de</td>';
+                }
+                
                 echo '</tr></table>';
+                }
+                
                 
             }
         } 

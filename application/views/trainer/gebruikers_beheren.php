@@ -1,7 +1,7 @@
 <?php
 /**
  * @file gebruikers_beheren.php
- *
+ * @author Dieter Verboven
  * View waarin de admin alle gebruikers te zien krijgt
  * - toont een tabel met $persoon-objecten
  */

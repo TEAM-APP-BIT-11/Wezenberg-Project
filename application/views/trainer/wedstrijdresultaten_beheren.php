@@ -1,7 +1,7 @@
 <?php
 /**
  * @file wedstrijdresultaten_beheren.php
- *
+ * @author Dieter Verboven
  * View waarin de afgelopen wedstrijden worden getoond.
  * - krijgt $wedstrijd-objecten binnen.
  */

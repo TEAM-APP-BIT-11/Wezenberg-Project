@@ -1,7 +1,7 @@
 <?php
 /**
  * @file gebruiker_aanpassen.php
- *
+ * @author Dieter Verboven
  * View waarin de admin een nieuwe gebruiker kan toevoegen
  * - toont een leeg formulier
  * - systeem toont een foutmelding als de invoercontrole niet correct is.

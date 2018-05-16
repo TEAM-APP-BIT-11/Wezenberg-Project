@@ -1,7 +1,7 @@
 <?php
 /**
  * @file wedstrijdresultaat_toevoegen.php
- *
+ * @author Dieter Verboven
  * View waarin de gebruiker een resultaat kan toevoegen a.d.h.v. een formulier
  * - toont foutmelding als de invoercontrole een fout geeft.
  */
