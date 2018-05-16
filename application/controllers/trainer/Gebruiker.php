@@ -10,8 +10,10 @@
 class Gebruiker extends CI_Controller
 {
 
-    /*
-     * Constructor
+    /**
+     * Gebruiker constructor.
+     * Indien de persoon niet is aangemeld wordt deze naar de loginpagina gestuurd.
+     * Kan alleen als trainer worden opgeroepen.
      */
     public function __construct()
     {
@@ -28,6 +30,16 @@ class Gebruiker extends CI_Controller
 
         $this->load->helper('form');
         $this->load->helper('notation');
+    }
+    
+    /**
+     * Redirect de user naar de functie beheren()
+     * @author Dieter Verboven
+     * @see trainer/gebruiker/beheren.php
+     */
+    public function index()
+    {
+        $this->beheren();
     }
 
     /**
