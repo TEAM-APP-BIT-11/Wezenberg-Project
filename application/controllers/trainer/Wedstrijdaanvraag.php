@@ -89,6 +89,9 @@ class Wedstrijdaanvraag extends CI_Controller
         $aangepaste = $this->wedstrijddeelname_model->get($deelnameId);
         $aangepaste->statusId = 3;
 
+        
+        
+        
         $this->wedstrijddeelname_model->update($aangepaste);
 
         redirect('trainer/wedstrijdaanvraag/beheren');
