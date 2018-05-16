@@ -14,6 +14,12 @@
     </div>
 
       
+      
+      
+      
+      
+      
+      
       <?php
       echo '<table>';
        $teller=0;
