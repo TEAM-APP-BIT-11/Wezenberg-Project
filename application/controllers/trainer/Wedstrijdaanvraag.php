@@ -64,15 +64,33 @@ class Wedstrijdaanvraag extends CI_Controller
 
     public function goedkeuren($deelnameId)
     {
-
         $this->load->model('wedstrijddeelname_model');
-
+        $this->load->model('resultaat_model');
         $aangepaste = $this->wedstrijddeelname_model->get($deelnameId);
         $aangepaste->statusId = 2;
-
+        
+        $resultaat = new stdClass();
+        
+       
+       if($aangepaste->resultaatId == NULL)
+       {
+            $resultaat->id =0;
+            $resultaat->rondeTypeId=1;
+            $resultaat->tijd = "00:00:00";
+            $resultaat->ranking = 0;
+            $resultaatId= $this->resultaat_model->insert($resultaat);
+       }
+        else 
+       {
+           $resultaatId = $aangepaste->resultaatId;
+       }
+        
+        
+        $aangepaste->resultaatId = $resultaatId;
         $this->wedstrijddeelname_model->update($aangepaste);
-
+        
         redirect('trainer/wedstrijdaanvraag/beheren');
+    
     }
 /** 
      * Past de geselecteerde wedstrijddeelname record aan met overeenkomstige id = $deelnameId waar de statusId dan naar 3 wordt gezet
