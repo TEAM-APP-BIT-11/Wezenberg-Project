@@ -104,6 +104,9 @@ echo "<tr> <td>";
 echo form_label('Afstand:', 'afstand');
 echo "</td> <td>";
 echo form_dropdown('afstand', '', '' ,'class="form-control"');
+
+
+
 echo "</td></tr></br>";
 
 
