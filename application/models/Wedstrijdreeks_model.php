@@ -200,7 +200,7 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 
-    
+
 
     /*
     * Retourneert alle records uit de tabel wedstrijdreeks, wedstrijd, slag en afstand
@@ -295,9 +295,7 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeksen;
     }
 /**
-   
      * Geeft alle wedstrijdreeksen met de overeenkomstige slag, afstand en wedstrijd. uit de tabel wedstrijdreeks Ook de overeenkomstige wedstrijddeelnamens worden gegeven uit de tabel wedstrijddeelname.
- 
      * @return geeft de wedstrijdreeksen met slag, afstand, wedstrijd en wedstrijddeelnamens terug.
      * @author Ruben Tuytens
      * @see Wedstrijddeelname_model::getAllByReeks()
@@ -333,7 +331,6 @@ class Wedstrijdreeks_model extends CI_Model
      * @author Ruben Tuytens
      * @see Slag_model::get()
      * @see Afstand_model::get()
-    
      */
 
     public function getReeksenSlag($wedstrijdId)
@@ -351,7 +348,7 @@ class Wedstrijdreeks_model extends CI_Model
         }
         return $wedstrijdreeksen;
     }
-   
+
  /**
      * Geeft de wedstrijdreeksen weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId waar ook id != $wedstrijdReeksen en de bijhorende afstand records
      * @param $wedstrijdId id van de wedstrijd waar er wedstrijdreeksen van moeten opgehaald worden
@@ -360,37 +357,33 @@ class Wedstrijdreeks_model extends CI_Model
      * @return wedstrijdreeksen met afstand gefilterd op wedstrijd en slag en niet toegelaten reeksen
      * @author Ruben Tuytens
      * @see Afstand_model::get()
-    
-     */   
+     */
 	public function getAllAfstandenForSlag($slagId, $wedstrijdId, $wedstrijdReeksen)
     {
-   
+
         foreach($wedstrijdReeksen as $test)
         {
-          $this->db->where('id !=', $test);     
+          $this->db->where('id !=', $test);
         }
-        
+
         $this->db->where('wedstrijdId', $wedstrijdId);
         $this->db->where('slagId', $slagId);
 
-            
-        
-        
         $query = $this->db->get('wedstrijdreeks');
-        
+
         $afstanden = $query->result();
-        
+
         $this->load->model('afstand_model');
-        
+
         foreach($afstanden as $afstand)
         {
             $afstand->afstand = $this->afstand_model->get($afstand->afstandId);
         }
-        
+
         return $afstanden;
-        
+
     }
-    
+
 /**
      * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
@@ -398,8 +391,7 @@ class Wedstrijdreeks_model extends CI_Model
      * @param $slagId id van de slag waar er een wedstrijdreeks van moeten opgehaald worden
      * @return opgevraagde wedstrijdreeks record
      * @author Ruben Tuytens
-    
-     */    
+     */
 	 public function getWedstrijdreeks($wedstrijdId, $afstandId, $slagId)
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
@@ -407,6 +399,6 @@ class Wedstrijdreeks_model extends CI_Model
         $this->db->where('afstandId', $afstandId);
         $query = $this->db->get('wedstrijdreeks');
         return $query->row();
-      
+
     }
 }
