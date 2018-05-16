@@ -3,7 +3,7 @@
 /**
  * Class Agenda
  * @class Agenda
- * @brief Controller-klasse met de benodigde methodes die gebruikt worden om de Agenda voor de zwemmer te voorzien.
+ * @brief Controller-klasse met de benodigde methodes die gebruikt worden om de Agenda voor de zwemmer/trainer te voorzien.
  * @author Neil Van den Broeck
  */
 
@@ -170,5 +170,15 @@ class Agenda extends CI_Controller
         $data["locatie"] = $this->locatie_model->get($id);
 
         $this->load->view('zwemmer/ajax_locatie', $data);
+    }
+
+
+    /**
+     * redirect naar de functie raadplegen
+     * @see raadplegen();
+     */
+    public function index()
+    {
+        redirect("zwemmer/Agenda/raadplegen");
     }
 }

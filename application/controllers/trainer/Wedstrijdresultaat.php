@@ -1,9 +1,5 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 class Wedstrijdresultaat extends CI_Controller
 {
     /**
@@ -25,12 +21,13 @@ class Wedstrijdresultaat extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('notation');
     }
-    
+
     /**
      * Redirect de user naar de functie resultaten()
      * @author Dieter Verboven
      * @see trainer/wedstrijdresultaat/resultaten.php
      */
+
     public function index()
     {
         $this->resultaten();
@@ -108,6 +105,7 @@ class Wedstrijdresultaat extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
     /**
      * @param id De id van de wedstrijd waarvan de gegevens moeten opgehaald worden.
      * Geeft alle reeksen, slagen en afstanden bij de reeksen van de meegegeven wedstrijd.
@@ -129,6 +127,7 @@ class Wedstrijdresultaat extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
     /**
      * @param reeksId De id van de reeks waarvan de gegevens moeten opgehaald worden in wedstrijdresultaten_aanpassen.
      * Geeft alle resultaten, personen en rondes bij de reeks die is meegegeven.
@@ -179,6 +178,7 @@ class Wedstrijdresultaat extends CI_Controller
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
+
     /**
      * Past het resultaat aan indien nodig
      * keert hierna terug naar de resultaten van een wedstrijd (wedstrijdresultaten_aanpassen.php)
