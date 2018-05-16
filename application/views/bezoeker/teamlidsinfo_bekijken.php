@@ -11,6 +11,5 @@
     </div>
 </div>
 <a href=" javascript:history.go(-1);">
-    <button type="button" class="btn btn-secundary">Terug</button>
+    <button type="button" class="btn btn-primary">Terug</button>
 </a>
-

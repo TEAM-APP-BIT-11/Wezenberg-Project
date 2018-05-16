@@ -46,7 +46,7 @@ class Home extends CI_Controller
     public function team()
     {
         $data['titel'] = 'Team';
-        $data['eindverantwoordelijke'] = 'Iemand';
+        $data['eindverantwoordelijke'] = 'Stef Schoeters';
 
         $this->load->model('persoon_model');
 
@@ -66,7 +66,7 @@ class Home extends CI_Controller
 
         $zwemmer = $this->persoon_model->get($id);
 
-        $data['eindverantwoordelijke'] = 'Iemand';
+        $data['eindverantwoordelijke'] = 'Stef Schoeters';
         $data['titel'] = 'ZwemmerInfo - ' . $zwemmer->voornaam;
         $data['zwemmer'] = $zwemmer;
 
