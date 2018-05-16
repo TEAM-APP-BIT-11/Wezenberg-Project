@@ -9,20 +9,20 @@
  */
 class Inname_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel inname
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel inname
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     function get($id)
     {
@@ -31,10 +31,10 @@ class Inname_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert alle records uit de tabel inname
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel inname
+     * @return Alle records
+     */
 
     function getAll()
     {
@@ -65,10 +65,10 @@ class Inname_model extends CI_Model
         return $innames;
     }
 
-    /*
-    * Update het record in de tabel inname met de id die uit $inname gehaald wordt
-    * @param $inname Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel inname met de id die uit $inname gehaald wordt
+     * @param $inname Het record waarmee we een bestaand record willen vervangen
+     */
 
     function update($inname)
     {
@@ -76,10 +76,10 @@ class Inname_model extends CI_Model
         $this->db->update('inname', $inname);
     }
 
-    /*
-    * Verwijdert het record in de tabel inname', $inname met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel inname', $inname met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     function delete($id)
@@ -88,11 +88,11 @@ class Inname_model extends CI_Model
         $this->db->delete('inname');
     }
 
-    /*
-    * Voegt een nieuw record inname=$inname', $inname toe in de tabel inname', $inname
-    * @param $inname', $inname Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record inname=$inname', $inname toe in de tabel inname', $inname
+     * @param $inname ', $inname Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     function insert($inname)
     {

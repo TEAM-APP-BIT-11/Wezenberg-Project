@@ -9,20 +9,20 @@
  */
 class Melding_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel melding
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel melding
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     function get($id)
     {
@@ -31,10 +31,10 @@ class Melding_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert alle records uit de tabel melding
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel melding
+     * @return Alle records
+     */
 
     function getAll()
     {
@@ -59,10 +59,10 @@ class Melding_model extends CI_Model
         return $query->result();
     }
 
-    /*
-* Update het record in de tabel melding met de id die uit $melding gehaald wordt
-* @param $melding Het record waarmee we een bestaand record willen vervangen
-*/
+    /**
+     * Update het record in de tabel melding met de id die uit $melding gehaald wordt
+     * @param $melding Het record waarmee we een bestaand record willen vervangen
+     */
 
     function update($melding)
     {
@@ -70,10 +70,10 @@ class Melding_model extends CI_Model
         $this->db->update('melding', $melding);
     }
 
-    /*
-    * Verwijdert het record in de tabel melding', $melding met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel melding', $melding met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     function delete($id)
@@ -82,11 +82,11 @@ class Melding_model extends CI_Model
         $this->db->delete('melding', $melding);
     }
 
-    /*
-    * Voegt een nieuw record melding=$melding', $melding toe in de tabel melding', $melding
-    * @param $melding', $melding Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record melding=$melding', $melding toe in de tabel melding', $melding
+     * @param $melding ', $melding Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     function insert($melding)
     {

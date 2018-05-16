@@ -9,20 +9,20 @@
  */
 class Wedstrijd_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel wedstrijd
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel wedstrijd
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     public function get($id)
     {
@@ -30,24 +30,11 @@ class Wedstrijd_model extends CI_Model
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
-    //
-    // public function getWithLocatie($id)
-    // {
-    //     $this->db->where('id', $id);
-    //     $query = $this->db->get('wedstrijd');
-    //     $wedstrijd = $query->row();
-    //
-    //     $this->load->model('locatie_model');
-    //     $wedstrijd->locatie = $this->locatie_model->get($wedstrijd->locatieId);
-    //
-    //     return $wedstrijd;
-    // }
 
-
-    /*
-    * Retourneert alle records uit de tabel wedstrijd
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel wedstrijd
+     * @return Alle records
+     */
 
     public function getAll()
     {
@@ -55,7 +42,7 @@ class Wedstrijd_model extends CI_Model
         return $query->result();
     }
 
-    /*
+    /**
      * Geeft alle wedstrijden waarvan de einddatum na vandaag ligt.
      * @return Alles records waarvan de einddatum van de wedstrijden na vandaag liggen.7
      * @author Neil Van den Broeck
@@ -87,67 +74,49 @@ class Wedstrijd_model extends CI_Model
         return $wedstrijden;
     }
 
-    // public function getAllByDeelname()
-    // {
-    //     $query = $this->db->get('wedstrijd');
-    //     $wedstrijden = $query->result();
-    //
-    //     $this->load->model('locatie_model');
-    //
-    //     foreach ($wedstrijden as $wedstrijd) {
-    //         $wedstrijd->locatie = $this->locatie_model->get($wedstrijd->locatieId);
-    //     }
-    //
-    //     return $wedstrijden;
-    // }
-
-    /*
-    * Update het record in de tabel wedstrijd met de id die uit $wedstrijd gehaald wordt
-    * @param $wedstrijd Het record waarmee we een bestaand record willen vervangen
-    */
-
     public function update($wedstrijd)
     {
         $this->db->where('id', $wedstrijd->id);
         $this->db->update('wedstrijd', $wedstrijd);
     }
 
-    /*
-    * Verwijdert het record in de tabel wedstrijd', $wedstrijd met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel wedstrijd', $wedstrijd met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     public function delete($id)
     {
-      $this->db->where('id', $id);
-      if(!$this->db->delete('wedstrijd')){
-        $errors = $this->db->error();
-        if($errors){
-          return "Verwijderen mislukt! Er hangen nog wedstrijdreeksen aan de wedstrijd";
+        $this->db->where('id', $id);
+        if (!$this->db->delete('wedstrijd')) {
+            $errors = $this->db->error();
+            if ($errors) {
+                return "Verwijderen mislukt! Er hangen nog wedstrijdreeksen aan de wedstrijd";
+            }
         }
-      }
     }
 
-    /*
-    * Voegt een nieuw record wedstrijd=$wedstrijd', $wedstrijd toe in de tabel wedstrijd', $wedstrijd
-    * @param $wedstrijd', $wedstrijd Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record wedstrijd=$wedstrijd', $wedstrijd toe in de tabel wedstrijd', $wedstrijd
+     * @param $wedstrijd ', $wedstrijd Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     public function insert($wedstrijd)
     {
         $this->db->insert('wedstrijd', $wedstrijd);
         return $this->db->insert_id();
     }
-     /**
+
+    /**
      * Geeft alle wedstrijden met hun locatie terug waar de einddatum verder ligt dan de huidige datum
      * @author Ruben Tuytens
-
      * @return Wedstrijden met locatie na de huidige datum
      * @see Locatie_model::get()
      */
-	public function getAllAfterTodayWithLocatie(){
+    public function getAllAfterTodayWithLocatie()
+    {
         $this->db->where('einddatum >=', date('Y-m-d'));
         $query = $this->db->get('wedstrijd');
         $wedstrijden = $query->result();

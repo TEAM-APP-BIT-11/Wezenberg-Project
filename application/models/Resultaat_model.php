@@ -9,20 +9,20 @@
  */
 class Resultaat_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel resultaat
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel resultaat
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
 
     public function get($id)
@@ -32,10 +32,10 @@ class Resultaat_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert alle records uit de tabel resultaat
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel resultaat
+     * @return Alle records
+     */
 
     public function getAll()
     {
@@ -43,10 +43,10 @@ class Resultaat_model extends CI_Model
         return $query->result();
     }
 
-    /*
-    * Update het record in de tabel resultaat met de id die uit $resultaat gehaald wordt
-    * @param $resultaat Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel resultaat met de id die uit $resultaat gehaald wordt
+     * @param $resultaat Het record waarmee we een bestaand record willen vervangen
+     */
 
 
     public function update($resultaat)
@@ -55,10 +55,10 @@ class Resultaat_model extends CI_Model
         $this->db->update('resultaat', $resultaat);
     }
 
-    /*
-    * Verwijdert het record in de tabel resultaat', $resultaat met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel resultaat', $resultaat met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     public function delete($id)
@@ -67,11 +67,11 @@ class Resultaat_model extends CI_Model
         $this->db->delete('resultaat', $resultaat);
     }
 
-    /*
-    * Voegt een nieuw record resultaat=$resultaat', $resultaat toe in de tabel resultaat', $resultaat
-    * @param $resultaat', $resultaat Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record resultaat=$resultaat', $resultaat toe in de tabel resultaat', $resultaat
+     * @param $resultaat ', $resultaat Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
 
     public function insert($resultaat)
@@ -88,7 +88,7 @@ class Resultaat_model extends CI_Model
 
     public function getWithRondetypeById($id)
     {
-        $this->db->where('id', $id);      
+        $this->db->where('id', $id);
         $query = $this->db->get('resultaat');
         $resultaat = $query->row();
 

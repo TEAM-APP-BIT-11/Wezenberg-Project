@@ -9,20 +9,20 @@
  */
 class Rondetype_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel rondetype
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel rondetype
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
 
     function get($id)
@@ -32,10 +32,10 @@ class Rondetype_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert alle records uit de tabel rondetype
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel rondetype
+     * @return Alle records
+     */
 
     function getAll()
     {
@@ -45,10 +45,10 @@ class Rondetype_model extends CI_Model
     }
 
 
-    /*
-    * Update het record in de tabel rondetype met de id die uit $rondetype gehaald wordt
-    * @param $rondetype Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel rondetype met de id die uit $rondetype gehaald wordt
+     * @param $rondetype Het record waarmee we een bestaand record willen vervangen
+     */
 
 
     function update($rondetype)
@@ -57,10 +57,10 @@ class Rondetype_model extends CI_Model
         $this->db->update('rondetype', $rondetype);
     }
 
-    /*
-    * Verwijdert het record in de tabel rondetype', $rondetype met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel rondetype', $rondetype met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     function delete($id)
@@ -69,11 +69,11 @@ class Rondetype_model extends CI_Model
         $this->db->delete('rondetype', $rondetype);
     }
 
-    /*
-    * Voegt een nieuw record rondetype=$rondetype', $rondetype toe in de tabel rondetype', $rondetype
-    * @param $rondetype', $rondetype Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record rondetype=$rondetype', $rondetype toe in de tabel rondetype', $rondetype
+     * @param $rondetype ', $rondetype Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
 
     function insert($rondetype)

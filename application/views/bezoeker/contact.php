@@ -1,3 +1,14 @@
+<?php
+/**
+ * Contactformulier voor personen of wezenberg(trainers) te contacteren.
+ *  - krijgt de e-mailadress reeds binnen
+ *  - bevat id van de zwemmer waarnaar er terug moet worden verwezen bij terugknop of 0 indien trainer(terug naar homepagina)
+ *
+ */
+
+
+?>
+
 <h2>Contact</h2>
 
 <p>Op deze pagina kan u een bericht intypen voor <?php echo $melding; ?></p>

@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Inlogformulier om in te loggen op de webapplicaite
+ */
+
 $attributes = array('name' => 'mijnFormulier', 'class' => 'form-signin');
 echo form_open('Welcome/controleerAanmelden', $attributes);
 ?>

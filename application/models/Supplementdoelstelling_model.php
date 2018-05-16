@@ -1,27 +1,28 @@
 <?php
+
 /**
-* @class Supplementdoelstelling_model
-* @brief Model-klasse voor supplementdoelstellingen
-*
-* Model-klasse die alle methodes bevat om te
-* interageren met de database-tabel supplementdoelstelling
-*/
+ * @class Supplementdoelstelling_model
+ * @brief Model-klasse voor supplementdoelstellingen
+ *
+ * Model-klasse die alle methodes bevat om te
+ * interageren met de database-tabel supplementdoelstelling
+ */
 class Supplementdoelstelling_model extends CI_Model
 {
-    /*
-    * Constructor
-    */
+    /**
+     * Constructor
+     */
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /*
-    * Retourneert het record met id=$id uit de tabel supplementdoelstelling
-    * @param $id De id van het record dat opgevraagd wordt
-    * @return Het opgevraagde record
-    */
+    /**
+     * Retourneert het record met id=$id uit de tabel supplementdoelstelling
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
 
     public function get($id)
     {
@@ -30,10 +31,10 @@ class Supplementdoelstelling_model extends CI_Model
         return $query->row();
     }
 
-    /*
-    * Retourneert alle records uit de tabel supplementdoelstelling
-    * @return Alle records
-    */
+    /**
+     * Retourneert alle records uit de tabel supplementdoelstelling
+     * @return Alle records
+     */
 
     public function getAll()
     {
@@ -42,10 +43,10 @@ class Supplementdoelstelling_model extends CI_Model
         return $query->result();
     }
 
-    /*
-    * Update het record in de tabel supplementdoelstelling met de id die uit $supplementdoelstelling gehaald wordt
-    * @param $supplementdoelstelling Het record waarmee we een bestaand record willen vervangen
-    */
+    /**
+     * Update het record in de tabel supplementdoelstelling met de id die uit $supplementdoelstelling gehaald wordt
+     * @param $supplementdoelstelling Het record waarmee we een bestaand record willen vervangen
+     */
 
     public function update($supplementdoelstelling)
     {
@@ -53,10 +54,10 @@ class Supplementdoelstelling_model extends CI_Model
         $this->db->update('supplementdoelstelling', $supplementdoelstelling);
     }
 
-    /*
-    * Verwijdert het record in de tabel supplementdoelstelling', $supplementdoelstelling met de id=$id
-    * @param $id De id van het record dat verwijderd zal worden
-    */
+    /**
+     * Verwijdert het record in de tabel supplementdoelstelling', $supplementdoelstelling met de id=$id
+     * @param $id De id van het record dat verwijderd zal worden
+     */
 
 
     public function delete($id)
@@ -65,11 +66,11 @@ class Supplementdoelstelling_model extends CI_Model
         $this->db->delete('supplementdoelstelling');
     }
 
-    /*
-    * Voegt een nieuw record supplementdoelstelling=$supplementdoelstelling', $supplementdoelstelling toe in de tabel supplementdoelstelling', $supplementdoelstelling
-    * @param $supplementdoelstelling', $supplementdoelstelling Het nieuwe record dat toegevoegd zal worden
-    * @return De id van het nieuw toegevoegde record
-    */
+    /**
+     * Voegt een nieuw record supplementdoelstelling=$supplementdoelstelling', $supplementdoelstelling toe in de tabel supplementdoelstelling', $supplementdoelstelling
+     * @param $supplementdoelstelling ', $supplementdoelstelling Het nieuwe record dat toegevoegd zal worden
+     * @return De id van het nieuw toegevoegde record
+     */
 
     public function insert($supplementdoelstelling)
     {
@@ -77,5 +78,5 @@ class Supplementdoelstelling_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    
+
 }

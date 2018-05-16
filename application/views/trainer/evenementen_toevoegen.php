@@ -29,13 +29,33 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
         });
         //Submit Form
         $("#opslaan").click(function(){
-            var deelnemendeZwemmers = '';
-            $("#deelnemendeZwemmers option").each(function(){
-                deelnemendeZwemmers += $(this).val() + ',';
-            });
-            $("#zwemmers").val(deelnemendeZwemmers);
-            $("#type, #hoeveelheid, #einddatum").attr('disabled', false);
-            $("#nieuweEvenementenForm").submit();
+            var begindatum = moment($("#datetimepickerBegindatum input").val(), "DD/MM/YYYY");
+            var einddatum = moment();
+            
+            if($("#einddatum").attr('disabled') !== false){
+                einddatum = moment($("#datetimepickerEinddatum input").val(), "DD/MM/YYYY");
+            } else{
+                einddatum = begindatum.clone();
+                einddatum.add(1, 'd');
+            }
+            
+            var begindatumJS = begindatum.toDate();
+            var einddatumJS = einddatum.toDate();
+            
+            if(einddatumJS < begindatumJS){
+                $.alert({
+                    title: 'Opgepast!',
+                    content: 'Gelieve het startmoment voor het eindmoment te kiezen.',
+                }); 
+            } else{
+                var deelnemendeZwemmers = '';
+                $("#deelnemendeZwemmers option").each(function(){
+                    deelnemendeZwemmers += $(this).val() + ',';
+                });
+                $("#zwemmers").val(deelnemendeZwemmers);
+                $("#type, #hoeveelheid, #einddatum").attr('disabled', false);
+                $("#nieuweEvenementenForm").submit();
+            }
         });
         $("#annuleren").click(function(){
            $.confirm({
@@ -60,7 +80,7 @@ $nummerdagen = array('1', '2', '3', '4', '5', '6', '7');
                 $("#hoeveelheid").val('enkel');
                 $("#hoeveelheid").prop('disabled', true);
                 $("#begindatum").html('Begindatum *');
-                $("#einddatum").prop('disabled', false);
+                $("#einddatum input").prop('disabled', false);
                 $("#dagen").hide();
             } else{
                 if(type === 'Training' && hoeveelheid === 'enkel'){
