@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file main_help.php
+ * 
+ * Hoofdpagina voor de gebruikersondersteuning
+ * - krijgt de variabelen $titel, $persoon, $inhoud en $footer binnen
+ * - gebruikt Bootstrap navbar
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>

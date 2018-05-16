@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file main_master.php
+ * 
+ * Hoofdpagina voor het zwemmers- en trainersgedeelte van de applicatie
+ * - krijgt de variabelen $titel, $persoon, $inhoud en $footer binnen
+ * - gebruikt Bootstrap navbar
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>

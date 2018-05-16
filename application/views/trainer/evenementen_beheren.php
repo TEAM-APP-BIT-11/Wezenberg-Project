@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @file evenementen_beheren.php
  * @author Senne Cools
  * 
