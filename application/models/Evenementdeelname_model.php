@@ -113,6 +113,14 @@ class Evenementdeelname_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    /**
+     * Geeft alle evenementdeelnames uit de tabel evenementdeelname waar persoonId = $persoonId
+     * Bijgevoegd ook de locatie en het evenement
+     * @param $persoonId
+     * @return alle gevraagde records
+     * @author Neil Van den Broeck
+     */
+
     function getAllFromPersoonWithEvenement($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
@@ -129,8 +137,6 @@ class Evenementdeelname_model extends CI_Model
 
         return $evenementdeelnames;
     }
-
-
 }
 
 ?>

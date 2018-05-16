@@ -268,6 +268,15 @@ class Wedstrijdreeks_model extends CI_Model
         return $wedstrijdreeks;
     }
 
+    /**
+     * Geeft alle reeksen van een bepaalde wedstrijd (wedstrijdId = $wedstrijdId uti de tabel wedstrijdreeks)
+     * Hieraan worden als er eventuele deelnames aan toegevoegd.
+     * Haalt alle records op uit de tabel wedstrijdreeks waarvoor er uit de tabel wedstrijddeelname persoonId = $persoonId
+     * @param $persoonId de id van de persoon waarvoor de wedstrijdreeksen opgevraagd worden.
+     * @param $wedstrijdId id van de wedstrijd waarvoor de reeksen worden opgevraagd.
+     * @return de gevraagde records
+     * @author Neil Van den Broeck
+     */
     public function getAllFromWedstrijdSlagAfstandAndDeelnamePersoon($persoonId, $wedstrijdId)
     {
         $this->db->where('wedstrijdId', $wedstrijdId);
@@ -385,6 +394,10 @@ class Wedstrijdreeks_model extends CI_Model
 
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b4132685787d32e59b5a94645c514969cdc96634
     /**
      * Geeft de wedstrijdreeks weer voor een wedstrijd wedstrijdId = $wedstrijdId waar ook de slagId = $slagId en de afstandId = $afstandId uit de tabel wedstrijdreeks
      * @param $wedstrijdId id van de wedstrijd waar er een wedstrijdreeks van moeten opgehaald worden
