@@ -1,7 +1,7 @@
 <?php
 /**
  * @file wedstrijdresultaat_aanpassen.php
- *
+ * @author Dieter Verboven
  * View waarin de gebruiker de gegevens van een resultaat kan aanpassen.
  * - toont een $resultaat-object in een formulier.
  */

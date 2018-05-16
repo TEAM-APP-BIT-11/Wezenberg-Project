@@ -1,7 +1,7 @@
 <?php
 /**
  * @file resetwachtwoord.php
- *
+ * @author Dieter Verboven
  * View waarin de gebruiker zijn/haar wachtwoord kan aanpassen.
  * - toont foutmelding als wachtwoord niet overeen komt.
  * - gebruikt bootstrap success & danger alert

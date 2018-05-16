@@ -1,7 +1,7 @@
 <?php
 /**
  * @file profiel_beheren.php
- *
+ * @author Dieter Verboven
  * View waarin de gebruiker zijn/haar gegevens kan aanpassen.
  * - krijgt $persoon binnen van de ingelogde persoon.
  */

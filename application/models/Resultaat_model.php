@@ -89,8 +89,15 @@ class Resultaat_model extends CI_Model
 
         $this->load->model('rondetype_model');
 
-
-        $resultaat->rondetype = $this->rondetype_model->get($resultaat->rondeTypeId);
+        if(isset($resultaat->rondetype))
+        {
+            
+        }
+        else
+        {
+            $resultaat->rondetype = $this->rondetype_model->get($resultaat->rondeTypeId);
+        }
+        
 
         return $resultaat;
     }

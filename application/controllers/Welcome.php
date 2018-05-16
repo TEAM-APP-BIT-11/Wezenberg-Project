@@ -114,8 +114,7 @@ class Welcome extends CI_Controller
             $data['titel'] = "Profiel wijzigen";
             $this->load->model('persoon_model');
             $data['persoon'] = $this->persoon_model->get($id);
-            $partials = array('hoofding' => 'main_header',
-                'inhoud' => 'algemeen/profiel_beheren',
+            $partials = array('inhoud' => 'algemeen/profiel_beheren',
                 'footer' => 'main_footer');
 
 
@@ -123,8 +122,7 @@ class Welcome extends CI_Controller
             $data["titel"] = "Fout!";
             $data['error'] = "Er is iets fout gelopen! U kan dit niet aanpassen!";
 
-            $partials = array('hoofding' => 'main_header',
-                'inhoud' => 'algemeen/fout_wijzigen',
+            $partials = array('inhoud' => 'algemeen/fout_wijzigen',
                 'footer' => 'main_footer');
         }
         $this->template->load('main_master', $partials, $data);
@@ -151,8 +149,7 @@ class Welcome extends CI_Controller
             $this->load->model('persoon_model');
             $data['persoon'] = $this->persoon_model->get($id);
 
-            $partials = array('hoofding' => 'main_header',
-                'inhoud' => 'algemeen/reset_wachtwoord',
+            $partials = array('inhoud' => 'algemeen/reset_wachtwoord',
                 'footer' => 'main_footer');
         } else {
             $data["titel"] = "Fout!";
