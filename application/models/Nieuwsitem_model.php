@@ -36,6 +36,7 @@ class Nieuwsitem_model extends CI_Model {
 
 	function getAll()
 	{
+                $this->db->order_by('foto', 'asc');
 		$query = $this->db->get('nieuwsitem');
 		return $query->result();
 	}

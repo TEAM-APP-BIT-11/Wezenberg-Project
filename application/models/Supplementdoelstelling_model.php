@@ -37,6 +37,7 @@ class Supplementdoelstelling_model extends CI_Model
 
     public function getAll()
     {
+        $this->db->order_by('doelstelling', 'asc');
         $query = $this->db->get('supplementdoelstelling');
         return $query->result();
     }

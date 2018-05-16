@@ -40,7 +40,7 @@ class Supplement extends CI_Controller
         $data['titel'] = 'supplementen beheren';
         $data['eindverantwoordelijke'] = "Ruben Tuytens";
         $this->load->model('supplementdoelstelling_model');
-        
+        $data['error'] = '';
         $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
       
         $partials = array(
@@ -88,7 +88,7 @@ class Supplement extends CI_Controller
             $this->load->model('voedingssupplement_model');
            // $this->voedingssupplement_model->verwijderAlleSupplementen($supplement);
             $this->supplementdoelstelling_model->delete($supplement);
-            redirect('/trainer/supplement/beheren');
+           return $this->beheren();
         }
 
         $this->template->load('main_master', $partials, $data);
@@ -126,7 +126,7 @@ class Supplement extends CI_Controller
         $this->supplementdoelstelling_model->update($doelstelling);
 
 
-        redirect('trainer/supplement/beheren');
+       return $this->beheren();
     }
 /** 
      *  Maakt een nieuw supplementdoelstelling aan met gegevens van het formulier via Supplementdoelstelling_model
@@ -161,7 +161,7 @@ class Supplement extends CI_Controller
 
         $this->supplementdoelstelling_model->insert($doelstelling);
 
-        redirect('trainer/supplement/beheren');  
+       return $this->beheren();
          }
          
         
@@ -190,7 +190,7 @@ class Supplement extends CI_Controller
         $uitvoeren = $this->input->post('supplement');
         if ($uitvoeren == 'aanpassen') {
             if ($supplement == 0) {
-                redirect('/trainer/supplement/beheren');
+                return $this->beheren();
             } else {
                 $data['titel'] = 'Supplement wijzigen';
                 $data['supplement'] = $this->voedingssupplement_model->getWithDoelstelling($supplement);
@@ -213,10 +213,28 @@ class Supplement extends CI_Controller
         } elseif ($uitvoeren == 'verwijderen') {
             
             $this->voedingssupplement_model->delete($supplement);
-            redirect('/trainer/supplement/beheren');
+            if($this->voedingssupplement_model->get($supplement) == NULL)
+            {
+               return $this->beheren();
+            }
+            else
+            {
+               $data['error'] = 'Er zijn nog innnames van zwemmers die dit supplement gebruiken';
+               $data['titel'] = 'supplementen beheren';
+         
+         $this->load->model('supplementdoelstelling_model');
+        
+        $data['doelstellingen'] = $this->supplementdoelstelling_model->getAll();
+      
+        $partials = array(
+            'inhoud' => 'trainer/supplementen_beheren',
+            'footer' => 'main_footer');
+       
+            }
+          
         }
 
-        $this->template->load('main_master', $partials, $data);
+      $this->template->load('main_master', $partials, $data);
     }
 /** 
      *  Past een voedingssupplement aan met gegevens van het formulier via Voedingssupplement_model
@@ -236,7 +254,7 @@ class Supplement extends CI_Controller
         $this->voedingssupplement_model->update($supplement);
 
 
-        redirect('trainer/supplement/beheren');
+        return $this->beheren();
     }
 /** 
      *  Maakt een nieuw voedingssupplement aan met gegevens van het formulier via Voedingssupplement_model
@@ -271,15 +289,15 @@ class Supplement extends CI_Controller
          }else
          {
             $supplement = new stdClass();
-        $supplement->id = $this->input->post('voedingId');
-        $supplement->naam = $this->input->post('supplement');
+        $supplement->id = $this->input->post('supplementId');
+        $supplement->naam = $this->input->post('suppla');
         $supplement->doelstellingId = $this->input->post('doelstelling');
 
         $this->load->model('voedingssupplement_model');
 
         $this->voedingssupplement_model->insert($supplement);
 
-        redirect('trainer/supplement/beheren'); 
+       return $this->beheren();
          }
         
         
