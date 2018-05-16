@@ -44,8 +44,8 @@ class Melding_model extends CI_Model
 
     /**
      *
-     * Retourneert alle meldingen voor de persoon met id=$persoonId en gelezen=0
-     * @param De id van de persoon waarvoor de meldingen opgevraagd worden
+     * Retourneert alle meldingen voor de persoon met id=$persoonId en gelezen=0 van nieuw naar oud.
+     * @param $persoonId De id van de persoon waarvoor de meldingen opgevraagd worden
      * @return De opgevraagde records
      * @author Neil Van den Broeck
      */

@@ -104,7 +104,7 @@ echo "</div>";
 <button class="btn btn-primary" name ="supplement" type="submit" value="aanpassen">Aanpassen</button>
 <button class="btn btn-primary" name ="supplement" type="submit" value="verwijderen">Verwijderen</button>  
     </div>  
-
+    <label><?php echo $error?></label>
 </form> 
 
 

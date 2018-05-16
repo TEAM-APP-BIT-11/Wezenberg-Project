@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Neil
- * Date: 4/05/2018
- * Time: 14:23
+ * Toont de zwemmers van de applicatie met een link naar hun agenda.
+ * @author Neil Van den Broeck
  */
 
 $personen = "";

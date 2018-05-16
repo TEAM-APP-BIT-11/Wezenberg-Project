@@ -108,6 +108,7 @@ class Inname_model extends CI_Model
      */
     function getInnamesPersonen()
     {
+        $this->db->order_by('datum', 'asc');
         $query = $this->db->get('inname');
 
         $innamespersonen = $query->result();

@@ -15,22 +15,34 @@
 
       
       <?php
-         echo  '<div class="row">';
+      echo '<table>';
+       $teller=0;
       foreach($nieuwsitems as $nieuws)
       {
-          if($nieuws->foto != NULL)
+          if($teller == 3)
           {
-              echo '<div class="col-lg-3"><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
-                  . toonAfbeelding('nieuwsitems/' . $nieuws->foto . ' ', 'width="250px" height="250px"').'</div>';
+              $teller =0;
+              echo '</tr><tr>';
           }
           else
           {
-              echo '<div class="col-lg-3"><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
-                  .'</div>';
+             if($nieuws->foto != NULL)
+          {
+              echo '<td><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
+                  . toonAfbeelding('nieuwsitems/' . $nieuws->foto . ' ', 'width="250px" height="250px"').'</td>';
+              $teller++;
           }
+          else
+          {
+              echo '<td><h3>'.$nieuws->titel.'</h3><p>'.$nieuws->tekst.'</p>'
+                  .'</td>';
+              $teller++;
+          } 
+          }
+          
          
       }
-      echo '</div>';
+      echo '</tr></table>';
       
       ?>
     
