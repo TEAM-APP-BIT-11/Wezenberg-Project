@@ -1,3 +1,13 @@
+<?php
+/**
+ * @file wedstrijdresultaten_aanpassen.php
+ *
+ * View waarin een dropdownlist komt waarin alle reeksen van een wedstrijd beschikbaar staan.
+ * - gebruikt AJAX om alle resultaten van een reeks te tonen.
+ * - krijgt $wedstrijdreeks-objecten en $resultaat-objecten binnen
+ */
+?>
+
 <script>
     
     function haalResultatenOp(reeksId)

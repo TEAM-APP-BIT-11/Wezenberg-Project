@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file gebruikers_beheren.php
+ *
+ * View waarin de admin alle gebruikers te zien krijgt
+ * - toont een tabel met $persoon-objecten
+ */
+?>
+
 <h1 class="">Gebruikers beheren</h1>
 <hr>
 <h3>Zwemmers</h3>
