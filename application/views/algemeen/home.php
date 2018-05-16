@@ -1,4 +1,11 @@
-
+<?php
+/**
+ * @mainpage Commentaar bij project Wezenberg App - Team11
+ * 
+ * # Wat?
+ * Je vindt hier onze Doxygen-commentaar bij het PHP-project <b>Wezenberg App - Team11</b>
+ */
+?>
 
 
 <div class="col-md-12">
