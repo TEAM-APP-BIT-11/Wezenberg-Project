@@ -6,19 +6,9 @@ if (!defined('BASEPATH'))
 class Authex
 {
 
-    // +----------------------------------------------------------
-    // | TV Shop
-    // +----------------------------------------------------------
-    // | 2ITF - 201x-201x
-    // +----------------------------------------------------------
-    // | Authex library
-    // |
-    // +----------------------------------------------------------
-    // | Nelson Wells (http://nelsonwells.net/2010/05/creating-a-simple-extensible-codeigniter-authentication-library/)
-    // | 
-    // | aangepast door Thomas More
-    // +----------------------------------------------------------
-
+    /**
+     * Authex constructor.
+     */
     public function __construct()
     {
         $CI = &get_instance();
@@ -26,6 +16,9 @@ class Authex
         $CI->load->model('persoon_model');
     }
 
+    /**
+     * @param $id
+     */
     function activeer($id)
     {
         // nieuwe gebruiker activeren
@@ -34,6 +27,10 @@ class Authex
         $CI->gebruiker_model->activeer($id);
     }
 
+    /**
+     * Geeft de persoon terug die is aangemeld. Indien geen aanmelding -> Null;
+     * @return $persoon Het object persoon die is aangemeld
+     */
     function getPersoonInfo()
     {
         // geef gebruiker-object als gebruiker aangemeld is
@@ -47,6 +44,10 @@ class Authex
         }
     }
 
+    /**
+     * Controleerd of de gebruiker is aangemeld (= sessiondata)
+     * @return bool waarde of de gebruiker is aangemeld(true) of false(niet aangemeld)
+     */
     function isAangemeld()
     {
         // gebruiker is aangemeld als sessievariabele gebruiker_id bestaat
@@ -59,6 +60,14 @@ class Authex
         }
     }
 
+    /**
+     * Meld de gebruiker aan indien deze een correcte gebruikersnaam en wachtwoordcombinatie invuld.
+     * Controleerd of de gebruiker en het wachtwoord in de database overeenkomen en meld deze dan aan (return = true).
+     * Indien deze wachtwoord + gebruikersnaam combinatie niet in database terechtkomt wordt de gebruiker niet aangemeld en returned de functie false;
+     * @param $gebruikersnaam gebruikersnaam van de persoon die wil aanmelden
+     * @param $wachtwoord ingevoerde wachtwoord van de persoon die wil aanmelden.
+     * @return bool waarde of het aanmelden is geslaagd.
+     */
     function meldAan($gebruikersnaam, $wachtwoord)
     {
         // gebruiker aanmelden met opgegeven email en wachtwoord
@@ -75,6 +84,9 @@ class Authex
         }
     }
 
+    /**
+     * Meld de gebruiker af door de session variabelen die aangemaakt worden bij het aanmelden te verwijderen.
+     */
     function meldAf()
     {
         // afmelden, dus sessievariabele wegdoen
@@ -84,6 +96,13 @@ class Authex
         $CI->session->unset_userdata('gebruiker');
     }
 
+    /**
+     * Voegt een nieuwe gebruiker toe aan de database indien het e-mailadres nog niet bestaat.
+     * @param $naam naam van de gebruiker
+     * @param $email email van de toegevoegde persoon
+     * @param $wachtwoord wachtwoord van de toegevoegde persoon
+     * @return int id van de toegevoegde persoon
+     */
     function registreer($naam, $email, $wachtwoord)
     {
         // nieuwe gebruiker registreren als email nog niet bestaat
