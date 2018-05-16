@@ -140,6 +140,12 @@ class Inname_model extends CI_Model
     }
 
 
+    /**
+     * Geeft alle innames terug uit de tabel inname waarvoor persoonId = $persoonId
+     * @param $persoonId persoon waarvoor de innames worden opgevraagd
+     * @return de gevraagde records
+     * @author Neil Van den Broeck
+     */
     function getAllFromPersoon($persoonId)
     {
         $this->db->where('persoonId', $persoonId);
