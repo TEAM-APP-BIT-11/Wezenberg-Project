@@ -34,7 +34,7 @@ echo '<h2>'. $titel.'</h2>';
 ?>
     
 <?php
-echo form_open_multipart('/trainer/startpagina/homepaginaOpslaan');
+echo form_open_multipart('/trainer/Startpagina/homepaginaOpslaan');
 echo '<h3>Homepagina beheren</h3>';
 echo '<div class="col-md-6">';
 
@@ -77,7 +77,7 @@ echo '<div class="col-md-12" name="actief" id="actief">';
 echo '<h3>Actieve nieuwsblokken</h3>';
 
 echo '<div>';
-echo anchor('trainer/startpagina/toevoegen/', form_button('toevoegen', 'Toevoegen', 'class="btn btn-primary"')) ;
+echo anchor('trainer/Startpagina/toevoegen/', form_button('toevoegen', 'Toevoegen', 'class="btn btn-primary"')) ;
 echo '</div>';
 
 foreach($nieuwsitems as $nieuws)
@@ -101,8 +101,8 @@ foreach($nieuwsitems as $nieuws)
     
     echo '</div>';
     echo '</div class="form-group">';
-    echo anchor('trainer/startpagina/verwijderen/' .$nieuws->id, form_button('verwijderen', 'Verwijderen', 'class="btn btn-primary"')) ;
-    echo anchor('trainer/startpagina/wijzigen/' .$nieuws->id, form_button('wijzigen', 'Wijzigen', 'class="btn btn-primary"')) ;
+    echo anchor('trainer/Startpagina/verwijderen/' .$nieuws->id, form_button('verwijderen', 'Verwijderen', 'class="btn btn-primary"')) ;
+    echo anchor('trainer/Startpagina/wijzigen/' .$nieuws->id, form_button('wijzigen', 'Wijzigen', 'class="btn btn-primary"')) ;
    
     }
     
@@ -137,7 +137,7 @@ foreach($nieuwsitems as $passief)
     echo '</br>'. toonAfbeelding('nieuwsitems/' . $passief->foto . ' ', 'width="250px" height="250px"');
     
     echo '</div>';
-    echo anchor('trainer/startpagina/activeren/' .$passief->id, form_button('activeren', 'Activeren', 'class="btn btn-primary"')) ;
+    echo anchor('trainer/Startpagina/activeren/' .$passief->id, form_button('activeren', 'Activeren', 'class="btn btn-primary"')) ;
     
     echo '<hr></hr>'; 
     }

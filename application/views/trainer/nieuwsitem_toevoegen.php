@@ -23,7 +23,7 @@ echo '<h2>'.$titel.'</h2>';?>
 
 <?php
 
-echo form_open_multipart('/trainer/startpagina/toevoegenOpslaan');
+echo form_open_multipart('/trainer/Startpagina/toevoegenOpslaan');
 echo '<div class="form-group">';
     echo form_hidden('id', 0);
     echo form_label('Titel:', 'titel');
@@ -58,4 +58,4 @@ echo form_dropdown('foto', $options, '' ,'class="form-control"');
    ?>
     <button type="submit" value="submit" name="toevoegen" class="btn btn-primary">Toevoegen</button>
     <?php
-    echo anchor('trainer/startpagina/beheren/' ,form_button('annuleren', 'Annuleren', 'class="btn btn-primary"')) ;
+    echo anchor('trainer/Startpagina/beheren/' ,form_button('annuleren', 'Annuleren', 'class="btn btn-primary"')) ;

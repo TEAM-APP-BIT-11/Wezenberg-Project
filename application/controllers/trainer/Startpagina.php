@@ -1,12 +1,12 @@
 <?php
 /**
-  * @class startpagina
+  * @class Startpagina
   * @brief Controller-klasse voor de startpagina te beheren voor de trainer
   * @author Ruben Tuytens
   *
   * Controller-klasse met alle methoden die gebruikt worden om de startpagina te beheren pagina van de trainer
   */
-class startpagina extends CI_Controller {
+class Startpagina extends CI_Controller {
    /**
      * Constructor
      */
@@ -74,7 +74,7 @@ class startpagina extends CI_Controller {
         $test->datum = $data['item']->datum;
         $test->homepaginaId = $data['item']->homepaginaId;
         $this->nieuwsitem_model->update($test);
-          redirect('/trainer/startpagina/beheren');
+          redirect('/trainer/Startpagina/beheren');
     }
     /**
  * Verandert het nieuwsitem met id = $id van het geselecteerde nieuwsitem en zorgt dat deze actief is.
@@ -98,7 +98,7 @@ class startpagina extends CI_Controller {
         $test->datum = $data['item']->datum;
         $test->homepaginaId = $data['item']->homepaginaId;
         $this->nieuwsitem_model->update($test);
-          redirect('/trainer/startpagina/beheren');
+          redirect('/trainer/Startpagina/beheren');
     }
     /**
  * Haalt het nieuwsitem met id = $id van het geselecteerde nieuwsitem op uit Nieuwsitem_model en toont het object op de view trainer/nieuwsitem_wijzigen.php 
@@ -193,7 +193,7 @@ class startpagina extends CI_Controller {
         
         }
         $this->nieuwsitem_model->insert($item);
-        redirect('/trainer/startpagina/beheren');
+        redirect('/trainer/Startpagina/beheren');
          }
     }
     /** 
@@ -238,7 +238,7 @@ class startpagina extends CI_Controller {
         
         }
          $this->nieuwsitem_model->update($item);
-         redirect('/trainer/startpagina/beheren');
+         redirect('/trainer/Startpagina/beheren');
         
         
         
@@ -273,6 +273,6 @@ class startpagina extends CI_Controller {
         $item->groepsfoto =  $this->input->post('groepsfoto');
         }
         $this->homepagina_model->update($item);
-        redirect('/trainer/startpagina/beheren');
+        redirect('/trainer/Startpagina/beheren');
     }
 }

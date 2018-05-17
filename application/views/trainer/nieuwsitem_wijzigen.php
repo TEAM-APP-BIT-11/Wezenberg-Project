@@ -12,7 +12,7 @@
 
 
 echo '<h2>'.$titel.'</h2>';
-echo form_open_multipart('/trainer/startpagina/wijzigingOpslaan');
+echo form_open_multipart('/trainer/Startpagina/wijzigingOpslaan');
 echo '<div>';
     echo form_hidden('id', $nieuwsitem->id);
     echo form_label('Titel:', 'titel');
@@ -48,4 +48,4 @@ echo form_dropdown('foto', $options, $nieuwsitem->foto ,'class="form-control"');
      </div>
     <button type="submit" value="submit" name="opslaan" class="btn btn-primary">Opslaan</button>
     <?php
-    echo anchor('trainer/startpagina/beheren/' ,form_button('annuleren', 'Annuleren', 'class="btn btn-primary"')) ;
+    echo anchor('trainer/Startpagina/beheren/' ,form_button('annuleren', 'Annuleren', 'class="btn btn-primary"')) ;
