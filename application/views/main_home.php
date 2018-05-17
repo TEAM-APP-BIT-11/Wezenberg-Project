@@ -48,6 +48,10 @@
     <script src="resources/js/moment.min.js"></script>
     <script src="resources/js/fullcalendar.min.js"></script>
     <script src="resources/js/gcal.js"></script>
+    
+    <!--JS confirmation plugin-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
 </head>
 <body>
