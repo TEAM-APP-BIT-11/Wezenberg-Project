@@ -49,7 +49,7 @@ class Wedstrijdaanvraag extends CI_Controller
         $data['personen'] = $this->persoon_model->getAll();
         $data['alles'] = $this->wedstrijdreeks_model->getAlles();
         $partials = array(
-            'inhoud' => 'trainer/Wedstrijdaanvraag_goedkeuren',
+            'inhoud' => 'trainer/wedstrijdaanvraag_goedkeuren',
             'footer' => 'main_footer');
         $this->template->load('main_master', $partials, $data);
     }
