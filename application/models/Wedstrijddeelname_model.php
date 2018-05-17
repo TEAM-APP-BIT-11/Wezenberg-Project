@@ -140,7 +140,7 @@ class Wedstrijddeelname_model extends CI_Model
         $this->db->where($controleren);
 
         $this->db->order_by('persoonId', 'asc');
-        $query = $this->db->get('wedstrijdDeelname');
+        $query = $this->db->get('wedstrijddeelname');
         return $query->result();
     }
 
