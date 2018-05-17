@@ -139,7 +139,7 @@ class Wedstrijdaanvraag extends CI_Controller
         $data['huidigeSlagAfstand'] = $this->wedstrijdreeks_model->getWithWedstrijdSlagAfstand($data['deelname']->wedstrijdReeksId);
         
         $partials = array(
-            'inhoud' => 'trainer/Wedstrijdaanvraag_aanpassen',
+            'inhoud' => 'trainer/wedstrijdaanvraag_aanpassen',
             'footer' => 'main_footer');
          
         $this->template->load('main_master', $partials, $data);
