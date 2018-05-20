@@ -13,7 +13,7 @@
     function haalResultatenOp(reeksId)
     {
         $.ajax({type : "GET",
-                url : site_url + "/trainer/wedstrijdresultaat/resultatenOphalen" ,
+                url : site_url + "/trainer/Wedstrijdresultaat/resultatenOphalen" ,
                 data : {reeksId : reeksId},
                 success: function (result) {
                 $("#success").html(result);
@@ -44,7 +44,7 @@
                 $(".formResultaten").show();
                 $("#success").show();
                 $(".btnToevoegen").show();
-                $(".btnToevoegen").attr('href', '/Wezenberg-Project/index.php/trainer/wedstrijdresultaat/toevoegen/' + reeksId);
+                $(".btnToevoegen").attr('href', '/Wezenberg-Project/index.php/trainer/Wedstrijdresultaat/toevoegen/' + reeksId);
             }
         });
         

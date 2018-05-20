@@ -21,7 +21,7 @@
         $zwemmerOpties[$zwemmer->id] = $zwemmer->voornaam;
     }
     $attributes = array('name' => 'wedstrijdResultaatToevoegenFormulier', 'data-toggle' => 'validator', 'role' => 'form');
-    echo form_open('trainer/wedstrijdresultaat/aanmaken', $attributes);
+    echo form_open('trainer/Wedstrijdresultaat/aanmaken', $attributes);
     ?>
     <div class="form-group">
     <?php

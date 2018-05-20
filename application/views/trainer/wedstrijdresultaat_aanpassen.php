@@ -21,7 +21,7 @@
         $zwemmerOpties[$zwemmer->persoon->id] = $zwemmer->persoon->voornaam;
     }
     $attributes = array('name' => 'wedstrijdResultaatAanpassenFormulier', 'data-toggle' => 'validator', 'role' => 'form');
-    echo form_open('trainer/wedstrijdresultaat/pasAan', $attributes);
+    echo form_open('trainer/Wedstrijdresultaat/pasAan', $attributes);
     
     ?>
         <div class="form-group">
@@ -76,7 +76,7 @@
     echo form_submit('knop', 'Opslaan', 'class="btn btn-primary"');
     echo form_close();
 
-    echo anchor($this->config->site_url() . '/trainer/wedstrijdresultaat/resultaten/', 'Annuleren', 'class="btn btn-warning"');
+    echo anchor($this->config->site_url() . '/trainer/Wedstrijdresultaat/resultaten/', 'Annuleren', 'class="btn btn-warning"');
     echo '</div>';
     ?>
 
