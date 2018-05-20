@@ -44,7 +44,7 @@
                 $(".formResultaten").show();
                 $("#success").show();
                 $(".btnToevoegen").show();
-                $(".btnToevoegen").attr('href', '/Wezenberg-Project/index.php/trainer/Wedstrijdresultaat/toevoegen/' + reeksId);
+                $(".btnToevoegen").attr('href', site_url + '/trainer/Wedstrijdresultaat/toevoegen/' + reeksId);
             }
         });
         
